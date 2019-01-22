@@ -1,0 +1,92 @@
+package com.revature.datatypes;
+
+public class Primitives {
+	
+	int a; // 4 bytes
+	boolean b; // true or false 
+	char c; // '' single character values
+	double d; // decimal values 8 bytes
+	long e; // whole number values 8 bytes
+	float f;  // smaller capacity than double. 4 bytes. 
+	short g; // 2 bytes. whole number values
+	byte h; 
+	static int stat;
+	
+	//WRAPPER CLASSES
+	//objects that can be "unboxed" into primitives 
+	
+	Integer integer = new Integer(9);
+	Boolean bool;
+	Character character;
+	
+	public static void main(String[] args) {
+		System.out.println(numToChar(199));
+	}
+	
+	static void intro() {
+		//create instance of class
+				int test;
+				Primitives prims = new Primitives();
+				System.out.println("Default values are assigned to "
+						+ "all instance and static variables "
+						+ "The primitive default values are as follows " );
+				System.out.println("int: " + prims.a);
+				System.out.println("short: " + prims.g);
+				System.out.println("boolean: " + prims.b);
+				System.out.println("char: " + prims.c);
+				System.out.println("double " + prims.d);
+				System.out.println("long: " + prims.e);
+				System.out.println("float: " + prims.f);
+				System.out.println("byte: " + prims.h);
+				
+				
+				System.out.println("INTEGER MAX VALUE " + 
+				Integer.MAX_VALUE);
+				
+				String num = "ten";
+				System.out.println(Integer.parseInt(num));
+				//System.out.println(test);
+				
+				
+				int x = 1_000_000;
+				//int wrong = _199;
+				double doub = 1__000.10;
+	}
+	
+	static void autoboxing() {
+		/*
+		 * Autoboxing is the automatic process of 
+		 * a primitive data type converting to its
+		 * wrapper class when a reference is changed
+		 */
+		
+		int x = 10;
+		Integer wrapper = x;
+	}
+
+	static void casting() {
+		int x = 1300;
+		long l = x; //casting is done automatically when changing reference to a broader type
+		byte b = (byte) x; //must EXPLICITLY cast from a larger to smaller type
+		System.out.println(b);
+		
+		//long <- int <- short <- byte
+		
+		char letter = 'a';
+		int ch = (int) letter;
+		System.out.println("ASCII VAL FOR 'a': " + ch);
+		
+	}
+	
+	static char numToChar(int n) {
+		//will work easily up to 256. will repeat after
+		return (char) n;
+		
+	
+		
+	}
+}
+
+
+
+
