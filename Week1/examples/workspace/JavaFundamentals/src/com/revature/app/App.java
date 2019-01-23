@@ -5,9 +5,9 @@ import com.revature.classbasics.*;
 public class App {
 
 	public static void main(String[] args) {
-		Blocks.test();
-		Blocks b = new Blocks();
-		Blocks c = new Blocks();
+		for(int i = 100; i > 50; i-=5) {
+			System.out.println(i);
+		}
 	}
 
 }
