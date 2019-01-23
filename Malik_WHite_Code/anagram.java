@@ -14,7 +14,7 @@ public class IntToHex {
 //							System.out.println("Hex value is " + Hex);
 		
 		//anagrams maw = new anagrams(); 
-		anagrams.AnaCheck("cat","tac"); 
+		anagrams.AnaCheck("bog","gob"); 
 							
 	}
 	
@@ -43,6 +43,10 @@ public class IntToHex {
 					
 					System.out.println("Is an Anagram");
 					return true; 
+				}
+				
+				else {
+					System.out.print("Same Size but not an Anagram");
 				}
 			}
 			
