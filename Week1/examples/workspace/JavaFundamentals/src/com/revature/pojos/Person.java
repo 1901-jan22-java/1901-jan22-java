@@ -1,9 +1,18 @@
 package com.revature.pojos;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable{
 	
+
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6551483167070684466L;
+//	private static final long serialVersionUID = -1884460746184266622L;
 	private String name;
-	private String email;
+	private transient String email;
+	
 	
 	public Person() {}
 	
