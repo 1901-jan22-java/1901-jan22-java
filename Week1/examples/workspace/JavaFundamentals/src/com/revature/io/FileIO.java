@@ -25,6 +25,7 @@ public class FileIO {
 		 */
 		try(BufferedWriter bw = new BufferedWriter(
 						new FileWriter(filepath, true))){
+			//FileWriter(filePath, booleanToAppend)^
 			bw.write(obj.toString() +  "\n");
 		} catch (IOException e) {
 			e.printStackTrace();
