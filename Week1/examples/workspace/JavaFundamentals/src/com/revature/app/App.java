@@ -1,13 +1,14 @@
 package com.revature.app;
 
-import com.revature.classbasics.*;
+import com.revature.io.FileIO;
+import com.revature.pojos.Person;
 
 public class App {
 
 	public static void main(String[] args) {
-		Blocks.test();
-		Blocks b = new Blocks();
-		Blocks c = new Blocks();
+		Person p = new Person("Malika", "m@revature.com");
+		FileIO driver = new FileIO();
+		driver.writeObj(p);
 	}
 
 }

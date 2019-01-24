@@ -25,7 +25,12 @@ public class Operators {
 	
 	//FIRST - increment/decrement
 	static boolean postIncrement(int count) {
-		return count++ == 5;
+		count = 5;
+		if(count++ == 5) {
+			System.out.println("true");
+		}
+		System.out.println(count);
+		return false;
 	}
 	
 	static boolean preIncrement(int count) {
@@ -55,6 +60,7 @@ public class Operators {
 	}
 	
 	static boolean opposite(boolean exp) {
+
 		return !exp;
 	}
 	
