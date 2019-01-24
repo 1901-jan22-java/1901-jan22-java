@@ -17,4 +17,17 @@ public class UnderstandingStrings {
 		System.out.println(str.substring(2, 34));
 		System.out.println("test");
 	}
+	
+	/*
+	 * Strings are often compared with the StringBuilder
+	 * and StringBuffer classes - both are mutable 
+	 * versions of strings 
+	 * They do the same things except StringBuffer is
+	 * synchronized or "thread-safe", whereas 
+	 * StringBuilder is not
+	 * However, StringBuilder is more efficient than
+	 * StringBuffer in terms of time so it is used 
+	 * more often 
+	 * 
+	 */
 }
