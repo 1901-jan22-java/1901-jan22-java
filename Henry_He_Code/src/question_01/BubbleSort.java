@@ -1,9 +1,9 @@
-package question_1;
+package question_01;
 
 public class BubbleSort {
 
 	/*
-	 * Fairly straight-forward; just sort adjacent indices and making n-1 pass throughs 
+	 * Fairly straight-forward; just sort adjacent indices and making n-1 passthroughs 
 	 */
 	
 	

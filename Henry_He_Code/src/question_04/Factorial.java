@@ -1,4 +1,4 @@
-package question_4;
+package question_04;
 
 public class Factorial {
 

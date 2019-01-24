@@ -1,4 +1,4 @@
-package question_3;
+package question_03;
 
 public class StringReverse {
 

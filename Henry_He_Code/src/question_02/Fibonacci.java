@@ -1,4 +1,4 @@
-package question_2;
+package question_02;
 
 public class Fibonacci {
 	

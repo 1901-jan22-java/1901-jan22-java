@@ -1,4 +1,4 @@
-package question_5;
+package question_05;
 
 import java.util.Arrays;
 
