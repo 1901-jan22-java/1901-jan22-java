@@ -1,3 +1,4 @@
+package com.revature.reversestring;
 
 public class ReverseString {
 	public static String reverse(String s) {

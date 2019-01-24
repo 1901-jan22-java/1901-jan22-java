@@ -21,6 +21,9 @@ public class UnderstandingExceptions {
 			throwCustom();
 		} catch (CustomException e) {
 			System.out.println(e.getMessage());
+		} finally {
+			//Typically used to close closable connections. 
+			System.out.println("WILL ALWAYS EXECUTE");
 		}
 		
 	}

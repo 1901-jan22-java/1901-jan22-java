@@ -1,3 +1,4 @@
+package com.revature.fibonacci;
 
 public class Fibonacci {
 	public static int nextFib(int a, int b) {
