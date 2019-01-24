@@ -51,6 +51,10 @@ public class Primitives {
 				int x = 1_000_000;
 				//int wrong = _199;
 				double doub = 1__000.10;
+				
+				long l = 100000000000L;
+				
+				float f = 34.21F;
 	}
 	
 	static void autoboxing() {
@@ -80,9 +84,20 @@ public class Primitives {
 	
 	static char numToChar(int n) {
 		//will work easily up to 256. will repeat after
-		return (char) n;
-		
+		return (char) n;	
+	}
 	
+	static void bases() {
+		int decimal = 10;
+		
+		//BINARY (base 2; val 0-1; 0b101 or 0B101)
+		int binary = 0b10101011;
+		
+		//OCTAL (base 8; 0-7)
+		int octal = 012347;
+		
+		//HEXADECIMAL (base 16; 0-9, a-f)
+		int hex = 0xa13f5;
 		
 	}
 }

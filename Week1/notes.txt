@@ -1,0 +1,23 @@
+Collections 3 things. all interfaces
+-queue
+
+-list
+
+-sets
+	->sortedset
+
+	dont allow for duplicates
+
+
+Maps are key value pairs. not associated with collections but are similar.
+
+
+
+ArrayList
+List list = new ArrayList();
+^^^^
+
+ALWAYS USE THE INTERFACE AS THE REFERENCE TYPE
+
+linked lists are linear data structures where elements are not stored in contiguous (next to each other) locations. and every element is a seperate object with a link to it's successor
+each element is known as a node.
