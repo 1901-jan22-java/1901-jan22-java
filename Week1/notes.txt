@@ -21,3 +21,12 @@ ALWAYS USE THE INTERFACE AS THE REFERENCE TYPE
 
 linked lists are linear data structures where elements are not stored in contiguous (next to each other) locations. and every element is a seperate object with a link to it's successor
 each element is known as a node.
+
+markup interface is an interface with no methods or fields
+
+serialize means you convert a string into strings of bytes
+
+markup interface tells the entity can be turned into bytes
+
+functional interface is the only method used in a markup interface
+
