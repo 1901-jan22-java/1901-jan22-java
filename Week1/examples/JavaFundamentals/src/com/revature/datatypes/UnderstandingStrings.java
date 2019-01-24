@@ -12,12 +12,9 @@ public class UnderstandingStrings {
 
 	public static void main(String[] args) {
 		String str = "hello";
-		str = str.concat(" world!");		//basically just str+="";
+		str = str.concat(" world!");
 		System.out.println(str);
 		System.out.println(str.substring(2, 34));
-		//substring(int number) returns everything starting from index
-		//substring(int num1, int num2) returns everything between index num1 and num2 not inclusive
-		
 		System.out.println("test");
 	}
 }

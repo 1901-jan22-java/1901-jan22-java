@@ -34,7 +34,6 @@ public class UnderstandingExceptions {
 			e.printStackTrace();
 		} 
 		
-		doSomethingRisky();
 		
 		try { //"try" to execute risky code
 			doSomethingRisky();
@@ -43,6 +42,10 @@ public class UnderstandingExceptions {
 			//catch the exception in the stack to continue program execution
 			System.out.println("Hey something went wrong!: " + 
 			e.getMessage());
+		}
+		finally {
+			//typically used to close closable resources 
+			System.out.println("WILL ALWAYS EXECUTE");
 		}
 		System.out.println("Made it to end!");
 	}
