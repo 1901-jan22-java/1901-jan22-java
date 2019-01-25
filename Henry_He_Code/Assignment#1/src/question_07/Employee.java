@@ -28,25 +28,25 @@ public class Employee implements Comparator<Employee>{
 	
 	
 	
-//	public static Comparator<Employee> NameComparator = new Comparator<Employee>() {
-//        @Override
-//        public int compare(Employee e1, Employee e2) {
-//            return e1.name.compareTo(e2.name);
-//        }
-//    };
-//    
-//    public static Comparator<Employee> DepartmentComparator = new Comparator<Employee>() {
-//    	public int compare(Employee e1, Employee e2) {
-//    		return e1.department.compareTo(e2.department);
-//    	}
-//    };
-//	
-//	public static Comparator<Employee> AgeComparator = new Comparator<Employee>() {
-//        @Override
-//        public int compare(Employee e1, Employee e2) {
-//            return e1.age - e2.age;
-//        }
-//    };
+	public static Comparator<Employee> NameComparator = new Comparator<Employee>() {
+        @Override
+        public int compare(Employee e1, Employee e2) {
+            return e1.name.compareTo(e2.name);
+        }
+    };
+    
+    public static Comparator<Employee> DepartmentComparator = new Comparator<Employee>() {
+    	public int compare(Employee e1, Employee e2) {
+    		return e1.department.compareTo(e2.department);
+    	}
+    };
+	
+	public static Comparator<Employee> AgeComparator = new Comparator<Employee>() {
+        @Override
+        public int compare(Employee e1, Employee e2) {
+            return e1.age - e2.age;
+        }
+    };
 
 }
 
