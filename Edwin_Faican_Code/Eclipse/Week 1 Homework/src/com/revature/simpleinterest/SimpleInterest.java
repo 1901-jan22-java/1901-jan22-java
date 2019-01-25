@@ -1,4 +1,4 @@
-package com.revature.simple.interest;
+package com.revature.simpleinterest;
 
 import java.util.Scanner;
 
