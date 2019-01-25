@@ -1,7 +1,8 @@
 package com.revature.factorial;
 
+
 public class ComputeFactorial {
-	public static int factorial(int a) {
+	public static long factorial(long a) {
 		if( a == 1 || a == 0) {
 			return 1;
 		} else if(a == 2) {
@@ -11,7 +12,7 @@ public class ComputeFactorial {
 		return factorial(a, a-1);
 	}
 	
-	public static int factorial(int a, int b) {
+	public static long factorial(long a, long b) {
 		if(a == 2) {
 			return 2;
 		}
@@ -20,6 +21,6 @@ public class ComputeFactorial {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(factorial(4));
+		System.out.println(factorial(25));
 	}
 }
