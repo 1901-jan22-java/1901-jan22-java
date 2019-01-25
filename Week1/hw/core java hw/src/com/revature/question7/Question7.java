@@ -1,7 +1,5 @@
 package com.revature.question7;
 
-import java.util.InputMismatchException;
-import java.util.Scanner;
 
 public class Question7 {
 /*
@@ -9,37 +7,38 @@ public class Question7 {
  * */
 	public static void main(String[] args)
 	{
-		try
-		{
-			//gets user input
-			Scanner input = new Scanner(System.in);
-			System.out.println("Enter name");
-			String name = input.nextLine();
-			System.out.println("Enter department");
-			String department = input.nextLine();
-			System.out.println("Enter age");
-			int age = input.nextInt();
-			input.close();
-		}
-		//if user enters invalid inputs, make them try again
-		catch(InputMismatchException e)
-		{
-			System.out.println("Invalid inputs. Try again.");
-		}
+		Employee guy1 = new Employee("Nomuraa", "Square Enixx", 21);
+		Employee guy2 = new Employee("Nomura", "Square Enix", 20);
+		//prints out the employees
+		System.out.println(	guy1.getName() + " " + 
+							guy1.getDepartment() + " " + 
+							guy1.getAge());
+		System.out.println(	guy2.getName() + " " + 
+							guy2.getDepartment() + " " + 
+							guy2.getAge());
+
+		System.out.println(compare(guy1, guy2));
+		System.out.println(compare(guy1, guy2));
+		System.out.println(compare(guy1, guy2));
+		
 	}
 }
 
 class Employee
 {
-	private String name;
-	private String department;
-	private int age;
+	private String name = "";
+	private String department = "";
+	private int age = 0;
 	
 	public Employee(String name, String department, int age)
 	{
 		this.name = name;
 		this.department = department;
 		this.age = age;
+	}
+
+	public Employee()
+	{
 	}
 
 	public String getName() {
@@ -65,6 +64,5 @@ class Employee
 	public void setAge(int age) {
 		this.age = age;
 	}
-	
 	
 }
