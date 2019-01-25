@@ -1,28 +1,53 @@
 package com.revature.question7;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-public class Question7 {
+public class Question7{
 /*
  * sort two employees based on their name, department, and age using the comparator interface
  * */
 	public static void main(String[] args)
 	{
-		Employee guy1 = new Employee("Nomuraa", "Square Enixx", 21);
-		Employee guy2 = new Employee("Nomura", "Square Enix", 20);
+		List<Employee> employees = new ArrayList<Employee>();
+		Employee guy1 = new Employee("A", "C", 20);
+		Employee guy2 = new Employee("D", "A", 20);
+		Employee guy3 = new Employee("B", "B", 21);
+		Employee guy4 = new Employee("C", "D", 19);
 		//prints out the employees
-		System.out.println(	guy1.getName() + " " + 
-							guy1.getDepartment() + " " + 
-							guy1.getAge());
-		System.out.println(	guy2.getName() + " " + 
-							guy2.getDepartment() + " " + 
-							guy2.getAge());
+		
+		employees.add(guy1);
+		employees.add(guy2);
+		employees.add(guy3);
+		employees.add(guy4);
 
-		System.out.println(compare(guy1, guy2));
-		System.out.println(compare(guy1, guy2));
-		System.out.println(compare(guy1, guy2));
+		System.out.println("SORTING BY NAME");
+		Collections.sort(employees, new CompareByName());
+		System.out.println(toString(employees));
+		
+		System.out.println("SORTING BY DEPARTMENT");
+		Collections.sort(employees, new CompareByDepartment());
+		System.out.println(toString(employees));
+				
+		System.out.println("SORTING BY AGE");
+		Collections.sort(employees, new CompareByAge());
+		System.out.println(toString(employees));
 		
 	}
+	
+	public static String toString(List<Employee> employees)
+	{
+		String result = "";
+        
+        for(int i = 0; i < employees.size(); i++)
+        	result += "" + employees.get(i).getName() + " " + employees.get(i).getDepartment() + " " + employees.get(i).getAge() + "\n";
+    
+        return result;
+	}
+	
 }
+
 
 class Employee
 {
