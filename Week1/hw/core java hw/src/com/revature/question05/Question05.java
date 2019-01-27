@@ -1,9 +1,9 @@
-package com.revature.question5;
+package com.revature.question05;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Question5 {
+public class Question05 {
 	/*
 	 * write a substring method that accepts a 
 	 * string str and an integer idx and returns

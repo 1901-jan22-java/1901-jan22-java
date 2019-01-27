@@ -1,0 +1,57 @@
+why choose java?
+can run on any operating system because of jvm
+dont have to deal with memory management
+
+
+OOP -
+	Abstraction - abstract, interface
+	Encapsulation - getters, setters, private instance variables, nested classes
+	Inheritance - extends, implements
+	Polymorphism - how we have different behavior capabilities with the same object, override/overload methods, covariant types
+
+garbage collection - JVM manages, gc thread - "daemon" thread (never dies), 
+			finalize(); called before garbage collection
+			System.gc(); request to garbage collection
+
+final vs finally vs finalize
+finalize - called before garbage collection. end of a program
+finally - end of a try/catch block. you do not need it. can be used for things that you always want to happen though. basically a fail safe
+final - 	variable	cannot reassign variables
+		method		cannot override method (can overload)
+		class		cannot extend
+
+Strings
+	Immutable
+	Stored in String Pool unless you create an object ("new" to instantiate)
+	ex. 
+		String s = "hello"; 		String pool
+		String t = new String("hello");	
+	
+	String Builder and String Buffer (kinda like a mutable string)
+	append (like concat)
+	reverse()
+	ex. StringBuilder sb = new StringBuilder("hello");
+	sb.append(" world").reverse();
+
+	String Buffer is synchronized 
+	Builder is not
+
+
+Synchronized = only 1 thread can access at a time
+
+
+Multithreading
+	extend Thread class
+	implement Runnable interface
+	override run()
+	call start() which is a member of Thread class
+	if you want to run a thread, make a Thread class then implement the Runnable class
+	used for serialization
+	
+Serialization - taking object state and converting it to stream of bytes
+Deserialization - opposite of serialization
+	Transient keyword for things you do not want to serialize
+	Serial Version UID - generated for a serialized thing
+More for transfer purposes, not for security
+
+

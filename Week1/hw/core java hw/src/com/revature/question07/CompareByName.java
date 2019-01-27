@@ -1,4 +1,4 @@
-package com.revature.question7;
+package com.revature.question07;
 
 import java.util.Comparator;
 

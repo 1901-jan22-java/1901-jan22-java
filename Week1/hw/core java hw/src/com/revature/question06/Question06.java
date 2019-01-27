@@ -1,9 +1,9 @@
-package com.revature.question6;
+package com.revature.question06;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Question6 {
+public class Question06 {
 
 	public static void main(String[] args)
 	{

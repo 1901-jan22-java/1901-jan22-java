@@ -1,10 +1,11 @@
-package com.revature.question7;
+package com.revature.question07;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class Question7{
+public class Question07
+{
 /*
  * sort two employees based on their name, department, and age using the comparator interface
  * */

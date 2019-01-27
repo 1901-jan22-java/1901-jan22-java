@@ -1,9 +1,9 @@
-package com.revature.question4;
+package com.revature.question04;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Question4 {
+public class Question04 {
 	/*
 	 * Write a program to compute N factorial
 	 * */

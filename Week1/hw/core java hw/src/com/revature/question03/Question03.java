@@ -1,8 +1,8 @@
-package com.revature.question3;
+package com.revature.question03;
 
 import java.util.Scanner;
 
-public class Question3 {
+public class Question03 {
 	/*
 	 * Reverse a string without using a temporary variable. 
 	 * do NOT use reverse() in the stringbuffer or stringbuilder api
