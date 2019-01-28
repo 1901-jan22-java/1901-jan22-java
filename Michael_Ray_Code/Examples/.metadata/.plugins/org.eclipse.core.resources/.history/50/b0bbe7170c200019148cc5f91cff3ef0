@@ -1,8 +1,0 @@
-package com.revature.io;
-
-public class HangMan {
-public static void main(String[] args) {
-	
-	List<String> words = FileIO.ReadFile(src/com/revature/io/text.txt);
-}
-}
