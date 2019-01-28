@@ -34,7 +34,7 @@ Strings
 	sb.append(" world").reverse();
 
 	String Buffer is synchronized 
-	Builder is not
+	String Builder is not
 
 
 Synchronized = only 1 thread can access at a time
