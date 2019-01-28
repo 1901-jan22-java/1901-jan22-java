@@ -1,7 +1,6 @@
 package com.revature.Exceptions;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 public class UnderstandingExceptions {
 
@@ -25,7 +24,6 @@ public class UnderstandingExceptions {
 			e.printStackTrace();
 		} 
 		catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		System.out.println("continues");
