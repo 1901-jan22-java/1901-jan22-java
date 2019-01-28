@@ -3,7 +3,7 @@ package com.revature.inheritabstract;
 import java.util.Scanner;
 
 public class SubAbstract extends SuperAbstract{
-
+	
 	@Override
 	public boolean hasUpperCase(String s) {
 		for(int i=0; i < s.length()-1; i++) {
