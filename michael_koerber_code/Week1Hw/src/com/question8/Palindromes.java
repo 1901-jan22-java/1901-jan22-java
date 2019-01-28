@@ -30,7 +30,7 @@ public class Palindromes {
 	}
 	
 	public static boolean isPalindrome(String str) { // Return true if the original str is equal to the new string built to be reversed and returned again as a string.
-	    return str.equals(new StringBuilder(str).reverse().toString()); // .reverse will seperate each letter in the str to a seperate char, reverse them, and then join them back into a string with .toString
-	}
+	    return str.equals(new StringBuilder(str).reverse().toString()); // .reverse will separate each letter in the str to a separate char, reverse them, and then join them back into a string with .toString
+	} // the string entered as a param is compared to the new reversed string object created with the stringbuilder class
 
 }

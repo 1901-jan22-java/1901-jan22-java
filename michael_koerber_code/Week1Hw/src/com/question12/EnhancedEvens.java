@@ -11,8 +11,8 @@ public class EnhancedEvens {
 		   numbers.add(i); // Add 1 - 100 to the array
 		}
 		
-		for(int num: numbers){ // For-each look assigning each value to int num in arraylist numbers
-			if(num % 2 == 0){ // checking each value num (1-100) if the num is even
+		for(int num: numbers){ // For-each loop assigning each value to int num in arraylist numbers
+			if(num % 2 == 0){ // checking each value num (1-100) for even numbers
 				System.out.println(num);
 			}
 		}

@@ -18,7 +18,7 @@ public class RemoveDuplicates {
         String newString = ""; //create new string to add characters to
  
         for (char character : charArray) { // for each loop to check each character in the array
-            if (newString.indexOf(character) == -1) { // if the character being iterated over is not in the newString
+            if (newString.indexOf(character) == -1) { // if the character being iterated over is not in the newString - inside indexOf method a false return is -1
                 newString += character;//  add the character to the new string.
             }
         }
