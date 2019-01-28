@@ -1,0 +1,30 @@
+package com.revature.app;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class HW2_FibaSequence {
+public static void main(String[] args) {
+	
+}
+static List<Integer> memo;
+static int highestFibNum = 25;
+
+static{
+	memo = new ArrayList();
+	
+	GetFibSequenceNum(25);
+}
+
+static int GetFibSequenceNum(int num){
+	int finalNum = 0;
+	if(num > memo.size()){
+		
+	}
+	else{
+		finalNum = memo.get(num);
+	}
+	return finalNum;
+}
+
+}

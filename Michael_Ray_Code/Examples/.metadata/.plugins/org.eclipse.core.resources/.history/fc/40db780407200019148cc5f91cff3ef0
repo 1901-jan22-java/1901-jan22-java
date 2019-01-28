@@ -1,0 +1,8 @@
+package com.revature.io;
+
+public class FileIO {
+
+	void WriteObj(Object obj){
+		
+	}
+}

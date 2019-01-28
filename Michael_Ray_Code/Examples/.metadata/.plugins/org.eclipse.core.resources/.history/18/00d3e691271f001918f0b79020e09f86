@@ -1,0 +1,43 @@
+package com.revature.classbasics;
+
+public class ControlStatement {
+public static void main(String[] args) {
+	
+	System.out.println(intToHex(19));
+	
+	
+}
+
+public static String intToHex(int num)
+{
+	int divide = num;
+	int mod = 0;
+	String returnString = "";
+	do{
+		mod = divide % 16;
+		divide /= 16;
+
+
+			switch(mod)
+			{
+			case 10:
+				returnString = "" + returnString + "A";
+			case 11:
+				returnString = "" + returnString + "B";
+			case 12:
+				returnString = "" + returnString + "C";
+			case 13:
+				returnString = "" + returnString + "D";
+			case 14:
+				returnString = "" + returnString + "E";
+			case 15:
+				returnString = "" + returnString + "F";
+				default:
+					returnString = "" + returnString + mod;
+			}
+
+	}while(divide > 16);
+	
+	return returnString;
+}
+}

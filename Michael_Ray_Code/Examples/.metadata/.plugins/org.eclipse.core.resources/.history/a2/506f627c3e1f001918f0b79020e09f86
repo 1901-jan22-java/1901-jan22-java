@@ -1,0 +1,28 @@
+package com.revature.classbasics;
+
+public class Constructors {
+public static void main(String[] args) {
+	
+}
+}
+class A{
+	String name;
+	public A(){
+		this.name = "A";
+		System.out.println("CONSTRUCING A");
+	}
+}
+class B extends A{
+	String name;
+	public B(){
+		this.name = "B";
+		System.out.println("CONSTRUCING B");
+	}
+}
+class C extends B{
+	String name;
+	public C(){
+		this.name = "C";
+		System.out.println("CONSTRUCING C");
+	}
+}

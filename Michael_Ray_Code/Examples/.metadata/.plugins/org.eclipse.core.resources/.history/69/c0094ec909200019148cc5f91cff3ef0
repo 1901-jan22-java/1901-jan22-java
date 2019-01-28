@@ -1,0 +1,45 @@
+package com.revature.io;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.revature.pojos.Person;
+
+public class FileIO {
+
+	public void WriteObj(Object obj){
+		String filePath = "src/com/revature/io/text.txt";
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, true))){
+			bw.write(obj.toString() + "\n");
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	public List<Person> ReadObj(){
+		String filePath = "src/com/revature/io/text.txt";
+		List<Person> people = new ArrayList<Person>();
+		
+		try(BufferedReader bw = new BufferedReader(new FileReader(filePath))){
+			String line = bw.readLine();
+			while(line != null){
+				String[] split = line.split(";");
+				
+				people.add(new Person(split[0], split[1]));
+				
+				line = bw.readLine();
+			}
+
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+		
+		return people;
+		
+	}
+}

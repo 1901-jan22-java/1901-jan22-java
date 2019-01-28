@@ -1,0 +1,35 @@
+package com.revature.app;
+
+public class HomeWork1 {
+public static void main(String[] args) {
+	
+}
+
+
+public static void BubbleSort(int[] arr, int start,int end){
+	int halfNum = (end - start)/2;
+	
+	if(halfNum == 0)
+	{
+		return;		
+	}
+	else
+	{
+		BubbleSort(arr, start, halfNum);
+		BubbleSort(arr, halfNum, end);
+	}
+	
+	for(int i = start; i < end; i++)
+	{
+		if(arr[i] > arr[end-i]){
+			int store = arr[i];
+			arr[i] = arr[end-i];
+			arr[end-i] = store;
+		}
+		
+	}
+	
+	
+	
+}
+}

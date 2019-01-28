@@ -1,0 +1,14 @@
+package com.revature.app;
+
+public class HW5_SubString {
+public static void main(String[] args) {
+	
+}
+
+public static String SubString(String mainString, int index){
+	String subString = "";
+	
+	return subString;
+	
+}
+}

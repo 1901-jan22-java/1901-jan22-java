@@ -1,0 +1,186 @@
+package com.revature.io;
+
+import java.util.List;
+import java.util.Random;
+import java.util.Set;
+
+public class HangMan {
+
+	private List<String> currentWordPool;
+	private Set<String> worngLetters;
+	private String[] currentWord;
+	private String guessedWord = "";
+	private String guess = "";
+	public boolean gameFinished = false;
+	private int wrongAnswers = 0;
+	
+	public void StartNewGame(){
+		currentWord = GetNewWord();
+		guessedWord = "";
+		for(String word : currentWord){
+			for(int i = 0; i < word.length(); i++){
+				guessedWord += "_ ";
+			}
+			guessedWord += " ";
+		}
+		gameFinished = false;
+		wrongAnswers = 0;
+		
+		Draw();
+	}
+	public void Update(String guess){
+		
+		String newGuessedWord = "";
+		boolean hit = false;
+		for(String word : currentWord){
+			for(int i = 0; i < word.length(); i++){
+				if(word.charAt(i) == guess.charAt(0)){
+					newGuessedWord += guess.charAt(0) + " ";
+					hit = true;
+				}
+				else{
+					newGuessedWord += guessedWord.charAt(i);
+				}
+						
+			}
+			newGuessedWord += " ";
+		}
+		
+		guessedWord =  newGuessedWord;
+		
+		if(!hit){
+			AddToWrong("" + guess.charAt(0));
+			wrongAnswers++;
+		}
+		
+		Draw();
+	}
+	void AddToWrong(String wrong){
+		worngLetters.add(wrong);
+	}
+	void Draw()
+	{
+		DrawHangMan();
+		System.out.println();
+		DrawGuessWord();
+		System.out.println();
+		DrawWrongLetters();
+		
+	}
+	void DrawGuessWord(){
+		
+		System.out.println(guessedWord);
+		
+	}
+	void DrawWrongLetters(){
+		System.out.println("Wrong Letters: ");
+		for(String wrong : worngLetters){
+			System.out.println(wrong + ",");
+		}
+	}
+	void DrawHangMan(){
+		switch(wrongAnswers){
+		case 0:{
+			System.out.println("      ------");
+			System.out.println("      |    |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("------------");
+			break;
+		}
+		case 1:{
+			System.out.println("      ------");
+			System.out.println("      |    |");
+			System.out.println("    (-_-)  |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("------------");
+			break;
+		}
+		case 2:{
+			System.out.println("      ------");
+			System.out.println("      |    |");
+			System.out.println("    (-_-)  |");
+			System.out.println("      |    |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("------------");
+			break;
+		}
+		case 3:{
+			System.out.println("      ------");
+			System.out.println("      |    |");
+			System.out.println("    (-_-)  |");
+			System.out.println("     /|    |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("------------");
+			break;
+		}
+		case 4:{
+			System.out.println("      ------");
+			System.out.println("      |    |");
+			System.out.println("    (-_-)  |");
+			System.out.println("     /|\\   |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("------------");
+			break;
+		}
+		case 5:{
+			System.out.println("      ------");
+			System.out.println("      |    |");
+			System.out.println("    (-_-)  |");
+			System.out.println("     /|\\   |");
+			System.out.println("      |    |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("------------");
+			break;
+		}
+		case 6:{
+			System.out.println("      ------");
+			System.out.println("      |    |");
+			System.out.println("    (-_-)  |");
+			System.out.println("     /|\\   |");
+			System.out.println("      |    |");
+			System.out.println("     /     |");
+			System.out.println("           |");
+			System.out.println("------------");
+			break;
+		}
+		case 7:{
+			System.out.println("      ------");
+			System.out.println("      |    |");
+			System.out.println("    (-_-)  |");
+			System.out.println("     /|\\   |");
+			System.out.println("      |    |");
+			System.out.println("     / \\   |");
+			System.out.println("           |");
+			System.out.println("------------");
+			break;
+		}
+		}
+	}
+	
+	String[] GetNewWord(){
+		int wordNum = (int)Math.random() % currentWordPool.size();
+		
+		String word = currentWordPool.get(wordNum);
+		
+		return word.split(" ");
+	}
+
+	
+	public void LoadWordPool(List<String> words){
+		currentWordPool = words;
+	}
+}

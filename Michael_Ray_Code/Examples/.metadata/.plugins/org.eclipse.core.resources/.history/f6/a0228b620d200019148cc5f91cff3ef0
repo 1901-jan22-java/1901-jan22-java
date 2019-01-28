@@ -1,0 +1,30 @@
+package com.revature.io;
+
+import java.util.List;
+import java.util.Random;
+
+public class HangMan {
+
+	private List<String> currentWordPool;
+	private String[] currentWord;
+	
+	public StartNewGame(){
+		currentWord = GetNewWord();
+	}
+	public Draw(){
+		
+	}
+	
+	String[] GetNewWord(){
+		int wordNum = (int)Math.random() % currentWordPool.size();
+		
+		String word = currentWordPool.get(wordNum);
+		
+		return word.split(" ");
+	}
+
+	
+	public void LoadWordPool(List<String> words){
+		currentWordPool = words;
+	}
+}

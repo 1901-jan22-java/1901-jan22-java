@@ -1,0 +1,10 @@
+package com.revature.oop;
+
+public class MyObject {
+private int id = 5;
+private string name;
+private String desc;
+{
+	id+=5;
+}
+}

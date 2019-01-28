@@ -1,0 +1,19 @@
+package com.revature.app;
+
+public class HW9_Primes {
+public static void main(String[] args) {
+	
+}
+
+public static boolean IsAPrime(int num){
+	boolean isPrime = true;
+	
+	if((num % 2) == 0 || (num % 3) == 0){
+		isPrime = false;
+	}
+	
+	return isPrime;
+}
+}
+
+

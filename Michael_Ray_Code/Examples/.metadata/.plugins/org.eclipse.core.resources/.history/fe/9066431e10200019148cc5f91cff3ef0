@@ -1,0 +1,147 @@
+package com.revature.io;
+
+import java.util.List;
+import java.util.Random;
+
+public class HangMan {
+
+	private List<String> currentWordPool;
+	private List<String> worngLetters;
+	private String[] currentWord;
+	private String guessedWord = "";
+	public boolean gameFinished = false;
+	private int wrongAnswers = 0;
+	
+	public void StartNewGame(){
+		currentWord = GetNewWord();
+		guessedWord = "";
+		for(String word : currentWord){
+			for(int i = 0; i < word.length(); i++){
+				guessedWord += "_ ";
+			}
+			guessedWord += " ";
+		}
+		gameFinished = false;
+		 wrongAnswers = 0;
+		
+		Draw();
+	}
+	public void Draw()
+	{
+		DrawHangMan();
+		DrawGuessWord();
+		DrawWrongLetters();
+		
+	}
+	void DrawGuessWord(){
+		
+	}
+	void DrawWrongLetters(){
+		
+	}
+	void DrawHangMan(){
+		switch(wrongAnswers){
+		case 0:{
+			System.out.println("      ------");
+			System.out.println("      |    |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("------------");
+			break;
+		}
+		case 1:{
+			System.out.println("      ------");
+			System.out.println("      |    |");
+			System.out.println("    (-_-)  |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("------------");
+			break;
+		}
+		case 2:{
+			System.out.println("      ------");
+			System.out.println("      |    |");
+			System.out.println("    (-_-)  |");
+			System.out.println("      |    |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("------------");
+			break;
+		}
+		case 3:{
+			System.out.println("      ------");
+			System.out.println("      |    |");
+			System.out.println("    (-_-)  |");
+			System.out.println("     /|    |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("------------");
+			break;
+		}
+		case 4:{
+			System.out.println("      ------");
+			System.out.println("      |    |");
+			System.out.println("    (-_-)  |");
+			System.out.println("     /|\\   |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("------------");
+			break;
+		}
+		case 5:{
+			System.out.println("      ------");
+			System.out.println("      |    |");
+			System.out.println("    (-_-)  |");
+			System.out.println("     /|\\   |");
+			System.out.println("      |    |");
+			System.out.println("           |");
+			System.out.println("           |");
+			System.out.println("------------");
+			break;
+		}
+		case 6:{
+			System.out.println("      ------");
+			System.out.println("      |    |");
+			System.out.println("    (-_-)  |");
+			System.out.println("     /|\\   |");
+			System.out.println("      |    |");
+			System.out.println("     /     |");
+			System.out.println("           |");
+			System.out.println("------------");
+			break;
+		}
+		case 7:{
+			System.out.println("      ------");
+			System.out.println("      |    |");
+			System.out.println("    (-_-)  |");
+			System.out.println("     /|\\   |");
+			System.out.println("      |    |");
+			System.out.println("     / \\   |");
+			System.out.println("           |");
+			System.out.println("------------");
+			break;
+		}
+		}
+	}
+	
+	String[] GetNewWord(){
+		int wordNum = (int)Math.random() % currentWordPool.size();
+		
+		String word = currentWordPool.get(wordNum);
+		
+		return word.split(" ");
+	}
+
+	
+	public void LoadWordPool(List<String> words){
+		currentWordPool = words;
+	}
+}

@@ -1,0 +1,12 @@
+package com.revature.exceptions;
+
+public class UnderstandingExceptions {
+public static void main(String[] args) {
+	
+}
+static void DoSomethingRisky(){
+	int[] arr = new int[5];
+	
+	arr[10] = 5;
+}
+}

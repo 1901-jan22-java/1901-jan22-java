@@ -1,0 +1,24 @@
+package com.revature.app;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class HW9_Primes {
+public static void main(String[] args) {
+	
+	List<Interger> primes = new ArrayList<Interger>();
+	
+}
+
+public static boolean IsAPrime(int num){
+	boolean isPrime = false;
+	
+	if((num % 2) == 0 || (num % 3) == 0){
+		isPrime = true;
+	}
+	
+	return isPrime;
+}
+}
+
+

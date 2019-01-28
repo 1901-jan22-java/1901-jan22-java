@@ -1,0 +1,20 @@
+package com.revature.io;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
+
+public class FileIO {
+
+	public void WriteObj(Object obj){
+		String filePath = "src/com/revature/io/text.txt";
+		try(BufferedWriter bw = new BufferedWriter(new FileWriter(filePath, false))){
+			bw.write(obj.toString() + "\n");
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	
+	
+}
