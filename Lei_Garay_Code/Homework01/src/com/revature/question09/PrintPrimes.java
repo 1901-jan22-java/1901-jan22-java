@@ -9,10 +9,10 @@ public class PrintPrimes {
 		
 		for (int i = 2; i < num+1; i++) {
 			array.add(i);
-			if(i<10) 
+			if(i<11) 
 			{
-				int temp = i;
-			//// UNFINISED ///
+				if(i%i==0 && (i==2 || i==3 || i==5 || i==7))
+					System.out.print(i+" ");
 			}
 			else if(!(i%2==0) && !(i%3==0) && !(i%5==0) && !(i%7==0))
 			{
