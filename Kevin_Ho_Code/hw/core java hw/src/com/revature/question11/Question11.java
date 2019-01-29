@@ -19,4 +19,6 @@ public class Question11{
 		myFloats.setNumber2(69f);
 		System.out.println("Number 2 " + myFloats.getNumber2());
 	}
+	
+	
 }
