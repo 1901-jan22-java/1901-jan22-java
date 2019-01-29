@@ -1,6 +1,10 @@
 package com.revature.assignment1;
 
-import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 
 /**
@@ -14,7 +18,7 @@ import java.util.HashSet;
 
 public class StringHelper extends StringBase {
 
-	private static final String[] testCases = {"1", "lowerUPPER","mix123ER","mix123eRxxxxx", "noupper"};
+	private static final String[] testCases = {"01/27/2019", "lowerUPPER","mix123ER","mix123eRxxxxx", "noupper"};
 //	private static final HashMap<String, Integer> month = new HashMap<>();
 //	
 //	static {
@@ -42,6 +46,7 @@ public class StringHelper extends StringBase {
 			StringHelper sh = new StringHelper(str);
 			
 			System.out.println("String: " + sh);
+			System.out.println("\t- toDate() returns "			+ sh.toDate());
 			System.out.println("\t- removeRepeats() returns "	+ sh.removeRepeats());
 			System.out.println("\t- hasUpper() returns "		+ sh.hasUpper());
 			System.out.println("\t- toUpper() returns " 		+ sh.toUpper());
@@ -49,13 +54,26 @@ public class StringHelper extends StringBase {
 		}
 		
 	}
+
+	public LocalDate toDate() {
+		return toDate(s);
+	}
 	
-	public static Date toDate(String s) {
-//		Date d = 
-//		String[] parts;
-//		if(s.contains("/")) parts = s.split("/");
-//		else parts = s.split(" ");
-//		d.setMonth(month.get(parts[0]));
+	public static LocalDate toDate(String str) {
+		ArrayList<String> formats = new ArrayList<>(Arrays.asList(
+				"yyyy-MM-dd", "yyyy/MM/dd",
+				"MM-dd-yyyy", "MM/dd/yyyy", 
+				"LLL-dd-yyyy", "LLL/dd/yyyy"));
+		
+		for(String s: formats) {
+			DateTimeFormatter f = DateTimeFormatter.ofPattern(s);
+			try {
+				return LocalDate.parse(str, f);
+			} catch(DateTimeParseException e) {
+//				e.printStackTrace();
+			}
+		}
+		
 		return null;
 	}
 	
