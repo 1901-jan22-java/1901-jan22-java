@@ -1,0 +1,5 @@
+
+csquid:S1481"/Remove this unused "blockScope" local variable.(ÎÎ¨Ê8ä±Úá‡-H›RMINORZ
+CODE_SMELL
+rsquid:S1854">Remove this useless assignment to local variable "blockScope".(ÎÎ¨Ê8ä±Úá‡-HœRMAJORZ
+CODE_SMELL

@@ -1,0 +1,6 @@
+
+€"squid:ObjectFinalizeOverridenCheck"-Do not override the Object.finalize() method.(ÖÒ˜Ùùÿÿÿÿ8¨®Ç±‰-HêRCRITICALZ
+CODE_SMELL
+q
+squid:S106"9Replace this use of System.out or System.err by a logger.(¤ê¼Ðûÿÿÿÿ8„÷Ë±‰-HîRMAJORZ
+CODE_SMELL
