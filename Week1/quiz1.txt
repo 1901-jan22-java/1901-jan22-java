@@ -13,7 +13,7 @@ methods defined in an interface are implicitly public abstract
 
 runtimeexception and its subclasses are not checked exceptions
 
-you can catch an error in java, but dont
+you can catch an error in java, but dont do that
 
 default keyword in a switch statement is used to define the initial case
 
@@ -31,6 +31,4 @@ the run() method does not come from the thread class
 
 a finally block gets executed always when a try block is executed, no matter if there was an exception or not
 
-string builder is not thread-safe, mutable, and the default capacity is 16
-
-
+string builder is not thread-safe, is mutable, and the default capacity is 16
