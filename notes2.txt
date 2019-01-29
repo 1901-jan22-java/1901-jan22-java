@@ -1,0 +1,20 @@
+maven is a software project management and comprehension tool
+
+maven vs ant
+	ant is basically an outdated competitor
+
+maven generates directories
+
+POM is maven's guidelines
+
+groupId
+	organization
+	convention is using reverse domain name
+	.cc.multivision.demo
+
+artifactId
+	a unique identifier for groupId
+
+packaging 
+
+new -> other -> maven project
