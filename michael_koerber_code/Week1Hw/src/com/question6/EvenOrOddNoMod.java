@@ -3,7 +3,7 @@ package com.question6;
 public class EvenOrOddNoMod {
 
 	public static void main(String[] args) {
-		bitwiseCheck(7);
+		bitwiseCheck(406);
 	}
 	 static void bitwiseCheck(int n){           
 	     // 1 in binary is 0001, odd
