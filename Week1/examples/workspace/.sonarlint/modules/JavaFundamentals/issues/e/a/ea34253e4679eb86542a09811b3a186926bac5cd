@@ -1,0 +1,40 @@
+
+nsquid:S1854M"5Remove this useless assignment to local variable "x".(Ç•ù£øÿÿÿÿ8éì„Ú‡-HÈRMAJORZ
+CODE_SMELL
+_squid:S1481I"&Remove this unused "x" local variable.(»‘Ë·ıÿÿÿÿ8éì„Ú‡-HÃRMINORZ
+CODE_SMELL
+nsquid:S1854K"5Remove this useless assignment to local variable "x".(…·¦ãüÿÿÿÿ8éì„Ú‡-HÊRMAJORZ
+CODE_SMELL
+usquid:S1126a"AReplace this if-then-else statement by a single return statement.(åûôŞ8éì„Ú‡-HÁRMINORZ
+CODE_SMELL
+isquid:S1854L"5Remove this useless assignment to local variable "x".(Â£Û”8éì„Ú‡-HÉRMAJORZ
+CODE_SMELL
+q
+squid:S106 "9Replace this use of System.out or System.err by a logger.(³ğ¸ûÿÿÿÿ8…ÇäÛ‡-HàRMAJORZ
+CODE_SMELL
+osquid:S1226"BIntroduce a new variable instead of reusing the parameter "count".(‚ÊşÉ8…ÇäÛ‡-HâRMINORZBUG
+usquid:S1126h"AReplace this if-then-else statement by a single return statement.(ªäŒ•8éì„Ú‡-HÂRMINORZ
+CODE_SMELL
+hsquid:S1854J"5Remove this useless assignment to local variable "x".(Ù¡;8éì„Ú‡-HËRMAJORZ
+CODE_SMELL
+~squid:S3358–"DExtract this nested ternary operation into an independent statement.(¸€‡Ñøÿÿÿÿ8éì„Ú‡-HÎRMAJORZ
+CODE_SMELL
+psquid:S2583h"CChange this condition so that it does not always evaluate to "true"(ªäŒ•8éì„Ú‡-HÀRMAJORZBUG
+rsquid:S1854*"9Remove this useless assignment to local variable "count".(€©ª°øÿÿÿÿ8éì„Ú‡-HÇRMAJORZ
+CODE_SMELL
+nsquid:S1854I"5Remove this useless assignment to local variable "x".(»‘Ë·ıÿÿÿÿ8éì„Ú‡-HÌRMAJORZ
+CODE_SMELL
+fsquid:S1481–",Remove this unused "testing" local variable.(¸€‡Ñøÿÿÿÿ8éì„Ú‡-HÄRMINORZ
+CODE_SMELL
+usquid:S1854–";Remove this useless assignment to local variable "testing".(¸€‡Ñøÿÿÿÿ8éì„Ú‡-HÍRMAJORZ
+CODE_SMELL
+esquid:S2201›"2The return value of "toBinaryString" must be used.(¶ª™äùÿÿÿÿ8éì„Ú‡-HÅRMAJORZBUG
+l
+squid:S106"9Replace this use of System.out or System.err by a logger.(ûåóˆ8éì„Ú‡-H¿RMAJORZ
+CODE_SMELL
+q
+squid:S106/"9Replace this use of System.out or System.err by a logger.(³ğ¸ûÿÿÿÿ8…ÇäÛ‡-HáRMAJORZ
+CODE_SMELL
+q
+squid:S106"9Replace this use of System.out or System.err by a logger.(úÏÜ‘ÿÿÿÿÿ8éì„Ú‡-H¾RMAJORZ
+CODE_SMELL

@@ -1,0 +1,27 @@
+
+q
+squid:S106'"9Replace this use of System.out or System.err by a logger.(ßş»²şÿÿÿÿ8ÀäŞÏ‰-HŒRMAJORZ
+CODE_SMELL
+q
+squid:S106&"9Replace this use of System.out or System.err by a logger.(Ëöáœúÿÿÿÿ8ÀäŞÏ‰-H‹RMAJORZ
+CODE_SMELL
+_squid:S1068"&Remove this unused "id" private field.(ôç¼Óşÿÿÿÿ8ÀäŞÏ‰-H‰RMAJORZ
+CODE_SMELL
+bsquid:S1068".Remove this unused "todaysTime" private field.(Ÿùï8ÀäŞÏ‰-HŠRMAJORZ
+CODE_SMELL
+l
+squid:S106%"9Replace this use of System.out or System.err by a logger.(Şüäª8ÀäŞÏ‰-HRMAJORZ
+CODE_SMELL
+l
+squid:S106,"9Replace this use of System.out or System.err by a logger.(‘¿«Õ8ÀäŞÏ‰-HRMAJORZ
+CODE_SMELL
+\squid:S1068"(Remove this unused "name" private field.(Ë¥¼8ÀäŞÏ‰-HˆRMAJORZ
+CODE_SMELL
+l
+squid:S106*"9Replace this use of System.out or System.err by a logger.(†ÜÅá8ÀäŞÏ‰-HRMAJORZ
+CODE_SMELL
+~squid:S1192%"GDefine a constant instead of duplicating this literal " bytes" 3 times.(Şüäª8ÀäŞÏ‰-H‡RCRITICALZ
+CODE_SMELL
+l
+squid:S106+"9Replace this use of System.out or System.err by a logger.(şÅœÅ8ÀäŞÏ‰-HRMAJORZ
+CODE_SMELL

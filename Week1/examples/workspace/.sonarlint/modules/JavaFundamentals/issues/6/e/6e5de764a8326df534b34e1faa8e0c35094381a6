@@ -1,0 +1,75 @@
+
+l
+squid:S106M"9Replace this use of System.out or System.err by a logger.(Õ ûñ8¶¿¹„ˆ-H—RMAJORZ
+CODE_SMELL
+l
+squid:S106N"9Replace this use of System.out or System.err by a logger.(‰øÄ›8ŒŸ¸„ˆ-HˆRMAJORZ
+CODE_SMELL
+q
+squid:S106J"9Replace this use of System.out or System.err by a logger.(Å­Ëİúÿÿÿÿ8ÿÌúƒˆ-HãRMAJORZ
+CODE_SMELL
+squid:S2293E"YReplace the type specification in this constructor call with the diamond operator ("<>").(ïªÙÙ8şıöƒˆ-HÙRMINORZ
+CODE_SMELL
+l
+squid:S106:"9Replace this use of System.out or System.err by a logger.(•È®À8îëØƒˆ-H»RMAJORZ
+CODE_SMELL
+q
+squid:S106L"9Replace this use of System.out or System.err by a logger.(şÜôÅùÿÿÿÿ8û‘´„ˆ-HùRMAJORZ
+CODE_SMELL
+squid:S22934"YReplace the type specification in this constructor call with the diamond operator ("<>").(†å¶Ô8‡Õƒˆ-H¢RMINORZ
+CODE_SMELL
+‚squid:S11926"FDefine a constant instead of duplicating this literal "hello" 4 times.(ÌÒÿ úÿÿÿÿ8Úëˆˆ-H¹RCRITICALZ
+CODE_SMELL
+l
+squid:S106\"9Replace this use of System.out or System.err by a logger.(ĞÌûı8Úëˆˆ-HºRMAJORZ
+CODE_SMELL
+l
+squid:S106_"9Replace this use of System.out or System.err by a logger.(ĞÌûı8Úëˆˆ-H»RMAJORZ
+CODE_SMELL
+q
+squid:S106a"9Replace this use of System.out or System.err by a logger.(ŞÒ—üÿÿÿÿ8Úëˆˆ-H¼RMAJORZ
+CODE_SMELL
+k
+squid:S106n"9Replace this use of System.out or System.err by a logger.(¨«§%8Úëˆˆ-H½RMAJORZ
+CODE_SMELL
+l
+squid:S106p"9Replace this use of System.out or System.err by a logger.(·¨œ®8Úëˆˆ-H¾RMAJORZ
+CODE_SMELL
+l
+squid:S106r"9Replace this use of System.out or System.err by a logger.(÷”í’8Úëˆˆ-H¿RMAJORZ
+CODE_SMELL
+q
+squid:S106y"9Replace this use of System.out or System.err by a logger.(¶¾òøùÿÿÿÿ8Úëˆˆ-HÀRMAJORZ
+CODE_SMELL
+l
+squid:S106{"9Replace this use of System.out or System.err by a logger.(÷Äã¼8Úëˆˆ-HÁRMAJORZ
+CODE_SMELL
+q
+squid:S106~"9Replace this use of System.out or System.err by a logger.(ËŒ«èøÿÿÿÿ8Úëˆˆ-HÂRMAJORZ
+CODE_SMELL
+m
+squid:S106€"9Replace this use of System.out or System.err by a logger.(Ò»ù8Úëˆˆ-HÃRMAJORZ
+CODE_SMELL
+m
+squid:S106†"9Replace this use of System.out or System.err by a logger.(Ş•öç8Úëˆˆ-HÄRMAJORZ
+CODE_SMELL
+r
+squid:S106‰"9Replace this use of System.out or System.err by a logger.(–àçŠùÿÿÿÿ8Úëˆˆ-HÅRMAJORZ
+CODE_SMELL
+r
+squid:S106Œ"9Replace this use of System.out or System.err by a logger.(·£—Üùÿÿÿÿ8Úëˆˆ-HÆRMAJORZ
+CODE_SMELL
+m
+squid:S106"9Replace this use of System.out or System.err by a logger.(Ïÿ÷×8Úëˆˆ-HÇRMAJORZ
+CODE_SMELL
+m
+squid:S106–"9Replace this use of System.out or System.err by a logger.(‹¤·Ñ8Úëˆˆ-HÈRMAJORZ
+CODE_SMELL
+Zsquid:S1481P"&Remove this unused "v" local variable.(«®½¾8Úëˆˆ-HÉRMINORZ
+CODE_SMELL
+isquid:S1854P"5Remove this useless assignment to local variable "v".(«®½¾8Úëˆˆ-HÊRMAJORZ
+CODE_SMELL
+™squid:S1149P"eReplace the synchronized class "Vector" by an unsynchronized one such as "ArrayList" or "LinkedList".(«®½¾8Úëˆˆ-HËRMAJORZ
+CODE_SMELL
+Ysquid:S2129i" Remove this "String" constructor(†Áì“üÿÿÿÿ8Úëˆˆ-HÌRMAJORZ
+CODE_SMELL
