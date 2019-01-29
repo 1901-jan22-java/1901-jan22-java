@@ -37,8 +37,6 @@ public class classBasics {
 			System.out.println(d);
 		}
 		
-
-		
 		if (num == 1)
 		{
 			System.out.println("if");
