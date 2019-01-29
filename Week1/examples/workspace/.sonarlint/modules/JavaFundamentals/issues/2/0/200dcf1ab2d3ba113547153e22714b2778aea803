@@ -1,0 +1,16 @@
+
+nsquid:S1854
+":Remove this useless assignment to local variable "people".(Ì×ä¢8ÃÊö¬ˆ-HÃRMAJORZ
+CODE_SMELL
+bsquid:S1481	")Remove this unused "ints" local variable.(õ”ë¡üÿÿÿÿ8ÃÊö¬ˆ-HÁRMINORZ
+CODE_SMELL
+_squid:S1481
+"+Remove this unused "people" local variable.(Ì×ä¢8ÃÊö¬ˆ-HÂRMINORZ
+CODE_SMELL
+squid:S2293
+"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ì×ä¢8ÃÊö¬ˆ-HÀRMINORZ
+CODE_SMELL
+qsquid:S1854	"8Remove this useless assignment to local variable "ints".(õ”ë¡üÿÿÿÿ8ÃÊö¬ˆ-HÄRMAJORZ
+CODE_SMELL
+’squid:S2293	"YReplace the type specification in this constructor call with the diamond operator ("<>").(õ”ë¡üÿÿÿÿ8ÃÊö¬ˆ-H¿RMINORZ
+CODE_SMELL
