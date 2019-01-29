@@ -1,0 +1,24 @@
+
+k
+squid:S106*"9Replace this use of System.out or System.err by a logger.(ë‘¥x8­‰¿ˆ-HúRMAJORZ
+CODE_SMELL
+ssquid:S1118":Add a private constructor to hide the implicit public one.(¡ÉÄËøÿÿÿÿ8×ááˆ-H¢RMAJORZ
+CODE_SMELL
+q
+squid:S106"9Replace this use of System.out or System.err by a logger.(¡‘Şüÿÿÿÿ8­‰¿ˆ-HöRMAJORZ
+CODE_SMELL
+k
+squid:S106-"9Replace this use of System.out or System.err by a logger.(¤ık8­‰¿ˆ-HùRMAJORZ
+CODE_SMELL
+msquid:S1481%"4Remove this unused "instanceOfLocal" local variable.(¼Çø¨üÿÿÿÿ8»ÛÉˆ-H‰RMINORZ
+CODE_SMELL
+|squid:S1854%"CRemove this useless assignment to local variable "instanceOfLocal".(¼Çø¨üÿÿÿÿ8»ÛÉˆ-HŠRMAJORZ
+CODE_SMELL
+ssquid:S1161)":Add the "@Override" annotation above this method signature(ÀÏ“ÿÿÿÿÿ8­‰¿ˆ-HıRMAJORZ
+CODE_SMELL
+q
+squid:S106"9Replace this use of System.out or System.err by a logger.(×²©‘øÿÿÿÿ8­‰¿ˆ-H÷RMAJORZ
+CODE_SMELL
+l
+squid:S106!"9Replace this use of System.out or System.err by a logger.(ùˆø8­‰¿ˆ-HøRMAJORZ
+CODE_SMELL
