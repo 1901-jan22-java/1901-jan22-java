@@ -4,7 +4,7 @@ public class OneChallenge {
 
 	public static void main(String[] args) {
 		int points[]; // declaring an array with the INT type
-		points = new int[] {1,3,7,2,5,10,11}; // set the array size to 100
+		points = new int[] {1,3,7,2,5,10,11}; // setting values in the array. Size of this array is 7.
 		int sumTarget = 13;
 	    getPairsCount(points, sumTarget);
 		
