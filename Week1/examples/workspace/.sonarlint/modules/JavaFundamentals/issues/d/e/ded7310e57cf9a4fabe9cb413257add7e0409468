@@ -1,0 +1,7 @@
+
+Psquid:S1643"Use a StringBuilder instead.(‰šÂ…8±üé„ˆ-H¥RMINORZ
+CODE_SMELL
+\squid:S1481"(Remove this unused "str" local variable.(·â¢¹8±üé„ˆ-H¦RMINORZ
+CODE_SMELL
+ksquid:S1854"7Remove this useless assignment to local variable "str".(ÈÁ–€8±üé„ˆ-H§RMAJORZ
+CODE_SMELL

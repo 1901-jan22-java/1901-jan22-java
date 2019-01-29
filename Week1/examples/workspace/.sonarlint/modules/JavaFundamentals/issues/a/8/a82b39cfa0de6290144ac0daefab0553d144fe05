@@ -1,0 +1,29 @@
+
+dsquid:S1854"8Remove this useless assignment to local variable "arr2".(¾İ	H¶RMAJORZ
+CODE_SMELL
+q
+squid:S106#"9Replace this use of System.out or System.err by a logger.(ªÓ¼áşÿÿÿÿ8Éàìá‡-HÀRMAJORZ
+CODE_SMELL
+jsquid:S1197"8Move the array designator from the variable to the type.(ºü×ÔùÿÿÿÿH²RMINORZ
+CODE_SMELL
+Usquid:S1481"(Remove this unused "arr" local variable.(ä°©·H´RMINORZ
+CODE_SMELL
+dsquid:S1854"7Remove this useless assignment to local variable "arr".(ä°©·H·RMAJORZ
+CODE_SMELL
+e
+squid:S106!"9Replace this use of System.out or System.err by a logger.(ÿÑğH³RMAJORZ
+CODE_SMELL
+dsquid:S1197"8Move the array designator from the variable to the type.(¾İ	H±RMINORZ
+CODE_SMELL
+Usquid:S1481")Remove this unused "arr2" local variable.(¾İ	HµRMINORZ
+CODE_SMELL
+_squid:S1481"+Remove this unused "number" local variable.(°÷«ö8Ü˜â‡-HÄRMINORZ
+CODE_SMELL
+½squid:S11867"€Add a nested comment explaining why this method is empty, throw an UnsupportedOperationException or complete the implementation.(Ëâ¦¤ÿÿÿÿÿ8Ü˜â‡-HÅRCRITICALZ
+CODE_SMELL
+ssquid:S1854":Remove this useless assignment to local variable "number".(á Ô‘úÿÿÿÿ8Ü˜â‡-HÆRMAJORZ
+CODE_SMELL
+nsquid:S1854":Remove this useless assignment to local variable "number".(‹¶Åï8Ü˜â‡-HÇRMAJORZ
+CODE_SMELL
+nsquid:S1854":Remove this useless assignment to local variable "number".(°÷«ö8Ü˜â‡-HÈRMAJORZ
+CODE_SMELL

@@ -1,0 +1,31 @@
+
+xsquid:S2147Q"DCombine this catch with the one at line 79, which has the same body.(ï­£Ä8Ì¢«Šˆ-HıRMINORZ
+CODE_SMELL
+Psquid:S1643B"Use a StringBuilder instead.(´’Ó8¿­ØŠˆ-H…RMINORZ
+CODE_SMELL
+\squid:S2140U")Use "java.util.Random.nextInt()" instead.(Œ×áh8éß±Šˆ-H€RMINORZ
+CODE_SMELL
+’squid:S2293"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ù¢Î‚ıÿÿÿÿ8¸Ì¡Šˆ-HùRMINORZ
+CODE_SMELL
+q
+squid:S106 "9Replace this use of System.out or System.err by a logger.(„ÿÿĞıÿÿÿÿ8Ğ¸³Šˆ-HRMAJORZ
+CODE_SMELL
+squid:S2293H"YReplace the type specification in this constructor call with the diamond operator ("<>").(¥ğ‹8»“‡‹ˆ-H”RMINORZ
+CODE_SMELL
+_squid:S1148P"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8Ì¢«Šˆ-HşRMINORZVULNERABILITY
+l
+squid:S106"9Replace this use of System.out or System.err by a logger.(ÆÎ¿ô8³§õŠˆ-H’RMAJORZ
+CODE_SMELL
+l
+squid:S106;"9Replace this use of System.out or System.err by a logger.(Ù”Ğ¶8¢ôßŠˆ-HRMAJORZ
+CODE_SMELL
+_squid:S1148R"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8Ì¢«Šˆ-HÿRMINORZVULNERABILITY
+k
+squid:S1062"9Replace this use of System.out or System.err by a logger.(Ö’Æ$8»“‡‹ˆ-H•RMAJORZ
+CODE_SMELL
+q
+squid:S1068"9Replace this use of System.out or System.err by a logger.(š”¡èúÿÿÿÿ8¿­ØŠˆ-H†RMAJORZ
+CODE_SMELL
+q
+squid:S106D"9Replace this use of System.out or System.err by a logger.(£‰Ğ­ÿÿÿÿÿ8ã¬˜‹ˆ-HœRMAJORZ
+CODE_SMELL

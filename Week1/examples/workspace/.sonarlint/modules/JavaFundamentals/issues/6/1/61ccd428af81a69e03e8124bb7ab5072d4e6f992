@@ -1,0 +1,8 @@
+
+]squid:S2140E")Use "java.util.Random.nextInt()" instead.(¡Á¸Ð8•’–…ˆ-H­RMINORZ
+CODE_SMELL
+l
+squid:S106L"9Replace this use of System.out or System.err by a logger.(åÿï™8•’–…ˆ-H¬RMAJORZ
+CODE_SMELL
+lsquid:S1854)"8Remove this useless assignment to local variable "temp".(œ¯¥³8•’–…ˆ-H®RMAJORZ
+CODE_SMELL
