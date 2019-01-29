@@ -1,5 +1,14 @@
 package com.revature.io;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+
+import com.revature.pojos.Person;
+
 public class Serialization {
 	/*
 	 * Serialization is the conversion of the 
@@ -28,6 +37,10 @@ public class Serialization {
 	 * ensuring that you are deserializing a stream 
 	 * of bytes into the right type of object)
 	 * 
+	 * If attempting to deserialize a stream of bytes into
+	 * the wrong class reference, an InvalidClassException 
+	 * will be thrown
+	 * 
 	 * static fields belong to the class, not the
 	 * object, and are not serialized
 	 * 
@@ -42,7 +55,46 @@ public class Serialization {
 	 * read and write primitive types and graphs of
 	 * objects
 	 * 
-	 * 
 	 */
+	
+	
+	public static void main(String[] args) {
+	
+//		Person p = new Person("gen", "gab12@duke.edu");
+//		serializeObject(p);
+		
+		Person p = (Person) deserializeObject();	
+		System.out.println(p);
+		
+	}
+	static String filename = "src/com/revature/io/bytes.txt";
+	
+	static void serializeObject(Object obj) {
+		try(ObjectOutputStream oos = new ObjectOutputStream(
+				new FileOutputStream(filename))){
+			oos.writeObject(obj);
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	static Object deserializeObject() {
+		
+		Object obj = null;
+		try(ObjectInputStream ois = new ObjectInputStream(
+				new FileInputStream(filename))){
+			obj = ois.readObject();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return obj;
+	}
 
 }

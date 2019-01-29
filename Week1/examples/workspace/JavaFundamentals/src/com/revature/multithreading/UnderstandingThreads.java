@@ -12,7 +12,7 @@ public class UnderstandingThreads {
 	 * 
 	 * Types of threads:
 	 * 	- user - main() or any other explicitly requested processes
-	 *  - daemon threads - background processes ie garbace collector
+	 *  - daemon threads - background processes ie garbage collector
 	 *  
 	 *  isAlive() - checks if thread is active
 	 *  join() - allows one thread ot wait for the completion of another
@@ -40,5 +40,54 @@ public class UnderstandingThreads {
 	 *  
 	 *  Related topics: deadlock, starvation, producer-consumer problem
 	 */
+	
+	public static void main(String[] args) {
+		ExtendsThread et = new ExtendsThread();
+		ImplementsRunnable ir = new ImplementsRunnable();
+		Thread irThread = new Thread(ir);
+		
+		Thread main = Thread.currentThread();
+		System.out.println(main.getName());
+		System.out.println(main.getPriority());
+		System.out.println(main.getState());
+		
+		et.setPriority(Thread.MIN_PRIORITY);
+		irThread.setPriority(Thread.MAX_PRIORITY);
+		
+		et.start();
+		irThread.start();
+		run();
+		
+		System.out.println(et.getState());
+		
+		
+		///////// LAMBDAS //////////////
+		Runnable lambda = () -> {
+			//overriding run method here 
+			for(int i = 0; i < 20; i++) {
+				System.out.println("LAMBDA: " + i);
+			}
+		};
+		
+		Thread lamThread = new Thread(lambda);
+		lamThread.start();
+		
+		////////////Anonymous Classes
+		Thread anonymous = new Thread() {
+			@Override
+			public void run() {
+				//do thread things
+			}
+		};
+		
+		anonymous.start();
+		
+	}
+	
+	static void run() {
+		for(int i = 0; i < 20; i++) {
+			System.out.println("MAIN: " + i);
+		}
+	}
 
 }
