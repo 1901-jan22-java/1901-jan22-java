@@ -18,3 +18,14 @@ artifactId
 packaging 
 
 new -> other -> maven project
+
+
+
+all
+debug
+info
+warn
+error
+fatal
+off
+trace
