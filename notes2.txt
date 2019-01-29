@@ -29,3 +29,64 @@ error
 fatal
 off
 trace
+
+
+Primary key
+condidate key chosen to ID each row
+notnull, unique
+should never change
+
+- natural key - batyrakkt icy=cyrrubg bit bykk ybuqye & fairly stable field
+- surrogate key - auto generated
+- foreign key - a column reference to another column or set of columns, can have a reference to null
+
+CONSTRAINTS
+Primary key
+Foreign key
+Unique id
+Not null
+CHECK
+DEFAULT
+
+referential integrity - 
+	property that describes the state of relationships in database. All of our foreign key relationships must be maintained
+
+domain integrity - 
+	ensuring that all data is of the correct type, size
+
+one to many 1:N
+one to one 1:1
+many to many N:N
+
+"junction table"
+student_courses
+S_ID	C_ID	TIME
+1	5	MWF	<<
+1	10	TR	
+1	11		
+2	5		
+2	6		
+composite key - key made of >1 column 
+
+
+"look up tables"
+ACC_TYPE
+TypeID	TYPE
+1	Check
+2	Savings
+3	LongTerm
+look up for static values
+can change the type without messing up referential integrity
+
+Database Normalization
+process of organizing database to increase efficiency and reduce redundancy
+
+1NF the key - 	tables must have primary key
+		no repeated columns
+		atomic data (smaller relevant data) ex name column is first/last name
+2NF the whole key - 	1NF
+			cannot have partial dependencies
+3NF nothing but the key -	2NF
+				cannot have transitive dependencies
+				can only deduce this information from primary key
+
