@@ -1,0 +1,23 @@
+
+€squid:S001125"FDefine and throw a dedicated exception instead of using a generic one.(Ù‹íµûÿÿÿÿ8ø×”ã‡-HÒRMAJORZ
+CODE_SMELL
+ssquid:UselessImportCheck"2Remove this unused import 'java.sql.SQLException'.(ÛïÆŸ8•¬Àã‡-HÜRMINORZ
+CODE_SMELL
+_squid:S1148""#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8¨Â©ã‡-HÙRMINORZVULNERABILITY
+l
+squid:S106+"9Replace this use of System.out or System.err by a logger.(‡Â±½8 ™ã‡-HÓRMAJORZ
+CODE_SMELL
+¸%squid:RedundantThrowsDeclarationCheck5"eRemove the declaration of thrown exception 'java.lang.RuntimeException' which is a runtime exception.(Ù‹íµûÿÿÿÿ8ø×”ã‡-HÑRMINORZ
+CODE_SMELL
+_squid:S1148 "#Use a logger to log this exception.(Âşÿâûÿÿÿÿ8¨Â©ã‡-HØRMINORZVULNERABILITY
+q
+squid:S1060"9Replace this use of System.out or System.err by a logger.(ˆŞöûÿÿÿÿ8×æÏã‡-HåRMAJORZ
+CODE_SMELL
+q
+squid:S106"9Replace this use of System.out or System.err by a logger.(á½‹¾úÿÿÿÿ8æÛ’ã‡-HĞRMAJORZ
+CODE_SMELL
+€squid:UselessImportCheck":Remove this unused import 'java.io.FileNotFoundException'.(·î™ùÿÿÿÿ8¨Â©ã‡-H×RMINORZ
+CODE_SMELL
+l
+squid:S1062"9Replace this use of System.out or System.err by a logger.(¯éòã8Å ¢ä‡-H‰RMAJORZ
+CODE_SMELL
