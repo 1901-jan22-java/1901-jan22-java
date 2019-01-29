@@ -1,0 +1,13 @@
+
+l
+squid:S106"9Replace this use of System.out or System.err by a logger.(ışƒ8„Ñ±‰-HúRMAJORZ
+CODE_SMELL
+Xsquid:S1481"&Remove this unused "c" local variable.(ÃÑÍşÿÿÿÿHõRMINORZ
+CODE_SMELL
+‹squid:S1215
+"TDon't try to be smarter than the JVM, remove this call to run the garbage collector.(ÅØù8Ö„Ò±‰-HıRCRITICALZ
+CODE_SMELL
+Rsquid:S1481"&Remove this unused "a" local variable.(µÎ¶HôRMINORZ
+CODE_SMELL
+‹squid:S1215"TDon't try to be smarter than the JVM, remove this call to run the garbage collector.(Ì°¬“8ÂÇÕ±‰-H‚RCRITICALZ
+CODE_SMELL

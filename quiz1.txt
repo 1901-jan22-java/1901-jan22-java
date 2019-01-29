@@ -1,0 +1,34 @@
+polymorphism makes code more dynamic and reusable
+
+string pool is a pool of strings stored in the heap. 
+a string pool is a location in memory where strings are referenced as literals in an application are stored
+
+stackoverflow resulted in excessive or deep recursion
+
+outofmemoryerror caused by creating excessive amounts of objects that stay in a scope
+
+interfaces and abstract classes are associated with abstraction
+
+methods defined in an interface are implicitly public abstract
+
+runtimeexception and its subclasses are not checked exceptions
+
+you can catch an error in java, but dont do that
+
+default keyword in a switch statement is used to define the initial case
+
+default is not an access modifier
+
+a class does not always have a default constructor
+
+the collection class is a class for creating collection instances
+
+a hash table does not extend set to store key/value pairs
+
+JVM invokes the thread's run() method when the thread is initially executed.
+
+the run() method does not come from the thread class
+
+a finally block gets executed always when a try block is executed, no matter if there was an exception or not
+
+string builder is not thread-safe, is mutable, and the default capacity is 16

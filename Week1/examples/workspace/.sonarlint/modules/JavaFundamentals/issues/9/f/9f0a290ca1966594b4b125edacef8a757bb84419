@@ -1,0 +1,87 @@
+
+j
+squid:S106("9Replace this use of System.out or System.err by a logger.(”68å®¾º‡-H9RMAJORZ
+CODE_SMELL
+p
+squid:S106K"9Replace this use of System.out or System.err by a logger.(š—°øÿÿÿÿ8‡ ôº‡-H$RMAJORZ
+CODE_SMELL
+_squid:S1481D",Remove this unused "wrapper" local variable.(ÕĞÈµ8‡ ôº‡-H'RMINORZ
+CODE_SMELL
+p
+squid:S106"9Replace this use of System.out or System.err by a logger.(Óô™‡üÿÿÿÿ8å®¾º‡-H;RMAJORZ
+CODE_SMELL
+nsquid:S18549"5Remove this useless assignment to local variable "f".(²Áû“úÿÿÿÿ8ÚÓêÙ‡-H¤RMAJORZ
+CODE_SMELL
+Ysquid:S14817"&Remove this unused "l" local variable.(£”äü8‡ ôº‡-H(RMINORZ
+CODE_SMELL
+j
+squid:S106+"9Replace this use of System.out or System.err by a logger.(½üÆf8Ü†Ñº‡-H3RMAJORZ
+CODE_SMELL
+hsquid:S18543"5Remove this useless assignment to local variable "x".( Œ£”8‡ ôº‡-H8RMAJORZ
+CODE_SMELL
+p
+squid:S106!"9Replace this use of System.out or System.err by a logger.(ÊŸ€òüÿÿÿÿ8ŒÙ§º‡-H7RMAJORZ
+CODE_SMELL
+Ysquid:S1481I"&Remove this unused "l" local variable.(µ§¿&8ÚÓêÙ‡-H£RMINORZ
+CODE_SMELL
+_squid:S14819"&Remove this unused "f" local variable.(²Áû“úÿÿÿÿ8ÚÓêÙ‡-H¢RMINORZ
+CODE_SMELL
+k
+squid:S106#"9Replace this use of System.out or System.err by a logger.(ãÁé8å®¾º‡-H4RMAJORZ
+CODE_SMELL
+j
+squid:S106%"9Replace this use of System.out or System.err by a logger.(²·ä48å®¾º‡-H<RMAJORZ
+CODE_SMELL
+isquid:S18547"5Remove this useless assignment to local variable "l".(£”äü8ÚÓêÙ‡-H¥RMAJORZ
+CODE_SMELL
+gsquid:S1854I"5Remove this useless assignment to local variable "l".(µ§¿&8‡ ôº‡-H,RMAJORZ
+CODE_SMELL
+p
+squid:S106'"9Replace this use of System.out or System.err by a logger.(¾Æòæıÿÿÿÿ8å®¾º‡-H2RMAJORZ
+CODE_SMELL
+Ysquid:S2129"!Remove this "Integer" constructor(ïØìĞøÿÿÿÿ8Ü†Ñº‡-HRMAJORZ
+CODE_SMELL
+k
+squid:S106""9Replace this use of System.out or System.err by a logger.(˜Ú½ˆ8å®¾º‡-H=RMAJORZ
+CODE_SMELL
+j
+squid:S106$"9Replace this use of System.out or System.err by a logger.( áÓa8ˆ°º‡-H:RMAJORZ
+CODE_SMELL
+Ysquid:S14813"&Remove this unused "x" local variable.( Œ£”8‡ ôº‡-H>RMINORZ
+CODE_SMELL
+\squid:S1481")Remove this unused "test" local variable.(š¼”ñ8å®¾º‡-H0RMINORZ
+CODE_SMELL
+psquid:S18545"8Remove this useless assignment to local variable "doub".(ÇÖÜ•ùÿÿÿÿ8‡ ôº‡-H6RMAJORZ
+CODE_SMELL
+p
+squid:S106/"9Replace this use of System.out or System.err by a logger.(çß·Éûÿÿÿÿ8¶õ²º‡-H1RMAJORZ
+CODE_SMELL
+nsquid:S1854D";Remove this useless assignment to local variable "wrapper".(ÕĞÈµ8‡ ôº‡-H+RMAJORZ
+CODE_SMELL
+asquid:S14815")Remove this unused "doub" local variable.(ÇÖÜ•ùÿÿÿÿ8‡ ôº‡-H/RMINORZ
+CODE_SMELL
+k
+squid:S106&"9Replace this use of System.out or System.err by a logger.(·»€Š8å®¾º‡-H5RMAJORZ
+CODE_SMELL
+p
+squid:S106Q"9Replace this use of System.out or System.err by a logger.(©ëùÿÿÿÿ8„Èşº‡-H\RMAJORZ
+CODE_SMELL
+p
+squid:S106"9Replace this use of System.out or System.err by a logger.(÷ËÕæúÿÿÿÿ8öÓ„»‡-HgRMAJORZ
+CODE_SMELL
+esquid:S1481[",Remove this unused "decimal" local variable.(ÍÈ§Ğıÿÿÿÿ8éì„Ú‡-H¶RMINORZ
+CODE_SMELL
+dsquid:S1481^"+Remove this unused "binary" local variable.(ŒÂÙ™úÿÿÿÿ8éì„Ú‡-H·RMINORZ
+CODE_SMELL
+csquid:S1481a"*Remove this unused "octal" local variable.(şäı’şÿÿÿÿ8éì„Ú‡-H¸RMINORZ
+CODE_SMELL
+asquid:S1481d"(Remove this unused "hex" local variable.(ìŞÄŒùÿÿÿÿ8éì„Ú‡-H¹RMINORZ
+CODE_SMELL
+psquid:S1854d"7Remove this useless assignment to local variable "hex".(ìŞÄŒùÿÿÿÿ8éì„Ú‡-HºRMAJORZ
+CODE_SMELL
+rsquid:S1854a"9Remove this useless assignment to local variable "octal".(şäı’şÿÿÿÿ8éì„Ú‡-H»RMAJORZ
+CODE_SMELL
+ssquid:S1854^":Remove this useless assignment to local variable "binary".(ŒÂÙ™úÿÿÿÿ8éì„Ú‡-H¼RMAJORZ
+CODE_SMELL
+tsquid:S1854[";Remove this useless assignment to local variable "decimal".(ÍÈ§Ğıÿÿÿÿ8éì„Ú‡-H½RMAJORZ
+CODE_SMELL
