@@ -1,4 +1,4 @@
-package com.revature.challanges.test;
+package com.revature.challenges;
 
 public class FindTargetSum {
 	

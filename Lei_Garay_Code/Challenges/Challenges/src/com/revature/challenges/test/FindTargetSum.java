@@ -1,4 +1,4 @@
-package com.revature.challanges;
+package com.revature.challenges.test;
 
 public class FindTargetSum {
 	
@@ -9,12 +9,15 @@ public class FindTargetSum {
 		
 		for (int i = 0; i < array.length; i++) 
 		{
-			if(array[i]<=sum)
-			{	
-				tempAddend = array[i];
+			//moves to quadratic for element comparison
+			// only if current element can be an addend (less or equal to total sum)
+			if(array[i]<=sum) 
+			{					
+				tempAddend = array[i]; //temp var holds addend
 				
 				for (int j = 0; j < array.length; j++) 
 				{
+					// j != i ensures we are not comparing element to itself
 					if(j!=i && array[j]+tempAddend==sum)
 					{
 						return !areThereAddends;
