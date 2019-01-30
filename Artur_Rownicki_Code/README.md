@@ -1,0 +1,1 @@
+Artur Rownicki's code
