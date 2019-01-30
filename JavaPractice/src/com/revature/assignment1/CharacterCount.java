@@ -2,6 +2,9 @@ package com.revature.assignment1;
 
 import java.util.Arrays;
 
+import org.junit.Assert;
+import org.junit.Test;
+
 /**
  * Question 16
  * 
@@ -10,11 +13,6 @@ import java.util.Arrays;
  */
 
 public class CharacterCount {
-
-	public static void main(String[] args) {
-		System.out.println(Arrays.asList(args));
-		count(args);
-	}
 	
 	public static int count(String[] s) {
 		if(s.length < 0) return 0;
@@ -30,4 +28,17 @@ public class CharacterCount {
 		return sum;
 	}
 	
+}
+
+class CharacterCountTest{
+	
+	private static final String[] s = {};
+	private static final int[] count = {};
+	
+	@Test
+	public static void q16Test(String...strings) {
+		for(int i = 0; i < s.length; i++)
+			Assert.assertEquals(CharacterCount.count(s[i].split(" ")), count[i]);
+	}
+
 }

@@ -1,4 +1,4 @@
-package com.revature.assignment.floatholder;
+package com.revature.assignment1.floatholder;
 
 public class FloatHolder {
 	

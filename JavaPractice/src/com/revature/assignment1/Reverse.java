@@ -1,7 +1,6 @@
 package com.revature.assignment1;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Question 3
@@ -36,7 +35,11 @@ public class Reverse<T> {
 		return String.valueOf(carr);
 	}
 	
-	public T[] reverse(T[] arr){
+	public T[] reverse() {
+		return reversed = reverse(reversed);
+	}
+	
+	public static <T> T[] reverse(T[] arr){
 		for(int i = 0, j = arr.length-1-i; i < arr.length/2; i++) {
 			j = arr.length-1-i;
 			T temp = arr[i];

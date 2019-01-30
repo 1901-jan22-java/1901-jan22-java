@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Question 20
@@ -13,41 +14,44 @@ import java.util.ArrayList;
  *
  */
 
-public class DataReader {
+public class DataReader<T extends Data> {
 	
-	public static void main(String[] args) {
-		String filepath = "src/com/revature/Data.txt";
-		System.out.println(readPersonData(filepath));
+	private ArrayList<T> data;
+	private String filepath;
+
+	public DataReader() {
+		filepath =  "src/com/revature/Data.txt";
 	}
 	
-	public static ArrayList<PersonData> readPersonData(String filepath) {
+	public static <T extends Data> ArrayList<T> readPersonData(String filepath) {
 		
-		ArrayList<PersonData> people = new ArrayList<>();
+		ArrayList<T> dataSet = new ArrayList<>();
 		try ( BufferedReader br = new BufferedReader(new FileReader(filepath)) ) {
 			
 			for(String s = br.readLine(); s != null ; s = br.readLine()) {
 				String[] info = s.split(":");
-				PersonData p = new PersonData( info[0], info[1], info[2], info[3] );
-				people.add(p);
+//				Data p = new T();
+//				dataSet.add(p);
 			}
 			
-		} catch ( FileNotFoundException e ) {
-			e.printStackTrace();
 		} catch ( IOException e ) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		
-		return people;
-		
+		return dataSet;
 	}
 	
 }
 
-class PersonData {
+class PersonData implements Data {
 	
 	private String name;
 	private int age;
 	private String state;
+	
+	public PersonData(){
+		super();
+	}
 	
 	public PersonData(String name, int age, String state){
 		this.name = name;
@@ -78,6 +82,21 @@ class PersonData {
 		return "\n{\n\tName: " + name + "\n" +
 				"\tAge: " + age + " years\n" +
 				"\tState: " + state + " state\n}";
+	}
+	
+}
+
+class DataReaderTest {
+	
+	public static void main(String[] args) {
+		PersonData pd = new PersonData();
+		System.out.println( pd.thisClass() );
+		System.out.println( Arrays.asList(pd.thisClass().getFields()) );
+		System.out.println( Arrays.asList(pd.thisClass().getDeclaredFields()) );
+		Data d = (Data) pd;
+		System.out.println( d.thisClass() );
+		System.out.println( Arrays.asList(d.thisClass().getFields()) );
+		System.out.println( Arrays.asList(d.thisClass().getDeclaredFields()) );
 	}
 	
 }
