@@ -85,3 +85,57 @@ from track
 join album on track.albumid = album.albumid 
 join artist on artist.artistid = album.artistid;
 
+
+
+
+
+
+----------------- FUN QUERIES
+-- find # of tracks of each genre. alphabetize by genre
+select g.name ,  g.genreid, count(t.trackid)
+from track t
+inner join genre g
+on g.genreid = t.genreid
+group by g.name, g.genreid
+order by g.name;
+
+-- find longest song in each genre
+select g.name , max(t.milliseconds)/1000 as "Longest Song(s)"
+from track t
+inner join genre g
+on g.genreid = t.genreid
+group by g.name
+order by g.name;
+
+
+
+--Select from a join
+select count(albumid) as "# of Albums", name
+from 
+      (select album.albumid, artist.artistid, artist.name 
+      from album 
+      join artist 
+      on album.artistid = artist.artistid)
+  where artistid > 5
+  group by name
+  having count(albumid) > 1
+  order by "# of Albums";
+  
+  --VIEWS - virtual tables
+  -- essentially saved queries. cannot update table via views
+  create view Al_Art_View as
+   select album.albumid as album , artist.artistid as artist, artist.name 
+      from album 
+      join artist 
+      on album.artistid = artist.artistid;
+      
+select count(album) as "# of Albums", name
+from al_art_view
+  where artist > 5
+  group by name
+  having count(album) > 1
+  order by "# of Albums";
+
+
+  select * from al_art_view;
+  drop view al_art_view;
