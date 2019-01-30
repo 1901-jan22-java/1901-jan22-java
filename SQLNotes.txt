@@ -1,0 +1,32 @@
+Structured Query Language
+
+How we can communicate directly with our database
+
+5 subclasses
+	Data Control Language (DCL)
+		-access to database
+			GRANT, REVOKE
+	Data Definition Language (DDL)
+		-how we manage the schema (schema is the blueprint of the database)
+			CREATE, ALTER, DROP, TRUNCATE
+	Data Query Language (DQL)
+		-how to "query" or "view" data
+			SELECT -	where 
+					into 
+					joins 
+					subqueries
+	Data Manipulation Language (DML)
+		CREATE, READ, UPDATE, DELETE data (CRUD operations)
+		-INSERT inserts data into table
+	Transaction Control Language (TCL)
+		-managing interactions or transactions with database
+		Begin transactions commit rollback set savepoints
+
+
+AWS - Amazon Web Service
+Infrastructure as a Service (IaaS)
+Software as a Service (SaaS)
+Platform as a Service (PaaS)
+
+
+
