@@ -2,9 +2,9 @@ package com.revature.codingchallenges;
 
 import java.util.Stack;
 
-public class Conversion {
+public class ConversionChallenge {
 	public static void main(String[] args) {
-		Conversion con = new Conversion();
+		ConversionChallenge con = new ConversionChallenge();
 		
 		System.out.println(con.decimalToHex(90415129));
 	}
