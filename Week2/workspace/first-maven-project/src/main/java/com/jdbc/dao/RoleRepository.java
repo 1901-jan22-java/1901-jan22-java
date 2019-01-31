@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 
 import com.jdbc.pojos.Role;
 import com.jdbc.util.ConnectionFactory;
