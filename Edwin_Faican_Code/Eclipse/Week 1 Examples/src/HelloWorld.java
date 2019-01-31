@@ -19,5 +19,11 @@ public class HelloWorld {
       System.out.println("You didn't pass in any variables!");
     }
 
+    
+    A lambda = (a,b) -> a +b
   }
+}
+
+interface A {
+	int hello(int a, int b);
 }
