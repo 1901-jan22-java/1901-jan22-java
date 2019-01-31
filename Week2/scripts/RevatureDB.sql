@@ -16,4 +16,23 @@ CREATE TABLE Employees (
   FOREIGN KEY (RoleId) REFERENCES Roles(RId)
 );
 
+CREATE TABLE Batches(
+  BId number(10) PRIMARY KEY, 
+  Trainer number(10) NOT NULL, -- FK
+  Curriculum varchar2(50) NOT NULL,
+  StartDate Date,
+  EndDate Date, 
+  FOREIGN KEY (Trainer) references Employees(empid)
+);
+
+CREATE TABLE Associates(
+  AId number(10) PRIMARY KEY,
+  EmpId number(10) NOT NULL,
+  BatchId number(10) NOT NULL,
+  Grade number(3) NOT NULL,
+  Note varchar2(250),
+  FOREIGN KEY(empid) REFERENCES EMPLOYEES(empid),
+  FOREIGN KEY(batchid) REFERENCES Batches(bid)
+);
+
 
