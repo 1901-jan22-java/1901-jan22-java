@@ -10,8 +10,11 @@ public class App {
 	
 	public static void main(String[] args) {
 		RoleRepository roleRepo = new RoleRepository();
-		List<Role> roles= roleRepo.findAll();
 		
-		System.out.println(roles);
+		
+		//System.out.println(roles);
+		//System.out.println(roleRepo.getById(1));
+		Role r = roleRepo.save("Salesforce Director");
+		List<Role> roles= roleRepo.findAll();
 	}
 }
