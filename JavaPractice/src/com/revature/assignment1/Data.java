@@ -1,8 +1,9 @@
 package com.revature.assignment1;
 
+// Reflection Stuff I want to practice. Kinda useless right now
 public interface Data {
 	
-	public default Class<?> thisClass() {
+	public default Class<? extends Data> thisClass() {
 		return getClass();
 	}
 	

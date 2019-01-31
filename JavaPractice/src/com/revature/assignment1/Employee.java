@@ -122,9 +122,9 @@ class EmployeeTest {
 		
 		s.addAll(Arrays.asList(
 				new Employee("a", "a", 10), 
-				new Employee("a", "a", 20), 
+				new Employee("a", "a", 40), 
 				new Employee("a", "a", 30), 
-				new Employee("a", "a", 40)
+				new Employee("a", "a", 20)
 				));
 		
 		System.out.println(s);
