@@ -6,6 +6,10 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<description>Introduction to Maven</description>
 
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
 
 	<dependencies>
 		<!-- This is our first dependency we found this simply by googling maven 

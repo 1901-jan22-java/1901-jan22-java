@@ -45,25 +45,33 @@ WHERE CUSTOMERID = 32;
 
 --Task . Update name of artist in the Artist table ?gCreedence Clearwater Revival?h to ?gCCR?h
 UPDATE ARTIST
-SET NAME = '?gCCR?h'
-WHERE NAME = '?gCreedence Clearwater Revival?h';
+SET NAME = 'CCR'
+WHERE NAME = 'Creedence Clearwater Revival';
 
 -------------------------2.5 LIKE
 --Task . Select all invoices with a billing address like ?gT%?h
+SELECT * FROM INVOICE 
+WHERE BILLINGADDRESS LIKE 'T%';
 
 -------------------------2.6 BETWEEN
 --Task . Select all invoices that have a total between 15 and 50
+SELECT * FROM INVOICE
+WHERE TOTAL BETWEEN 15 AND 50;
 
 --Task . Select all employees hired between 1st of June 2003 and 1st of March 2004
+SELECT * FROM EMPLOYEE
+WHERE HIREDATE BETWEEN '01-JUN-03' AND '01-MAR-04';
 
 -------------------------2.7 DELETE
 --Task . Delete a record in Customer table where the name is Robert Walter (There may be constraints that rely on this, find out how to resolve them).
+DELETE FROM CUSTOMER
+WHERE FIRSTNAME = 'Robert' AND LASTNAME =  'Walter';
 
 -------------------------3.0 SQL Functions
 --In this section you will be using the Oracle system functions, as well as your own functions, to perform various actions against the database
-
 -------------------------3.1 System Defined Functions
 --Task – Create a function that returns the current time.
+
 
 --Task – create a function that returns the length of a mediatype from the mediatype table
 

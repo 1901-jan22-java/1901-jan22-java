@@ -21,6 +21,7 @@
 **/Servers
 **/.springBeans
 **/.properties
+**/db.properties
 
 #IDEA
 **/.idea/

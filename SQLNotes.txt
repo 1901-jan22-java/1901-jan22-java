@@ -28,5 +28,35 @@ Infrastructure as a Service (IaaS)
 Software as a Service (SaaS)
 Platform as a Service (PaaS)
 
+PL/SQL
+procedural language (extension of) SQL
+	triggers
+		ex. whenever a row is inserted into a table
+	sequence
+	stored procedures
+		use all DML & TCL statements
+		in/out parameters
+	functions
+		return one value
+		can still have in/out parameters
+		DATA QUERY LANGUAGE DQL
 
+JDBC - Java Database Connectivity
+
+Connection 	- you talking to your database
+Result Set	-what you get when you query some data
+Statement	-BAD. leave you vulnerable to SQL injection (DROP TABLE EMPLOYEES)
+	PreparedStatement
+		CallableStatement
+
+"SELECT * FROM EMPLOYEES";
+WHERE ROLE = " + variable;
+
+
+DAO - Data Access Object
+Coupling & Cohesion
+
+DAO should be the only place you want to communicate with database
+
+Business logic and functional logic can both call the same thing, but they're used differently
 
