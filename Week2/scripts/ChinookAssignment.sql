@@ -1,5 +1,5 @@
 /*
-* Genesis Bonds Week 2 Assignment [EXAMPLE of format]
+* Kevin Ho SQL Week 2 Assignment
 */
 
 
@@ -15,20 +15,38 @@ SELECT * from Employee where firstname = 'Andrew' AND reportsto IS null;
 
 -------------------------2.2 ORDER BY
 --Task . Select all albums in Album table and sort result set in descending order by title.
+SELECT * FROM album ORDER BY title DESC;
 
 --Task . Select first name from Customer and sort result set in ascending order by city
+SELECT firstname FROM customer ORDER BY city ASC;
 
 -------------------------2.3 INSERT INTO
 --Task . Insert two new records into Genre table
+INSERT INTO GENRE VALUES (26, 'Math Rock');
+INSERT INTO GENRE VALUES (27, 'Eurobeat');
 
 --Task . Insert two new records into Employee table
+INSERT INTO EMPLOYEE (EMPLOYEEID, LASTNAME, FIRSTNAME, TITLE, REPORTSTO, BIRTHDATE, HIREDATE, ADDRESS, CITY, STATE, COUNTRY, POSTALCODE, PHONE, FAX, EMAIL) 
+            VALUES   (9, 'Ho', 'Kevin', 'XD', 3, '27-FEB-97', '01-JAN-01', '240 Bay 35 St', 'Brooklyn', 'NY', 'USA', 'XD', '1 (917) 621 6996', '1 (917) 621 6906', 'xd@xd.com');
+INSERT INTO EMPLOYEE (EMPLOYEEID, LASTNAME, FIRSTNAME, TITLE, REPORTSTO, BIRTHDATE, HIREDATE, ADDRESS, CITY, STATE, COUNTRY, POSTALCODE, PHONE, FAX, EMAIL) 
+            VALUES   (10, 'Ho2', 'Kevin2', 'XD2', 3, '27-FEB-97', '01-JAN-01', '241 Bay 35 St', 'Brooklyn', 'NY', 'USA', 'XD', '1 (917) 621 6997', '1 (917) 621 6999', 'xd2@xd.com');
 
 --Task . Insert two new records into Customer table
+INSERT INTO CUSTOMER (CUSTOMERID, FIRSTNAME, LASTNAME, COMPANY, ADDRESS, CITY, STATE, COUNTRY, POSTALCODE, PHONE, FAX, EMAIL, SUPPORTREPID)
+            VALUES   (60, 'Kevin', 'Ho', 'Revature', '240 Bay 69 Street', 'Brooklyn', 'NY', 'USA', '69696', '+1 (696) 969 6969' , null, 'kevho48@gmail.com', 3);
+INSERT INTO CUSTOMER (CUSTOMERID, FIRSTNAME, LASTNAME, COMPANY, ADDRESS, CITY, STATE, COUNTRY, POSTALCODE, PHONE, FAX, EMAIL, SUPPORTREPID)
+            VALUES   (61, 'Kevin', 'Ho', null, null, 'Brooklyn', 'NY', 'USA', '69626', '+1 (696) 969 6922' , null, 'kevho482@gmail.com', 4);
 
 -------------------------2.4 UPDATE
 --Task . Update Aaron Mitchell in Customer table to Robert Walter
+UPDATE CUSTOMER 
+SET FIRSTNAME = 'Robert', LASTNAME = 'Walter' 
+WHERE CUSTOMERID = 32;
 
 --Task . Update name of artist in the Artist table ?gCreedence Clearwater Revival?h to ?gCCR?h
+UPDATE ARTIST
+SET NAME = '?gCCR?h'
+WHERE NAME = '?gCreedence Clearwater Revival?h';
 
 -------------------------2.5 LIKE
 --Task . Select all invoices with a billing address like ?gT%?h

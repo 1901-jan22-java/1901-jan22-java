@@ -54,4 +54,30 @@ Deserialization - opposite of serialization
 	Serial Version UID - generated for a serialized thing
 More for transfer purposes, not for security
 
+VARIABLE SCOPES
+class - need 1 class to use variable
+block - can be used inside that block
+instance - need 1 instance to use variable
+method - can be used in that method
+
+DESIGN PATTERNS - solution to common problem in coding
+basically a way to code. kind of like a style but it's a solution made from experience in coding
+creational design pattern - provide solution to instantiate an object for situations
+structural design pattern - different ways to create class structure
+behavioral design pattern - interaction between objects and how to lose coupling
+
+start up a thread you need to implement runnable or extend thread class
+.start() the thread
+
+thread = the execution of programs
+
+
+Collection is the collection interface with list/set/queue
+Collections has a bunch of static methods. Arrays.sort Arrays.asList
+	a utility class, can be used on other entities
+
+if you don't write a constructor, it'll have a default constructor where it just calls super()
+if you write another method, it'll lose the default constructor
+noargs constructor can be written, but it's not the same as default constructor since you dont need to write the default constructor
+
 
