@@ -38,9 +38,15 @@ CREATE TABLE Associates(
 select * from roles;
 
 -- add values to our lookup table 
-insert into Roles(RID, Title) values(1, 'Associate');
+insert into Roles values(100, 'adding role');
 insert into Roles values(4, 'Sales Rep');
 
+update Roles 
+set title = 'HR Representative'
+where rid = 5;
+
+select r_seq.nextval from dual;
+select max(rid) from roles;
 
 ------------------- TRIGGERS , SEQUENCES 
 /*  a sequence in a DB is a set of integers that are generated and 
@@ -50,7 +56,7 @@ unique values on demand
 of numeric values 
 - we will use these more often than not to auto generate a PK value
 */
-CREATE SEQUENCE EMP_SEQ;
+CREATE SEQUENCE R_SEQ;
 
 -- creating a sequence with the no specified settings will create one as follows
 CREATE SEQUENCE  "DEMO1901JAN22RDS"."EMP_SEQ"  
@@ -71,11 +77,11 @@ CREATE SEQUENCE BATCH_SEQ;
 A trigger is a special type of stored procedure that happens 
 automatically when an event occurs in the database 
 */
-CREATE OR REPLACE TRIGGER emp_trig -- declare and name trigger
-BEFORE INSERT ON Employees -- specify when it will execute
+CREATE OR REPLACE TRIGGER r_trig -- declare and name trigger
+BEFORE INSERT ON Roles -- specify when it will execute
 FOR EACH ROW -- necessary to change values in rows 
 BEGIN -- start what we want to happen
-  select emp_seq.nextval into :new.empid from dual;      
+  select r_seq.nextval into :new.rid from dual;      
 END; -- end of what we want to happen 
 /
 
@@ -101,6 +107,7 @@ update employees
 set firstname = 'John'
 where empid = 9;
 
+select * from roles;
 
 ----- REMEMBER TO COMMIT!
 commit;

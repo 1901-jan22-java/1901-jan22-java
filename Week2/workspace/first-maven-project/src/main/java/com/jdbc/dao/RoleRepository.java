@@ -8,10 +8,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.jdbc.pojos.Role;
 import com.jdbc.util.ConnectionFactory;
 
 public class RoleRepository {
+	
+	final static Logger logger = Logger.getLogger(RoleRepository.class);
 	
 	
 	/*
@@ -114,6 +118,37 @@ public class RoleRepository {
 			e.printStackTrace();
 		}
 		return r;
+	}
+	
+	public Role update(Role r) { //1, "something random"
+		//param passed in will contain id of entity to be 
+		//changed WITH the new values to change it to
+		
+		//update Roles set title = ? where rid = ?;
+		
+		   try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+	            conn.setAutoCommit(false);
+	            String sql = "UPDATE Roles SET title = ? WHERE rid = ?";
+	            
+	            PreparedStatement ps = conn.prepareStatement(sql);
+	            
+	            ps.setString(1,r.getTitle());
+	            ps.setInt(2,r.getId());
+	            
+	            int numRows = ps.executeUpdate();
+	            
+	            if(numRows > 0) {
+	            	logger.info("ROLE " + r.getTitle() + " UPDATED");
+	                conn.commit();
+	            } else {
+	            	logger.info("NO ROLE UPDATED");
+	                return null;
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	        
+	        return r;
 	}
 
 }
