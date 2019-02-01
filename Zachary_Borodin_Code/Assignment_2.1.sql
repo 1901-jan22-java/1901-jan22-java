@@ -18,7 +18,7 @@ end;
 /
 
 
---make a function that does something
+--Task 2 make a function that does something
 --A function that returns the number of almbums an inputted band name has
 /
  create or replace function CountAlbumFromArtname(
@@ -33,4 +33,4 @@ end;
  /
  
  select CountAlbumFromArtname('Metallica') from dual;
-
+ 
