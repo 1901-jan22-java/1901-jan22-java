@@ -60,3 +60,9 @@ DAO should be the only place you want to communicate with database
 
 Business logic and functional logic can both call the same thing, but they're used differently
 
+SELF JOIN
+set operators
+union		A + B - AB
+union all	A + B
+minus		A - B (just results in A that arent in B)
+intersect	AB (results in both A and B)

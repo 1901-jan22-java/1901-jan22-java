@@ -71,29 +71,52 @@ WHERE FIRSTNAME = 'Robert' AND LASTNAME =  'Walter';
 --In this section you will be using the Oracle system functions, as well as your own functions, to perform various actions against the database
 -------------------------3.1 System Defined Functions
 --Task – Create a function that returns the current time.
-
+SELECT CURRENT_TIMESTAMP FROM DUAL;
 
 --Task – create a function that returns the length of a mediatype from the mediatype table
+SELECT LENGTH(NAME) FROM Mediatype;
 
 -------------------------3.2 System Defined Aggregate Functions
 --Task – Create a function that returns the average total of all invoices
+SELECT AVG(TOTAL) "Average" FROM INVOICE;
 
 --Task – Create a function that returns the most expensive track
+SELECT MAX(UNITPRICE) "Price" FROM TRACK;
 
 -------------------------3.3 User Defined Functions
 --Task – Create a function that returns the average price of invoiceline items in the invoiceline table
+SELECT AVG(UNITPRICE) "AveragePrice" FROM INVOICELINE;
 
 -------------------------3.4 User Defined Table Valued Functions
 --Task – Create a function that returns all employees who are born after 1968.
+SELECT * FROM EMPLOYEE WHERE (EXTRACT(YEAR FROM BIRTHDATE)) > 1968;
 
 -------------------------4.0 Stored Procedures
---In this section you will be creating and executing stored procedures. You will be creating various types of stored procedures that take input and output parameters.
-
+--In this section you will be creating and executing stored procedures. 
+--You will be creating various types of stored procedures that take input and output parameters.
 -------------------------4.1 Basic Stored Procedure
 --Task – Create a stored procedure that selects the first and last names of all the employees.
+CREATE OR REPLACE PROCEDURE getName(
+fn out varchar2,
+ln out varchar2
+)
+AS
+BEGIN
+    dmbs_output.put_line(fn || ln);
+END;
+/
 
 -------------------------4.2 Stored Procedure Input Parameters
 --Task – Create a stored procedure that updates the personal information of an employee.
+CREATE OR REPLACE PROCEDURE Update(
+
+)
+AS
+BEGIN
+    SELECT firstname, lastname 
+    INTO fn, ln FROM EMPLOYEE;
+END;
+/
 
 --Task – Create a stored procedure that returns the managers of an employee.
 
@@ -102,16 +125,20 @@ WHERE FIRSTNAME = 'Robert' AND LASTNAME =  'Walter';
 
 -------------------------5.0 Transactions
 --In this section you will be working with transactions. Transactions are usually nested within a stored procedure.
-
 --Task – Create a transaction that given a invoiceId will delete that invoice (There may be constraints that rely on this, find out how to resolve them).
 
 --Task – Create a transaction nested within a stored procedure that inserts a new record in the Customer table
 
 -------------------------6.0 Triggers
 --In this section you will create various kinds of triggers that work when certain DML statements are executed on a table.
-
 -------------------------6.1 AFTER/FOR
 --Task - Create an after insert trigger on the employee table fired after a new record is inserted into the table.
+CREATE OR REPLACE TRIGGER fired_Employee
+AFTER INSERT ON EMPLOYEES
+BEGIN
+    
+END;
+/
 
 --Task – Create an after update trigger on the album table that fires after a row is inserted in the table
 
@@ -119,9 +146,10 @@ WHERE FIRSTNAME = 'Robert' AND LASTNAME =  'Walter';
 
 -------------------------7.0 JOINS
 --In this section you will be working with combing various tables through the use of joins. You will work with outer, inner, right, left, cross, and self joins.
-
 -------------------------7.1 INNER
 --Task – Create an inner join that joins customers and orders and specifies the name of the customer and the invoiceId.
+SELECT * FROM CUSTOMER JOIN INVOICE
+ON CUSTOMER.CUSTOMERID = INVOICE.CUSTOMERID;
 
 -------------------------7.2 OUTER
 --Task – Create an outer join that joins the customer and invoice table, specifying the CustomerId, firstname, lastname, invoiceId, and total.
@@ -140,5 +168,4 @@ WHERE FIRSTNAME = 'Robert' AND LASTNAME =  'Walter';
 
 -------------------------9.0 Administration
 --In this section you will be creating backup files of your database. After you create the backup file you will also restore the database.
-
 --Task – Create a .bak file for the Chinook database
