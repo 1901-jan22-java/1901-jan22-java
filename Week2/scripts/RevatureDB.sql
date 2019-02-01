@@ -38,7 +38,7 @@ CREATE TABLE Associates(
 select * from roles;
 
 -- add values to our lookup table 
-insert into Roles values(100, 'adding role');
+insert into Roles values(99, 'adding role');
 insert into Roles values(4, 'Sales Rep');
 
 update Roles 
