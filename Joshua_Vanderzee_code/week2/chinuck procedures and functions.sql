@@ -86,4 +86,26 @@ end;
 select getNumArtists() from dual;
 
 
+create or replace procedure setNewArtist(
+    a_id in number, 
+    a_name in varchar2
+)
+as
+begin
+    insert into artist(artistID, name) VALUES (a_id, a_name);
+end;
+/
 
+execute setNewArtist(276, 'crush 40');
+
+
+create or replace function getLastArtist
+return varchar2 
+as
+a_name varchar2(100);
+begin
+    select name into a_name from artist where artistid in (select count(artistid) from artist);
+    return a_name;
+end;
+/
+/
