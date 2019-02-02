@@ -139,3 +139,94 @@ from al_art_view
 
   select * from al_art_view;
   drop view al_art_view;
+  
+
+  --Set operators--
+--Union all = A + B
+SELECT * FROM employee WHERE title LIKE 'S%' UNION
+SELECT * FROM employee WHERE employeeid > 4;
+
+-- STORED PROCEDURES
+--Compile procedure
+CREATE OR REPLACE PROCEDURE helloWorld
+AS -- would declare any variables
+BEGIN
+dbms_output.put_line('Hello World');
+END;
+-- execute
+execute helloWorld;
+
+-- get artist by id procedure
+CREATE OR REPLACE PROCEDURE getArtistById (
+a_id IN NUMBER, --Variable name IN/OUT datatype
+a_name OUT VARCHAR2
+)
+IS -- AS or IS
+BEGIN
+SELECT name INTO a_name
+FROM artist WHERE artistid = a_id;
+END;
+
+declare
+a_name VARCHAR2(100);
+begin
+getArtistById(50, a_name);
+dbms_output.put_line('ID: 50, Artist: '|| a_name);
+END;
+
+-- Cursor is a mechanism by which you can assign a name
+-- a select statement and manipulate information from within it
+
+-- pointer to a context area which is what oracle stores the results 
+-- from a query in
+
+-- explicit/implicit cursors
+/
+CREATE OR REPLACE PROCEDURE getAllArtists(
+cursorParam OUT SYS_REFCURSOR
+)
+IS
+BEGIN
+OPEN cursorParam FOR SELECT * FROM artist;
+END;
+/
+
+--Transactional procedure
+CREATE OR REPLACE PROCEDURE Delete_invoice(
+inv_id IN NUMBER)
+AS
+BEGIN
+ --first delete invoice lines which depend on the invoice
+ DELETE FROM invoiceline WHERE invoiceid = inv_id;
+ DELETE FROM invoice WHERE invoiceid = inv_id;
+ 
+ commit;
+END;
+/
+
+SELECT * FROM invoice WHERE invoiceid = 1;
+EXECUTE delete_invoice(1);
+
+-- write a stores procedure that will insert data 
+-- into a table with parameters given
+
+-- FUNCTIONS
+-- blocks of code we can execute that must return 1 value
+-- they may take in 0 or more in or out parameters
+-- invoke functions using ()
+-- can only use DQL statements
+
+CREATE OR REPLACE FUNCTION getNumArtist
+ RETURN NUMBER
+ IS
+ total NUMBER;
+ BEGIN
+ SELECT count(*) INTO total FROM artist;
+ RETURN total;
+ END;
+ /
+ 
+ SELECT getNumArtist() FROM Dual;
+ 
+ 
+ 

@@ -1,24 +1,20 @@
-/*
-* Genesis Bonds Week 2 Assignment [EXAMPLE of format]
-*/
+-- SQL Assignment --
 
+-- 2.1 SELECT --
+SELECT * FROM employee;
 
-------------------------2.1 SELECT
---Task – Select all records from the Employee table. 
-SELECT * from Employee;
+SELECT * FROM employee 
+WHERE lastname = 'King';
 
---Task – Select all records from the Employee table where last name is King.
-SELECT * from Employee where lastname = 'King';
-
---Task – Select all records from the Employee table where first name is Andrew and REPORTSTO is NULL.
-SELECT * from Employee where firstname = 'Andrew' AND reportsto IS null;
+SELECT * FROM employee
+WHERE firstname = 'Andrew'
+AND
+reportsto IS NULL;
 
 -- 2.2 ORDER BY --
--- Task: Select all albums in Album Table and sort result set in descending order
 SELECT * FROM album
 ORDER BY title DESC;
 
---Task: Select first nae from customer and sort result set in ascending orer by city
 SELECT firstname, city FROM customer
 ORDER BY city;
 
@@ -27,7 +23,6 @@ SELECT * FROM genre;
 SELECT * FROM employee;
 SELECT * FROM customer;
 
--- Task: Insert tew new records into Genre Table, Employee Table, Customer Table
 INSERT ALL 
 INTO genre (genreid, name) VALUES (26, 'Funk')
 INTO genre (genreid, name) VALUES (27, 'Acoustic')
@@ -39,14 +34,6 @@ VALUES (9, 'Rodgers', 'Steve', 'IT Staff', 6, '09-MAY-75', '14-APR-04', '123 Dor
 INTO employee (employeeid, lastname, firstname, title, reportsto, birthdate, hiredate, address, city, state, country, postalcode, phone, fax, email)
 VALUES (10, 'Lahey', 'Randy', 'IT Staff', 6, '09-MAY-85', '17-APR-04', '123 Doris Lane', 'Sunnyvale', 'AB', 'Canada', 'T2P 5G3', '+1 (403) 634-6774', '+1 (403) 345-5674', 'randylahey@tpb.com')
 SELECT * FROM DUAL;
-
-SELECT * FROM customer;
-INSERT ALL
-INTO customer (customerid, firstname, lastname, company, address, city, state, country, postalcode, phone, fax, email, supportrepid)
-VALUES (60, 'Garth', 'Smith', 'Avoy', 'Sequoia Way', 'Holbrook', 'NY', 'USA', '11741', '631-283-4838', null, 'garth.smith@aol.com', 3)
-INTO customer (customerid, firstname, lastname, company, address, city, state, country, postalcode, phone, fax, email, supportrepid)
-VALUES (61, 'Sally', 'Smith', 'Neiman Marcus', 'Sequoia Way', 'Holbrook', 'NY', 'USA', '11741', '631-183-4838', null, 'sally.smith@aol.com', 3)
-SELECT * FROM dual;
 
 -- 2.4 UPDATE --
 SELECT * FROM customer;
@@ -109,11 +96,3 @@ WHERE unitprice =
 (SELECT MAX(unitprice) FROM track);
 
 -- USER DEFINED FUNCTIONS --
-SELECT * FROM invoiceline;
-
-
-
-
-
-
-
