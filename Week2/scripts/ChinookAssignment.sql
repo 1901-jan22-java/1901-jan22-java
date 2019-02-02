@@ -111,9 +111,82 @@ WHERE unitprice =
 -- USER DEFINED FUNCTIONS --
 SELECT * FROM invoiceline;
 
+-- Task: Create a function that returns the avg rpice of invoiceline items in the invoiceline table
+CREATE OR REPLACE FUNCTION getAvgPrice
+RETURN NUMBER
+IS average NUMBER;
+BEGIN
+ SELECT AVG(UNITPRICE) INTO average
+ FROM invoiceline;
+ RETURN average;
+END;
+/
+SELECT getAvgPrice() FROM Dual;
+
+-- Task: Create a function that returns all employees who are born after 1968
+CREATE TYPE emp_birthdate_obj IS OBJECT (
+empid NUMBER,
+empFname VARCHAR2(50),
+empLname VARCHAR2(50)
+);
+/
+CREATE OR REPLACE TYPE emp_birthdate_table IS TABLE OF emp_birthdate_obj;
+/
+
+CREATE OR REPLACE FUNCTION bornAfter1968
+RETURN emp_birthdate_table
+IS emp_tbl emp_birthdate_table := emp_birthdate_table();
+n NUMBER := 0;
+BEGIN
+FOR e in (SELECT employeeid, firstname, lastname FROM employee 
+WHERE (EXTRACT(YEAR FROM BIRTHDATE)) > 1968)
+LOOP
+emp_tbl.extend;
+n := n + 1;
+emp_tbl(n) := emp_birthdate_obj(e.employeeid, e.firstname, e.lastname);
+END LOOP;
+RETURN emp_tbl;
+END;
+/
+SELECT * FROM TABLE (bornAfter1968); 
+
+-- BASIC STORED PROCEDURE --
+-- Task: Create a stored procedure that selects the firstname and last names of all employees
+
+-- TASK: Create a stored procedure that updates the personal info of an employee
+
+-- Task: reate a stored procedure that returns the managers of an employee
+
+-- Task: Create a stored procedure that returns the name and company of a customer
 
 
 
+-- Transactions --
+-- Task: Create a transaction that given a invoiceid will delete that invoice
+
+-- Task: Create a transaction nested within a stored procedure that inserts a new record in the customer table
 
 
+
+-- Triggers -- 
+-- Task: Create an after insert trigger on the empployee table fired after a new record is inserted into the table
+
+-- Task: Create an after update trigger on the album table that fires after a row is inserted in the table
+
+-- Task: Create an after delete trigger on the customer table that fires after a row is deleted from the table
+
+
+
+-- Joins --
+-- Task: Create an inner join that joins customers and orders and specifies the name of the customer and invoiceid
+
+-- Task: Create an outer join that joins the customer and invoice table specifying the CustomerId, fname, lname, invoiceid, and total
+
+-- Task: Create a right join that joins album and artist specifying artist name and title
+
+-- Task: Create a cross join that joins album and artist and sorts the artist name in ascending order
+
+-- Task: Perform a self-join that joins on the employee table, joining on the reportsto column
+
+-- Task: Create an inner join between all tables in the DB
 

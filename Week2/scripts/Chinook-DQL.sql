@@ -80,10 +80,23 @@ select al.title, art.name
 from album al, artist art;
 
 --joining more than two tables
-select track.name, album.title, artist.name 
+select track.name as TRACKNAME, album.title, artist.name 
 from track 
 join album on track.albumid = album.albumid 
 join artist on artist.artistid = album.artistid;
+
+
+select *
+from track 
+join album 
+on track.albumid = album.albumid;
+
+select * from employee;
+
+select e1.lastname AS manager, e2.lastname as EMPLOYEE
+from employee  e1
+full outer join employee e2
+on e1.employeeid = e2.reportsto;
 
 
 
@@ -140,6 +153,7 @@ from al_art_view
   select * from al_art_view;
   drop view al_art_view;
   
+<<<<<<< HEAD
 
   --Set operators--
 --Union all = A + B
@@ -230,3 +244,20 @@ CREATE OR REPLACE FUNCTION getNumArtist
  
  
  
+
+  ----------------------------------- SET OPERATORS ---------------------------------
+  
+  select * from employee;
+  
+  select * from employee where title LIKE 'S%' minus
+  select * from employee where employeeid > 4;
+  
+  -- UNION ALL - A + B
+  
+  
+  
+  
+  
+  
+  
+>>>>>>> master
