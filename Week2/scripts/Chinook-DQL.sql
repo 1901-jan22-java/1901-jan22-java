@@ -260,4 +260,3 @@ CREATE OR REPLACE FUNCTION getNumArtist
   
   
   
->>>>>>> master
