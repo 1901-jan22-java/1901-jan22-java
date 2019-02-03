@@ -1,3 +1,0 @@
-Person [name=Genesis Bonds, email=genesis.bonds@revature.com]
-Person [name=Genesis Bonds, email=genesis.bonds@revature.com]
-Person [name=Genesis Bonds, email=genesis.bonds@revature.com]
