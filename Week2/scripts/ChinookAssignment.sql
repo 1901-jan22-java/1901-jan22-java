@@ -189,14 +189,37 @@ SELECT * FROM TABLE (bornAfter1968);
 
 -- Joins --
 -- Task: Create an inner join that joins customers and orders and specifies the name of the customer and invoiceid
+SELECT firstname, lastname, invoiceid FROM customer INNER JOIN invoice
+ON customer.customerid = invoice.customerid;
 
 -- Task: Create an outer join that joins the customer and invoice table specifying the CustomerId, fname, lname, invoiceid, and total
+SELECT invoice.customerid, firstname, lastname, invoiceid, total FROM invoice FULL OUTER JOIN customer
+ON invoice.customerid = customer.customerid;
 
 -- Task: Create a right join that joins album and artist specifying artist name and title
+SELECT name, title FROM artist RIGHT JOIN album
+ON artist.artistid = album.artistid;
 
 -- Task: Create a cross join that joins album and artist and sorts the artist name in ascending order
+SELECT * FROM artist CROSS JOIN album
+ORDER BY name ASC;
 
 -- Task: Perform a self-join that joins on the employee table, joining on the reportsto column
+SELECT * FROM employee;
+SELECT e1.reportsto, e2.reportsto FROM employee e1, employee e2;
 
 -- Task: Create an inner join between all tables in the DB
+SELECT *
+FROM track tr
+INNER JOIN invoiceline ON invoiceline.trackid = tr.trackid
+INNER JOIN genre ON genre.genreid = tr.genreid
+INNER JOIN mediatype ON mediatype.mediatypeid = tr.mediatypeid
+INNER JOIN album ON album.albumid = tr.albumid
+INNER JOIN playlisttrack ON playlisttrack.trackid = tr.trackid
+INNER JOIN playlist ON playlist.playlistid = playlisttrack.playlistid
+INNER JOIN invoice ON invoice.invoiceid = invoiceline.invoiceid
+INNER JOIN customer ON customer.customerid = invoice.customerid
+INNER JOIN employee ON employee.reportsto = employee.reportsto;
 
+
+commit;
