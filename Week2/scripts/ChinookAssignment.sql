@@ -52,26 +52,33 @@ SELECT * FROM dual;
 SELECT * FROM customer;
 SELECT * FROM artist;
 
+--Task – Update Aaron Mitchell in Customer table to Robert Walter
 UPDATE customer
 SET firstname = 'Robert', lastname = 'Walter'
 WHERE customerid = 32;
 
+--Task – Update name of artist in the Artist table “Creedence Clearwater Revival” to “CCR”
 UPDATE artist
 SET name = 'CCR'
 WHERE name = 'Creedence Clearwater Revival';
 
 -- Like --
+--Task – Select all invoices with a billing address like “T%”
 SELECT * FROM invoice
 WHERE billingaddress LIKE 'T%';
 
 -- BETWEEN -
+--Task – Select all invoices that have a total between 15 and 50
 SELECT * FROM invoice
 WHERE total BETWEEN 15 AND 50;
 
+--Task – Select all employees hired between 1st of June 2003 and 1st of March 2004
 SELECT * FROM employee
 WHERE hiredate BETWEEN '01-JUN-03' AND '01-MAR-04'; 
 
 -- DELETE --
+--Task – Delete a record in Customer table where the name is Robert Walter (There may be constraints
+--that rely on this, find out how to resolve them).
 ALTER TABLE invoice
 DISABLE CONSTRAINT fk_invoicecustomerid;
 
@@ -91,18 +98,21 @@ ALTER TABLE invoice
 ENABLE CONSTRAINT FK_INVOICECUSTOMERID;
 
 -- SYSTEM DEFINED FUNCTIONS --
+--Task – Create a function that returns the current time.
 SELECT SYSTIMESTAMP FROM dual;
 
+--Task – create a function that returns the length of a mediatype from the mediatype table
 SELECT LENGTH(name)
 FROM mediatype
 WHERE mediatypeid = 3;
 
 -- System Defined Aggregate Functions --
 SELECT * FROM invoice;
-
+--Task – Create a function that returns the average total of all invoices
 SELECT AVG(total)
 FROM invoice;
 
+--Task – Create a function that returns the most expensive track
 SELECT trackid, name, unitprice
 From track
 WHERE unitprice = 
