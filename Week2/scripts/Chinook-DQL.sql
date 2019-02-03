@@ -25,7 +25,7 @@ select * from invoice;
 
 /*********
 Subqueries AKA nested queries
-*/
+*********/
 
 select * from artist;
 

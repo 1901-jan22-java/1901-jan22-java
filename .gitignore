@@ -5,12 +5,18 @@
 # *.[oa]
 # *~
 # .git/info/exclude
-
 **/pull_request_template.md
 **/issue_template.md
 **/target/
 **/bin/
 **/META-INF/**
+
+#Personal (Sanford)
+**/"External JARs"
+**/Python
+**/SQL
+
+**/first-maven-project
 
 #Eclipse
 **/.metadata
@@ -20,7 +26,8 @@
 **/.recommenders/**
 **/Servers
 **/.springBeans
-**/.properties
+**/*.properties
+**/db.properties
 
 #IDEA
 **/.idea/
