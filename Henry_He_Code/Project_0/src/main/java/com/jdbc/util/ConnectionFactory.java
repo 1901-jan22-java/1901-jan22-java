@@ -54,9 +54,5 @@ public class ConnectionFactory {
 		return conn;
 	}
 	
-	public static void main(String[] args) {
-		Connection conn = ConnectionFactory.getInstance().getConnection();
-		
-	}
 	
 }
