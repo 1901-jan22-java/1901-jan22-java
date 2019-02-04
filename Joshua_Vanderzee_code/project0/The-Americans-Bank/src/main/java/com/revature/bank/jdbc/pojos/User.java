@@ -12,7 +12,7 @@ public class User {
 			String SecurityQuestion1, String SecurityAnswer1, String SecurityQuestion2, String SecurityAnswer2,
 			String SecurityQuestion3, String SecurityAnswer3, String Addressline1, String Addressline2, String City,
 			String States, String Country, int PostalCode, int HomePhone, int CellPhone, int Fax, String Email,
-			String SSN, Date BirthDate, String Maritalstatus) {
+			int SSN, Date BirthDate, String Maritalstatus) {
 		this.UserId = UserId;
 		this.UserName = UserName; 
 		this.Password = Password;
@@ -165,10 +165,10 @@ public class User {
 	public void setEmail(String email) {
 		Email = email;
 	}
-	public String getSSN() {
+	public int getSSN() {
 		return SSN;
 	}
-	public void setSSN(String sSN) {
+	public void setSSN(int sSN) {
 		SSN = sSN;
 	}
 	public Date getBirthDate() {
@@ -205,7 +205,7 @@ public class User {
 	private int CellPhone;
 	private int Fax;
 	private String Email;
-	private String SSN;
+	private int SSN;
 	private Date BirthDate;
 	private String Maritalstatus; 
 }

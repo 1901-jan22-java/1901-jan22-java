@@ -116,7 +116,7 @@ end;
 /
 
 create or replace procedure login(
-    username in varchar2, password in varchar2, out_result out number
+    username in varchar2, password in varchar2, out_result out number, email_alert out varchar2
 )
 as
     u_usernameid number; pass number;
@@ -125,23 +125,37 @@ begin
     if u_usernameid != null then
         select count(*) into pass from Users u where u.UserId = u_usernameid and u.password = password;
         if pass = 1 then
-            out_result := 1;
+            out_result := u_usernameid;
         else
             out_result := 0;
+            select u.Email into email_alert from Users u where u.username = username;
         end if;
     end if;
 end;
 /
 
-insert into Users(UserName, Password, FirstName, LastName, SecurityQuestion1, SecurityAnswer1, SecurityQuestion2, SecurityAnswer2, SecurityQuestion3, SecurityAnswer3,
-    Addressline1, City, States, Country, PostalCode, CellPhone, Email, SSN, BirthDate, Maritalstatus)
-    values ()
+create or replace procedure countUsers(
+    out_result out number
+)
+as
+begin
+    select count(*) into out_result from Users;
+end;
+/
 
 declare
     u_num number;
 begin
     login('john', 'dfgfgbdfn', u_num);
     DBMS_OUTPUT.PUT_LINE('ID: ' || u_num);
+end;
+/
+
+declare
+    u_num number;
+begin
+    countUsers(u_num);
+    DBMS_OUTPUT.PUT_LINE(u_num);
 end;
 /
 

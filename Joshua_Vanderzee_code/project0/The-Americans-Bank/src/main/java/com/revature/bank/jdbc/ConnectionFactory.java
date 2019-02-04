@@ -9,6 +9,8 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
+import com.revature.bank.jdbc.dao.BackgroundNotifier;
+
 import java.util.Properties;
 
 public class ConnectionFactory {
@@ -23,6 +25,9 @@ public class ConnectionFactory {
 		if (cf == null)
 		{
 			cf = new ConnectionFactory();
+			BackgroundNotifier ir = new BackgroundNotifier();
+			Thread backgroundNotifierThread = new Thread(ir);
+			backgroundNotifierThread.start();
 		}
 		logger.info("Returning cf " + cf.getClass());
 		return cf;
