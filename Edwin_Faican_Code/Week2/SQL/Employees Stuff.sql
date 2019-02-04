@@ -56,6 +56,7 @@ NOORDER  NOCYCLE  NOPARTITION ;
 
 CREATE SEQUENCE TRAINER_SEQ;
 CREATE SEQUENCE BATCH_SEQ;
+CREATE SEQUENCE ROLE_SEQ;
 
 --Triggers--
 CREATE OR REPLACE TRIGGER Emp_trig
@@ -85,14 +86,92 @@ BEGIN
   FROM dual;
 END;
 /
+CREATE OR REPLACE TRIGGER Rol_trig
+BEFORE INSERT ON Role
+FOR EACH ROW
+BEGIN 
+  SELECT role_seq.nextval
+  INTO :new.role_id 
+  FROM dual;
+END;
+/
 
 --Inserting with Triggers--
 INSERT INTO Employees(e_role, firstname, lastname, email)
 VALUES (2, 'Patrick', 'Walsh', 'patrick@revature.com');
 
-SELECT * FROM Employees;
+INSERT INTO Role(name) VALUES('Frog');
+
+SELECT * FROM Role;
 
 --REMEBER TO COMMIT--
 commit;
 
 SELECT * FROM Role;
+
+UPDATE Role
+SET name = 'HR'
+WHERE role_id = 6;
+
+--PROCEDURES--
+/
+CREATE OR REPLACE PROCEDURE helloWorld
+AS 
+BEGIN
+  dbms_output.put_line('Hello World');
+END;
+/
+execute helloWorld;
+
+CREATE OR REPLACE PROCEDURE getArtistById(a_id IN NUMBER, a_name OUT VARCHAR2)
+AS
+BEGIN 
+  SELECT name INTO a_name FROM artist
+  WHERE artistid = a_id;
+END;
+/
+
+--PL/SQL Block to execute procedure--
+DECLARE a_name VARCHAR2(100);
+BEGIN 
+  getArtistById(2, a_name);
+  dbms_output.put_line('ID: 2, Artist: ' || a_name);
+END;
+/
+
+--CURSOR--
+CREATE OR REPLACE PROCEDURE getAllArtists(cursorParam OUT SYS_REFCURSOR)
+IS
+BEGIN
+  OPEN cursorParam FOR SELECT * FROM Artist;
+END;
+/
+
+--Transactional Procedure--
+CREATE OR REPLACE PROCEDURE Delete_Invoice(inv_id IN NUMBER)
+AS
+BEGIN
+  DELETE FROM invoiceline 
+  WHERE invoiceid = inv_id;
+  
+  DELETE FROM invoice 
+  WHERE invoiceid = inv_id;
+  
+  commit;
+END;
+/
+
+SELECT * FROM invoice
+WHERE invoiceid = 1;
+
+EXEC Delete_Invoice(1);
+
+SELECT * FROM invoice
+WHERE invoiceid = 1;
+
+--Write a stored procedure that will insert data into a table with params given--
+
+
+
+
+--FUNCTIONS--
