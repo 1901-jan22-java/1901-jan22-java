@@ -15,6 +15,9 @@ public class BankAccount {
 		this.owner = owner;
 		this.name = name;		
 	}
+	public BankAccount() {
+		
+	}
 	public int getAccountNumber() {
 		return accountNumber;
 	}
@@ -44,5 +47,15 @@ public class BankAccount {
 	}
 	public void setOwner(String owner) {
 		this.owner = owner;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return 	"Account[ Account Number= " + accountNumber + 
+				" Account Owner" + owner + 
+				" Money= " + money +	
+				" Account Type= " + type + 
+				" Account Name= " + name + "]";
 	}
 }

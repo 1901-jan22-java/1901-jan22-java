@@ -109,9 +109,9 @@ public class BankUser {
 	public String toString() {
 		return "User [username= " + username + " password= " + password 
 				+ " first name= " + first_name + " last name= " + last_name
-				+ "birthdate= " + birthdate + "address= " + address
-				+ "city= " + city + "state= " + state 
-				+ "postal code= " + postalcode + "country= " + country
-				+ "phone= " + phone + "email= " + email;
+				+ " birthdate= " + birthdate + " address= " + address
+				+ " city= " + city + " state= " + state 
+				+ " postal code= " + postalcode + " country= " + country
+				+ " phone= " + phone + " email= " + email;
 	}
 }
