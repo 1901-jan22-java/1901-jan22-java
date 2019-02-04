@@ -15,7 +15,7 @@ is
 begin
     delete from invoice where invoiceid = inv_id
         returning customerid into cid;
-    dbms_output.put_line('Deleted Invoice for Customer: ' || cid);
+    dbms_output.put_line('Invoice deleted for Customer: ' || cid);
     commit;
 end;
 -- Testing
@@ -30,9 +30,11 @@ declare
 begin
     insert into invoice(invoiceid, customerid, invoicedate, total)
         values(invid, cid, '02-FEB-19', 10000);
-    del_invoice_by_id(cid);
+    del_invoice_by_id(invid);
 end;
 /
+delete from invoice where total = 10000;
+
 select * from invoice where total = 10000;
 
 -- Task 2 Create a transaction nested within a stored procedure that inserts a new record in the Customer table
