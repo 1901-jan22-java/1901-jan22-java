@@ -70,11 +70,38 @@ DELETE FROM CUSTOMER WHERE FIRSTNAME = 'Robert' AND LASTNAME = 'Walter';
 CREATE OR REPLACE FUNCTION getCurrentTime
   return varchar 
 is -- or AS -- var declarations
-  ct varchar;
+  CT varchar(5);
 begin 
-  SET CT  (SELECT CONVERT(VARCHAR(5),getdate(),108));
+  SELECT  TO_CHAR(SYSDATE, 'HH24:MI') into CT FROM DUAL;
   return CT;
 end;
-
+/
 select getCurrentTime() from dual;
 -- create a function that returns the length of a mediatype from the mediatype table
+CREATE OR REPLACE FUNCTION getMediaTypeLength(media_id number)
+  return number 
+is -- or AS -- var declarations
+  mediaLength number(20);
+begin 
+  SELECT LENGTH(( SELECT NAME FROM MEDIATYPE WHERE MEDIATYPEID = MEDIA_ID ))
+  INTO mediaLength FROM DUAL;
+  return mediaLength;
+end;
+/
+select getMediaTypeLength(3) from dual;
+/
+--3.2 System Defined Aggregate Functions
+--create function that returns the avg total of all invoices
+CREATE OR REPLACE FUNCTION invoice_avg
+  return number 
+is -- or AS -- var declarations
+  avg number(20);
+begin 
+  SELECT AVG(TOTAL )
+  INTO avg FROM INVOICE;
+  return avg;
+end;
+/
+select invoice_avg from dual;
+
+--create function that returns the most expensive track
