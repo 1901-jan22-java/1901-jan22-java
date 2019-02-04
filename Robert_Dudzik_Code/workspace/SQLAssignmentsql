@@ -1,0 +1,262 @@
+--2.1 Select
+select * from employee;
+select * from employee where employee.lastname = 'King';
+select * from employee where employee.firstname = 'Andrew' and reportsto = null;
+
+--2.2 Order by
+select * from album order by album.title desc;
+select customer.firstname from Customer order by customer.city asc;
+
+--2.3 Insert into
+insert into genre(genreid, name) values(26, 'Custom1');
+insert into genre(genreid, name) values(27, 'Custom2');
+insert into employee(employeeid, lastname, firstname, title, birthdate, hiredate, address, city, state,
+country, postalcode, phone, fax, email)
+values(9, 'John', 'Doe', 'IT Staff', '20-DEC-87', '13-JAN-05', '34 Green Ave', 'NYC',
+'NY', 'USA', '07293', '201-412-2754', '201-230-8912','johndoe@chinookcorp.com');    
+insert into employee(employeeid, lastname, firstname, title, birthdate, hiredate, address, city, state,
+country, postalcode, phone, fax, email)
+values(10, 'Mary', 'Doe', 'IT Staff', '02-FEB-89', '13-JAN-05', '34 Green Ave', 'NYC',
+'NY', 'USA', '07293', '201-412-2764', '201-230-8912','marydoe@chinookcorp.com'); 
+insert into customer(customerid, firstname, lastname, address, city,
+country, postalcode, phone, fax, email, supportrepid)
+values(60, 'Andrew', 'Smith' , '115 Start ave', 'NYC', 'USA', 07239, '298-234-1293', '298-390-3843', 'andrewsmith@yahoo.com', 4);
+insert into customer(customerid, firstname, lastname, address, city,
+country, postalcode, phone, fax, email, supportrepid)
+values(61, 'Bob', 'Deft' , '175 Some ave', 'NYC', 'USA', 07239, '298-980-9059', '298-900-3533', 'bobdeft@yahoo.com', 4);
+--2.4 Update
+update customer set customer.firstname = 'Robert', customer.lastname = 'Walter' where customer.firstname = 'Aaron' and customer.lastname = 'Mitchell';
+update artist  set artist.name = 'CCR' where artist.name = 'Creedence Clearwater Revival';
+--2.5 Like
+select * from invoice where invoice.billingaddress like 'T%';
+--2.6 Between 
+select * from invoice where invoice.total between 15 and 50;
+select * from employee where employee.hiredate between '01-JUN-2003' and '01-MAR-2004';
+--2.7 delete
+delete from customer where customer.firstname = 'Robert' and customer.lastname = 'Walter';
+
+--3.1 system defined functions
+create or replace function getCurTime
+return date 
+is curdate date;
+begin 
+select systimestamp into curdate from dual;
+return curdate;
+end;
+/
+select getCurTime() from dual;
+
+create or replace function getmedialength
+(medId in number)
+return number
+as
+len number;
+begin 
+select Length(mediatype.name) into len from mediatype where mediatypeid = medId;
+return len;
+end;
+/
+
+select getmedialength(3) from dual;
+--3.2 
+create or replace function getaveragetotal
+return number
+as
+average number;
+begin
+select Avg(invoice.total) into average from invoice;
+return average;
+end;
+/
+select getaveragetotal() from dual;
+
+create or replace function getmostexpensive
+return number
+as
+expensive number;
+begin
+select max(track.unitprice) into expensive from track;
+return expensive;
+end;
+/
+select getmostexpensive() from dual;
+
+--3.3
+create or replace function getaverageinvoice
+return number
+as 
+average number;
+begin
+select avg(invoiceline.unitprice) into average from invoiceline;
+return average;
+end;
+/
+
+select getaverageinvoice() from dual;
+
+--3.4 not sure
+
+
+--4.1 not sure either
+create or replace procedure firstlastemployee
+(fname out varchar2,
+lname out varchar2)
+is 
+begin
+select employee.firstname into fname from employee;
+select employee.lastname into lname from employee;
+end;
+/
+
+declare
+fname varchar2(200);
+lname varchar2(200);
+begin
+firstlastemployee(fname, lname);
+dbms_output.put_line(fname || lname);
+end;
+/
+
+--4.2
+create or replace procedure updateemployee(eid in number, efname in varchar2, elname in varchar2)
+is 
+begin
+update employee  set employee.firstname = efname where employee.employeeid = eid;
+update employee  set employee.lastname = elname where employee.employeeid = eid;
+end;
+/
+
+declare 
+fname varchar2(200) := 'Bob';
+lname varchar2(200) := 'Smith';
+begin
+updateemployee(3, fname, lname);
+end;
+/
+select * from employee;
+
+create or replace procedure returnmanger(eid in number, rid out number, rtfname out varchar2, rtlname out varchar2)
+is
+begin
+select reportsto into rid from employee where employeeid = eid;
+select firstname into rtfname from employee where employeeid = rid;
+select lastname into rtlname from employee where employeeid = rid;
+end;
+/
+
+declare
+rid number;
+rtfname varchar2(200);
+rtlname varchar2(200);
+begin 
+returnmanger(4, rid, rtfname, rtlname);
+dbms_output.put_line('First Name: ' || rtfname);
+dbms_output.put_line('Last Name: ' || rtfname);
+end;
+/
+
+--4.3
+create or replace procedure getcompanyname(cid in number, cname out varchar2, ccompany out varchar2)
+is
+begin
+select firstname into cname from customer where customerid = cid;
+select company into ccompany from customer where customerid = cid;
+end;
+/
+
+declare
+cname varchar2(200);
+ccompany varchar2(200);
+begin
+getcompanyname(1, cname, ccompany);
+dbms_output.put_line('Name: ' || cname);
+dbms_output.put_line('Company: ' || ccompany);
+end;
+/
+
+--5.0
+create or replace procedure deleteinvoice(invid in number)
+is
+begin
+delete from invoiceline where invoiceid = invid;
+delete from invoice where invoiceid = invid;
+commit;
+end;
+/
+exec deleteinvoice(2);
+select * from invoice where invoiceid = 2;
+
+create or replace procedure insertcustomer(cid in number, fname in varchar2, lname in varchar2
+, companyn in varchar2, addre in varchar2, cityn in varchar2, staten in varchar2, countryn in varchar2,
+postal in number, pnumber in varchar2, fnumber in varchar2, emailn in varchar2, suppnumber in number)
+is
+begin
+insert into customer(customerid, firstname, lastname, company, address, city, state, country, postalcode, phone, fax, email, supportrepid)
+values(cid, fname, lname, companyn, addre, cityn, staten, countryn, postal, pnumber, fnumber, emailn, suppnumber);
+end;
+/
+exec insertcustomer(62, 'Phil', 'Doe', 'somecomapny' , '302 some ave', 'NYC','NY', 'USA', 070234, '298-674-2498', '642-342-6421', 'phildoe@yahoo.com', 4);
+select * from customer;
+
+--6.1
+create or replace trigger employee_trig
+after insert on employee
+begin
+dbms_output.put_line('Employee Trigger');
+end;
+/
+create or replace trigger album_tri
+after update on album
+for each row
+begin
+dbms_output.put_line('Album trigger');
+end;
+/
+
+create or replace trigger employeedel_trig
+after delete on employee
+begin
+dbms_output.put_line('Employee delete triger');
+end;
+/
+
+--7.1
+select customer.firstname, invoice.invoiceid
+from invoice
+join customer 
+on invoice.customerid = customer.customerid;
+
+--7.2
+select customer.customerid, customer.firstname, customer.lastname, invoice.invoiceid, invoice.total
+from invoice
+full outer join customer
+on invoice.customerid = customer.customerid;
+
+--7.3
+select artist.name, album.title
+from album 
+right outer join artist 
+on album.artistid = artist.artistid;
+
+--7.4
+select artist.name
+from artist, album order by artist.name;
+
+--7.5
+select A.firstname as EmployeeName, B.firstname as ReportsTo
+from Employee A, Employee B
+where b.employeeid = a.reportsto;
+
+--7.6
+select invoiceline.invoiceid, invoice.customerid, customer.firstname, employee.firstname, track.name, genre.name, mediatype.name, album.title, artist.name, playlisttrack.playlistid, playlist.name
+from invoiceline
+join invoice on invoiceline.invoiceid = invoice.invoiceid
+join customer on invoice.customerid = customer.customerid
+join employee on customer.supportrepid = employee.employeeid
+join track on invoiceline.trackid = track.trackid
+join genre on track.genreid = genre.genreid
+join mediatype on track.mediatypeid = mediatype.mediatypeid
+join album on track.albumid = album.albumid
+join artist on album.artistid = artist.artistid
+join playlisttrack on track.trackid = playlisttrack.trackid
+join playlist on playlisttrack.playlistid = playlist.playlistid;
