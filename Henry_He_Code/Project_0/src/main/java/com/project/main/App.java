@@ -3,7 +3,6 @@ package com.project.main;
 import java.util.Scanner;
 
 import com.project.managers.LoginManager;
-import com.project.managers.Manager;
 import com.project.managers.SignupManager;
 
 public class App {
@@ -12,7 +11,7 @@ public class App {
 		System.out.print("\nWelcome to J&J Banking!\n"
 				+ "Please type in QUIT at anytime to quit the application.\n"
 				+ "Type LOGIN to be redirected to the login console.\n"
-				+ "Otherwise, please type SIGNUP to create a new account.\n\n");
+				+ "Otherwise, please type SIGNUP to create a new account.\n");
 	}
 	
 	public static void main(String[] args) {
