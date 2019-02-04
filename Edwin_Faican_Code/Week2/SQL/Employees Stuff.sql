@@ -170,8 +170,43 @@ SELECT * FROM invoice
 WHERE invoiceid = 1;
 
 --Write a stored procedure that will insert data into a table with params given--
+CREATE OR REPLACE PROCEDURE insertIntoArtist(a_name IN VARCHAR2, a_id IN NUMBER) 
+AS 
+BEGIN   
+  INSERT INTO Artist(name, artistid) VALUES(a_name, a_id);
+  commit;
+END;
+/
 
+EXEC insertIntoArtist('Paul McCartney', 276);
 
-
+SELECT * FROM Artist;
 
 --FUNCTIONS--
+SELECT COUNT(*) FROM Artist;
+
+CREATE OR REPLACE FUNCTION getNumArtists
+RETURN NUMBER
+IS total NUMBER;
+BEGIN 
+  SELECT COUNT(*) INTO total FROM Artist;
+  RETURN total;
+END;
+/
+
+SELECT getNumArtists() FROM DUAL;
+
+CREATE OR REPLACE FUNCTION numArtistWithSingleAlbum
+RETURN NUMBER
+IS total NUMBER;
+BEGIN
+  SELECT COUNT(*) INTO total FROM Album a1
+  WHERE NOT EXISTS (SELECT a2.artistid FROM Album a2
+                    WHERE a1.artistid = a2.artistid AND a1.albumid != a2.albumid);
+  RETURN total;
+END;
+/
+INSERT INTO Album VALUES(348,'AAAA',276);
+INSERT INTO Album VALUES(349,'BBBB', 276);
+SELECT COUNT(*) FROM Album;
+SELECT numArtistWithSingleAlbum() FROM DUAL;

@@ -107,18 +107,24 @@ SELECT invoicelineavg() FROM dual;
 
 --Part 3.4: User-Defined Table Valued Functions--
 --Return number of employees born after 1968--
-
+CREATE TYPE after_1968 AS OBJECT
+       (af_firstname  VARCHAR2(50),
+        af_lastname   VARCHAR2(50));
+/
+CREATE TYPE after_1968_table AS TABLE OF after_1968;
+/
 CREATE OR REPLACE FUNCTION bornAfter1968
-RETURN NUMBER
-IS numEmp NUMBER;
+RETURN after_1968_table PIPELINED IS
 BEGIN 
-  SELECT COUNT(*) INTO numEmp FROM Employee
-  WHERE birthdate >= '01-JAN-1968';
-  RETURN numEmp;
+  FOR i in (SELECT * FROM Employee
+            WHERE birthdate >= '01-JAN-1968') LOOP
+    PIPE ROW(after_1968(i.firstname,i.lastname));
+  END LOOP;
+  return;
 END;
 /
 
-SELECT bornAfter1968() FROM DUAL;
+SELECT * FROM table(bornAfter1968());
 
 
 --Part 4.0: Stored Procedures--

@@ -1,28 +1,31 @@
 package com.revature.account;
 
 public class Account {
-	private String userName;
-	private int actualPassword; 
-	private int amount;
+	private String type;
+	private double balance;
+
+	public Account() {};
 	
-	public Account(String userName, String password, int amount) {
-		this.userName = userName;
-		this.actualPassword = generatePassword(password);
-		this.amount = amount;
+	public Account(String type, double amount) {
+		this.type = type;
+		this.balance = amount;
 	}
 	
-	public Account(String userName, String password, String amount) {
-		this(userName, password, Integer.parseInt(amount));
+	public Account(String type, String amount) {
+		this(type, Double.parseDouble(amount));
 	}
 	
-	private static int generatePassword(String pass) {
-		return pass.hashCode();
-		
+	public String getType() {
+		return this.type;
 	}
-	
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	public synchronized boolean withdraw(int moneyOut) {
-		if(moneyOut <= amount) {
-			this.amount -= moneyOut;
+		if(moneyOut <= balance) {
+			this.balance -= moneyOut;
 		} else {
 			return false;
 		}
@@ -31,26 +34,15 @@ public class Account {
 	}
 	
 	public synchronized boolean deposit(int moneyIn) {
-		this.amount += moneyIn;
+		this.balance += moneyIn;
 		return true;
 	}
 	
-	public int viewAccount() {
-		return this.amount;
+	public double viewAccount() {
+		return this.balance;
 	}
 	
 	public String toString() {
-		return userName + "," + actualPassword + "," + amount;
-	}
-	
-	public static boolean checkPass(String pass, String test) {
-		if((generatePassword(pass) + "").equals(test)) {
-			return true;
-		} 
-		return false;
-	}
-	
-	public String getName() {
-		return this.userName;
+		return type + ": " + balance;
 	}
 }

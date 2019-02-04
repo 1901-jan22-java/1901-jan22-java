@@ -1,22 +1,22 @@
 --CREATING TABLES FOR BANKING APPLICATION--
 CREATE TABLE Client(
 client_id number(15),
-firstname varchar(20) NOT NULL,
-lastname varchar(20) NOT NULL,
-username varchar(30) UNIQUE NOT NULL,
-pass varchar(30) NOT NULL,
+firstname varchar2(20) NOT NULL,
+lastname varchar2(20) NOT NULL,
+username varchar2(30) UNIQUE NOT NULL,
+pass number(38) NOT NULL,
 PRIMARY KEY (client_id));
 
 CREATE TABLE Type(
 type_id number(10),
-type_name varchar(20) UNIQUE NOT NULL,
+type_name varchar2(20) UNIQUE NOT NULL,
 PRIMARY KEY (type_id));
 
 CREATE TABLE Account(
 account_id number(15),
 client_id number(15) NOT NULL,
 account_type number(10) NOT NULL,
-balance numeric(20,2) NOT NULL CHECK(balance > 0),
+balance number(30,2) NOT NULL CHECK(balance > 0),
 PRIMARY KEY (account_id),
 FOREIGN KEY (client_id) REFERENCES client
               ON DELETE CASCADE,
@@ -56,3 +56,10 @@ BEGIN
   FROM dual;
 END;
 /
+
+--Adding the initial specified types of accounts--
+INSERT INTO Type(type_name) VALUES('Checking');
+INSERT INTO Type(type_name) VALUES('Savings');
+INSERT INTO Type(type_name) VALUES('Student');
+INSERT INTO Type(type_name) VALUES('Interest');
+INSERT INTO Type(type_name) VALUES('Retirement');
