@@ -15,7 +15,7 @@ public class ConnectionFactory {
 	//This class is used to establish connections with the database
 	//Uses a lazy singleton design pattern to return the same single
 	// connection factory each time.
-	// In order to eastablish a connection, we need 4 things
+	// In order to establish a connection, we need 4 things
 	
 	//Driver(ojdbc)
 	//Locations of URL(AWS Endpoint or localhost)
