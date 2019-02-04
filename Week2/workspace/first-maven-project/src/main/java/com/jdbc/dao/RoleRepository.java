@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
 import com.jdbc.pojos.Role;
 import com.jdbc.util.ConnectionFactory;
 
-import oracle.jdbc.internal.OracleTypes;
+import oracle.jdbc.OracleTypes;
 
 
 public class RoleRepository {
