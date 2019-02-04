@@ -33,9 +33,12 @@ begin
     del_invoice_by_id(invid);
 end;
 /
+-- Test Helpers
 delete from invoice where total = 10000;
-
 select * from invoice where total = 10000;
+
+
+
 
 -- Task 2 Create a transaction nested within a stored procedure that inserts a new record in the Customer table
 
