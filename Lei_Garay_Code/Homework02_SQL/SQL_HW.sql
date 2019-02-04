@@ -95,13 +95,23 @@ select getMediaTypeLength(3) from dual;
 CREATE OR REPLACE FUNCTION invoice_avg
   return number 
 is -- or AS -- var declarations
-  avg number(20);
+  average number(20);
 begin 
-  SELECT AVG(TOTAL )
-  INTO avg FROM INVOICE;
-  return avg;
+  SELECT AVG(TOTAL) into average FROM INVOICE;
+  return average;
 end;
 /
 select invoice_avg from dual;
 
 --create function that returns the most expensive track
+
+CREATE OR REPLACE FUNCTION mostExpensiveTrack
+  return number 
+is -- or AS -- var declarations
+  met number(20);
+begin 
+  SELECT MAX(UNITPRICE) into met FROM TRACK;
+  return met;
+end;
+/
+select mostExpensiveTrack from dual;
