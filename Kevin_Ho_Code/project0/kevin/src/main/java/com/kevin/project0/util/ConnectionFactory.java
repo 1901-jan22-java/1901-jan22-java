@@ -10,7 +10,6 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
-
 public class ConnectionFactory {
 	final static Logger logger = Logger.getLogger(ConnectionFactory.class);
 	
@@ -32,7 +31,6 @@ public class ConnectionFactory {
 		Connection conn = null;
 		Properties prop = new Properties();
 		String filepath = "src/main/resources/db.properties";
-		
 		try {
 			prop.load(new FileReader(filepath));
 			Class.forName(prop.getProperty("driver"));
@@ -46,11 +44,13 @@ public class ConnectionFactory {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
+			System.out.println("i died");
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
+		System.out.println("xd");
 		return conn;
 	}
 }

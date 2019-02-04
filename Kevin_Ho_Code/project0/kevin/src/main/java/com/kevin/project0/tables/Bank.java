@@ -145,7 +145,12 @@ public class Bank {
 		for(int i = 0; i < users.size(); i++)
 			if(users.get(i).getUsername().equals(username))
 				if(users.get(i).getPassword().equals(password))
+				{
+					System.out.println("Log in successful");
 					return users.get(i);
+				}
+		System.out.println("Log in failed");
+		
 		return null;
 	}
 
