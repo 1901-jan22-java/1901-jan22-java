@@ -24,7 +24,6 @@ BEGIN
   SELECT name INTO a_name 
   FROM artist WHERE artistid = a_id;
 END;
-
 /
 -- PL/SQL block to execute this procedure 
 declare 
