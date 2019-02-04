@@ -16,7 +16,7 @@ public class RoleRepository {
 	public List<Roles> findAll()
 	{
 		List<Roles> roles = new ArrayList<Roles>();
-		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			String query = "select * from Revature_Roles";
 			Statement statement = conn.createStatement();
 			ResultSet rs = statement.executeQuery(query);
