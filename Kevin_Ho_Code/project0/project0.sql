@@ -23,15 +23,28 @@ CREATE TABLE bankaccount
     owner           VARCHAR2(20)    CONSTRAINT account_to_username_fk REFERENCES bankuser(username),
     name            VARCHAR2(20)    
 );
-INSERT INTO bankaccount VALUES (00000001, 6969, 'CHECKING', 'kevinuser', 'KevinChecking');
+INSERT INTO bankaccount(money, type, owner, name) VALUES (6969, 'CHECKING', 'kevinuser', 'KevinChecking');
 
 CREATE TABLE bank
 (
     bankaccount         NUMBER CONSTRAINT bank_to_account_fk REFERENCES bankaccount(account_number),
     bankuser            VARCHAR2(20) CONSTRAINT bank_to_user_fk REFERENCES bankuser(username)
 );
-INSERT INTO bank VALUES (00000001, 'kevinuser');
+INSERT INTO bank VALUES (1, 'kevinuser');
+
+CREATE SEQUENCE acc_sequence;
+CREATE OR REPLACE TRIGGER acc_trigger
+BEFORE INSERT ON bankaccount
+FOR EACH ROW
+BEGIN
+    SELECT acc_sequence.nextval into :new.account_number FROM dual;
+END;
+/
 
 SELECT * FROM bankuser;
 SELECT * FROM bankaccount;
 SELECT * FROM bank;
+
+DROP table bank;
+drop table bankaccount;
+drop table bankuser;

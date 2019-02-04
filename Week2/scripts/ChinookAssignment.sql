@@ -188,7 +188,6 @@ AS
 BEGIN
     DELETE FROM invoice WHERE customerid = cid;
     DELETE FROM customer WHERE customerid = cid;
-
     commit;
 END;
 /
