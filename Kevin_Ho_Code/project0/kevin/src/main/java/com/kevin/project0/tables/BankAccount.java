@@ -1,19 +1,20 @@
 package com.kevin.project0.tables;
 
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
 public class BankAccount {
 	private int accountNumber;	//primary key
 	private double money;		//how much money in account
 	private String type;		//checking or saving
 	private String owner;		//who owns the account
-	private String name;		//optional user generated name
 	
-	public BankAccount(int accountNumber, double money, String type, String owner, String name)
+	public BankAccount(int accountNumber, double money, String type, String owner)
 	{
 		this.accountNumber = accountNumber;
 		this.money = money;
 		this.type = type;
 		this.owner = owner;
-		this.name = name;		
 	}
 	public BankAccount() {
 		
@@ -23,12 +24,6 @@ public class BankAccount {
 	}
 	public void setAccountNumber(int accountNumber) {
 		this.accountNumber = accountNumber;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
 	}
 	public double getMoney() {
 		return money;
@@ -48,14 +43,41 @@ public class BankAccount {
 	public void setOwner(String owner) {
 		this.owner = owner;
 	}
-	
+	public boolean deposit(Scanner console)
+	{
+		try{
+			money += console.nextDouble();
+			return true;
+		} catch(InputMismatchException e)
+		{
+			System.out.println("Invalid input");
+			return false;
+		}
+	}
+	public double withdraw(Scanner console)
+	{
+		try{
+			double amount = console.nextDouble();
+			if(money - amount < 0)
+			{
+				System.out.println("Not enough balance");
+				return 0;
+			}
+			
+			money -= amount;
+			return amount;
+		} catch(InputMismatchException e)
+		{
+			System.out.println("Invalid input");
+			return 0;
+		}
+	}
 	@Override
 	public String toString()
 	{
 		return 	"Account[ Account Number= " + accountNumber + 
-				" Account Owner" + owner + 
+				" Account Owner= " + owner + 
 				" Money= " + money +	
-				" Account Type= " + type + 
-				" Account Name= " + name + "]";
+				" Account Type= " + type + "]";
 	}
 }

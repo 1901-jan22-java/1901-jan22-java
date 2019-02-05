@@ -42,10 +42,12 @@ public class App
     	   			else
     	   			{
     	   				System.out.println("Logging in as new user");
+    	   				runStartUp = false;
     	   				return temp;
     	   			}
     	   		default:
     	   			System.out.println("Quitting app");
+    	   			runStartUp = false;
     	   			return null;
     	   	}
     	}
@@ -57,11 +59,12 @@ public class App
     	Bank myBank = new Bank();
     	Scanner console = new Scanner(System.in);
     	BankUser loggedInUser = startUp(console, myBank);
+    	
     	boolean loggedIn = (loggedInUser!=null);
     	String input = "";
     	while(loggedIn)
     	{
-    		if(myBank.getAccounts().size() == 0){
+    		if(myBank.getAccounts(loggedInUser).size() == 0){
     			System.out.println("No accounts found. Please create one");
     			myBank.addAccount(console, loggedInUser);
     		}
@@ -82,10 +85,10 @@ public class App
     					loggedIn = false;
     					break;
     				case "D":
-    					myBank.deposit(console, myBank.getAccounts().get(0));
+    					//myBank.deposit(console, myBank.getAccounts().get(0));
     					break;
     				case "W":
-    					myBank.withdraw(console, myBank.getAccounts().get(0));
+    					//myBank.withdraw(console, myBank.getAccounts().get(0));
     					break;
     				case "A":
     					myBank.addAccount(console, loggedInUser);
@@ -99,9 +102,12 @@ public class App
     		}
         }
 
-    	//System.out.println(myBank.getUsers().get(0).toString());
+    	for(int i = 0; i < myBank.getUsers().size(); i++)
+    		System.out.println(myBank.getUsers().get(i).toString());
+    	for(int i = 0; i < myBank.getAccounts(loggedInUser).size(); i++)
+    		System.out.println(myBank.getAccounts(loggedInUser).get(i).toString());
+    	
     	console.close();
     }
-    
     
 }

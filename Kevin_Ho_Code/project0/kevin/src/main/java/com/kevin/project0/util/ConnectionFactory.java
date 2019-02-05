@@ -44,13 +44,10 @@ public class ConnectionFactory {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			System.out.println("i died");
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		System.out.println("xd");
 		return conn;
 	}
 }
