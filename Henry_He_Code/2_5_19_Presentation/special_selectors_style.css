@@ -1,3 +1,63 @@
+/*
+    TYPE SELECTOR - SELECTS ALL ELEMENTS THAT MATCHES THE GIVEN TYPE
+*/
 h1 {
     color:red;
+}
+
+/*
+    CLASS SELECTOR - SELECTS ALL ELEMENTS THAT CORRESPONDS TO THE GIVEN CLASS ATTRIBUTE
+*/
+.class_selector {
+    color: blue;
+}
+
+/*
+    ID SELECTOR - SELECTS ALL ELEMENTS THAT CORRESPONDS TO THE GIVEN CLASS ATTRIBUTE
+*/
+#id_selector {
+    color: yellow;
+}
+
+/*
+    UNIVERSAL SELECT - SELECTS ALL ELEMENTS
+*/
+* {
+    color: purple;
+}
+
+/*
+    ATTRIBUTE SELECTOR - THE EXAMPLE BELOW IS ONLY A SMALL TASTE OF THE POWER YOU MAY WIELD.
+
+    SEE https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors FOR A COMPREHENSIVE 
+    DOCUMENT ON THE SYNTAX OF ATTRIBUTE SELECTORS!
+*/
+li[value="2"] {
+    color: orange
+}
+
+/*
+    BELOW ARE COMBINATORS, NOT SELECTORS...THEY REALLY AREN'T A SINGLE SELECTOR.
+*/
+
+/*
+    ADJACENT SIBLING SELECTOR - IT'S NOT REALLY ONE SELECTOR. IT'S A COMBINATION OF TWO...
+
+    THE EXAMPLE BELOW WORKS LIKE THIS:
+        1) FIND HEADING-4
+        2) SELECT FIRST PARAGRAPH PROCEDING HEADING-4
+*/
+h4 + p{
+    color:green;
+}
+
+/*
+    GENERAL SIBLING SELECTOR - THE ELEMENTS FOLLOWING THE FIRST ARE SELECTED
+*/
+h5 ~ p {
+    color: aqua;
+}
+
+div > p {
+    color: brown;
 }

@@ -3,11 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta description = "SPECIAL SELECTOR HTML AND CSS PRESENTATION CREATED BY THEEBIKA & HENRY">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Special Selectors for CSS</title>
     <link rel="stylesheet" type="text/css" href="special_selectors_style.css">
 </head>
 <body>
-    <h1>Does this work?</h1>
+
+    <!-- TYPE SELECTOR -->
+    <h1>HEADING ONE IS SELECTED VIA TYPE SELECTOR!</h1>
+    <hr>
+
+    <!-- CLASS SELECTOR -->
+    <h2 class="class_selector">HEADING TWO IS SELECTED VIA THE CLASS SELECTOR!</h2>
+    <hr>
+    
+    <!-- ID SELECTOR -->
+    <h3 id = "id_selector">HEADING THREE IS SELECTED VIA THE ID SELECTOR!</h3>
+    <hr>
+
+    <!-- UNIVERSAL SELECTOR -->
+    <h4>HEADING FOUR IS SELECTED VIA THE UNIVERSAL SELECTOR!</h4>
+    <hr>
+
+    <!-- ATTRIBUTE SELECTOR -->
+    <ul>
+        <li value = "1">BEHOLD THE POWER OF THE ATTRIBUTE SELECTOR!</li>
+        <li value = "2">I AM SELECTED.</li>
+        <li value = "3">THIS IS NOT.</li>
+        <li>ALSO, THE UNIVERSAL SELECTOR IS KINDA MAKING ME PURPLE. HELP.</li>
+    </ul>
+    <hr>
+
+    <!-- ADJACENT SIBLING COMBINATOR -->
+    <h4>HEADING 4 IS NOT SELECTED...</h4>
+    <p>Instead, the paragraph is.</p>
+    <p>Do I get selected too? No.</p>
+    <hr>
+
+    <!-- GENERAL SIBLING COMBINATOR -->
+    <p>
+        Theebika, is not one of Henry's siblings
+    </p>
+    <h5>This is Henry, he has 3 siblings</h5>
+    <h6>Apparently, Henry is the only one without a first name starting with J. <br>
+        He's kinda the black sheep of the family. (Woo!) <br>
+        Anyway, his siblings are colored aqua.
+    </h6>
+    <p>Julia</p>
+    <p>Joey</p>
+    <p>Jerry</p>
+    <hr>
+
+    <!-- CHILD COMBINATOR -->
+    <div>
+        <p>I am a paragraph inside div.</p>
+        <p>I am a paragraph inside div.</p>
+        <p>I am a paragraph inside div.</p>
+    </div>
+    <p>
+        I am NOT a paragraph inside div. <br>
+        Also, the general sibling combinator is affecting me to this point...
+    </p>
 </body>
 </html>
