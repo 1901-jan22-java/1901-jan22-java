@@ -11,6 +11,7 @@ public class BankAccount {
 	
 	public BankAccount(int accountNumber, double money, String type, String owner)
 	{
+		super();
 		this.accountNumber = accountNumber;
 		this.money = money;
 		this.type = type;
@@ -70,16 +71,16 @@ public class BankAccount {
 			return true;
 		} catch(InputMismatchException e)
 		{
-			System.out.println("Invalid input");
+			System.out.println("Invalid input.");
 			return false;
 		}
 	}
 	@Override
 	public String toString()
 	{
-		return 	"Account[ Account Number= " + accountNumber + 
-				" Account Owner= " + owner + 
-				" Money= " + money +	
-				" Account Type= " + type + "]";
+		return 	"Account Number= " + accountNumber + "	" + 
+				"Account Owner= " + owner + "	" +
+				"Money= " + money + "	" +
+				"Account Type= " + type;
 	}
 }

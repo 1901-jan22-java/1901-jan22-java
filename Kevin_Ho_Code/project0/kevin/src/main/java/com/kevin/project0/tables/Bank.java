@@ -38,6 +38,7 @@ public class Bank {
 												rs.getString("Email"));
 				users.add(temp);
 			}
+			statement.close();
 		}catch (SQLException e){
 			e.printStackTrace();
 		}
@@ -59,6 +60,7 @@ public class Bank {
 													rs.getString("Type"), rs.getString("Owner"));
 				accounts.add(temp);
 			}
+			ps.close();
 		}catch (SQLException e){
 			e.printStackTrace();
 		}
@@ -89,9 +91,9 @@ public class Bank {
 			String first_name = console.nextLine();
 			System.out.println("Enter your Last Name");
 			String last_name = console.nextLine();
-			System.out.println("Enter your Birthdate");
+			System.out.println("Enter your Birthdate in the format DD-MMM-YY");
 			String birthdate = console.nextLine();
-			System.out.println("Enter your Phone");
+			System.out.println("Enter your Phone in the format X-XXX-XXX-XXXX");
 			String phone = console.nextLine();
 			System.out.println("Enter your Email");
 			String email = console.nextLine();
@@ -114,7 +116,7 @@ public class Bank {
 				
 				insertUser.executeUpdate();
 				conn.commit();
-				
+				insertUser.close();
 				BankUser tmp = new BankUser(username, password, first_name, 
 						last_name, birthdate, phone, email);
 				users.add(tmp);
@@ -125,7 +127,7 @@ public class Bank {
 				e.printStackTrace();
 			}
 		} catch(InputMismatchException e){
-		System.out.println("Invalid input");
+		System.out.println("Invalid Input. Try again.");
 		}
 		return null;
 	}
@@ -141,11 +143,10 @@ public class Bank {
 			if(users.get(i).getUsername().equals(username))
 				if(users.get(i).getPassword().equals(password))
 				{
-					System.out.println("Log in successful");
+					System.out.println("Logging in. Please wait.");
 					accounts = getAccounts(users.get(i));
 					return users.get(i);
 				}
-		System.out.println("Log in failed");
 		
 		return null;
 	}
@@ -192,6 +193,8 @@ public class Bank {
 				if(rs.next())
 					accountnumber = rs.getInt(1);
 
+				insertUser.close();
+				conn.setAutoCommit(true);
 				BankAccount tmp = new BankAccount(accountnumber, money, type, owner);
 				accounts.add(tmp);
 				return tmp;
@@ -202,10 +205,10 @@ public class Bank {
 			}
 		} catch(InputMismatchException e)
 		{
-			System.out.println("Invalid inputs");
+			System.out.println("Invalid Inputs. Try again.");
 		} catch(NumberFormatException e)
 		{
-			System.out.println("Invalid inputs");
+			System.out.println("Invalid inputs. Try again.");
 		}
 		
 		return null;
@@ -229,12 +232,16 @@ public class Bank {
 				CallableStatement cs = null;
 				try(Connection conn = ConnectionFactory.getInstance().getConnection())
 				{
+					conn.setAutoCommit(false);
 					String sql = "call withdraw(?,?)";
 					cs = conn.prepareCall(sql);
 					cs.setInt(1, input);
 					cs.setDouble(2, getAccount(input).getMoney());
 					cs.executeUpdate();
 					conn.commit();
+					System.out.println("Withdraw success");
+					cs.close();
+					conn.setAutoCommit(true);
 					return true;
 					
 				} catch (SQLException e)
@@ -245,11 +252,11 @@ public class Bank {
 			}
 		} catch(InputMismatchException e)
 		{
-			System.out.println("Invalid input");
+			System.out.println("Invalid input. Try again");
 			return false;
 		} catch(NumberFormatException e)
 		{
-			System.out.println("Invalid inputs");
+			System.out.println("Invalid Input. Try again.");
 			return false;
 		}
 	}
@@ -274,17 +281,21 @@ public class Bank {
 					CallableStatement cs = null;
 					try(Connection conn = ConnectionFactory.getInstance().getConnection())
 					{
+						conn.setAutoCommit(false);
 						String sql = "call deposit(?,?)";
 						cs = conn.prepareCall(sql);
 						cs.setInt(1, input);
 						cs.setDouble(2, getAccount(input).getMoney());
 						cs.executeUpdate();
 						conn.commit();
-
+						System.out.println("Deposit success");
+						cs.close();
+						conn.setAutoCommit(true);
 						return true;
 					} catch (SQLException e)
 					{
 						System.out.println("Deposit failed");
+						e.printStackTrace();
 						return false;
 					}
 				}
@@ -294,7 +305,7 @@ public class Bank {
 			
 		} catch(InputMismatchException e)
 		{
-			System.out.println("Invalid input");
+			System.out.println("Invalid Input. Try again.");
 			return false;
 		}
 	}

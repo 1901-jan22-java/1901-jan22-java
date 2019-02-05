@@ -8,22 +8,22 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import org.apache.log4j.Logger;
+//import org.apache.log4j.Logger;
 
 public class ConnectionFactory {
-	final static Logger logger = Logger.getLogger(ConnectionFactory.class);
+	//fina4l static Logger logger = Logger.getLogger(ConnectionFactory.class);
 	
 	private static ConnectionFactory cf = null;
 	
 	private ConnectionFactory() {
-		logger.info("INSTANTIATED CONNECTION FACTORY");
+		//logger.info("INSTANTIATED CONNECTION FACTORY");
 	}
 	
 	public static synchronized ConnectionFactory getInstance() {
 		if(cf == null) {
 			cf = new ConnectionFactory();
 		}
-		logger.info("RETURNING CF INSTANCE " + cf.getClass());
+		//logger.info("RETURNING CF INSTANCE " + cf.getClass());
 		return cf;
 	}
 
@@ -46,6 +46,7 @@ public class ConnectionFactory {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
+			System.err.println("Lost connection");
 			e.printStackTrace();
 		}
 		return conn;

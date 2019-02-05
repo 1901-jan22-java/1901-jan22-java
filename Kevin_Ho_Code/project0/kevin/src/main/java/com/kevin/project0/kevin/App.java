@@ -72,17 +72,18 @@ public class App
     		else
     		{
     			System.out.println("\nChoose what you want to do\n"
-    								+ "Q = quit\n"
-    								+ "D = deposit\n"
-    								+ "W = withdraw\n"
-    								+ "A = make new account\n"
-    								+ "C = check account balance");
+    								+ "C = Check Account Balance"
+    								+ "A = Make New Account\n"
+    								+ "D = Deposit\n"
+    								+ "W = Withdraw\n"
+    								+ "Q = Quit\n");
     			input = console.nextLine().toUpperCase();
         	
     			switch(input)
     			{
     				case "Q":
     					loggedIn = false;
+    					System.out.println("Quitting app");
     					break;
     				case "D":
     					myBank.deposit(console);
@@ -100,6 +101,7 @@ public class App
     					break;
     			}
     		}
+
         }
     	
     	console.close();

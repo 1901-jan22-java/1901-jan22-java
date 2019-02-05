@@ -15,12 +15,6 @@ CREATE TABLE bankaccount
     type            VARCHAR2(20)    NOT NULL,
     owner           VARCHAR2(20)    CONSTRAINT account_to_username_fk REFERENCES bankuser(username)
 );
-CREATE TABLE bank
-(
-    bankaccount         NUMBER CONSTRAINT bank_to_account_fk REFERENCES bankaccount(account_number),
-    bankuser            VARCHAR2(20) CONSTRAINT bank_to_user_fk REFERENCES bankuser(username)
-);
-INSERT INTO bank VALUES (1, 'kevinuser');
 
 CREATE SEQUENCE acc_sequence;
 CREATE OR REPLACE TRIGGER acc_trigger
@@ -33,9 +27,7 @@ END;
 
 SELECT * FROM bankuser;
 SELECT * FROM bankaccount;
-SELECT * FROM bank;
 
-DROP table bank;
 drop table bankaccount;
 drop table bankuser;
 
