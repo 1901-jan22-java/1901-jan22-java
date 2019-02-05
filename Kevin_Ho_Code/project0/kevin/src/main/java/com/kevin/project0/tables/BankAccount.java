@@ -55,22 +55,23 @@ public class BankAccount {
 			return false;
 		}
 	}
-	public double withdraw(Scanner console)
+	public boolean withdraw(Scanner console)
 	{
+		System.out.println("Enter the amount you want to withdraw");
 		try{
 			double amount = console.nextDouble();
 			if(money - amount < 0)
 			{
 				System.out.println("Not enough balance");
-				return 0;
+				return false;
 			}
 			
 			money -= amount;
-			return amount;
+			return true;
 		} catch(InputMismatchException e)
 		{
 			System.out.println("Invalid input");
-			return 0;
+			return false;
 		}
 	}
 	@Override
