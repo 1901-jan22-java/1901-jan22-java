@@ -38,8 +38,19 @@ SELECT * FROM bank;
 DROP table bank;
 drop table bankaccount;
 drop table bankuser;
- 
+
+commit;
+
 CREATE OR REPLACE PROCEDURE deposit (accID IN NUMBER, amount IN NUMBER)
+AS
+BEGIN
+    UPDATE bankaccount
+    SET money = amount
+    WHERE bankaccount.account_number = accID;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE withdraw (accID IN NUMBER, amount IN NUMBER)
 AS
 BEGIN
     UPDATE bankaccount
