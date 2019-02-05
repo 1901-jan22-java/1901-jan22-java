@@ -5,30 +5,29 @@
 /*
     TYPE SELECTOR - SELECTS ALL ELEMENTS THAT MATCHES THE GIVEN TYPE
 */
-h1 {
+#example_1 h1 {
     color:red;
 }
 
 /*
     CLASS SELECTOR - SELECTS ALL ELEMENTS THAT CORRESPONDS TO THE GIVEN CLASS ATTRIBUTE
 */
-.class_selector {
-    color: blue;
+#example_2 .class_selector {
+    color: red;
 }
 
 /*
     ID SELECTOR - SELECTS ALL ELEMENTS THAT CORRESPONDS TO THE GIVEN CLASS ATTRIBUTE
 */
-#id_selector {
-    color: yellow;
+#example_3 #id_selector {
+    color: red;
 }
 
 /*
     UNIVERSAL SELECT - SELECTS ALL ELEMENTS
 */
-* {
-    color: purple;
-    background-color:lightgrey;
+#example_4 * {
+    color: red;
 }
 
 /*
@@ -37,8 +36,8 @@ h1 {
     SEE https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors
     FOR A COMPREHENSIVE DOCUMENT ON THE SYNTAX OF ATTRIBUTE SELECTORS!
 */
-li[value="2"] {
-    color: orange
+#example_5 li[value="2"] {
+    color: red
 }
 
 /*******************************************************************************
@@ -52,16 +51,16 @@ li[value="2"] {
         1) FIND HEADING-4
         2) SELECT FIRST PARAGRAPH PROCEDING HEADING-4
 */
-h4 + p{
-    color:green;
+#example_6 h4 + p{
+    color:red;
 }
 
 /*
     GENERAL SIBLING COMBINATORS - THE ELEMENTS FOLLOWING THE FIRST ARE SELECTED
     IN THIS EXAMPLE, PARAGRAPH ELEMENTS FOLLOWING HEADING-5 ARE SELECTED.
 */
-h5 ~ p {
-    color: aqua;
+#example_7 h5 ~ p {
+    color: red;
 }
 
 /*
@@ -69,16 +68,16 @@ h5 ~ p {
     IN THIS EXAMPLE, ONLY THE PARAGRAPHS NESTED IN DIV ARE SELECTED - NOT THE PARAGRAPHS
     OUTSIDE THE DIV.
 */
-div > p {
-    color: brown;
+#example_8 div > p {
+    color: red;
 }
 
 /*
     DIRECT DESCENDANT COMBINATOR - FREQUENTLY USED TO GET ELEMENTS NESTED WITHIN ELEMENTS...
     VERY FREQUENTLY USED. YOU CAN PROBABLY DO EVERYTHING WITH ONLY THE BASIC SELECTORS AND THIS ONE COMBINATOR.
 */
-div ul li {
-    color: black;
+#example_9 div ul li {
+    color: red;
 }
 
 /*******************************************************************************
@@ -92,7 +91,7 @@ div ul li {
     BUT REALLY, I SINCERELY DOUBT YOU WILL NEED THE COLUMN COMBINATOR.
 
     ----------------------------------------------------------------------------
-    
+
     LET'S GET INTO SOMETHING MORE USEFUL! PSEUDO-CLASSES!
 
     PSEUDO-CLASSES SELECTS ELEMENTS BASED ON THEIR STATES, WHICH IS INFORMATION
@@ -116,6 +115,6 @@ div ul li {
     WORTH NOTING THERE IS A FIRST-CHILD AND LAST-CHILD PSEUDOCLASS,
     BUT THIS PARTICULAR PSEUDOCLASS IS POWERFUL ENOUGH TO REPLACE BOTH.
 */
-ol li:nth-child(2n + 5){
-    color: lime;
+#example_10 ol li:nth-child(2n + 5){
+    color: red;
 }

@@ -10,91 +10,109 @@
 </head>
 <body>
 
-    
     <!-- TYPE SELECTOR -->
-    <h1>HEADING ONE IS SELECTED VIA TYPE SELECTOR!</h1>
+    <div id="example_1" class="selector_examples">
+        <h1>HEADING ONE IS SELECTED VIA TYPE SELECTOR!</h1>
+    </div>
     <hr>
 
     <!-- CLASS SELECTOR -->
-    <h2 class="class_selector">HEADING TWO IS SELECTED VIA THE CLASS SELECTOR!</h2>
+    <div id="example_2" class="selector_examples">
+        <h2 class="class_selector">HEADING TWO IS SELECTED VIA THE CLASS SELECTOR!</h2>
+    </div>
     <hr>
     
     <!-- ID SELECTOR -->
-    <h3 id = "id_selector">HEADING THREE IS SELECTED VIA THE ID SELECTOR!</h3>
+    <div id="example_3" class="selector_examples">
+        <h3 id = "id_selector">HEADING THREE IS SELECTED VIA THE ID SELECTOR!</h3>
+    </div>
     <hr>
 
     <!-- UNIVERSAL SELECTOR -->
-    <h4>HEADING FOUR IS SELECTED VIA THE UNIVERSAL SELECTOR!</h4>
+    <div id="example_4" class="selector_examples">
+        <h4>HEADING FOUR IS SELECTED VIA THE UNIVERSAL SELECTOR!</h4>
+    </div>
     <hr>
 
     <!-- ATTRIBUTE SELECTOR -->
-    <ul>
-        <li value = "1">BEHOLD THE POWER OF THE ATTRIBUTE SELECTOR!</li>
-        <li value = "2">I AM SELECTED.</li>
-        <li value = "3">THIS IS NOT.</li>
-        <li>ALSO, THE UNIVERSAL SELECTOR IS KINDA MAKING ME PURPLE. HELP.</li>
-    </ul>
-    <hr>
-
-    <!-- ADJACENT SIBLING COMBINATOR -->
-    <h4>HEADING 4 IS NOT SELECTED...</h4>
-    <p>Instead, the paragraph is.</p>
-    <p>Do I get selected too? No.</p>
-    <hr>
-
-    <!-- GENERAL SIBLING COMBINATOR -->
-    <p>
-        Theebika, is not one of Henry's siblings
-    </p>
-    <h5>This is Henry, he has 3 siblings</h5>
-    <h6>Apparently, Henry is the only one without a first name starting with J. <br>
-        He's kinda the black sheep of the family. (Woo!) <br>
-        Anyway, his siblings are colored aqua.
-    </h6>
-    <p>Julia</p>
-    <p>Joey</p>
-    <p>Jerry</p>
-    <hr>
-
-    <!-- CHILD COMBINATOR -->
-    <div>
-        <p>I am a paragraph inside div.</p>
-        <p>I am a paragraph inside div.</p>
-        <p>I am a paragraph inside div.</p>
-    </div>
-    <p>
-        I am NOT a paragraph inside div. <br>
-        Also, the general sibling combinator is affecting me to this point...
-    </p>
-    <hr>
-
-    <!-- DIRECT DESCENDANT COMBINATOR -->
-    <div>
-        <ol>
-            <li>I AM A LIST ITEM, INSIDE AN ORDER LIST, INSIDE A DIV</li>
-            <li>I AM A LIST ITEM, INSIDE AN ORDER LIST, INSIDE A DIV</li>
-            <li>I AM A LIST ITEM, INSIDE AN ORDER LIST, INSIDE A DIV</li>
-        </ol>
+    <div id="example_5" class="selector_examples">
         <ul>
-            <li>I AM A LIST ITEM, INSIDE AN UNORDER LIST, INSIDE A DIV</li>
-            <li>I AM A LIST ITEM, INSIDE AN UNORDER LIST, INSIDE A DIV</li>
-            <li>I AM A LIST ITEM, INSIDE AN UNORDER LIST, INSIDE A DIV</li>
+            <li value="1">BEHOLD THE POWER OF THE ATTRIBUTE SELECTOR!</li>
+            <li value="2">I AM SELECTED.</li>
+            <li value="3">THIS IS NOT.</li>
+            <li>ALSO, THE UNIVERSAL SELECTOR IS KINDA MAKING ME PURPLE. HELP.</li>
         </ul>
     </div>
     <hr>
 
+    <!-- ADJACENT SIBLING COMBINATOR -->
+    <div id="example_6" class="selector_examples">
+        <h4>HEADING 4 IS NOT SELECTED...</h4>
+        <p>Instead, the paragraph is.</p>
+        <p>Do I get selected too? No.</p>
+    </div>
+    <hr>
+
+    <!-- GENERAL SIBLING COMBINATOR -->
+    <div id="example_7" class="selector_examples">
+        <p>Theebika, is not one of Henry's siblings</p>
+        <h5>This is Henry, he has 3 siblings</h5>
+        <h6>Apparently, Henry is the only one without a first name starting with J. <br>
+            He's kinda the black sheep of the family. (Woo!) <br>
+            Anyway, his siblings are colored aqua.
+        </h6>
+        <p>Julia</p>
+        <p>Joey</p>
+        <p>Jerry</p>
+    </div>
+    <hr>
+
+    <!-- CHILD COMBINATOR -->
+    <div id="example_8" class="selector_examples">
+        <div>
+            <p>I am a paragraph inside div.</p>
+            <p>I am a paragraph inside div.</p>
+            <p>I am a paragraph inside div.</p>
+        </div>
+        <p>
+            I am NOT a paragraph inside div. <br>
+            Also, the general sibling combinator is affecting me to this point...
+        </p>
+        <hr>
+    </div>
+
+    <!-- DIRECT DESCENDANT COMBINATOR -->
+    <div id="example_9" class="selector_examples">
+        <div>
+            <ol>
+                <li>I AM A LIST ITEM, INSIDE AN ORDER LIST, INSIDE A DIV</li>
+                <li>I AM A LIST ITEM, INSIDE AN ORDER LIST, INSIDE A DIV</li>
+                <li>I AM A LIST ITEM, INSIDE AN ORDER LIST, INSIDE A DIV</li>
+            </ol>
+            <ul>
+                <li>I AM A LIST ITEM, INSIDE AN UNORDER LIST, INSIDE A DIV</li>
+                <li>I AM A LIST ITEM, INSIDE AN UNORDER LIST, INSIDE A DIV</li>
+                <li>I AM A LIST ITEM, INSIDE AN UNORDER LIST, INSIDE A DIV</li>
+            </ul>
+        </div>
+    </div>
+    <hr>
+
     <!-- NTH-CHILD PSEUDOCLASS -->
-    <ol>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
-    </ol>
+    <div id="example_10" class="selector_examples">
+        <ol>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ol>
+    </div>
+    
 </body>
 </html>
