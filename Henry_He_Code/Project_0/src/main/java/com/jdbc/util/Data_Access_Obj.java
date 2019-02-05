@@ -23,7 +23,13 @@ public class Data_Access_Obj {
 	}
 	
 	public void createAccount(String user, String pw, int acct_type) {
-		
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+			String query = "INSERT INTO PROJECT_0_CLIENT_DATA VALUES(?,?,?)";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setString(1,user);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void updateAccount() {}

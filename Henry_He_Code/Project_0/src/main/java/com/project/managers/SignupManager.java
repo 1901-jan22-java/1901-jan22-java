@@ -25,6 +25,7 @@ public class SignupManager implements Manager {
 		String[] data = new String[3];
 		String input;
 		
+		// Username loop - loops user until user enters quit or gives a proper username
 		System.out.println("\nPlease create your username.");
 		input = scan.nextLine();
 		while(true) {
@@ -38,6 +39,7 @@ public class SignupManager implements Manager {
 			};
 		}
 		
+		// Password loop - loops user until user enters quit or gives a proper password
 		System.out.println("\nHello " + data[0] + ", please create your password");
 		input = scan.nextLine();
 		while(true) {
@@ -51,6 +53,9 @@ public class SignupManager implements Manager {
 			};
 		}
 		
+		// Account Type loop - loops user until user enters quit or selects an account
+		// User should get a full list of available account types when they enter
+		// "ACCOUNT_OPTIONS"
 		System.out.println("\nFinally, please select the account you would like to open!"
 				+ "\nHere at J&J Banking, we offer CHECKING, SAVING and much more."
 				+ "\nPlease enter ACCOUNT_OPTIONS for a full list of account types.");
@@ -77,7 +82,10 @@ public class SignupManager implements Manager {
 		}
 		
 		System.out.println("Please hold as your account is currently being created...");
+		logger.info("Data Array: " + data[0] + " : " + data[1] + " : " + data[2] + 
+				" account corresponds to int value " + account_options.indexOf(data[2]));
 		Manager.dao.createAccount(data[0], data[1], account_options.indexOf(data[2]));
+		System.out.println("Account creation successful!");
 		return;
 	}
 
