@@ -29,13 +29,10 @@ order by art.name;
 /
 ------------------------ 7.5 SELF JOIN ------------------------
 -- Task 1 Perform a self-join on the employee table, joining on the reportsto column.
-select e1.firstname || ' ' || e1.lastname as "Employee", e2.firstname || ' ' || e2.lastname as "Reports To"
+select e1.firstname || ' ' || e1.lastname as "Employee", coalease(e2.firstname || ' ' || e2.lastname, null) as "Reports To"
 from employee e1, employee e2
-where e1.reportsto = e2.employeeid;
+where e1.reportsto = e2.employeeid or reportsto is null;
 
-select firstname || ' ' || lastname as "Big Boss"
-from employee
-where reportsto = null;
 /
 ------------------------ 7.6 Complicated Join assignment ------------------------
 -- Task 1 Create an inner join between all tables in the chinook database.
