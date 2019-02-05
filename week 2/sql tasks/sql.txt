@@ -1,0 +1,101 @@
+
+/* SELECT COUNT(*) FROM ARTIST;  */ 
+
+SELECT  * FROM  EMPLOYEE; 
+/*SELECT Task – Select all records from the Employee table. */
+
+SELECT * FROM EMPLOYEE WHERE LASTNAME = 'King'; 
+/* Task – Select all records from the Employee table where last name is King. */
+
+SELECT * FROM EMPLOYEE WHERE FIRSTNAME = 'Andrew' AND  REPORTSTO is NULL; 
+/* Task – Select all records from the Employee table where first name is Andrew and REPORTSTO is NULL. */
+
+Select * FROM ALBUM ORDER BY TITLE DESC; 
+/* ORDER BY Task – Select all albums in Album table and sort result set in descending order by title. */
+
+
+SELECT FIRSTNAME FROM CUSTOMER 
+  ORDER BY CITY DESC;
+/* Task – Select first name from Customer and sort result set in ascending order by city */
+
+
+
+
+SELECT * FROM GENRE; 
+
+INSERT INTO GENRE (GENREID, NAME)
+VALUES (26, 'SALSA');
+
+INSERT INTO GENRE (GENREID, NAME)
+VALUES (27, 'Merengue');
+/*INSERT INTO Task – Insert two new records into Genre table */
+
+select * from employee;
+
+insert into employee(employeeid,lastname,firstname) values(9,'Mars','Veronica');
+
+insert into employee(employeeid,lastname,firstname) values(10,'James','Rick');
+
+/*Task – Insert two new records into Employee table */
+
+select * from customer; 
+
+insert into customer(customerid,firstname,lastname,email,supportrepid) values(123123123,'Sanchez','Pedro','pedrosanchez@gmail.com',2);
+
+insert into customer(customerid,firstname,lastname,email,supportrepid) values(2242422,'Sanchez','dudeman','dudeman@gmail.com',2);
+
+
+/* Task – Insert two new records into Customer table */
+
+update customer
+set firstname = 'Robert', lastname = 'Walter'
+where firstname='Aaron' and lastname = 'Mitchell';
+
+--UPDATE Task – Update Aaron Mitchell in Customer table to Robert Walter 
+
+update artist
+set name = 'CCR'
+where name = 'Creedence Clearwater Revival'; 
+
+
+--Task – Update name of artist in the Artist table “Creedence Clearwater Revival” to “CCR” 
+
+SELECT * FROM invoice where billingaddress like 'T%';
+--LIKE Task – Select all invoices with a billing address like “T%” 
+
+select * from invoice where total between 15 and 50;
+
+--Select all invoices that have a total between 15 and 50 Task 
+
+select * from employee where hiredate between '01-JUN-03' and '01-MAR-04'; 
+
+--– Select all employees hired between 1st of June 2003 and 1 st of March 2004
+
+
+--delete from customer
+--where firstname = 'Robert' and lastname = 'Walter' ; 
+-- DELETE Task – Delete a record in Customer table where the name is Robert Walter (There may be constraints that rely on this, find out how to resolve them).
+
+CREATE OR REPLACE PROCEDURE current_time_in_NY AS
+    BEGIN
+         DBMS_OUTPUT.PUT_LINE('The current time in New York is ' 
+         ||            TO_CHAR(SYSDATE,'MM-DD-YY HH:MI:SS AM'));
+    END;
+    /
+exec current_time_in_NY;
+--System Defined Functions Task – Create a function that returns the current time. 
+--Task – create a function that returns the length of a mediatype from the mediatype table
+
+
+--System Defined Aggregate Functions Task – Create a function that returns the average total of all invoices 
+
+--Task – Create a function that returns the most expensive track 
+
+
+
+
+
+
+
+
+
