@@ -113,6 +113,18 @@ select*from employee;
 select*from employee where title LIKE 'S%' minus
 select*from employee where employeeid > 4;
 
+---find the number of songs per genre -- ex of HAVING
+
+select genreid, count(trackid)
+from track
+group by genreid; -- shows genreid not genre name
+
+select genre.name GENRE, count(track.trackid) "NUM SONGS"
+from track
+inner join genre on genre.genreid = track.genreid
+group by genre.name
+order by genre.name;
+
 
 
 

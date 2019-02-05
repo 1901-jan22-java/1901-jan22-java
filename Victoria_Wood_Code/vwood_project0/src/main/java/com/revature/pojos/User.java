@@ -1,6 +1,6 @@
 package com.revature.pojos;
 
-public class Customer {
+public class User {
 	private int id;
 	private String fn;
 	private String ln;
@@ -8,7 +8,7 @@ public class Customer {
 	private String pwd;
 	
 	
-	public Customer(int id, String fn, String ln) {
+	public User(int id, String fn, String ln) {
 		super();
 		this.id = id;
 		this.fn = fn;

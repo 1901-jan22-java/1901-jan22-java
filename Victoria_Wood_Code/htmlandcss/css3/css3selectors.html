@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Selectors</title>
+  </head>
+  <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="#">Navbar</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                      <a class="nav-link" href="C:\Users\torimadera\my_git_repos\1901-jan22-java\Victoria_Wood_Code\htmlandcss\css3.html">Home <span class="sr-only"></span></a>
+                    </li>
+                    </ul>
+                    </div>
+                    </nav>
+    <h1>New Selectors in CSS 3</h1>
+
+    The CSS type selector matches elements by node name. In other words, 
+    it selects all elements of the given type within a document. <br> <br>
+
+    <style>
+        .red {
+            color: #f33;
+        }
+        .yellow-bg {
+             background: #ffa;
+        }
+        .fancy {
+             font-weight: bold;
+             text-shadow: 4px 4px 3px #77f;
+        }
+        #identified {
+            background-color: skyblue;
+        }
+
+        * [lang^=en] {
+            color: green;
+        }
+
+        *.warning {
+            color: red;
+        }
+
+        *#maincontent {
+             border: 1px solid blue;
+        }
+
+        
+    
+    </style>
+
+    <p class="red">This paragraph has red text.</p>
+    <p class="red yellow-bg">This paragraph has red text and a yellow background.</p>
+    <p class="red fancy">This paragraph has red text and "fancy" styling.</p>
+    <p>This is just a regular paragraph.</p>
+
+    <p> This is the code for above:</p>
+    <code> 
+         class="red">This paragraph has red text. <br>
+        class="red yellow-bg">This paragraph has red text and a yellow background. <br>
+        class="red fancy">This paragraph has red text and "fancy" styling. <br>
+        <br>
+        .red { 
+            color: #f33;
+        } <br>
+        .yellow-bg {
+             background: #ffa;
+        } <br>
+        .fancy {
+             font-weight: bold;
+             text-shadow: 4px 4px 3px #77f;
+        } <br>
+    
+    </code>
+
+    <div id="identified">This div has a special ID on it!</div>
+    <div>This is just a regular div.</div>
+
+
+    <p class="warning">
+            <span lang="en-us">A green span</span> in a red paragraph.
+    </p>
+    <p id="maincontent" lang="en-gb">
+        <span class="warning">A red span</span> in a green paragraph.
+    </p>
+
+    <p>This is the code for above</p>
+    <code>
+            div id="identified">This div has a special ID on it! div <br>
+            div This is just a regular div. <br>
+        
+        
+             p class="warning" <br>
+                    span lang="en-us" A green span in a red paragraph. <br>
+            
+            p id="maincontent" lang="en-gb" <br>
+                span class="warning">A red span  in a green paragraph. <br>
+            
+            <br>
+            #identified {
+                background-color: skyblue;
+            } <br>
+    
+            * [lang^=en] {
+                color: green;
+            } <br>
+    
+            *.warning {
+                color: red;
+            } <br>
+    
+            *#maincontent {
+                 border: 1px solid blue;
+            } <br>
+    
+
+    </code>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  </body>
+</html>

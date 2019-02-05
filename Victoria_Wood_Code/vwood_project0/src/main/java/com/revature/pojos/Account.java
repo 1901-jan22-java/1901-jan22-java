@@ -5,15 +5,15 @@ public class Account {
 	private int id;
 	private String type;
 	private float balance;
-	private int cid;
+	private int uid;
 	
 	
-	public Account(int id, String type, float balance, int cid) {
+	public Account(int id, String type, float balance, int uid) {
 		super();
 		this.id = id;
 		this.type = type;
 		this.balance = balance;
-		this.cid = cid;
+		this.uid = uid;
 	}
 	public int getId() {
 		return id;
@@ -33,11 +33,11 @@ public class Account {
 	public void setBalance(float balance) {
 		this.balance = balance;
 	}
-	public int getCid() {
-		return cid;
+	public int getuid() {
+		return uid;
 	}
-	public void setCid(int cid) {
-		this.cid = cid;
+	public void setuid(int uid) {
+		this.uid = uid;
 	}
 	
 	
