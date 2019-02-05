@@ -45,6 +45,7 @@ public class BankAccount {
 	}
 	public boolean deposit(Scanner console)
 	{
+		System.out.println("Enter the amount you want to deposit");
 		try{
 			money += console.nextDouble();
 			return true;

@@ -1,5 +1,6 @@
 package com.kevin.project0.tables;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -210,43 +211,30 @@ public class Bank {
 		
 		return null;
 	}
-
-	public boolean deposit(Scanner console, BankAccount myAccount) {
-		
-		System.out.println("Enter the amount you want to deposit. Current balance = " + myAccount.getMoney());
-		try{
-			double input = Double.parseDouble(console.nextLine());
-		
-			myAccount.setMoney(myAccount.getMoney() + input);
-			System.out.println("Deposited " + input + " dollars. Current balance = " + myAccount.getMoney());
-			return true;
-		} catch(InputMismatchException e){
-			System.out.println("Invalid input");
-		} catch(NumberFormatException e)
-		{
-			System.out.println("Invalid inputs");
-		}
-		
-		return false;
-	}
-	
-	public boolean withdraw(Scanner console, BankAccount myAccount){
+	/*
+	public boolean withdraw(Scanner console){
 
 		System.out.println("Enter the amount you want to withdraw. Current balance = " + myAccount.getMoney());
 		try{
-			double input = Double.parseDouble(console.nextLine());
-		
-			if(input < 0 || myAccount.getMoney()-input < 0)
+			myAccount.withdraw(console);
+			CallableStatement cs = null;
+			try(Connection conn = ConnectionFactory.getInstance().getConnection())
 			{
-				System.out.println("Invalid input");
+				String sql = "call withdraw(?,?)";
+				cs = conn.prepareCall(sql);
+				cs.setInt(1, input);
+				cs.setDouble(2, getAccount(input).getMoney());
+				cs.executeUpdate();
+				conn.commit();
+				return true;
+			} catch (SQLException e)
+			{
+				System.out.println("Deposit failed");
 				return false;
 			}
-			else
-			{
-				myAccount.setMoney(myAccount.getMoney()-input);
-				System.out.println("Withdrew " + input + " dollars. Current balance = " + myAccount.getMoney());
-				return true;
-			}
+			System.out.println("Withdrew " + input + " dollars. Current balance = " + myAccount.getMoney());
+			return true;
+		}
 		} catch(InputMismatchException e){
 			System.out.println("Invalid input");
 		} catch(NumberFormatException e)
@@ -256,24 +244,63 @@ public class Bank {
 		
 		return false;
 	}
-
-	public void checkBalance() {
-		for(int i = 0; i < accounts.size(); i++)
-			System.out.println(accounts.get(i).toString());
-	}
+*/
 	
 	public boolean deposit(Scanner console)
 	{
 		System.out.println("Please enter which account number you wish to deposit to");
+		printAccounts();
+    	
 		try
 		{
 			int input = console.nextInt();
-			
+			if(getAccount(input) == null)
+			{
+				System.out.println("Account does not exist");
+				return false;
+			}
+			else
+			{
+				if(getAccount(input).deposit(console))
+				{
+					CallableStatement cs = null;
+					try(Connection conn = ConnectionFactory.getInstance().getConnection())
+					{
+						String sql = "call deposit(?,?)";
+						cs = conn.prepareCall(sql);
+						cs.setInt(1, input);
+						cs.setDouble(2, getAccount(input).getMoney());
+						cs.executeUpdate();
+						conn.commit();
+
+						return true;
+					} catch (SQLException e)
+					{
+						System.out.println("Deposit failed");
+						return false;
+					}
+				}
+				else
+					return false;
+			}
 			
 		} catch(InputMismatchException e)
 		{
 			System.out.println("Invalid input");
 			return false;
 		}
+	}
+	public BankAccount getAccount(int accID)
+	{
+		for(int i = 0; i < accounts.size(); i++)
+			if(accounts.get(i).getAccountNumber() == accID)
+				return accounts.get(i);
+		return null;
+	}
+	
+	public void printAccounts()
+	{
+    	for(int i = 0; i < accounts.size(); i++)
+    		System.out.println(accounts.get(i).toString());
 	}
 }

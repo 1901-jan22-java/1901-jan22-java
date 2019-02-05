@@ -38,5 +38,12 @@ SELECT * FROM bank;
 DROP table bank;
 drop table bankaccount;
 drop table bankuser;
-
-SELECT * FROM bankaccount WHERE bankaccount.owner = 'kevho';
+ 
+CREATE OR REPLACE PROCEDURE deposit (accID IN NUMBER, amount IN NUMBER)
+AS
+BEGIN
+    UPDATE bankaccount
+    SET money = amount
+    WHERE bankaccount.account_number = accID;
+END;
+/

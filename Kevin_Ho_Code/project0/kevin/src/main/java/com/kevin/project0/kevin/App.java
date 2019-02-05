@@ -85,27 +85,22 @@ public class App
     					loggedIn = false;
     					break;
     				case "D":
-    					//myBank.deposit(console, myBank.getAccounts().get(0));
+    					myBank.deposit(console);
     					break;
     				case "W":
-    					//myBank.withdraw(console, myBank.getAccounts().get(0));
+    					myBank.withdraw(console);
     					break;
     				case "A":
     					myBank.addAccount(console, loggedInUser);
     					break;
     				case "C":
-    					myBank.checkBalance();
+    					myBank.printAccounts();
     					break;
     				default:
     					break;
     			}
     		}
         }
-
-    	for(int i = 0; i < myBank.getUsers().size(); i++)
-    		System.out.println(myBank.getUsers().get(i).toString());
-    	for(int i = 0; i < myBank.getAccounts(loggedInUser).size(); i++)
-    		System.out.println(myBank.getAccounts(loggedInUser).get(i).toString());
     	
     	console.close();
     }
