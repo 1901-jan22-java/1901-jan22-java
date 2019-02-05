@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.exception.NoMoneyException;
@@ -27,7 +28,7 @@ public class AccountRepository {
 			ps.setString(2, pwd);
 			ResultSet info = ps.executeQuery();
 			if(info.next()) {
-				c = new User(info.getInt("uid"), info.getString("firstname"), info.getString("lastname"));
+				c = new User(info.getInt("userid"), info.getString("firstname"), info.getString("lastname"));
 			}
 				
 		} catch (SQLException e) {
@@ -119,14 +120,14 @@ public class AccountRepository {
 	
 	
 	public static List<Account> getAccounts(int uid) {
-		List<Account> accts = null;
+		List<Account> accts = new ArrayList<Account>();
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			String sql = "{call getAccount(?)}";
+			String sql = "{call getAccount(?, ?)}";
 			CallableStatement cs = conn.prepareCall(sql);
 			cs.setInt(1, uid);
 			cs.registerOutParameter(2, OracleTypes.CURSOR);
 			cs.execute();
-			ResultSet rs = (ResultSet) cs.getObject(1);
+			ResultSet rs = (ResultSet) cs.getObject(2);
 			while(rs.next()) {
 				Account a = new Account(rs.getInt("acctid"), rs.getString("type"), rs.getFloat("balance"), uid);
 				accts.add(a);
@@ -139,9 +140,9 @@ public class AccountRepository {
 	
 	public static Account deposit(Account a, float deposit) {
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			String sql = "update set balance = ? where acctid = ? ";
+			String sql = "update Account set balance = ? where acctid = ? ";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setFloat(1, a.getBalance() + deposit);
+			ps.setFloat(1, (a.getBalance() + deposit));
 			ps.setInt(2, a.getId());
 			int numRows = ps.executeUpdate();
 			if (numRows > 0) {
@@ -159,7 +160,7 @@ public class AccountRepository {
 			throw new NoMoneyException("Your withdrawl exceeds the balance of this account.");
 		} else {
 			try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
-				String sql = "update set balance = ? where acctid = ?";
+				String sql = "update Account set balance = ? where acctid = ?";
 				PreparedStatement ps = conn.prepareStatement(sql);
 				ps.setFloat(1,  a.getBalance() - withdrawl);
 				ps.setInt(2, a.getId());
