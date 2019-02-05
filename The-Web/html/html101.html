@@ -23,6 +23,40 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>HTML 101</title>
+
+    <style>
+        /* This is a comment in CSS
+        below, i am styling every li element*/
+        li {
+            font-style: italic;
+            color: #8741a2 !important;
+        }
+
+        /* below we are styling everything of the class "class"*/
+        .class{
+            border: 3px dotted paleturquoise;
+            border-radius: 5px;
+            color: red;
+        }
+
+        /* id selector */
+        #second{
+            color: yellow;
+        }
+
+        /* Various other selectors */
+
+        /*
+        E1 + E2 
+        adjacent sibling selector, selects all of element e2 that 
+        immediately follow the element type e1
+        */
+        input[type=checkbox]:checked + label{
+            background-color: green;
+            font-style: italic;
+        }
+
+    </style>
 </head>
 <body>
     <!-- Content to be seen goes here!-->
@@ -40,7 +74,7 @@
     There are two kinds of lists, ordered and unordered 
     <ul>
         <li>one item</li>
-        <li>second item</li>
+        <li class="class">second item</li>
     </ul>
 
 
@@ -85,6 +119,31 @@
     <br>
     <br>
     <iframe src="https://www.revature.com" frameborder="5px"></iframe>
+
+    <h4 class="class">Input fields</h4>
+    Input fields allow users to enter information through your HTML page 
+    While it is common to use these with forms, you do <b>not</b> have to 
+    use these inside of forms 
+
+    <br>
+    <input type="text" id="textInput" name="textInput"
+             placeholder="This is a text input field"> <br>
+    <input type="number" max="100" min="0"> <br>
+    <input type="password" placeholder="Password input"> <br>
+
+    <input type="radio" name="role" value="Associate"> Associate <br>
+    <input type="radio" name="role" value="Trainer"> Trainer <br>
+
+    Countries Traveled:
+    <input type="checkbox" name="countries" value="mexico"> 
+    <label for="mexico">Mexico</label> <br>
+    <input type="checkbox" name="countries" value="cuba">
+    <label for="cuba">Cuba</label> <br>
+
+
+
+
+
 
 </body>
 </html>
