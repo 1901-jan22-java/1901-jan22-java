@@ -8,6 +8,7 @@ import java.util.HashMap;
 /**
  * This will probably be deprecated.
  *
+ * @deprecated
  * @author Sanford Zheng
  *
  */

@@ -47,7 +47,7 @@ public class AccountTypeRepository {
 		return at;
 	}
 
-	public static ArrayList<AccountType> getAccountTypes(){
+	public static ArrayList<AccountType> getAccountTypes() {
 		ArrayList<AccountType> ats = new ArrayList<>();
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			String sql = "select * from bank_account_types";

@@ -10,19 +10,19 @@ public class BankApp {
 	private Scanner s;
 
 	public BankApp(){
-		bi = new BankingInterface();
+		bi = null;
 		s = new Scanner(System.in);
+		banking();
 	}
 
 	public static void main(String[] args) {
 		BankApp ba = new BankApp();
-		ba.banking();
 	}
 
-	public void banking(){
+	private void banking(){
 		boolean exit = false;
 		while(!exit) {
-			System.out.print(BankAppHelper.CREATE_LOGIN_MENU);
+			System.out.print(BankAppHelper.MAIN_MENU);
 			int selection = s.nextInt();
 			s.nextLine();
 			switch(selection) {
@@ -40,24 +40,34 @@ public class BankApp {
 		close();
 	}
 
-	private boolean login(){
+	private boolean createNewUser(){
 		boolean keepTrying = true;
-		while(keepTrying){
+		while(keepTrying) {
 
 		}
 		return false;
 	}
-
-	private void session(){
-		System.out.println("Session");
-	}
-
-	private boolean createNewUser(){
-		System.out.println("Create New!");
+	private boolean login() {
+		boolean keepTrying = true;
+		while(keepTrying){
+		}
 		return false;
 	}
 
+	private boolean interfaceSetup(){
+		return bi.setUp();
+	}
+
+	private void session(){
+		boolean exit = false;
+		while(!exit){
+			System.out.println(BankAppHelper.sessionMenu(bi));
+		}
+	}
+
+
 	private void close(){
-		System.out.println("Outta here!");
+		bi = null;
+		s.close();
 	}
 }
