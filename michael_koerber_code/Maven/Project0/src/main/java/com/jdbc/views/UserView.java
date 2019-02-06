@@ -14,12 +14,12 @@ public class UserView {
 	public static void userLogin() {
 		System.out.println("Login\n");
 		
-		Scanner scanner = new Scanner(System.in);
+		Scanner scan = new Scanner(System.in);
 
 		System.out.println("Please enter your username: ");
-		String username = scanner.nextLine();
+		String username = scan.nextLine();
 		System.out.println("Please enter your password: ");
-		String password = scanner.nextLine();
+		String password = scan.nextLine();
 
 		User foundUser = UserRepository.findLoginInfo(username, password);
 				
@@ -28,18 +28,16 @@ public class UserView {
 			userLogin();
 		}
 		else if(foundUser != null) {
-			System.out.println("Login successful!");
+			System.out.println("Login successful!\n");
 			UserMenu(foundUser);
 		}
-		scanner.close();
+		scan.close();
 	}
-	
-	// userMenu
-	
+		
 	static User currUser = new User();
-	static Scanner scan = new Scanner(System.in);
 	
 	public static void addUser() {
+		Scanner scan = new Scanner(System.in);
 
 		System.out.println("Please enter your first name: ");
 		String fname = scan.nextLine();
@@ -58,7 +56,6 @@ public class UserView {
 		currUser.setUsername(username);
 		currUser.setPassword(password);
 
-		System.out.println(UserRepository.save(currUser));
 		User checkedUser = UserRepository.save(currUser);
 		
 		if(checkedUser == null) {
@@ -69,6 +66,7 @@ public class UserView {
 			System.out.println("Account created!\n");
 			userLogin();
 		}
+		scan.close();
 	}
 	
 	public static void UserMenu(User currUser) {
@@ -76,7 +74,7 @@ public class UserView {
 		List<Account> accounts = AccountRepository.findAllUserAccounts(currUser.getUserId());
 		int numAccounts = accounts.size();
 		
-		System.out.println("\nHello " + currUser.getFirstName());
+		System.out.println("Hello " + currUser.getFirstName());
 		if(accounts.size() != 0){
 			System.out.println("Your Accounts:");
 			for (Account a : accounts) {
@@ -85,29 +83,27 @@ public class UserView {
 			}
 		}
 		else {
-			System.out.println("You do not have any accounts, please open one");
+			System.out.println("You do not have any accounts, please open one by pressing 3");
 		}
 		
 		System.out.println("\nHow can I assist you?\n" + "Enter 1 to make a deposit\n"
-				+ "Enter 2 to make a withdrawal\n" + "Enter 3 to open a new account\n" + "Enter 4 to log out\n");
+				+ "Enter 2 to make a withdrawal\n" + "Enter 3 to open an account\n" + "Enter 4 to log out\n");
 		
 		Scanner scan = new Scanner(System.in);
-		String s = scan.nextLine();
-		int option = 0;
-		try {
-			option = Integer.parseInt(s);
-		}
-		catch(NumberFormatException e){
-			System.out.println("Enter a number between 1 and 4!\n");
+		int choice = 0;
+		if(scan.hasNextInt()){
+			choice = scan.nextInt();
+		} else {
+			System.out.println("You must enter 1, 2, 3, or 4");
 			UserMenu(currUser);
 		}
 
-		if(option != 1 && option != 2 && option != 3 && option != 4 || s == null) {
-			System.out.println("Enter a number between 1 and 4!");
+		if(choice != 1 && choice != 2 && choice != 3 && choice != 4) {
+			System.out.println("You must enter 1, 2, 3, or 4");
 			UserMenu(currUser);
 		}
 
-		switch (option) {
+		switch (choice) {
 		case 1:
 			if(numAccounts != 0) {
 				AccountView.initiateDeposit(currUser);

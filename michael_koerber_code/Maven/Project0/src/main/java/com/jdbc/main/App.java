@@ -1,29 +1,12 @@
 package com.jdbc.main;
 
-import java.util.List;
 import java.util.Scanner;
 
-import com.jdbc.dao.RoleRepository;
-import com.jdbc.pojos.Role;
-import com.jdbc.views.AccountView;
 import com.jdbc.views.UserView;
 
 public class App {
 
 	public static void main(String[] args) {
-//		RoleRepository roleRepo = new RoleRepository();
-//		List<Role> roles = roleRepo.findAll();
-		
-//		System.out.println(roles);
-//		System.out.println(roleRepo.getById(1));
-		
-//		Role r = roleRepo.save("Salesforce Director");
-//		List<Role> roles = roleRepo.findAll();
-//		System.out.println(roles);
-		
-//		Role r = new Role(3, "Housing Coordinator");
-//		roleRepo.update(r);
-//		List<Role> roles = roleRepo.findAll();
 		System.out.println("Welcome to your Bank");
 		homeMenu();
 	}
@@ -34,15 +17,19 @@ public class App {
 				+ " Enter 2 to Create a New Account" + "\n"
 				+ " Enter 3 to Exit");
 		Scanner scan = new Scanner(System.in);
-		int option = 0;
+		int choice = 0;
 		if(scan.hasNextInt()){
-			option = scan.nextInt();
+			choice = scan.nextInt();
 		} else {
 			System.out.println("You must enter 1, 2, or 3");
 			homeMenu();
 		}
+		if(choice != 1 && choice != 2 && choice != 3) {
+			System.out.println("You must enter 1, 2, or 3");
+			homeMenu();
+		}
 		
-		switch(option){
+		switch(choice){
 		case 1:
 			UserView.userLogin();
 			break;
@@ -50,14 +37,14 @@ public class App {
 			UserView.addUser();
 			break;
 		case 3:
-			closeApp(option);
+			closeApp(choice);
 			break;
 		}
 		scan.close();
 	}
 	
-	public static void closeApp(int option) {
+	public static void closeApp(int choice) {
 		System.out.println("Have a great day!");
-		System.exit(option);
+		System.exit(choice);
 	}
 }

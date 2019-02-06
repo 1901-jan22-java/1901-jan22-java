@@ -13,7 +13,7 @@ import com.jdbc.util.ConnectionFactory;
 
 public class UserRepository {
 	
-	
+	// Method used for logging in with username and password, executed in the User View
 	public static User findLoginInfo(String username, String password){
 		User user = null;
 		
@@ -53,7 +53,7 @@ public class UserRepository {
 				obj.setUserId(pk.getInt(1));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			
 		}
 		return obj;
 	}

@@ -11,7 +11,6 @@ import com.jdbc.pojos.Account;
 import com.jdbc.pojos.User;
 import com.jdbc.util.ConnectionFactory;
 import com.jdbc.views.AccountView;
-import com.jdbc.views.UserView;
 
 public class AccountRepository {
 
@@ -109,7 +108,6 @@ public class AccountRepository {
 			String query = "update accounts set balance = balance - ? where accountId = ?";
 			
 			PreparedStatement ps = conn.prepareStatement(query);
-			
 			ps.setDouble(1, withdrawAmount);
 			ps.setInt(2, withdrawAccount);
 			
@@ -120,8 +118,6 @@ public class AccountRepository {
 			} else {
 				ps.executeUpdate();
 			}
-		
-			
 		} catch(SQLException e){
 			e.printStackTrace();
 		}
