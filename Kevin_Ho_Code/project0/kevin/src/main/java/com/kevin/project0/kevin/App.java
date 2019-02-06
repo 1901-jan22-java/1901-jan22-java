@@ -5,10 +5,6 @@ import java.util.Scanner;
 import com.kevin.project0.tables.Bank;
 import com.kevin.project0.tables.BankUser;
 
-/**
- * Hello world!
- *
- */
 public class App 
 {
 	public static BankUser startUp(Scanner input, Bank myBank)
@@ -38,7 +34,7 @@ public class App
     	   		case "2":
     	   			temp = myBank.createUser(input);
     	   			if(temp == null)
-    	   				System.out.println("User already exists!");
+    	   				System.out.println("Failed to create new user");
     	   			else
     	   			{
     	   				System.out.println("Logging in as new user");
@@ -101,7 +97,6 @@ public class App
     					break;
     			}
     		}
-
         }
     	
     	console.close();

@@ -93,8 +93,12 @@ public class Bank {
 			String last_name = console.nextLine();
 			System.out.println("Enter your Birthdate in the format DD-MMM-YY");
 			String birthdate = console.nextLine();
+			if(birthdate != "[0-9][0-9]-[a-zA-Z][a-zA-Z][a-zA-Z]-[0-9][0-9]")
+				return null;
 			System.out.println("Enter your Phone in the format X-XXX-XXX-XXXX");
 			String phone = console.nextLine();
+			if(phone != "[0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]")
+				return null;
 			System.out.println("Enter your Email");
 			String email = console.nextLine();
 		
