@@ -3,7 +3,7 @@ package com.kevin.project0.tables;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-import com.kevin.project0.exception.NoMoneyException;
+import com.kevin.project0.exception.BadMoneyException;
 
 public class BankAccount {
 	private int accountNumber;	//primary key
@@ -50,7 +50,15 @@ public class BankAccount {
 	{
 		System.out.println("Enter the amount you want to deposit");
 		try{
-			money += console.nextDouble();
+			double x = console.nextDouble();
+			if(x < 0)
+			{
+				System.out.println("Cannot deposit negative numbers");
+				return false;
+			}
+			else
+				money -= x;
+			System.out.println("Deposit success");
 			return true;
 		} catch(InputMismatchException e)
 		{
@@ -58,15 +66,22 @@ public class BankAccount {
 			return false;
 		}
 	}
-	public boolean withdraw(Scanner console) throws NoMoneyException
+	public boolean withdraw(Scanner console) throws BadMoneyException
 	{
 		System.out.println("Enter the amount you want to withdraw");
 		try{
 			double amount = console.nextDouble();
-			if(money - amount < 0)
-				throw new NoMoneyException("Not enough money");
+			if(amount < 0)
+			{
+				System.out.println("Cannot withdraw a negative amount");
+				return false;
+			}
+			else
+				if(money - amount < 0)
+					throw new BadMoneyException("Not enough money");
 			
 			money -= amount;
+			System.out.println("Withdraw success");
 			return true;
 		} catch(InputMismatchException e)
 		{

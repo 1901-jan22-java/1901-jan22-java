@@ -11,7 +11,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-import com.kevin.project0.exception.NoMoneyException;
+import com.kevin.project0.exception.BadMoneyException;
 import com.kevin.project0.util.ConnectionFactory;
 
 
@@ -97,7 +97,7 @@ public class Bank {
 				String query = "INSERT INTO bankuser (username, password, first_name,"
 													+ "last_name)"
 								+ "VALUES (?,?,?,?)";
-						
+					
 				insertUser = conn.prepareStatement(query);
 				insertUser.setString(1, username);
 				insertUser.setString(2, password);
@@ -146,6 +146,11 @@ public class Bank {
 			String owner = loggedInUser.getUsername();
 			System.out.println("Enter the amount of money you're adding to the account");
 			double money = Double.parseDouble(console.nextLine());
+			if(money < 0)
+			{
+				System.out.println("Cannot have a negative balance.");
+				return null;
+			}
 			System.out.println("Enter C if Checking, and S if Savings");
 			String type = console.nextLine();
 			switch(type.toUpperCase())
@@ -219,7 +224,7 @@ public class Bank {
 			{
 				try {
 					getAccount(input).withdraw(console);
-				} catch (NoMoneyException e1) {
+				} catch (BadMoneyException e1) {
 					System.out.println("Not enough money");
 					return false;
 				}
@@ -233,7 +238,6 @@ public class Bank {
 					cs.setDouble(2, getAccount(input).getMoney());
 					cs.executeUpdate();
 					conn.commit();
-					System.out.println("Withdraw success");
 					cs.close();
 					conn.setAutoCommit(true);
 					return true;
@@ -282,7 +286,6 @@ public class Bank {
 						cs.setDouble(2, getAccount(input).getMoney());
 						cs.executeUpdate();
 						conn.commit();
-						System.out.println("Deposit success");
 						cs.close();
 						conn.setAutoCommit(true);
 						return true;

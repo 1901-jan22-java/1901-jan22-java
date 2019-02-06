@@ -72,7 +72,7 @@ public class App
     								+ "A = Make New Account\n"
     								+ "D = Deposit\n"
     								+ "W = Withdraw\n"
-    								+ "Q = Quit\n");
+    								+ "Q = Quit");
     			input = console.nextLine().toUpperCase();
 
     			switch(input)
