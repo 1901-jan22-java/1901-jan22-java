@@ -64,7 +64,7 @@ public class App
     			System.out.println("No accounts found. Please create one");
     			myBank.addAccount(console, loggedInUser);
     		}
-    			
+
     		else
     		{
     			System.out.println("\nChoose what you want to do\n"
@@ -74,7 +74,7 @@ public class App
     								+ "W = Withdraw\n"
     								+ "Q = Quit\n");
     			input = console.nextLine().toUpperCase();
-        	
+
     			switch(input)
     			{
     				case "Q":

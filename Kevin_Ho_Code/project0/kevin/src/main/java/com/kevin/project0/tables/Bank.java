@@ -181,7 +181,7 @@ public class Bank {
 				ResultSet rs = insertUser.executeQuery();
 				if(rs.next())
 					accountnumber = rs.getInt(1);
-
+				
 				insertUser.close();
 				conn.setAutoCommit(true);
 				BankAccount tmp = new BankAccount(accountnumber, money, type, owner);
