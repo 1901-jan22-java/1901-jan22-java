@@ -16,7 +16,7 @@ public class ConnectionFactory {
 	private static ConnectionFactory cf = null;
 	
 	private ConnectionFactory() {
-		logger.info("Instantiated Connection Factory");
+		logger.debug("Instantiated Connection Factory");
 	}
 	
 	public static synchronized ConnectionFactory getInstance() {
@@ -24,7 +24,7 @@ public class ConnectionFactory {
 			cf = new ConnectionFactory();
 			
 		}
-		logger.info("Returning cf instance " + cf.getClass());
+		logger.debug("Returning cf instance " + cf.getClass());
 		return cf;
 	}
 	

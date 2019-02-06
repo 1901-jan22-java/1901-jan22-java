@@ -1,12 +1,22 @@
 package com.revature.client;
 
+import org.apache.log4j.Logger;
+
+import com.revature.app.App;
+
 public class Client {
+	private int clientId;
 	private String firstname;
 	private String lastname;
 	private String username;
 	private int actualPassword; 
 	
-	public Client(String firstname, String lastname, String username, String password) {
+	final static Logger logger = Logger.getLogger(Client.class);
+	
+	public Client() {};
+	
+	public Client(int clientId, String firstname, String lastname, String username, String password) {
+		this.clientId = clientId;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.username = username;
@@ -14,6 +24,7 @@ public class Client {
 		
 	}
 	
+	//Passwords are hashed simply. This allows at least some security though not ideal since it is general java hashCode.
 	private static int generatePassword(String pass) {
 		return pass.hashCode();
 		
@@ -35,19 +46,43 @@ public class Client {
 		this.lastname = lastname;
 	}
 	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	
+	public int getClientId() {
+		return clientId;
+	}
+
+	public void setClientId(int clientId) {
+		this.clientId = clientId;
+	}
+
+	public int getPassword() {
+		return actualPassword;
+	}
+
+	public void setPassword(int actualPassword) {
+		this.actualPassword = actualPassword;
+	}
+	
+	public void setPassword(String pass) {
+		this.actualPassword = generatePassword(pass);
+	}
 	
 	public String toString() {
 		return firstname + " " + lastname + ", " + username;
 	}
 	
-	public static boolean checkPass(String pass, String test) {
-		if((generatePassword(pass) + "").equals(test)) {
+	//Check if passwords are identical. Generate a password for any String input. 
+	public static boolean checkPass(String pass, int test) {
+		if(generatePassword(pass) == test) {
 			return true;
 		} 
 		return false;
-	}
-	
-	public String getName() {
-		return this.username;
 	}
 }

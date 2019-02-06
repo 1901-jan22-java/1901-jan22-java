@@ -124,7 +124,7 @@ BEGIN
 END;
 /
 
-SELECT * FROM table(bornAfter1968());
+SELECT * FROM TABLE(bornAfter1968());
 
 
 --Part 4.0: Stored Procedures--
