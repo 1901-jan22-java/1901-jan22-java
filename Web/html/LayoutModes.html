@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <title>Layout Modes</title>
+  </head>
+  <body>
+    <h1>Layout Modes</h1>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                    <h2>Normal Flow</h2>
+                    <p>Normal flow is how the browser lays out HTML pages by default when you do nothing to control page layout.</p>
+                    <p>By default, the browser will display this code as follows:</p>
+                    <div class="normalflow">
+                            <p>I love my cat.</p>
+                    
+                            <ul>
+                              <li>Buy cat food</li>
+                              <li>Exercise</li>
+                              <li>Cheer up friend</li>
+                            </ul>
+                                
+                            <p>The end!</p>
+                    </div>
+                    <p>When you use CSS to create a layout, what you are doing is moving the elements away from this normal flow, 
+                        however for many of the elements on your page this normal flow will create exactly the layout you need.
+                    </p>
+              </div>
+              <div class="carousel-item">
+                    <h2>The Display Property</h2>
+                    <p>The display property — Standard values such as block, inline or inline-block can change how elements behave in normal flow</p>
+                    <div>
+                            <span class="d-block bg-primary">Block</span>
+                    </div>
+                    <br>
+                    <br>
+                    <div>
+                            <div class="d-inline bg-success">Inline</div>
+                            <div class="d-inline bg-success">Inline</div>
+                    </div>
+                    <br>
+                    <br>
+                    <div class="d-inline-block bg-warning">
+                        <h3>inline-block</h3>
+                            Boot that strap!
+                    </div>
+                    <div class="d-inline-block bg-warning">
+                    <h3>inline-block</h3>
+                    Strap that boot!
+                    </div>
+              </div>
+              <div class="carousel-item">
+                    <h2>Flexbox</h2>
+                    <div class=".d-flex ">
+                        <div>
+                            <p>The main idea behind the flex layout is to give the container the ability to alter its items' width/height (and order) to best fill the available space. 
+                            A flex container expands items to fill available free space, or shrinks them to prevent overflow.</p>  
+                        </div>
+                        <div>
+                            <p>Most importantly, the flexbox layout is direction-agnostic as opposed to the regular layouts (block which is vertically-based and inline which is horizontally-based).</p>
+                        </div>
+                        <div>
+                            <p>Flexbox layout is most appropriate to the components of an application, and small-scale layouts, while the Grid layout is intended for larger scale layouts.</p>
+                        </div>
+                    </div>
+              </div>
+              <div class="carousel-item">
+                    <h2>Grid</h2>
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  </body>
+</html>

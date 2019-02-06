@@ -1,0 +1,23 @@
+ul{
+    color: rebeccapurple !important;
+}
+li{
+    color: blue;
+}
+#second {
+    color: yellow;
+}
+
+/*
+e1 + e2 
+adjacent sibling selector, selects all of element e2 that immediatly follow the element type
+*/
+
+input[type=checkbox]:checked + label{
+    background-color: green;
+    font-style: italic;
+}
+
+p{
+    color: royalblue;
+}

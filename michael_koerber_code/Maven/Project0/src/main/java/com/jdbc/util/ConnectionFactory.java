@@ -34,7 +34,7 @@ public class ConnectionFactory {
 		if(cf == null){
 			cf = new ConnectionFactory();
 		}
-		logger.info("Returning CF Instance " + cf.getClass());
+//		logger.info("Returning CF Instance " + cf.getClass());
 		return cf;
 	}
 	

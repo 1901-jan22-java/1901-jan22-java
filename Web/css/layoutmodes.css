@@ -1,0 +1,17 @@
+block-ex {
+    display: block;
+    padding: 10px;
+}
+
+inline-ex {
+    display: inline;
+    padding: 10px;
+}
+
+inline-block-ex ul {
+    display: inline-block;
+    padding: 10px;
+    color: red;
+}
+
+
