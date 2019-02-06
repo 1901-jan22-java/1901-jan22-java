@@ -3,6 +3,7 @@ package com.project.main;
 import java.util.Scanner;
 
 import com.project.managers.LoginManager;
+import com.project.managers.Manager;
 import com.project.managers.SignupManager;
 
 public class App {
@@ -15,17 +16,17 @@ public class App {
 	}
 	
 	public static void main(String[] args) {
-		Scanner scan = new Scanner(System.in);
+		Scanner scan = Manager.scan;
 		printWelcome();
 		String cmd = scan.nextLine().toLowerCase();
 		while(!cmd.equals("quit")) {
 			switch(cmd) {
 				case "login":
-					new LoginManager().takeover(scan);
+					new LoginManager().takeover();
 					cmd = "welcome_back";
 					continue;
 				case "signup":
-					new SignupManager().takeover(scan);
+					new SignupManager().takeover();
 					cmd = "welcome_back";
 					continue;
 				case "welcome_back":

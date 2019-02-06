@@ -3,16 +3,15 @@ package com.project.managers;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 import org.apache.log4j.Logger;
 
-public class SignupManager implements Manager { 
+public class SignupManager extends Manager { 
 	
 	final static Logger logger = Logger.getLogger(SignupManager.class);
 	
 	@Override
-	public void takeover(Scanner scan) {
+	public void takeover() {
 		List<String> account_options = new ArrayList<>(Arrays.asList(
 			new String[] {
 					"saving",
@@ -83,14 +82,11 @@ public class SignupManager implements Manager {
 		
 		System.out.println("Please hold as your account is currently being created...");
 		logger.info("Data Array: " + data[0] + " : " + data[1] + " : " + data[2] + 
-				" account corresponds to int value " + account_options.indexOf(data[2]));
-		Manager.dao.createAccount(data[0], data[1], account_options.indexOf(data[2]));
-		System.out.println("Account creation successful!");
+				" account corresponds to int value " + account_options.indexOf(data[2].toLowerCase()));
+		boolean success = Manager.dao.createAccount(data[0], data[1], account_options.indexOf(data[2].toLowerCase()));
+		if(success) System.out.println("Account creation successful!");
+		else System.out.println("Account creation failed!");
 		return;
 	}
 
-	public static void main(String[] args) {
-		new SignupManager().takeover(new Scanner(System.in));
-	}
-	
 }
