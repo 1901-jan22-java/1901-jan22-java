@@ -1,31 +1,45 @@
 package com.revature.bank.app;
 
+import java.util.ArrayList;
+
+import org.apache.log4j.Logger;
+
 import com.revature.bank.dao.AccountRepository;
 import com.revature.bank.dao.AccountTypeRepository;
+import com.revature.bank.dao.UserRepository;
+import com.revature.bank.exceptions.NoSuchBankUserException;
 import com.revature.bank.pojos.Account;
 import com.revature.bank.pojos.AccountType;
 import com.revature.bank.pojos.User;
 
-import java.util.ArrayList;
-
 public class BankingInterface {
 
+	private static final Logger logger = Logger.getLogger(BankingInterface.class);
+	
     private User user;
     private ArrayList<Account> accounts;
 
-    public BankingInterface(User user) {
+    public BankingInterface(User user) throws NoSuchBankUserException {
         signIn(user);
         setUp();
     }
-
-    public boolean signIn(User user){
-
-        return true;
+    
+    public boolean signIn(User user) throws NoSuchBankUserException {
+        return signIn(user.getUsername(), user.getPassword());
     }
 
-    public boolean signIn(String username, String password){
-
-        return true;
+    public boolean signIn(String username, String password) throws
+    	NoSuchBankUserException
+    {
+    	try {
+    		user = UserRepository.getUser(username);
+    		if(user.getPassword().equals(password))
+    			return true;
+    	} catch (NoSuchBankUserException e) {
+    		logger.error("NoSuchBankUserException from signing in!", e);
+    		throw new NoSuchBankUserException();
+    	}
+    	return false;
     }
 
     public boolean setUp(){

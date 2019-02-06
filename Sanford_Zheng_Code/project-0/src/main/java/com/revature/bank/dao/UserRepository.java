@@ -13,10 +13,10 @@ import java.sql.SQLException;
 
 public class UserRepository {
 
-	private static final Logger logger = Logger.getLogger(AccountRepository.class);
+	private static final Logger logger = Logger.getLogger(UserRepository.class);
 
 	/* JDBC Queries */
-    public static User getByID(Integer id) throws NoSuchBankUserException {
+    public static User getUser(Integer id) throws NoSuchBankUserException {
 		User user = null;
     	try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
     		String sql = "select * from bank_users where id = ?";
@@ -36,7 +36,7 @@ public class UserRepository {
     	return user;
 	}
 
-	public static User getByUsername(String username) throws NoSuchBankUserException {
+	public static User getUser(String username) throws NoSuchBankUserException {
 		User user = null;
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			String sql = "select * from bank_users where username = ?";

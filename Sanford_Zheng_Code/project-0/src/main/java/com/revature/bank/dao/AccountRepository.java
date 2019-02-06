@@ -32,6 +32,7 @@ public class AccountRepository {
 			int updates = ps.executeUpdate();
 			if(updates < 1)
 				throw new UnableToGenerateKeyException();
+			conn.commit();
 		} catch (SQLException e) {
 		    logger.error("SQLException has occurred in !", e);
 		}
@@ -89,5 +90,13 @@ public class AccountRepository {
 		}
 		return as;
 	}
+	
+//	public static boolean addToBalance(Double amount) {
+//		
+//	}
+//	
+//	private static boolean changeBalance() {
+//		
+//	}
 	
 }

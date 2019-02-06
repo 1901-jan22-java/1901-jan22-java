@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 
 public class BankAppHelper {
 
-    private BigInteger random;
 
     public BankAppHelper(){
     }
@@ -45,8 +44,11 @@ public class BankAppHelper {
 
     // USER CREATED
     public static final String CREATE_USER_SUCCESS =
-            "A user account has been created for you...\n\n" +
+            "A user account has been created for you...\n" +
                     "\tWelcome to the Bank App!";
+    // USER FAILED TO CREATE
+    public static final String CREATE_USER_FAILURE =
+            "Your user account failed to create! :(";
 
     /* LOGIN MENU */
     public static final String LOGIN_USERNAME_PROMPT = "Username: ";
@@ -54,6 +56,12 @@ public class BankAppHelper {
     public static final String LOGIN_PASSWORD_PROMPT = "Password: ";
     public static final String PASSWORD_INVALID = "Invalid password!";
 
+    public static final String LOGIN_USER_SUCCESS = 
+    		"Session has been created for user!\n"
+    				+ "\tWelcome to the Bank App Proper!";
+    public static final String LOGIN_USER_FAILURE =
+            "Either or both your username or password was incorrect. Could not log you in. :(";
+    
     /* SESSION MENU */
     private static final String SESSION_MENU =
             "Session Options:\n" +
@@ -105,6 +113,7 @@ public class BankAppHelper {
         return pwd.matches(PASSWORD_REGEX);
     }
     /*
+    private BigInteger random;
     public BankAppHelper(BigInteger heyWhatAreYouDoing){
         Integer randsrc;
         do {

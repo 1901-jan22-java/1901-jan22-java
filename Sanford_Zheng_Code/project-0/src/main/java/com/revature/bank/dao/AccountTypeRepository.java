@@ -1,27 +1,32 @@
 package com.revature.bank.dao;
 
-import com.jdbc.util.ConnectionFactory;
-import com.revature.bank.exceptions.DuplicateAccountTypeException;
-import com.revature.bank.exceptions.NoSQLUpdatesException;
-import com.revature.bank.pojos.AccountType;
-import org.apache.log4j.Logger;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import org.apache.log4j.Logger;
+
+import com.jdbc.util.ConnectionFactory;
+import com.revature.bank.exceptions.DuplicateAccountTypeException;
+import com.revature.bank.exceptions.NoSQLUpdatesException;
+import com.revature.bank.pojos.AccountType;
+
+import zheng.sanford.utils.MyUtils;
+
 public class AccountTypeRepository {
 
-	protected static final Logger logger = Logger.getLogger(AccountRepository.class);
+	protected static final Logger logger = Logger.getLogger(AccountTypeRepository.class);
 
 	// Need to add trigger for adding account id
 	public static void addAccountType(String acc_type) throws
 			DuplicateAccountTypeException,
 			NoSQLUpdatesException
 	{
-		if(getAccountTypes().contains(acc_type)) throw new DuplicateAccountTypeException();
+		MyUtils.format(acc_type);
+		for(AccountType a: getAccountTypes())
+			if(a.getType().equalsIgnoreCase(acc_type)) throw new DuplicateAccountTypeException();
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			String sql = "insert into bank_account_types(account_type) values(?)";
 
@@ -31,11 +36,13 @@ public class AccountTypeRepository {
 			if( ps.executeUpdate() < 1 ) {
 				throw new NoSQLUpdatesException();
 			}
+			
+			conn.commit();
 		} catch ( SQLException e ) {
 			logger.error("SQLException occurred when adding account type " + acc_type +"!", e);
 		}
 	}
-
+	
 	public static String getAccountTypeByID(int atid) {
 		String at = null;
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
