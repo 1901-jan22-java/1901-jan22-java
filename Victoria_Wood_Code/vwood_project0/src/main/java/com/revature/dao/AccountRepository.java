@@ -38,25 +38,25 @@ public class AccountRepository {
 	}
 	
 	public static User createNewAccount(String fn, String ln, String username, String pwd) {
-		User c = null;
+		User u = null;
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 			conn.setAutoCommit(false);
 			String sql = "insert into Users(username, pwd, firstname, lastname) values( ?, ?, ?, ?)";
-			String[] keys = {"uid"};
+			String[] keys = {"userid"};
 			PreparedStatement ps = conn.prepareStatement(sql, keys);
 			ps.setString(1, username); ps.setString(2, pwd); ps.setString(3, fn); ps.setString(4, ln);
 			int numRows = ps.executeUpdate();
 			if (numRows > 0) {
 				ResultSet pk = ps.getGeneratedKeys();
 				pk.next();
-				int c_id = pk.getInt(1);
-				c = new User(c_id, fn, ln);
+				int u_id = pk.getInt(1);
+				u = new User(u_id, fn, ln);
 				conn.commit();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return c;
+		return u;
 	}
 	
 	
