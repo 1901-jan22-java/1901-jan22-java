@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./flex.css">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Layout Modes</a>
+        <button class="navbar-toggler" type="button" 
+            data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#normalflow">Normal Flow <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#FlexBox">Flex Box </a>
+                </li>
+                <li class="nav-item active">
+                        <a class="nav-link" href="#Grid">Grid </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <h1>Layout Modes</h1>
+    <h3>A layout Mode is an Algorithm that determines the position in sizes of the boxes.</h3>
+    <h3>There are several Layout Modes</h3>
+    <br>
+    <br>
+    <div id="normalflow" class="e1">
+        <h3>Now let's look at the Normal flow</h3>
+        <p>Normal flow is how the browser lays out HTML pages by default when you do nothing to control page layout.</p>
+        <h3>By default, the browser will display this code as follows:</h3>
+        <div class="box">
+            <p>One <span>November</span> night in the year 1782, so the story runs, two brothers sat over their winter fire in the little French town of Annonay, watching the grey smoke-wreaths from the hearth curl up the wide chimney. Their names were Stephen and Joseph Montgolfier, they were papermakers by trade, and were noted as possessing thoughtful minds and a deep interest in all scientific knowledge and new discovery.</p>
+            <p>Before that night—a memorable night, as it was to prove—hundreds of millions of people had watched the rising smoke-wreaths of their fires without drawing any special inspiration from the fact.”</p>
+        </div>
+    
+        <p>I love my cat.</p>
+        
+        <ul>
+            <li>Buy cat food</li>
+            <li>Exercise</li>
+            <li>Cheer up friend</li>
+        </ul>
+            
+        <p>The end!</p>
+    </div>
+    <br>
+    <br>
+    <br>
+
+
+    <div id="FlexBox" class="e2">
+        <h3>Now let's look at the Flex Box</h3>
+        <p>The main idea behind the flex layout is to give the container the ability to alter <br>
+            its items' width/height (and order) to best fill the available space <br>
+            (mostly to accommodate to all kind of display devices and screen sizes). <br>
+            A flex container expands items to fill available free space, or shrinks them to prevent overflow.</p>
+        <h3>Here is what it looks like:</h3>
+
+        <div class="flexbox">
+            <div>One</div>
+            <div>Two</div>
+            <div>Three
+                <br>has
+                <br>extra
+                <br>text
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+
+
+
+
+
+
+    <div id="Grid" class="e3">
+        <div class="wrapper">
+                <div class="one">One</div>
+                <div class="two">Two</div>
+                <div class="three">Three</div>
+                <div class="four">Four</div>
+                <div class="five">Five</div>
+                <div class="six">Six</div>
+        </div>
+    </div>
+
+
+
+
+
+    <h3>Joshua Vanderzee, Malik White, Michael Koerber</h3>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+</body>
+</html>

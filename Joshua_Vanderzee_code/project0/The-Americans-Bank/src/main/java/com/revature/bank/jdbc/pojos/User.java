@@ -1,6 +1,6 @@
 package com.revature.bank.jdbc.pojos;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class User {
 	
@@ -11,8 +11,8 @@ public class User {
 	public User(long UserId, String UserName, String Password, String FirstName, String LastName,
 			String SecurityQuestion1, String SecurityAnswer1, String SecurityQuestion2, String SecurityAnswer2,
 			String SecurityQuestion3, String SecurityAnswer3, String Addressline1, String Addressline2, String City,
-			String States, String Country, int PostalCode, int HomePhone, int CellPhone, int Fax, String Email,
-			int SSN, Date BirthDate, String Maritalstatus) {
+			String States, String Country, long PostalCode, long HomePhone, long CellPhone, long Fax, String Email,
+			long SSN, Date BirthDate, String Maritalstatus) {
 		this.UserId = UserId;
 		this.UserName = UserName; 
 		this.Password = Password;
@@ -135,28 +135,28 @@ public class User {
 	public void setCountry(String country) {
 		Country = country;
 	}
-	public int getPostalCode() {
+	public long getPostalCode() {
 		return PostalCode;
 	}
-	public void setPostalCode(int postalCode) {
+	public void setPostalCode(long postalCode) {
 		PostalCode = postalCode;
 	}
-	public int getHomePhone() {
+	public long getHomePhone() {
 		return HomePhone;
 	}
-	public void setHomePhone(int homePhone) {
+	public void setHomePhone(long homePhone) {
 		HomePhone = homePhone;
 	}
-	public int getCellPhone() {
+	public long getCellPhone() {
 		return CellPhone;
 	}
-	public void setCellPhone(int cellPhone) {
+	public void setCellPhone(long cellPhone) {
 		CellPhone = cellPhone;
 	}
-	public int getFax() {
+	public long getFax() {
 		return Fax;
 	}
-	public void setFax(int fax) {
+	public void setFax(long fax) {
 		Fax = fax;
 	}
 	public String getEmail() {
@@ -165,10 +165,10 @@ public class User {
 	public void setEmail(String email) {
 		Email = email;
 	}
-	public int getSSN() {
+	public long getSSN() {
 		return SSN;
 	}
-	public void setSSN(int sSN) {
+	public void setSSN(long sSN) {
 		SSN = sSN;
 	}
 	public Date getBirthDate() {
@@ -200,12 +200,12 @@ public class User {
 	private String City;
 	private String States;
 	private String Country;
-	private int PostalCode;
-	private int HomePhone;
-	private int CellPhone;
-	private int Fax;
+	private long PostalCode;
+	private long HomePhone;
+	private long CellPhone;
+	private long Fax;
 	private String Email;
-	private int SSN;
+	private long SSN;
 	private Date BirthDate;
 	private String Maritalstatus; 
 }

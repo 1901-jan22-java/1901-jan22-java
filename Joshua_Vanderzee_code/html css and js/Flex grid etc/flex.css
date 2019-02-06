@@ -1,0 +1,45 @@
+.flexbox {
+    display: flex;
+    justify-content: space-between;
+  }
+
+span {
+    background-color: lightblue;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+  }
+  .one {
+    grid-column: 1 / 3;
+    grid-row: 1;
+    background-color: coral
+  }
+  .two { 
+    grid-column: 2 / 4;
+    grid-row: 1 / 3;
+    background-color: #65256956
+  }
+  .three {
+    grid-column: 1;
+    grid-row: 2 / 5;
+    background-color: royalblue
+  }
+  .four {
+    grid-column: 3;
+    grid-row: 3;
+    background-color: teal
+  }
+  .five {
+    grid-column: 2;
+    grid-row: 4;
+    background-color: slateblue
+  }
+  .six {
+    grid-column: 3;
+    grid-row: 4;
+    background-color: olive
+  }

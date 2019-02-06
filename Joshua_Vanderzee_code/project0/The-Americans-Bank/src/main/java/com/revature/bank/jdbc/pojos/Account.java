@@ -1,17 +1,17 @@
 package com.revature.bank.jdbc.pojos;
 
 public class Account {
-    private String AccountId;
+    private long AccountId;
     private String AccountType;
-    private String AccountNumber;
-    private String RoutingNumber;
-    private String Balance;
+    private long AccountNumber;
+    private long RoutingNumber;
+    private double Balance;
     
     public Account() {
     	super();
     }
     
-	public Account(String accountId, String accountType, String accountNumber, String routingNumber, String balance) {
+	public Account(long accountId, String accountType, long accountNumber, long routingNumber, double balance) {
 		super();
 		AccountId = accountId;
 		AccountType = accountType;
@@ -20,10 +20,10 @@ public class Account {
 		Balance = balance;
 	}
 	
-	public String getAccountId() {
+	public long getAccountId() {
 		return AccountId;
 	}
-	public void setAccountId(String accountId) {
+	public void setAccountId(long accountId) {
 		AccountId = accountId;
 	}
 	public String getAccountType() {
@@ -32,23 +32,28 @@ public class Account {
 	public void setAccountType(String accountType) {
 		AccountType = accountType;
 	}
-	public String getAccountNumber() {
+	public long getAccountNumber() {
 		return AccountNumber;
 	}
-	public void setAccountNumber(String accountNumber) {
+	public void setAccountNumber(long accountNumber) {
 		AccountNumber = accountNumber;
 	}
-	public String getRoutingNumber() {
+	public long getRoutingNumber() {
 		return RoutingNumber;
 	}
-	public void setRoutingNumber(String routingNumber) {
+	public void setRoutingNumber(long routingNumber) {
 		RoutingNumber = routingNumber;
 	}
-	public String getBalance() {
+	public double getBalance() {
 		return Balance;
 	}
-	public void setBalance(String balance) {
+	public void setBalance(double balance) {
 		Balance = balance;
+	}
+
+	@Override
+	public String toString() {
+		return "" + AccountId + " " + AccountType + " " + AccountNumber + " " + RoutingNumber + " " + Balance;
 	}
 
 }

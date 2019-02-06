@@ -1,0 +1,11 @@
+p {
+    font-variant-caps: small-caps;
+}
+
+#third {
+    color: sandybrown;
+}
+
+.class {
+    border: 16px dotted #15166569
+}

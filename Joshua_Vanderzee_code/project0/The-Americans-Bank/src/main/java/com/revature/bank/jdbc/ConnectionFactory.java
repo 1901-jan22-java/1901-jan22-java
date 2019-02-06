@@ -25,11 +25,11 @@ public class ConnectionFactory {
 		if (cf == null)
 		{
 			cf = new ConnectionFactory();
+			logger.info("Returning cf " + cf.getClass());			
 			BackgroundNotifier ir = new BackgroundNotifier();
 			Thread backgroundNotifierThread = new Thread(ir);
 			backgroundNotifierThread.start();
 		}
-		logger.info("Returning cf " + cf.getClass());
 		return cf;
 	}
 	
