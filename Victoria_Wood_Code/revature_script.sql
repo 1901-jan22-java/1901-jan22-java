@@ -11,15 +11,19 @@ CREATE TABLE Employees
 
 );
 
+
+drop table associate;
+
 CREATE TABLE Associate
 (
-  AssociateId NUMBER NOT NULL,
-  EmployeeId NUMBER NOT NULL,
-  BatchId NUMBER NOT NULL,
-  OverallScore NUMBER NOT NULL,
-  CONSTRAINT PK_Associate PRIMARY KEY (AssociateId)
-
-
+  AssociateId NUMBER PRIMARY KEY,
+  FirstName VARCHAR2(20) NOT NULL,
+  LastName VARCHAR2(20) NOT NULL,
+  Email VARCHAR2(60) UNIQUE NOT NULL,
+  Password VARCHAR2(20) NOT NULL,
+  Grade NUMBER NOT NULL,
+  AdminUser Number constraint bool check(adminuser = 0 or adminuser = 1)
+  
 );
 
 CREATE TABLE Batches
@@ -58,6 +62,8 @@ INSERT INTO Employees (EMPLOYEEID, FIRSTNAME, LASTNAME, EMAIL, ROLEID) VALUES (1
 INSERT INTO Employees (EMPLOYEEID, FIRSTNAME, LASTNAME, EMAIL, ROLEID) VALUES (2, 'John', 'Smith', 'jsmith@revature.com', 1);
 INSERT INTO Employees (EMPLOYEEID, FIRSTNAME, LASTNAME, EMAIL, ROLEID) VALUES (3, 'Alleyha', 'Dannett', 'adannett@revature.com',3);
 
+INSERT INTO Employees (FIRSTNAME, LASTNAME, EMAIL, ROLEID) VALUES ('Genesis', 'Bonds', 'g.bonds@revature.com',2);
+
 INSERT INTO Role (ROLEID, NAME) VALUES (1, 'Trainer');
 INSERT INTO Role (ROLEID, NAME) VALUES (2, 'Associate');
 INSERT INTO Role (ROLEID, NAME) VALUES (3, 'HR');
@@ -69,10 +75,92 @@ from Employees
 join Role on employees.roleid = role.roleid;
 
 
+------TRIGGERS, SEQUENCES
+/* a sequence in a DB is a set of integers that are generated and supported by the 
+DB system itself to support the production of unique values on demand
+
+A user defined schema bound object that generates a sequence of numeric values
+
+we will use these more often than not to autogenerate a PK value
+*/
+
+CREATE SEQUENCE EMP_SEQ;
+
+CREATE SEQUENCE ASSOCIATE_SEQ;
+CREATE SEQUENCE BATCH_SEQ;
+CREATE SEQUENCE ROLE_SEQ;
 
 
 
+/* TRIGGERS
+A trigger is a special type of stored procedure that happens automatically
+when an event occurs in the database
+*/
 
+CREATE OR REPLACE TRIGGER Emp_trig --declare and name trigger
+BEFORE INSERT ON Employees --specify when it will execute
+FOR EACH ROW --necessary to change values in rows
+BEGIN -- start what we want to happen
+  select emp_seq.nextval into : new.employeeid from dual;
+END; --end of what we want to happen
+/
+
+CREATE OR REPLACE TRIGGER Batch_trig
+BEFORE INSERT ON Batches 
+FOR EACH ROW
+BEGIN
+  select batch_seq.nextval into : new.batchid from dual;
+END;
+/
+
+CREATE OR REPLACE TRIGGER Assoc_trig
+BEFORE INSERT ON Associate
+FOR EACH ROW
+BEGIN
+  select associate_seq.nextval into : new.associateid from dual;
+END;
+/
+
+
+
+CREATE OR REPLACE TRIGGER role_trig
+BEFORE INSERT ON Role
+FOR EACH ROW
+BEGIN
+  select role_seq.nextval into : new.roleid from dual;
+END;
+/
+
+CREATE OR REPLACE PROCEDURE getAll(associates OUT SYS_REFCURSOR)
+AS
+BEGIN
+  OPEN associates FOR SELECT firstname, lastname, email, grade FROM associate;
+END;
+/
+
+
+
+--DUAL
+/*
+dual is a special, one-row, one-column table present by default in Oracle
+and some other database installations
+it exists for various reasons including being able to select values not associated with a table
+*/
+
+select*from dual;
+select emp_seq.currval from dual;
+select SYSDATE from dual;
+
+select*from Role;
+
+select role_seq.nextval from dual;
+
+update Role
+set name = 'Recruiter'
+where roleid = 5;
+
+-- REMEMBER TO COMMIT:
+commit;
 
 
 
