@@ -81,6 +81,7 @@ public class BankApp {
 				try {
 					UserRepository.createUser(username, password);
 					System.out.println(BankAppHelper.CREATE_USER_SUCCESS);
+					System.out.println(BankAppHelper.CREATE_USER_EXIT);
 					return true;
 				} catch(UnableToGenerateKeyException e) {
 					logger.error("UnableToGenerateKeyException occurred in creating user!", e);
@@ -88,6 +89,7 @@ public class BankApp {
 				}
 			}
 		}
+		System.out.println(BankAppHelper.CREATE_USER_EXIT);
 		return false;
 	}
 
@@ -95,7 +97,6 @@ public class BankApp {
 		boolean keepTrying = true;
 		boolean validUser = false;
 		boolean validPass = false;
-		boolean userFound = false;
 		String username = "";
 		String password = "";
 		while(keepTrying){
@@ -120,6 +121,7 @@ public class BankApp {
 				try {
 					if(bi.signIn(username, password)) {
 						System.out.println(BankAppHelper.LOGIN_USER_SUCCESS);
+						System.out.println(BankAppHelper.LOGIN_USER_EXIT);
 						return true;
 					}
 				} catch(NoSuchBankUserException e) {
@@ -128,6 +130,7 @@ public class BankApp {
 				}
 			}
 		}
+		System.out.println(BankAppHelper.LOGIN_USER_EXIT);
 		return false;
 	}
 
@@ -156,7 +159,21 @@ public class BankApp {
 	}
 
 	private void editAccount(int select) {
-		
+		boolean exit = false;
+		while(!exit){
+			System.out.println(BankAppHelper.sessionMenu(bi));
+			int selection = s.nextInt();
+			s.nextLine();
+			switch(selection) {
+			case(1):
+				break;
+			case(2):
+			default:
+				if(selection > 2 && selection < accounts.size()+3) {
+					editAccount(selection - 3);
+				} else exit = true;
+			}
+		}
 	}
 
 	private void close(){

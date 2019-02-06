@@ -12,8 +12,18 @@ import com.revature.bank.pojos.Account;
 import com.revature.bank.pojos.AccountType;
 import com.revature.bank.pojos.User;
 
+import zheng.sanford.utils.MyUtils;
+
 public class BankingInterface {
 
+    /**
+     * TO-DO:
+     *  How to handle this? Not sure... maybe not at all...
+     *  just use AccountTypeRepository every time and deprecate
+     *  this instead? Well I'm using it globally should be hashmap but don't got time...
+     */
+    public static final ArrayList<AccountType> ACCOUNT_TYPES = AccountTypeRepository.getAccountTypes();
+    
 	private static final Logger logger = Logger.getLogger(BankingInterface.class);
 	
     private User user;
@@ -42,8 +52,10 @@ public class BankingInterface {
     	return false;
     }
 
-    public boolean setUp(){
-        if(user == null || user.getUsername() == null || user.getUserID() == null) return false;
+    public boolean setUp() {
+    	// if used for control flow
+        if(user == null || MyUtils.isValidEmail(user.getUsername()) || user.getUserID() == null)
+        	return false;
         this.accounts = AccountRepository.getAccounts(user.getUserID());
         return true;
     }
@@ -66,13 +78,6 @@ public class BankingInterface {
         return dc;
     }
 
-    /**
-     * TO-DO:
-     *  How to handle this? Not sure... maybe not at all...
-     *  just use AccountTypeRepository every time and deprecate
-     *  this instead?
-     */
-    private static final ArrayList<AccountType> accountTypes = AccountTypeRepository.getAccountTypes();
 
     /**
      * Probably should be deprecate... we don't want users to add their own accounts list

@@ -1,12 +1,12 @@
 package com.revature.bank.main;
 
-import com.revature.bank.app.BankingInterface;
-import com.revature.bank.pojos.Account;
-
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import com.revature.bank.app.BankingInterface;
+import com.revature.bank.pojos.Account;
+import com.revature.bank.pojos.AccountType;
 
 public class BankAppHelper {
 
@@ -48,7 +48,12 @@ public class BankAppHelper {
                     "\tWelcome to the Bank App!";
     // USER FAILED TO CREATE
     public static final String CREATE_USER_FAILURE =
-            "Your user account failed to create! :(";
+            "Your user account failed to create! :(\n"
+            		+ "\tPlease try again...";
+    
+    // CREATE USER EXITING
+    public static final String CREATE_USER_EXIT =
+    		"Exiting create new user...";
 
     /* LOGIN MENU */
     public static final String LOGIN_USERNAME_PROMPT = "Username: ";
@@ -60,7 +65,10 @@ public class BankAppHelper {
     		"Session has been created for user!\n"
     				+ "\tWelcome to the Bank App Proper!";
     public static final String LOGIN_USER_FAILURE =
-            "Either or both your username or password was incorrect. Could not log you in. :(";
+            "Either or both your username or password was incorrect.\n"
+            + "\tCould not log you in. :(";
+    public static final String LOGIN_USER_EXIT = "Exiting login...!";
+    
     
     /* SESSION MENU */
     private static final String SESSION_MENU =
@@ -68,7 +76,6 @@ public class BankAppHelper {
                     "\t(1) Create Account\n" +
                     "\t(2) Logout\n" +
             "Accounts:\n";
-
     public static String sessionMenu(BankingInterface bi){
         ArrayList<Account> as = bi.getAccounts();
 
@@ -82,6 +89,31 @@ public class BankAppHelper {
 
         return sb.toString();
     }
+    
+    private static final String SESSION_ACCOUNT_MENU = 
+    		"Options:\n"
+    				+ "\t(1) Withdraw\n"
+    				+ "\t(2) Deposit";
+    
+    public static String sessionAccountPrompt(BankingInterface bi, int select) {
+    	Account acc = bi.getAccounts().get(select);
+    	StringBuilder sb = new StringBuilder("Account Details");
+    	String accType = ""+acc.getAccountID();
+    	for(AccountType at: BankingInterface.ACCOUNT_TYPES) {
+    		accType = at.getType();
+    	}
+    		
+    	sb.append("\tAccount ID: "+acc.getAccountID());
+    	sb.append("\tUser: "+bi.getUser().getUsername());
+    	sb.append("\tAccount Type: " + accType);
+    	sb.append("\tBalance: $"+acc.getBalance());
+    	sb.append(SESSION_ACCOUNT_MENU);
+    	return sb.toString();
+    }
+    
+    public static final String SESSION_LOGOUT =
+    		"Logging out...\n"
+    		+ "\tHave a nice day! :)";
 
     /* Helper Methods */
     public static String obfuscate(String str, int show) {
@@ -92,7 +124,11 @@ public class BankAppHelper {
         return sb.toString();
     }
 
-    // Validators copied from online
+    /* 
+     * Found online copy-pasta code
+     * MIGRATE TO UTILS! means we delete these but we're short for time...
+     * and we haven't even test run...D:
+     */
     private static final String EMAIL_REGEX = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
     private static final String PASSWORD_REGEX =
