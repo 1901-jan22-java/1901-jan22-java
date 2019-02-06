@@ -15,5 +15,4 @@ public class NoSQLUpdatesException extends Exception {
         super(cause);
     }
 
-
 }

@@ -82,12 +82,23 @@ public class BankAppHelper {
         StringBuilder sb = new StringBuilder(SESSION_MENU);
         int i = 3;
         for(Account a: as){
-            sb.append("\t("+ i +")" + a.toString());
+            sb.append("\t("+ i +")" + a.toString()+"\n");
             i++;
         }
-        sb.append("\n\nSelection: ");
+        sb.append("Selection: ");
 
         return sb.toString();
+    }
+    
+    public static final String SESSION_CREATE_ACCOUNT_TYPE_PROMPT =
+    		"Create Account of Type:\n";
+    public static String sessionAccountTypePrompt() {
+    	StringBuilder sb = new StringBuilder(SESSION_CREATE_ACCOUNT_TYPE_PROMPT);
+    	int i = 0;
+    	for(AccountType at: BankingInterface.ACCOUNT_TYPES) {
+    		sb.append("\t("+i+")"+at.getType());
+    	}
+    	return sb.toString();
     }
     
     private static final String SESSION_ACCOUNT_MENU = 
@@ -99,6 +110,7 @@ public class BankAppHelper {
     	Account acc = bi.getAccounts().get(select);
     	StringBuilder sb = new StringBuilder("Account Details");
     	String accType = ""+acc.getAccountID();
+    	
     	for(AccountType at: BankingInterface.ACCOUNT_TYPES) {
     		accType = at.getType();
     	}
@@ -110,6 +122,8 @@ public class BankAppHelper {
     	sb.append(SESSION_ACCOUNT_MENU);
     	return sb.toString();
     }
+    
+    public static final String SESSION_AMOUNT_PROMPT = "Amount: ";
     
     public static final String SESSION_LOGOUT =
     		"Logging out...\n"
@@ -129,7 +143,9 @@ public class BankAppHelper {
      * MIGRATE TO UTILS! means we delete these but we're short for time...
      * and we haven't even test run...D:
      */
-    private static final String EMAIL_REGEX = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+    private static final String EMAIL_REGEX = 
+    			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+    					+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
     private static final String PASSWORD_REGEX =
             "^(?=.*[0-9])" +                // at least 1 digit
@@ -142,7 +158,7 @@ public class BankAppHelper {
 
     public static boolean isValidEmail(String email) {
         Matcher matcher = EMAIL_PATTERN.matcher(email);
-        return matcher.find();
+        return matcher.matches();
     }
     public static boolean isValidPassword(String pwd) {
         if(pwd == null) return false;

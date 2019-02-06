@@ -8,6 +8,7 @@ import com.revature.bank.dao.AccountRepository;
 import com.revature.bank.dao.AccountTypeRepository;
 import com.revature.bank.dao.UserRepository;
 import com.revature.bank.exceptions.NoSuchBankUserException;
+import com.revature.bank.exceptions.NonPositiveAmountException;
 import com.revature.bank.pojos.Account;
 import com.revature.bank.pojos.AccountType;
 import com.revature.bank.pojos.User;
@@ -78,7 +79,26 @@ public class BankingInterface {
         return dc;
     }
 
+    public boolean withdraw(Account acc, Double amt) {
+		try {
+			AccountRepository.withdrawBalance(acc.getAccountID(), amt);
+		} catch (NonPositiveAmountException e) {
+			logger.error("NonPositiveAmountException in withdraw!", e);
+			return false;
+		}
+    	return true;
+    }
 
+    public boolean deposit(Account acc, Double amt) {
+		try {
+			AccountRepository.withdrawBalance(acc.getAccountID(), amt);
+		} catch (NonPositiveAmountException e) {
+			logger.error("NonPositiveAmountException in deposit!", e);
+			return false;
+		}
+		return true;
+    }
+    
     /**
      * Probably should be deprecate... we don't want users to add their own accounts list
      *

@@ -6,6 +6,7 @@ import java.util.Scanner;
 import org.apache.log4j.Logger;
 
 import com.revature.bank.app.BankingInterface;
+import com.revature.bank.dao.AccountRepository;
 import com.revature.bank.dao.UserRepository;
 import com.revature.bank.exceptions.NoSuchBankUserException;
 import com.revature.bank.exceptions.UnableToGenerateKeyException;
@@ -61,21 +62,21 @@ public class BankApp {
 		String password = "";
 		while(keepTrying) {
 			while(!validUser && keepTrying) {
-				System.out.println(BankAppHelper.CREATE_USERNAME_PROMPT);
+				System.out.print(BankAppHelper.CREATE_USERNAME_PROMPT);
 				username = MyUtils.format(s.nextLine());
 				validUser = BankAppHelper.isValidEmail(username);
 				keepTrying = !username.equalsIgnoreCase("exit");
-				if(!validUser) {
+				if(!validUser && keepTrying) {
 					System.out.println(BankAppHelper.USERNAME_INVALID);
 				}
 			}
 			while(!validPass && keepTrying) {
-				System.out.println(BankAppHelper.CREATE_PASSWORD_PROMPT);
+				System.out.print(BankAppHelper.CREATE_PASSWORD_PROMPT);
 				password = s.nextLine();
-				validPass = BankAppHelper.isValidPassword(password);
 				keepTrying = !password.equalsIgnoreCase("exit");
-				if(!validUser)
-					System.out.println(BankAppHelper.PASSWORD_INVALID);
+				validPass = BankAppHelper.isValidPassword(password);
+				if(!validUser && keepTrying)
+					System.out.print(BankAppHelper.PASSWORD_INVALID);
 			}
 			if(validUser && validPass && keepTrying) {
 				try {
@@ -100,7 +101,7 @@ public class BankApp {
 		String username = "";
 		String password = "";
 		while(keepTrying){
-			while(!validUser && keepTrying) {
+			while(!validUser || keepTrying) {
 				System.out.println(BankAppHelper.LOGIN_USERNAME_PROMPT);
 				username = MyUtils.format(s.nextLine());
 				validUser = BankAppHelper.isValidEmail(username);
@@ -109,7 +110,7 @@ public class BankApp {
 					System.out.println(BankAppHelper.USERNAME_INVALID);
 				}
 			}
-			while(!validPass && keepTrying) {
+			while(!validPass || keepTrying) {
 				System.out.println(BankAppHelper.LOGIN_PASSWORD_PROMPT);
 				password = s.nextLine();
 				validPass = BankAppHelper.isValidPassword(password);
@@ -117,7 +118,7 @@ public class BankApp {
 				if(!validUser)
 					System.out.println(BankAppHelper.PASSWORD_INVALID);
 			}
-			if(validUser && validPass && keepTrying) {
+			if(validUser && validPass && !keepTrying) {
 				try {
 					if(bi.signIn(username, password)) {
 						System.out.println(BankAppHelper.LOGIN_USER_SUCCESS);
@@ -148,30 +149,58 @@ public class BankApp {
 			s.nextLine();
 			switch(selection) {
 			case(1):
+				createNewAccount();
 				break;
 			case(2):
+				exit = true;
+				break;
 			default:
 				if(selection > 2 && selection < accounts.size()+3) {
 					editAccount(selection - 3);
-				} else exit = true;
+				} else 
+					System.out.println("Invalid Input!");
 			}
 		}
+	}
+	
+	private void createNewAccount() {
+		boolean exit = false;
+		while(!exit) {
+			System.out.println(BankAppHelper.sessionAccountTypePrompt());
+			Integer select = s.nextInt();
+			s.nextLine();
+			try {
+				if(select >= 0 && select < BankingInterface.ACCOUNT_TYPES.size()) {
+					AccountRepository.addAccount(bi.getUser().getUserID(), select, 0.0);
+				} else {
+					System.out.println("Invalid Input: "+select);
+				}
+				exit = true;
+			} catch (UnableToGenerateKeyException e) {
+				logger.error("UnableToGenerateKeyException in createNewAccount", e);
+			}
+		}
+		return;
 	}
 
 	private void editAccount(int select) {
 		boolean exit = false;
 		while(!exit){
-			System.out.println(BankAppHelper.sessionMenu(bi));
+			Account acc = bi.getAccounts().get(select);
+			System.out.println(BankAppHelper.sessionAccountPrompt(bi, select));
 			int selection = s.nextInt();
 			s.nextLine();
+			System.out.print(BankAppHelper.SESSION_AMOUNT_PROMPT);
+			Double amt = s.nextDouble();
 			switch(selection) {
 			case(1):
+				bi.withdraw(acc, amt);
 				break;
 			case(2):
+				bi.deposit(acc, amt);
+				break;
 			default:
-				if(selection > 2 && selection < accounts.size()+3) {
-					editAccount(selection - 3);
-				} else exit = true;
+				exit = true;
 			}
 		}
 	}

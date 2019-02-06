@@ -143,9 +143,9 @@ public class AccountRepository {
 			
 			int updates = cs.executeUpdate();
 			
-			if(updates < 1) {
-				throw new NoSuchBankAccountException();
-			}
+			if(updates < 1) throw new NoSuchBankAccountException();
+			
+			conn.commit();
 		}
 	}
 	
