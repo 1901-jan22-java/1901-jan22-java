@@ -1,3 +1,19 @@
+#toc h1 {
+    font-family: Staatliches;
+}
+
+#toc :not(h1){
+    font-family: lato;
+}
+
+#toc ol li a {
+    color: #3399ff;
+    ;
+}
+/*******************************************************************************
+   Keep Fancy Stylin' above to make the html file look..."bootstrappy"
+*******************************************************************************/
+
 /******************************************************************************
     BELOW ARE THE BASIC SELECTORS!
 *******************************************************************************/
@@ -6,28 +22,28 @@
     TYPE SELECTOR - SELECTS ALL ELEMENTS THAT MATCHES THE GIVEN TYPE
 */
 #example_1 h1 {
-    color:red;
+    color: #ffcc00;
 }
 
 /*
     CLASS SELECTOR - SELECTS ALL ELEMENTS THAT CORRESPONDS TO THE GIVEN CLASS ATTRIBUTE
 */
 #example_2 .class_selector {
-    color: red;
+    color: #ffcc00;
 }
 
 /*
     ID SELECTOR - SELECTS ALL ELEMENTS THAT CORRESPONDS TO THE GIVEN CLASS ATTRIBUTE
 */
 #example_3 #id_selector {
-    color: red;
+    color: #ffcc00;
 }
 
 /*
     UNIVERSAL SELECT - SELECTS ALL ELEMENTS
 */
 #example_4 * {
-    color: red;
+    color: #ffcc00;
 }
 
 /*
@@ -37,7 +53,7 @@
     FOR A COMPREHENSIVE DOCUMENT ON THE SYNTAX OF ATTRIBUTE SELECTORS!
 */
 #example_5 li[value="2"] {
-    color: red
+    color: #ffcc00;
 }
 
 /*******************************************************************************
@@ -52,7 +68,7 @@
         2) SELECT FIRST PARAGRAPH PROCEDING HEADING-4
 */
 #example_6 h4 + p{
-    color:red;
+    color:#ffcc00;
 }
 
 /*
@@ -60,7 +76,7 @@
     IN THIS EXAMPLE, PARAGRAPH ELEMENTS FOLLOWING HEADING-5 ARE SELECTED.
 */
 #example_7 h5 ~ p {
-    color: red;
+    color: #ffcc00;
 }
 
 /*
@@ -69,7 +85,7 @@
     OUTSIDE THE DIV.
 */
 #example_8 div > p {
-    color: red;
+    color: #ffcc00;
 }
 
 /*
@@ -77,7 +93,7 @@
     VERY FREQUENTLY USED. YOU CAN PROBABLY DO EVERYTHING WITH ONLY THE BASIC SELECTORS AND THIS ONE COMBINATOR.
 */
 #example_9 div ul li {
-    color: red;
+    color: #ffcc00;
 }
 
 /*******************************************************************************
@@ -116,5 +132,31 @@
     BUT THIS PARTICULAR PSEUDOCLASS IS POWERFUL ENOUGH TO REPLACE BOTH.
 */
 #example_10 ol li:nth-child(2n + 5){
-    color: red;
+    color: #ffcc00;
+}
+
+/*
+    IN-RANGE PSEUDOCLASS:
+    USED IN INPUT ELEMENTS, IN-RANGE CHECKS IF THE CURRENT IS WITHIN RANGE...
+
+    OUT-OF-RANGE PSEUDOCLASS IS ALMOST THE SAME THING. 
+    EXCEPT IT CHECKS IF YOU'RE OUTTA RANGE.
+*/
+#example_11 input:in-range {
+    background-color: rgba(0, 255, 0, 0.25);
+}
+#example_11 input:out-of-range {
+    background-color:red;
+  }
+
+/*
+  NOT() PSEUDOCLASS:
+  SPECIFY WHAT YOU WANT "NOT" SELECTED WITHIN THE PARENTHESIS
+*/
+#example_12 p:not(#hooman){
+    color:#ffcc00;
+}
+
+#example_13 p:is(.pick_me){
+    color:#ffcc00;
 }

@@ -1,41 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta description = "SPECIAL SELECTOR HTML AND CSS PRESENTATION CREATED BY THEEBIKA & HENRY">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
     <title>Special Selectors for CSS</title>
+    <!-- Link to CSS file "special_selector_style.css" -->
     <link rel="stylesheet" type="text/css" href="special_selectors_style.css">
+    <!-- Link to get some nice fonts... -->
+    <link href="https://fonts.googleapis.com/css?family=Lato|Oswald|Staatliches" rel="stylesheet">
+    <!-- Link to Bootstrap Stylin'-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
 
+    <!-- Table of Contents -->
+    <div id="toc" class="jumbotron">
+        <h1 class="display-4">Table of Contents</h1>
+        <ol>
+            <li><a href="#example_1">TYPE SELECTOR</a></li>
+            <li><a href="#example_2">CLASS SELECTOR</a></li>
+            <li><a href="#example_3">ID SELECTOR</a></li>
+            <li><a href="#example_4">UNIVERSAL SELECTOR</a></li>
+            <li><a href="#example_5">ATTRIBUTE SELECTOR</a></li>
+            <li><a href="#example_6">ADJ. SIBLING COMBINATOR</a></li>
+            <li><a href="#example_7">GEN. SIBLING COMBINATOR</a></li>
+            <li><a href="#example_8">CHILD COMBINATOR</a></li>
+            <li><a href="#example_9">DIRECT DESCENDANT COMBINATOR</a></li>
+            <li><a href="#example_10">N-TH CHILD PSEUDOCLASS</a></li>
+            <li><a href="#example_11">RANGE PSEUDOCLASS</a></li>
+            <li><a href="#example_12">NOT PSEUDOCLASS</a></li>
+            <li><a href="#example_13"></a></li>
+        </ol>
+    </div>
+
     <!-- TYPE SELECTOR -->
-    <div id="example_1" class="selector_examples">
+    <div id="example_1" class="container-fluid selector_examples">
         <h1>HEADING ONE IS SELECTED VIA TYPE SELECTOR!</h1>
     </div>
     <hr>
 
     <!-- CLASS SELECTOR -->
-    <div id="example_2" class="selector_examples">
+    <div id="example_2" class="container-fluid selector_examples">
         <h2 class="class_selector">HEADING TWO IS SELECTED VIA THE CLASS SELECTOR!</h2>
     </div>
     <hr>
     
     <!-- ID SELECTOR -->
-    <div id="example_3" class="selector_examples">
+    <div id="example_3" class="container-fluid selector_examples">
         <h3 id = "id_selector">HEADING THREE IS SELECTED VIA THE ID SELECTOR!</h3>
     </div>
     <hr>
 
     <!-- UNIVERSAL SELECTOR -->
-    <div id="example_4" class="selector_examples">
+    <div id="example_4" class="container-fluid selector_examples">
         <h4>HEADING FOUR IS SELECTED VIA THE UNIVERSAL SELECTOR!</h4>
     </div>
     <hr>
 
     <!-- ATTRIBUTE SELECTOR -->
-    <div id="example_5" class="selector_examples">
+    <div id="example_5" class="container-fluid selector_examples">
         <ul>
             <li value="1">BEHOLD THE POWER OF THE ATTRIBUTE SELECTOR!</li>
             <li value="2">I AM SELECTED.</li>
@@ -46,7 +73,7 @@
     <hr>
 
     <!-- ADJACENT SIBLING COMBINATOR -->
-    <div id="example_6" class="selector_examples">
+    <div id="example_6" class="container-fluid selector_examples">
         <h4>HEADING 4 IS NOT SELECTED...</h4>
         <p>Instead, the paragraph is.</p>
         <p>Do I get selected too? No.</p>
@@ -54,7 +81,7 @@
     <hr>
 
     <!-- GENERAL SIBLING COMBINATOR -->
-    <div id="example_7" class="selector_examples">
+    <div id="example_7" class="container-fluid selector_examples">
         <p>Theebika, is not one of Henry's siblings</p>
         <h5>This is Henry, he has 3 siblings</h5>
         <h6>Apparently, Henry is the only one without a first name starting with J. <br>
@@ -68,7 +95,7 @@
     <hr>
 
     <!-- CHILD COMBINATOR -->
-    <div id="example_8" class="selector_examples">
+    <div id="example_8" class="container-fluid selector_examples">
         <div>
             <p>I am a paragraph inside div.</p>
             <p>I am a paragraph inside div.</p>
@@ -82,7 +109,7 @@
     </div>
 
     <!-- DIRECT DESCENDANT COMBINATOR -->
-    <div id="example_9" class="selector_examples">
+    <div id="example_9" class="container-fluid selector_examples">
         <div>
             <ol>
                 <li>I AM A LIST ITEM, INSIDE AN ORDER LIST, INSIDE A DIV</li>
@@ -99,7 +126,7 @@
     <hr>
 
     <!-- NTH-CHILD PSEUDOCLASS -->
-    <div id="example_10" class="selector_examples">
+    <div id="example_10" class="container-fluid selector_examples">
         <ol>
             <li></li>
             <li></li>
@@ -113,6 +140,49 @@
             <li></li>
         </ol>
     </div>
+    <hr>
     
+    <!-- RANGE PSEUDOCLASSES -->
+    <div id="example_11" class="container-fluid selector_example">
+        <form action="" id="form1">
+            <ul> Range Selector Example
+                <li>
+                    <input id="value1" name="value1" type="number" placeholder="1 to 10" min="1" max="10" value="12">
+                    <label for="value1">Your value is </label>
+                </li>
+            </ul>
+        </form>
+    </div>
+    <hr>
+
+    <div id="example_12" class="container-fluid selector_example">
+        <h5>Hooman is not special. Hooman will not be selected!</h5>
+        <p id="cat">cat</p>
+        <p id="dog">dog</p>
+        <p id="elephant">elephant</p>
+        <p id="monkey">monkey</p>
+        <p id="walrus">walrus</p>
+        <p id="hooman">hooman</p>
+    </div>
+    <hr>
+
+    <div id="example_13" class="container-fluid selector_example">
+        <h5>Doggos are the coolest. so are elephants. and dolphins. <small><i>everythingelseisprettylame-</i></small></h5> 
+        <p id="cat">cat</p>
+        <p id="dog" class="pick_me">dog</p>
+        <p id="elephant" class="pick_me">elephant</p>
+        <p id="monkey">monkey</p>
+        <p id="walrus">walrus</p>
+        <p id="hooman">hooman</p>
+        <p>There is no dolphin. You lied to me.</p>
+    </div>
+    <hr>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>
