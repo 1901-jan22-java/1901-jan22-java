@@ -46,7 +46,7 @@ public class AccountTypeRepository {
 	public static String getAccountTypeByID(int atid) {
 		String at = null;
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			String query = "select * from bank_account_types where account_id = ?";
+			String query = "select * from bank_account_types where account_type_id = ?";
 
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.setInt(1, atid);

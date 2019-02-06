@@ -18,7 +18,7 @@ public class MyUtils {
 		return sb.toString();
 	}
 	
-	public static Double format(Double dbl) {
+	public static Double toMoney(Double dbl) {
 		return ((double) ((long) (dbl*100))) / 100.0;
 	}
 
@@ -52,8 +52,7 @@ public class MyUtils {
 	public static void main(String[] args) {
 		double d = 12308.24789;
 		
-		System.out.println(format(d));
-
+		System.out.println(toMoney(d));
 		System.out.println(isValidEmail("create@create.com"));
 	}
 }

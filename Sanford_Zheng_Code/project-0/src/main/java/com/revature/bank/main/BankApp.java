@@ -44,9 +44,10 @@ public class BankApp {
 					createNewUser();
 					break;
 				case(2):
-					if(login())
+					if(login()) {
 						interfaceSetup();
 						session();
+					}
 					break;
 				default:
 					exit = true;
@@ -100,8 +101,8 @@ public class BankApp {
 		boolean validPass = false;
 		String username = "";
 		String password = "";
-		while(keepTrying){
-			while(!validUser || keepTrying) {
+		while(keepTrying) {
+			while(!validUser && keepTrying) {
 				System.out.println(BankAppHelper.LOGIN_USERNAME_PROMPT);
 				username = s.nextLine();
 				validUser = MyUtils.isValidEmail(username);
@@ -110,7 +111,7 @@ public class BankApp {
 					System.out.println(BankAppHelper.USERNAME_INVALID);
 				}
 			}
-			while(!validPass || keepTrying) {
+			while(!validPass && keepTrying) {
 				System.out.println(BankAppHelper.LOGIN_PASSWORD_PROMPT);
 				password = s.nextLine();
 				validPass = MyUtils.isValidPassword(password);

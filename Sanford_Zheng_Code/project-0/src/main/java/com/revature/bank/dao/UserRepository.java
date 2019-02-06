@@ -19,7 +19,7 @@ public class UserRepository {
     public static User getUser(Integer id) throws NoSuchBankUserException {
 		User user = null;
     	try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-    		String sql = "select * from bank_users where id = ?";
+    		String sql = "select * from bank_users where user_id = ?";
 
     		PreparedStatement ps = conn.prepareStatement(sql);
     		ps.setInt(1, id);
@@ -28,8 +28,9 @@ public class UserRepository {
 
 			if(rs.getFetchSize() == 0)
 				throw new NoSuchBankUserException();
-			else
-				user = new User(rs.getInt("user_id"), rs.getString("username"), rs.getString("password"));
+			
+			user = new User(rs.getInt("user_id"), rs.getString("account_username"), rs.getString("account_password"));
+			conn.commit();
 		} catch( SQLException e ) {
 			logger.error("SQLException occurred in getByID(" + id +")!", e);
 		}
@@ -39,7 +40,7 @@ public class UserRepository {
 	public static User getUser(String username) throws NoSuchBankUserException {
 		User user = null;
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			String sql = "select * from bank_users where username = ?";
+			String sql = "select * from bank_users where account_username = ?";
 			
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setString(1, username);
@@ -48,8 +49,9 @@ public class UserRepository {
 
 			if(rs.getFetchSize() == 0)
 			    throw new NoSuchBankUserException();
-			else
-			    user = new User(rs.getInt("user_id"), rs.getString("username"), rs.getString("password"));
+			
+		    user = new User(rs.getInt("user_id"), rs.getString("account_username"), rs.getString("account_password"));
+			
 		} catch( SQLException e ) {
 			logger.error("SQLException occurred in getByUsername(" + username +")!", e);
 		}
@@ -58,8 +60,16 @@ public class UserRepository {
 
 	public static User createUser(String username, String password) throws UnableToGenerateKeyException{
 		User user = new User(username, password);
+		try {
+		if( getUser(username) != null ) {
+			System.out.println("Please enter a unique identifier");
+			return user;
+		}
+		}catch(NoSuchBankUserException e) {
+			// nothing here we want this
+		}
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			String sql = "insert into bank_users(username, password) values(?, ?)";
+			String sql = "insert into bank_users(account_username, account_password) values(?, ?)";
 
 			String[] keys = {"user_id"};
 			PreparedStatement ps = conn.prepareStatement(sql, keys);
@@ -70,7 +80,10 @@ public class UserRepository {
 
 			if(updates > 0) {
 				ResultSet rs = ps.getGeneratedKeys();
-				user = new User(rs.getInt("user_id"), rs.getString("username"), rs.getString("password"));
+				rs.next();
+				user = new User(rs.getInt("user_id"), rs.getString("account_username"), rs.getString("account_password"));
+			
+				conn.commit();
 			} else {
 				throw new UnableToGenerateKeyException();
 			}

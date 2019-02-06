@@ -24,7 +24,7 @@ public class AccountRepository {
 			UnableToGenerateKeyException
 	{
 		try( Connection conn = ConnectionFactory.getInstance().getConnection() ){
-		    String sql = "insert into bank_accounts(user_id, account_type_id, balance) " +
+		    String sql = "insert into bank_accounts(user_id, account_type_id, account_balance) " +
 					"values(?, ?, ?)";
 
 		    String[] key = {"account_id"};
@@ -38,7 +38,7 @@ public class AccountRepository {
 				throw new UnableToGenerateKeyException();
 			conn.commit();
 		} catch (SQLException e) {
-		    logger.error("SQLException has occurred in !", e);
+		    logger.error("SQLException has occurred in addAccount()!", e);
 		}
 	}
 
@@ -59,7 +59,7 @@ public class AccountRepository {
 			
 			if( rs.next() ) {
 				acc = new Account( rs.getInt("account_id"), rs.getInt("user_id"),
-						rs.getInt("account_type_id"), rs.getDouble("balance") );
+						rs.getInt("account_type_id"), rs.getDouble("account_balance") );
 			} else {
 				throw new NoSuchBankAccountException();
 			}
