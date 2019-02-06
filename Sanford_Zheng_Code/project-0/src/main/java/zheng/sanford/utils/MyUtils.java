@@ -22,8 +22,14 @@ public class MyUtils {
 		return ((double) ((long) (dbl*100))) / 100.0;
 	}
 
-    // Validators copied from online
-    private static final String EMAIL_REGEX = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+    /* 
+     * Found online copy-pasta code
+     * MIGRATE TO UTILS! means we delete these but we're short for time...
+     * and we haven't even test run...D:
+     */
+    private static final String EMAIL_REGEX = 
+    			"^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+    					+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     private static final Pattern EMAIL_PATTERN = Pattern.compile(EMAIL_REGEX, Pattern.CASE_INSENSITIVE);
     private static final String PASSWORD_REGEX =
             "^(?=.*[0-9])" +                // at least 1 digit
@@ -36,7 +42,7 @@ public class MyUtils {
 
     public static boolean isValidEmail(String email) {
         Matcher matcher = EMAIL_PATTERN.matcher(email);
-        return matcher.find();
+        return matcher.matches();
     }
     public static boolean isValidPassword(String pwd) {
         if(pwd == null) return false;
@@ -48,6 +54,6 @@ public class MyUtils {
 		
 		System.out.println(format(d));
 
-		System.out.println(isValidEmail(""));
+		System.out.println(isValidEmail("create@create.com"));
 	}
 }

@@ -63,8 +63,8 @@ public class BankApp {
 		while(keepTrying) {
 			while(!validUser && keepTrying) {
 				System.out.print(BankAppHelper.CREATE_USERNAME_PROMPT);
-				username = MyUtils.format(s.nextLine());
-				validUser = BankAppHelper.isValidEmail(username);
+				username = s.nextLine();
+				validUser = MyUtils.isValidEmail(username);
 				keepTrying = !username.equalsIgnoreCase("exit");
 				if(!validUser && keepTrying) {
 					System.out.println(BankAppHelper.USERNAME_INVALID);
@@ -74,7 +74,7 @@ public class BankApp {
 				System.out.print(BankAppHelper.CREATE_PASSWORD_PROMPT);
 				password = s.nextLine();
 				keepTrying = !password.equalsIgnoreCase("exit");
-				validPass = BankAppHelper.isValidPassword(password);
+				validPass = MyUtils.isValidPassword(password);
 				if(!validUser && keepTrying)
 					System.out.print(BankAppHelper.PASSWORD_INVALID);
 			}
@@ -103,8 +103,8 @@ public class BankApp {
 		while(keepTrying){
 			while(!validUser || keepTrying) {
 				System.out.println(BankAppHelper.LOGIN_USERNAME_PROMPT);
-				username = MyUtils.format(s.nextLine());
-				validUser = BankAppHelper.isValidEmail(username);
+				username = s.nextLine();
+				validUser = MyUtils.isValidEmail(username);
 				keepTrying = !username.equalsIgnoreCase("exit");
 				if(!validUser) {
 					System.out.println(BankAppHelper.USERNAME_INVALID);
@@ -113,12 +113,12 @@ public class BankApp {
 			while(!validPass || keepTrying) {
 				System.out.println(BankAppHelper.LOGIN_PASSWORD_PROMPT);
 				password = s.nextLine();
-				validPass = BankAppHelper.isValidPassword(password);
+				validPass = MyUtils.isValidPassword(password);
 				keepTrying = !password.equalsIgnoreCase("exit");
 				if(!validUser)
 					System.out.println(BankAppHelper.PASSWORD_INVALID);
 			}
-			if(validUser && validPass && !keepTrying) {
+			if(validUser && validPass && keepTrying) {
 				try {
 					if(bi.signIn(username, password)) {
 						System.out.println(BankAppHelper.LOGIN_USER_SUCCESS);
