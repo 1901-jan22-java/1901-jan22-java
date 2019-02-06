@@ -3,6 +3,8 @@ package com.kevin.project0.tables;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import com.kevin.project0.exception.NoMoneyException;
+
 public class BankAccount {
 	private int accountNumber;	//primary key
 	private double money;		//how much money in account
@@ -56,16 +58,13 @@ public class BankAccount {
 			return false;
 		}
 	}
-	public boolean withdraw(Scanner console)
+	public boolean withdraw(Scanner console) throws NoMoneyException
 	{
 		System.out.println("Enter the amount you want to withdraw");
 		try{
 			double amount = console.nextDouble();
 			if(money - amount < 0)
-			{
-				System.out.println("Not enough balance");
-				return false;
-			}
+				throw new NoMoneyException("Not enough money");
 			
 			money -= amount;
 			return true;

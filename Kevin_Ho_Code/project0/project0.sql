@@ -3,10 +3,7 @@ CREATE TABLE bankuser
     username        VARCHAR2(20)    PRIMARY KEY,
     password        VARCHAR2(20)    NOT NULL,
     first_name      VARCHAR2(20)    NOT NULL,
-    last_name       VARCHAR2(20)    NOT NULL,
-    birthdate       DATE            NOT NULL,
-    phone           VARCHAR2(20)    NOT NULL UNIQUE,
-    email           VARCHAR2(20)    NOT NULL UNIQUE
+    last_name       VARCHAR2(20)    NOT NULL
 );
 CREATE TABLE bankaccount
 (

@@ -5,21 +5,15 @@ public class BankUser {
 	private String password;
 	private String first_name;
 	private String last_name;
-    private String birthdate;
-    private String phone;
-    private String email;
 	
 	public BankUser(String username, String password, String first_name, 
-				String last_name, String birthdate, String phone, String email)
+				String last_name)
 	{
 		super();
 		this.username = username;
 		this.password = password;
 		this.first_name = first_name;
 		this.last_name = last_name;
-		this.birthdate = birthdate;
-		this.phone = phone;
-		this.email = email;
 	}
 	public String getUsername() {
 		return username;
@@ -45,29 +39,9 @@ public class BankUser {
 	public void setLast_name(String last_name) {
 		this.last_name = last_name;
 	}
-	public String getBirthdate() {
-		return birthdate;
-	}
-	public void setBirthdate(String birthdate) {
-		this.birthdate = birthdate;
-	}
-	public String getPhone() {
-		return phone;
-	}
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	
 	@Override
 	public String toString() {
 		return "User [username= " + username + " password= " + password 
-				+ " first name= " + first_name + " last name= " + last_name
-				+ " birthdate= " + birthdate + " phone= " + phone + " email= " + email;
+				+ " first name= " + first_name + " last name= " + last_name;
 	}
 }

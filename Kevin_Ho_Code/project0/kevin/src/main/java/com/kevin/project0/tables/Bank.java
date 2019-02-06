@@ -11,6 +11,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
+import com.kevin.project0.exception.NoMoneyException;
 import com.kevin.project0.util.ConnectionFactory;
 
 
@@ -33,9 +34,7 @@ public class Bank {
 			while(rs.next())
 			{
 				BankUser temp = new BankUser(	rs.getString("Username"), rs.getString("Password"),
-												rs.getString("First_Name"), rs.getString("Last_Name"),
-												rs.getString("Birthdate"), rs.getString("Phone"), 
-												rs.getString("Email"));
+												rs.getString("First_Name"), rs.getString("Last_Name"));
 				users.add(temp);
 			}
 			statement.close();
@@ -91,38 +90,24 @@ public class Bank {
 			String first_name = console.nextLine();
 			System.out.println("Enter your Last Name");
 			String last_name = console.nextLine();
-			System.out.println("Enter your Birthdate in the format DD-MMM-YY");
-			String birthdate = console.nextLine();
-			if(birthdate != "[0-9][0-9]-[a-zA-Z][a-zA-Z][a-zA-Z]-[0-9][0-9]")
-				return null;
-			System.out.println("Enter your Phone in the format X-XXX-XXX-XXXX");
-			String phone = console.nextLine();
-			if(phone != "[0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]")
-				return null;
-			System.out.println("Enter your Email");
-			String email = console.nextLine();
 		
 			try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 				conn.setAutoCommit(false);
 				PreparedStatement insertUser = null;
 				String query = "INSERT INTO bankuser (username, password, first_name,"
-													+ "last_name, birthdate, phone, email) "
-								+ "VALUES (?,?,?,?,?,?,?)";
+													+ "last_name)"
+								+ "VALUES (?,?,?,?)";
 						
 				insertUser = conn.prepareStatement(query);
 				insertUser.setString(1, username);
 				insertUser.setString(2, password);
 				insertUser.setString(3, first_name);
 				insertUser.setString(4, last_name);
-				insertUser.setString(5, birthdate);
-				insertUser.setString(6, phone);
-				insertUser.setString(7, email);
 				
 				insertUser.executeUpdate();
 				conn.commit();
 				insertUser.close();
-				BankUser tmp = new BankUser(username, password, first_name, 
-						last_name, birthdate, phone, email);
+				BankUser tmp = new BankUser(username, password, first_name, last_name);
 				users.add(tmp);
 
 				return tmp;	
@@ -232,7 +217,12 @@ public class Bank {
 			}
 			else
 			{
-				getAccount(input).withdraw(console);
+				try {
+					getAccount(input).withdraw(console);
+				} catch (NoMoneyException e1) {
+					System.out.println("Not enough money");
+					return false;
+				}
 				CallableStatement cs = null;
 				try(Connection conn = ConnectionFactory.getInstance().getConnection())
 				{

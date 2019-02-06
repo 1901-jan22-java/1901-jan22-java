@@ -68,7 +68,7 @@ public class App
     		else
     		{
     			System.out.println("\nChoose what you want to do\n"
-    								+ "C = Check Account Balance"
+    								+ "C = Check Account Balance\n"
     								+ "A = Make New Account\n"
     								+ "D = Deposit\n"
     								+ "W = Withdraw\n"
