@@ -2,6 +2,7 @@ package com.revature.data;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -71,6 +72,33 @@ public class AssociateRepository {
 			return null;
 		}
 		
+		return a;
+	}
+	
+	public Associate getByEmail(String email) {
+		Associate a = new Associate();
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+			String query = "select * from associates where lower(email) = ?";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setString(1, email.toLowerCase());
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				a = new Associate();
+				a.setId(rs.getInt(1));
+				a.setFirstName(rs.getString(2));
+				a.setLastName(rs.getString(3));
+				a.setEmail(rs.getString(4));
+				a.setPassword(rs.getString(5));
+				a.setGrade(rs.getDouble(6));
+			}
+			else {
+				return null;
+				//no associate with this email
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return a;
 	}
 	
