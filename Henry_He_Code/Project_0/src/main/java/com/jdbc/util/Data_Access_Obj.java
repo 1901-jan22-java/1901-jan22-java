@@ -1,9 +1,13 @@
 package com.jdbc.util;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+
+import oracle.jdbc.OracleTypes;
 
 public class Data_Access_Obj {
 	
@@ -24,10 +28,9 @@ public class Data_Access_Obj {
 	
 	public boolean doesUserExist(String user){
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
-			String query = "SELECT USERNAME FROM PROJECT_0_CLIENT_DATA WHERE USERNAME = ?";
-			PreparedStatement ps = conn.prepareStatement(query);
-			ps.setString(1,user);
-			ResultSet rs = ps.executeQuery();
+			String query = "SELECT USERNAME FROM PROJECT_0_CLIENT_DATA WHERE USERNAME = \'"+user+"\'";
+			Statement statement = conn.createStatement();
+			ResultSet rs = statement.executeQuery(query);
 			return rs.next();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -76,5 +79,22 @@ public class Data_Access_Obj {
 		}
 	}
 	
+	public static void printAllUsers() {
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+			String sql = "{call GET_ALL_USERS(?)}";
+			CallableStatement cs = conn.prepareCall(sql);
+			cs.registerOutParameter(1, OracleTypes.CURSOR);
+			cs.execute();
+			ResultSet rs = (ResultSet) cs.getObject(1);
+			while(rs.next()) System.out.println(rs.getInt(1) + " : " + rs.getString(2));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		printAllUsers();
+	}
 	
 }
