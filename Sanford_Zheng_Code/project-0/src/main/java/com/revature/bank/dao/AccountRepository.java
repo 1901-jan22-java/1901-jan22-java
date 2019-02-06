@@ -1,6 +1,7 @@
 package com.revature.bank.dao;
 
 import com.jdbc.util.ConnectionFactory;
+import com.revature.bank.exceptions.UnableToGenerateKeyException;
 import com.revature.bank.pojos.Account;
 import org.apache.log4j.Logger;
 
@@ -9,37 +10,56 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.NoSuchElementException;
 
 public class AccountRepository {
 
 	private static final Logger logger = Logger.getLogger(AccountRepository.class);
 
-	public static void addAccount(Integer userID, Integer typeID, Double balance){
+	public static void addAccount(Integer userID, Integer typeID, Double balance) throws
+			UnableToGenerateKeyException
+	{
 		try( Connection conn = ConnectionFactory.getInstance().getConnection() ){
-		    String sql = "";
+		    String sql = "insert into bank_accounts(user_id, account_type_id, balance) " +
+					"values(?, ?, ?)";
 
-		    PreparedStatement ps = conn.prepareStatement(sql);
+		    String[] key = {"account_id"};
+		    PreparedStatement ps = conn.prepareStatement(sql, key);
+			ps.setInt(1, userID);
+			ps.setInt(2, typeID);
+			ps.setDouble(3, balance);
 
+			int updates = ps.executeUpdate();
+			if(updates < 1)
+				throw new UnableToGenerateKeyException();
 		} catch (SQLException e) {
 		    logger.error("SQLException has occurred in !", e);
 		}
 	}
 
-	public static Account getAccountsByID(Integer id) {
+	/**
+	 * Read account by primary key.
+	 *
+	 * @param acc_id
+	 * @return
+	 */
+	public static Account getAccount(Integer acc_id) {
 		Account acc = null;
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			String query = "select * from bank_accounts where user_id = ?";
+			String query = "select * from bank_accounts where account_id = ?";
 			
 			PreparedStatement ps = conn.prepareStatement(query);
-			ps.setInt(1, id);
+			ps.setInt(1, acc_id);
 			ResultSet rs = ps.executeQuery();
 			
 			if( rs.next() ) {
-				acc = new Account( rs.getInt("account_id"), null,
+				acc = new Account( rs.getInt("account_id"), rs.getInt("user_id"),
 						rs.getInt("account_type_id"), rs.getDouble("balance") );
+			} else {
+				throw new NoSuchElementException();
 			}
 		} catch( SQLException e ) {
-			logger.error("SQLException in getAccountsByID("+id+")!", e);
+			logger.error("SQLException in getAccountsByID("+acc_id+")!", e);
 		} 
 		
 		return acc;
