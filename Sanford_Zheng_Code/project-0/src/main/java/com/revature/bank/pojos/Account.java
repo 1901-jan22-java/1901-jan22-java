@@ -22,7 +22,6 @@ public class Account {
 	}
 
 	public Account(String type, double balance) {
-		this();
 		this.balance = balance;
 		this.type = type;
 	}

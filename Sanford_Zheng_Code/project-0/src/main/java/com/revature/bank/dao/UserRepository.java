@@ -10,23 +10,13 @@ import org.apache.log4j.Logger;
 import com.jdbc.util.ConnectionFactory;
 import com.revature.bank.pojos.User;
 
-public class UserRepository {
+public interface UserRepository {
 
-	private static final Logger logger = Logger.getLogger(AccountRepository.class);
-
-	private static Connection conn;
+	Logger logger = Logger.getLogger(AccountRepository.class);
 	
-	static {
-		try {
-			conn = ConnectionFactory.getInstance().getConnection();
-		} catch (SQLException e) {
-			logger.error("Exception:\n", e);
-		}
-	}
-	
-	public static User getByUser(String username) {
+	public static User getByUsername(String username) {
 		User user = null;
-		try {
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			String query = "select * from bank_users where username = ?";
 			
 			PreparedStatement ps = conn.prepareStatement(query);
@@ -36,17 +26,20 @@ public class UserRepository {
 			if( rs.next() )
 				user = new User(rs.getString("username"), rs.getString("password"));
 		} catch( SQLException e ) {
-			e.printStackTrace();
+			logger.error("SQLException occured in UserRepository.getByUser()!", e);
 		} 
 		
 		return user;
 	}
 	
-	public void close() {
-		try {
-			conn.close();
-		} catch (SQLException e) {
-			logger.error("Exception Occured!", e);
+	public static User saveUser(User u) {
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()){
+			String query = "";
+		} catch( SQLException e) {
+			logger.error("SQLException occured in UserRepository!", e);
 		}
+		
+		return null;
 	}
+	
 }
