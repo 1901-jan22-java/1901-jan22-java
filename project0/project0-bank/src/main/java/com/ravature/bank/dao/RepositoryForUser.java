@@ -8,14 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 import com.ravature.bank.pojos.User;
 import com.jdbc.util.ConnectionFactory;
-public class UserRepository {
-	public static User findLoginInfo(String username, String password){
+public class RepositoryForUser {
+	public static User loginInfo(int userId, String username, String password){
 		User user = null;
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 			String query = "select * from bankusers where username = ? and password = ?";
 			PreparedStatement ps = conn.prepareStatement(query);
-			ps.setString(1, username);
-			ps.setString(2, password);
+			ps.setInt(1, userId);
+			ps.setString(2, username);
+			ps.setString(3, password);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()){
 				user = new User();
@@ -30,15 +31,15 @@ public class UserRepository {
 		}
 		return user;
 	}
-	public static User save(User obj){
+	public static User saveUser(User obj){
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
-			String query = "insert into bankusers(fName, lName, username, password) values(?, ?, ?, ?)";
-			String[] keys = {"userId"};
-			PreparedStatement ps = conn.prepareStatement(query, keys);
-			ps.setString(1, obj.getFirstName());
-			ps.setString(2, obj.getLastName());
-			ps.setString(3,  obj.getUsername());
-			ps.setString(4, obj.getPassword());	
+			String query = "insert into bankusers(userid, firstName, lastName, username, password) values(?, ?, ?, ?)";
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setInt(1, obj.getUser_Id());
+			ps.setString(2, obj.getFirstName());
+			ps.setString(3, obj.getLastName());
+			ps.setString(4, obj.getUsername());
+			ps.setString(5, obj.getPassword());	
 			int numRows = ps.executeUpdate();
 			if(numRows > 0) {
 				ResultSet pk = ps.getGeneratedKeys();
@@ -50,7 +51,7 @@ public class UserRepository {
 		}
 		return obj;
 	}
-	public static List<User> findAll() {
+	public static List<User> find() {
 		List<User> allUsers = new ArrayList<User>();
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			String query = "select * from bankusers";

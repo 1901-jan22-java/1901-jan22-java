@@ -10,8 +10,7 @@ public class User {
 	
 	public User(){}
 	
-	public User(int user_Id, String firstName, String lastName, String username,
-			String password) {
+	public User(int user_Id, String firstName, String lastName, String username,String password) {
 		super();
 		this.user_Id = user_Id;
 		this.firstName = firstName;

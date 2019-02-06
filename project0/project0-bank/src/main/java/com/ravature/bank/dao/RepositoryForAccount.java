@@ -8,14 +8,14 @@ import java.util.List;
 import com.jdbc.util.ConnectionFactory;
 import com.ravature.bank.pojos.Account;
 import com.ravature.bank.pojos.User;
-import com.ravature.bank.views.AccountView;
-public class AccountRepository {
-	public static List<Account> getAccounts(String username) {
+import com.ravature.bank.views.ViewAcc;
+public class RepositoryForAccount {
+	public static List<Account> getAccounts(int User_ID) {
 		List<Account> accounts = new ArrayList<Account>();
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			String query = "select * from accounts where userid = ?";
 			PreparedStatement ps = conn.prepareStatement(query);
-			ps.setString(1, username);
+			ps.setInt(1, User_ID);
 			ResultSet rs = ps.executeQuery();
 			while(rs.next()) {
 				Account acc1 = new Account();
@@ -31,29 +31,28 @@ public class AccountRepository {
 		return accounts;
 	}
 public static double getBalance(int User_Id){
-	   Account a = null;
+	   Account acc2 = null;
 	   try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 		   String query = "select * from accounts where userId = ?";
 		   PreparedStatement ps = conn.prepareStatement(query);
 		   ps.setInt(1, User_Id);
 		   ResultSet rs = ps.executeQuery(); 
 		   if(rs.next()) {
-			   a = new Account();
-			   a.setAccountId(rs.getInt(1));
-			   a.setAccountType(rs.getString(2));
-			   a.setBalance(rs.getDouble(3));
-			   a.setUserId(rs.getInt(4));
+			   acc2 = new Account();
+			   acc2.setAccountId(rs.getInt(1));
+			   acc2.setAccountType(rs.getString(2));
+			   acc2.setBalance(rs.getDouble(3));
+			   acc2.setUserId(rs.getInt(4));
 			} 
 	   } catch (SQLException e) {
 		e.printStackTrace();
 	}
-	   return a.getBalance();
+	   return acc2.getBalance();
 }
-	public static Account save(Account newAccount, User loggedInUser) {
+	public static Account save(int account_id, Account newAccount, User loggedInUser) {
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			String query = "insert into accounts(user_id, account_type, balance) values (?, ?, ?)";
-			String[] keys = { "account_id" };
-			PreparedStatement ps = conn.prepareStatement(query, keys);
+			String query = "insert into accounts(account_id, user_id, account_type, balance) values (?, ?, ?)";
+			PreparedStatement ps = conn.prepareStatement(query);
 			ps.setInt(1, loggedInUser.getUser_Id());
 			ps.setString(2, newAccount.getAccountType());
 			ps.setDouble(3, 0d);
@@ -89,7 +88,7 @@ public static double getBalance(int User_Id){
 			ps.setInt(2, withdrawAccount);
 			if(getBalance(currUser.getUser_Id()) - withdrawAmount < 0){
 				System.out.println("Insuffient Funds");
-				AccountView.initiateWithdrawal(currUser);
+				ViewAcc.initiateWithdrawal(currUser);
 				return false;
 			} else {
 				ps.executeUpdate();
