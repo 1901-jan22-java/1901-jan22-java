@@ -2,9 +2,32 @@ package com.jdbc.util;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DataAccessObject {
+	
+	public String[] login(String email, String pw) {
+		String query = "SELECT * FROM ASSOCIATE WHERE email=? AND password = ?";
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+			PreparedStatement ps = conn.prepareStatement(query);
+			ps.setString(1, email);
+			ps.setString(2, pw);
+			ResultSet rs = ps.executeQuery();
+			rs.next();
+			return new String[] {
+					rs.getString("AID"), 		// rs.getString(1)
+					rs.getString("FIRSTNAME"),	// rs.getString(2)
+					rs.getString("LASTNAME"),	// rs.getString(3)
+					rs.getString("EMAIL"),
+					rs.getString("PASSWORD"),
+					rs.getString("GRADE")
+			};
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+			return null;
+	}
 
 	public void createAssociate(String fn, String ln, String email, String password) {
 		String query = "INSERT INTO ASSOCIATE (FIRSTNAME, LASTNAME, EMAIL, PASSWORD, GRADE) VALUES (?, ?, ?, ?, 0)";
@@ -26,9 +49,28 @@ public class DataAccessObject {
 		
 	}
 	
+	public void updateAssociateGrade(int grade, int aid) {
+		
+		   try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+	            conn.setAutoCommit(false);
+	            String sql = "UPDATE ASSOCIATE set grade = ? WHERE aid = ?";
+	            
+	            PreparedStatement ps = conn.prepareStatement(sql);
+	            ps.setInt(1, grade);
+	            ps.setInt(2,aid);
+	            ps.executeUpdate();
+	            
+		   } catch (SQLException e) {
+			e.printStackTrace();
+		}
+	            
+	}
+		
+	
+	
 	public static void main(String[] args) {
 		DataAccessObject dao = new DataAccessObject();
-		dao.createAssociate("ohgod", "pleasehelp", "Imdying", "thisishell");
+		dao.updateAssociateGrade(100, 8);
 	}
 
 }
