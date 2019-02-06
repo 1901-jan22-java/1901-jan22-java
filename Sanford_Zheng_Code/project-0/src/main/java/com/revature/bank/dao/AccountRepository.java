@@ -13,7 +13,18 @@ import java.util.ArrayList;
 public class AccountRepository {
 
 	private static final Logger logger = Logger.getLogger(AccountRepository.class);
-	
+
+	public static void addAccount(Integer userID, Integer typeID, Double balance){
+		try( Connection conn = ConnectionFactory.getInstance().getConnection() ){
+		    String sql = "";
+
+		    PreparedStatement ps = conn.prepareStatement(sql);
+
+		} catch (SQLException e) {
+		    logger.error("SQLException has occurred in !", e);
+		}
+	}
+
 	public static Account getAccountsByID(Integer id) {
 		Account acc = null;
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
