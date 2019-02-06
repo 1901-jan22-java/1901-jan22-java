@@ -7,11 +7,9 @@ import com.jdbc.pojos.Role;
 
 public class App {
 
-	
 	public static void main(String[] args) {
-		RoleRepository roleRepo = new RoleRepository();
-		List<Role> roles= roleRepo.findAll();
-		
+		RoleRepository repo = new RoleRepository();
+		List<Role> roles = repo.findAll();
 		System.out.println(roles);
 	}
 }

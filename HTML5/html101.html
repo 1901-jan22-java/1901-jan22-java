@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, intial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 101</title>
+    <style>
+        /*This is a commnet in css*/
+        li{
+            font-style: italic;
+            color: blueviolet !important;
+        }
+        .class{
+            border: 3px dotted paleturquoise;
+            border-radius: 5px;
+        }
+        #second{
+            color: yellow;
+        }
+        input[type=checkbox]:checked + label{
+            background-color: green;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <!--Content to be seen goes here-->
+    <h1>
+    <h2 id="second"></h2>
+    <h3 id="third"></h3>
+    <h4 class="class">Anout HTMK</h4>
+    <h5>About HTML (H5)</h5>
+    <h6>About HTML (H6)</h6>
+    <p>About HTML (p)</p>
+    About HTML (No bounding element)
+    <h4>Lists</h4>
+    <ul>
+        <li>One item</li>
+        <li>two item</li>
+    </ul>
+    <li>This is outside of any UL tag
+        <ol>
+            <li>One</li>
+            <li>two</li>
+            <li>three</li>
+        </ol>
+    </li>
+    <h4>Tables</h4>
+    <table>
+        <thead>
+            <tr>
+                <th>First name</th>
+                <th>Lastname</th>
+                <th>school</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Genesis</td>
+                <td>Bonds</td>
+                <td>Duke</td>
+            </tr>
+            <tr>
+                <td>Mark</td>
+                <td>Zukerberg</td>
+                <td>Harvard</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr>
+    <br>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <iframe src="https://www.revature.com" frameborder="5px"></iframe>
+    <h4>Input fields</h4>
+    <br>
+    <input type="text"id="textinput"name="textinput" placeholder="This is a text input field"><br>
+    <input type="number" min="0" max="100">
+    <input type="password" placeholder="Password input"><br>
+    <input type="radio" name="role" id="Associate">Associate <br>
+    <input type="radio" name="role" id="Trainer">Trainer <br>
+    Countries Traveled:
+    <input type="checkbox" name="countries" id="mexico">
+    <label for="mexico">Mexico</label><br>
+    <input type="checkbox" name="countries" id="cuba">
+    <label for="cuba">Cuba</label><br>
+
+
+    </h1>
+</body>
+
+</html>
