@@ -12,7 +12,10 @@ public class App
     	boolean runStartUp = true;
     	while(runStartUp)
     	{	
-    		System.out.println("Press 1 to log in. "
+        	if(loggedIn)
+        		System.out.println("You're logged in");
+
+        	System.out.println("Press 1 to log in. "
     							+ "Press 2 to make a new account. "
     							+ "Press 3 to check grades");
         	testcase = input.nextLine();

@@ -58,6 +58,7 @@ public class App
     	
     	boolean loggedIn = (loggedInUser!=null);
     	String input = "";
+    	String xd = "";
     	while(loggedIn)
     	{
     		if(myBank.getAccounts(loggedInUser).size() == 0){
@@ -74,9 +75,8 @@ public class App
     								+ "W = Withdraw\n"
     								+ "Q = Quit\n");
     			
-    			input = console.nextLine().toUpperCase();
-
-
+    			input = console.next().toUpperCase();
+    			xd = console.nextLine();
     			switch(input)
     			{
     				case "Q":
