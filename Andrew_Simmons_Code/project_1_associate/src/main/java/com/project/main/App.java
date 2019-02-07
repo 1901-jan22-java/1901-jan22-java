@@ -38,14 +38,17 @@ public class App {
     	
     	     case 2: logIn(); break;
     		case 3: getStats(); break;
-    		case 4: System.exit(0);
-    		case 5: UpdateAssociateGrade(); break;
+    		case 4: UpdateAssociateGrade(); break;
+    		case 5: System.exit(0);
+    
     		default: System.out.println("You must enter a number: either 1, 2, or 3!"); welcome(); break;
     		}
 		
 		}
 	}
 	
+	
+	//Update Associates Grade - Should be an Admin function
 	
     public static void UpdateAssociateGrade() {
     	
@@ -65,7 +68,7 @@ public class App {
 		
 	}
 
-
+// Obtain Associates Stats  - Should be an Admin function
 	public static void getStats() {
     	try {
     	
