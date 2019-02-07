@@ -1,18 +1,4 @@
-#toc h1 {
-    font-family: Staatliches;
-}
 
-#toc :not(h1){
-    font-family: lato;
-}
-
-#toc ol li a {
-    color: #3399ff;
-    ;
-}
-/*******************************************************************************
-   Keep Fancy Stylin' above to make the html file look..."bootstrappy"
-*******************************************************************************/
 
 /******************************************************************************
     BELOW ARE THE BASIC SELECTORS!
@@ -21,28 +7,28 @@
 /*
     TYPE SELECTOR - SELECTS ALL ELEMENTS THAT MATCHES THE GIVEN TYPE
 */
-#example_1 h1 {
+#example_1 .example h1 {
     color: #ffcc00;
 }
 
 /*
     CLASS SELECTOR - SELECTS ALL ELEMENTS THAT CORRESPONDS TO THE GIVEN CLASS ATTRIBUTE
 */
-#example_2 .class_selector {
+#example_2 .example .class_selector {
     color: #ffcc00;
 }
 
 /*
     ID SELECTOR - SELECTS ALL ELEMENTS THAT CORRESPONDS TO THE GIVEN CLASS ATTRIBUTE
 */
-#example_3 #id_selector {
+#example_3 .example #id_selector {
     color: #ffcc00;
 }
 
 /*
     UNIVERSAL SELECT - SELECTS ALL ELEMENTS
 */
-#example_4 * {
+#example_4 .example *:not(.css-code) {
     color: #ffcc00;
 }
 
@@ -52,7 +38,7 @@
     SEE https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors
     FOR A COMPREHENSIVE DOCUMENT ON THE SYNTAX OF ATTRIBUTE SELECTORS!
 */
-#example_5 li[value="2"] {
+#example_5 .example li[value="2"] {
     color: #ffcc00;
 }
 
@@ -67,7 +53,7 @@
         1) FIND HEADING-4
         2) SELECT FIRST PARAGRAPH PROCEDING HEADING-4
 */
-#example_6 h4 + p{
+#example_6 .example h4 + p{
     color:#ffcc00;
 }
 
@@ -75,7 +61,7 @@
     GENERAL SIBLING COMBINATORS - THE ELEMENTS FOLLOWING THE FIRST ARE SELECTED
     IN THIS EXAMPLE, PARAGRAPH ELEMENTS FOLLOWING HEADING-5 ARE SELECTED.
 */
-#example_7 h5 ~ p {
+#example_7 .example h5 ~ p {
     color: #ffcc00;
 }
 
@@ -84,7 +70,7 @@
     IN THIS EXAMPLE, ONLY THE PARAGRAPHS NESTED IN DIV ARE SELECTED - NOT THE PARAGRAPHS
     OUTSIDE THE DIV.
 */
-#example_8 div > p {
+#example_8 .example div > p {
     color: #ffcc00;
 }
 
@@ -92,7 +78,7 @@
     DIRECT DESCENDANT COMBINATOR - FREQUENTLY USED TO GET ELEMENTS NESTED WITHIN ELEMENTS...
     VERY FREQUENTLY USED. YOU CAN PROBABLY DO EVERYTHING WITH ONLY THE BASIC SELECTORS AND THIS ONE COMBINATOR.
 */
-#example_9 div ul li {
+#example_9 .example ul li {
     color: #ffcc00;
 }
 
@@ -131,7 +117,7 @@
     WORTH NOTING THERE IS A FIRST-CHILD AND LAST-CHILD PSEUDOCLASS,
     BUT THIS PARTICULAR PSEUDOCLASS IS POWERFUL ENOUGH TO REPLACE BOTH.
 */
-#example_10 ol li:nth-child(2n + 5){
+#example_10 .example ol li:nth-child(2n + 5){
     color: #ffcc00;
 }
 
@@ -142,10 +128,10 @@
     OUT-OF-RANGE PSEUDOCLASS IS ALMOST THE SAME THING. 
     EXCEPT IT CHECKS IF YOU'RE OUTTA RANGE.
 */
-#example_11 input:in-range {
+#example_11 .example input:in-range {
     background-color: rgba(0, 255, 0, 0.25);
 }
-#example_11 input:out-of-range {
+#example_11 .example input:out-of-range {
     background-color:red;
   }
 
@@ -153,10 +139,41 @@
   NOT() PSEUDOCLASS:
   SPECIFY WHAT YOU WANT "NOT" SELECTED WITHIN THE PARENTHESIS
 */
-#example_12 p:not(#hooman){
+#example_12 .example p:not(#hooman):not(.css-code){
     color:#ffcc00;
 }
 
-#example_13 p:is(.pick_me){
+#example_13 .example p:is(.pick_me){
     color:#ffcc00;
+}
+
+/*******************************************************************************
+   Keep Fancy Stylin' below to make the html file look..."bootstrappy"
+*******************************************************************************/
+
+#toc h1 {
+    font-family: staatliches;
+}
+
+#toc :not(h1){
+    font-family: roboto;
+}
+
+#toc ol li a {
+    color: #3399ff;
+    ;
+}
+
+.selector_examples {
+    font-family: oswald;
+}
+
+.selector_examples .css-code {
+    font-family: roboto;
+    font-size: 36px;
+}
+
+.selector_examples .notes {
+    font-family: staatliches;
+    font-size: 24px;
 }

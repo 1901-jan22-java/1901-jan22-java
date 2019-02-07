@@ -11,7 +11,7 @@
     <!-- Link to CSS file "special_selector_style.css" -->
     <link rel="stylesheet" type="text/css" href="special_selectors_style.css">
     <!-- Link to get some nice fonts... -->
-    <link href="https://fonts.googleapis.com/css?family=Lato|Oswald|Staatliches" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Oswald|Roboto|Staatliches" rel="stylesheet">
     <!-- Link to Bootstrap Stylin'-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
@@ -33,84 +33,150 @@
             <li><a href="#example_10">N-TH CHILD PSEUDOCLASS</a></li>
             <li><a href="#example_11">RANGE PSEUDOCLASS</a></li>
             <li><a href="#example_12">NOT PSEUDOCLASS</a></li>
-            <li><a href="#example_13"></a></li>
+            <li><a href="#example_13">IS PSEUDOCLASS <i>STILLNOTWORKINGASINTENDEDAAAH</i></a></li>
         </ol>
     </div>
 
     <!-- TYPE SELECTOR -->
     <div id="example_1" class="container-fluid selector_examples">
-        <h1>HEADING ONE IS SELECTED VIA TYPE SELECTOR!</h1>
+        <p class="notes">TYPE SELECTOR - SELECTS ALL ELEMENTS THAT MATCHES THE GIVEN TYPE</p>
+        <div class="example jumbotron">
+            <p class="css-code">h1 { ... }</p>
+            <hr>
+            <h1>HEADING ONE IS SELECTED VIA TYPE SELECTOR!</h1>
+        </div>
     </div>
     <hr>
 
     <!-- CLASS SELECTOR -->
     <div id="example_2" class="container-fluid selector_examples">
-        <h2 class="class_selector">HEADING TWO IS SELECTED VIA THE CLASS SELECTOR!</h2>
+        <p class="notes">CLASS SELECTOR - SELECTS ALL ELEMENTS THAT CORRESPONDS TO THE GIVEN CLASS ATTRIBUTE</p>
+        <div class="example jumbotron">
+            <p class="css-code">.class_selector { ... }</p>
+            <hr>
+            <h2 class="class_selector">HEADING TWO IS SELECTED VIA THE CLASS SELECTOR!</h2>
+        </div>
     </div>
     <hr>
     
     <!-- ID SELECTOR -->
     <div id="example_3" class="container-fluid selector_examples">
-        <h3 id = "id_selector">HEADING THREE IS SELECTED VIA THE ID SELECTOR!</h3>
+        <p class="notes">ID SELECTOR - SELECTS ALL ELEMENTS THAT CORRESPONDS TO THE GIVEN CLASS ATTRIBUTE</p>
+        <div class="example jumbotron">
+            <p class="css-code">#id_selector { ... }</p>
+            <hr>
+            <h3 id = "id_selector">HEADING THREE IS SELECTED VIA THE ID SELECTOR!</h3>
+        </div>
     </div>
     <hr>
 
     <!-- UNIVERSAL SELECTOR -->
     <div id="example_4" class="container-fluid selector_examples">
-        <h4>HEADING FOUR IS SELECTED VIA THE UNIVERSAL SELECTOR!</h4>
+        <p class="notes">UNIVERSAL SELECT - SELECTS ALL ELEMENTS</p>
+        <div class="example jumbotron">
+            <p class="css-code">* { ... }</p>
+            <hr>
+            <h4>HEADING FOUR IS SELECTED VIA THE UNIVERSAL SELECTOR!</h4>
+            <p>SO IS THIS PARAGRAPH!</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>
+                            SO IS THIS TABLE:
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Some table data.</td>
+                        <td>Some more table data.</td>
+                        <td>EVEN MORE table data.</td>
+                    </tr>
+                    <tr>
+                        <td>An extreme amount of table data.</td>
+                        <td>A HUUUUUGE amount table data.</td>
+                        <td>"IRanOutOfAdjectives" table data.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <hr>
 
     <!-- ATTRIBUTE SELECTOR -->
     <div id="example_5" class="container-fluid selector_examples">
-        <ul>
-            <li value="1">BEHOLD THE POWER OF THE ATTRIBUTE SELECTOR!</li>
-            <li value="2">I AM SELECTED.</li>
-            <li value="3">THIS IS NOT.</li>
-            <li>ALSO, THE UNIVERSAL SELECTOR IS KINDA MAKING ME PURPLE. HELP.</li>
-        </ul>
+        <p class="notes">ATTRIBUTE SELECTOR - THE EXAMPLE BELOW IS ONLY A SMALL TASTE OF THE POWER YOU MAY WIELD.
+            <br>READ MORE AT: 
+            <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors">https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors</a>
+        </p>
+        <div class="example jumbotron">
+            <p class="css-code">li[value="2"] { ... }</p>
+            <hr>
+            <ul>
+                <li value="1">BEHOLD THE POWER OF THE ATTRIBUTE SELECTOR! (I HAVE A VALUE OF 1)</li>
+                <li value="2">I AM SELECTED. (I HAVE A VALUE OF 2)</li>
+                <li value="3">THIS IS NOT. (I HAVE A VALUE OF 3)</li>
+            </ul>
+        </div>
     </div>
     <hr>
 
     <!-- ADJACENT SIBLING COMBINATOR -->
     <div id="example_6" class="container-fluid selector_examples">
-        <h4>HEADING 4 IS NOT SELECTED...</h4>
-        <p>Instead, the paragraph is.</p>
-        <p>Do I get selected too? No.</p>
+        <p class="notes">ADJACENT SIBLING COMBINATORS - IT'S NOT REALLY ONE SELECTOR. IT'S A COMBINATION OF TWO...<br>
+            THE EXAMPLE BELOW WORKS LIKE THIS: FIND HEADING-4 THEN SELECT FIRST PARAGRAPH AFTER HEADING-4</p>
+        <div class="example jumbotron">
+            <p class="css-code">h4 + p { ... }</p>
+            <hr>
+            <h4>HEADING 4 IS NOT SELECTED...</h4>
+            <p>I AM THE FIRST PARAGRAPH AFTER H4</p>
+            <p>I AM THE SECOND PARAGRAPH AFTER H4</p>
+        </div>
     </div>
     <hr>
 
     <!-- GENERAL SIBLING COMBINATOR -->
     <div id="example_7" class="container-fluid selector_examples">
-        <p>Theebika, is not one of Henry's siblings</p>
-        <h5>This is Henry, he has 3 siblings</h5>
-        <h6>Apparently, Henry is the only one without a first name starting with J. <br>
-            He's kinda the black sheep of the family. (Woo!) <br>
-            Anyway, his siblings are colored aqua.
-        </h6>
-        <p>Julia</p>
-        <p>Joey</p>
-        <p>Jerry</p>
+        <p class="notes">GENERAL SIBLING COMBINATORS - THE ELEMENTS FOLLOWING THE FIRST ARE SELECTED <br>
+            IN THIS EXAMPLE, PARAGRAPH ELEMENTS FOLLOWING HEADING-5 ARE SELECTED.</p>
+        <div class="example jumbotron">
+            <p class="css-code">h5 ~ p { ... }</p>
+            <hr>
+            <p>THIS PARAGRAPH IS BEFORE H5</p>
+            <h5>THIS IS A H5</h5>
+            <p>THIS PARAGRAPH IS AFTER H5</p>
+            <p>THIS PARAGRAPH IS AFTER H5</p>
+            <p>THIS PARAGRAPH IS AFTER H5</p>
+        </div>
     </div>
     <hr>
 
     <!-- CHILD COMBINATOR -->
     <div id="example_8" class="container-fluid selector_examples">
-        <div>
-            <p>I am a paragraph inside div.</p>
-            <p>I am a paragraph inside div.</p>
-            <p>I am a paragraph inside div.</p>
+        <p class="notes"> CHILD COMBINATOR - THE ELEMENTS THAT ARE THE DIRECT CHILDREN OF THE FIRST ELEMENT ARE SELECTED. <br>
+            IN THIS EXAMPLE, ONLY THE PARAGRAPHS NESTED IN DIV ARE SELECTED - NOT THE PARAGRAPHS OUTSIDE THE DIV.</p>
+        <div class="example jumbotron">
+            <p class="css-code">div > p { ... }</p>
+            <hr>
+            <div>
+                <p>I am a paragraph inside div.</p>
+                <p>I am a paragraph inside div.</p>
+                <p>I am a paragraph inside div.</p>
+            </div>
+            <p>
+                I am NOT a paragraph inside div.
+            </p>
         </div>
-        <p>
-            I am NOT a paragraph inside div. <br>
-            Also, the general sibling combinator is affecting me to this point...
-        </p>
-        <hr>
     </div>
+    <hr>
 
     <!-- DIRECT DESCENDANT COMBINATOR -->
     <div id="example_9" class="container-fluid selector_examples">
-        <div>
+        <p class="notes"> DIRECT DESCENDANT COMBINATOR - FREQUENTLY USED TO GET ELEMENTS NESTED WITHIN ELEMENTS... <br>
+            VERY FREQUENTLY USED. YOU CAN PROBABLY DO EVERYTHING WITH ONLY THE BASIC SELECTORS AND THIS ONE COMBINATOR.</p>
+        <div class="example jumbotron">
+            <p class="css-code">div ul li { ... }</p>
+            <hr>
             <ol>
                 <li>I AM A LIST ITEM, INSIDE AN ORDER LIST, INSIDE A DIV</li>
                 <li>I AM A LIST ITEM, INSIDE AN ORDER LIST, INSIDE A DIV</li>
@@ -127,46 +193,84 @@
 
     <!-- NTH-CHILD PSEUDOCLASS -->
     <div id="example_10" class="container-fluid selector_examples">
-        <ol>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ol>
+        <p class="notes">
+                NTH-CHILD PSEUDOCLASS: 
+            <br>WITHIN THE PARANTHESIS, IT TAKES IN A SINGLE ARGUMENT.
+            <br>IT CAN TAKE IN A KEYWORD VALUE "EVEN" OR "ODD"
+            <br>OR IT CAN TAKE A FUNCTIONAL NOTATION IN THE FORM OF < AN+B >
+            <br>
+            <br>THE FUNCTIONAL NOTATION CAN BE READ AS:
+            <br>SELECT EVERY A'TH ELEMENT STARTING WITH B.
+            <br>
+            <br>IN THE EXAMPLE BELOW, THE FUNCTIONAL NOTATION CAN BE READ AS:
+            <br>SELECT EVERY 2ND ELEMENT STARTING WITH 5.
+            <br>
+            <br>WORTH NOTING THERE IS A FIRST-CHILD AND LAST-CHILD PSEUDOCLASS,
+            <br>BUT THIS PARTICULAR PSEUDOCLASS IS POWERFUL ENOUGH TO REPLACE BOTH.
+        </p>    
+        <div class="example jumbotron">
+            <p class="css-code">ol li:nth-child(2n + 5) { ... }</p>
+            <hr>
+            <ol>
+                <li>Child#1</li>
+                <li>Child#2</li>
+                <li>Child#3</li>
+                <li>Child#4</li>
+                <li>Child#5</li>
+                <li>Child#6</li>
+                <li>Child#7</li>
+                <li>Child#8</li>
+                <li>Child#9</li>
+                <li>Child#10</li>
+            </ol>
+        </div>
     </div>
     <hr>
     
     <!-- RANGE PSEUDOCLASSES -->
-    <div id="example_11" class="container-fluid selector_example">
-        <form action="" id="form1">
-            <ul> Range Selector Example
-                <li>
-                    <input id="value1" name="value1" type="number" placeholder="1 to 10" min="1" max="10" value="12">
-                    <label for="value1">Your value is </label>
-                </li>
-            </ul>
-        </form>
+    <div id="example_11" class="container-fluid selector_examples">
+        <p class="notes">
+                IN-RANGE PSEUDOCLASS:
+            <br>USED IN INPUT ELEMENTS, IN-RANGE CHECKS IF THE CURRENT IS WITHIN RANGE...
+            <br>
+            <br>OUT-OF-RANGE PSEUDOCLASS IS ALMOST THE SAME THING. 
+            <br>EXCEPT IT CHECKS IF YOU'RE OUTTA RANGE.
+        </p>
+        <div class="example jumbotron">
+            <p class="css-code">input:in-range{ ... } input:out-of-range{ ... }</p>
+            <hr>
+            <form action="" id="form1">
+                <ul> Range Selector Example
+                    <li>
+                        <input id="value1" name="value1" type="number" placeholder="1 to 10" min="1" max="10" value="12">
+                        <label for="value1">Your value is </label>
+                    </li>
+                </ul>
+            </form>
+        </div>
     </div>
     <hr>
 
-    <div id="example_12" class="container-fluid selector_example">
-        <h5>Hooman is not special. Hooman will not be selected!</h5>
-        <p id="cat">cat</p>
-        <p id="dog">dog</p>
-        <p id="elephant">elephant</p>
-        <p id="monkey">monkey</p>
-        <p id="walrus">walrus</p>
-        <p id="hooman">hooman</p>
+    <div id="example_12" class="container-fluid selector_examples">
+        <p class="notes">
+            NOT() PSEUDOCLASS:
+            SPECIFY WHAT YOU WANT "NOT" SELECTED WITHIN THE PARENTHESIS
+        </p>
+        <div class="example jumbotron">
+            <p class="css-code">p:not(#hooman) { ... }</p>
+            <hr>
+            <h5>Hooman is not special. Hooman will not be selected!</h5>
+            <p id="cat">cat</p>
+            <p id="dog">dog</p>
+            <p id="elephant">elephant</p>
+            <p id="monkey">monkey</p>
+            <p id="walrus">walrus</p>
+            <p id="hooman">hooman</p>
+        </div>
     </div>
     <hr>
 
-    <div id="example_13" class="container-fluid selector_example">
+    <div id="example_13" class="container-fluid selector_examples">
         <h5>Doggos are the coolest. so are elephants. and dolphins. <small><i>everythingelseisprettylame-</i></small></h5> 
         <p id="cat">cat</p>
         <p id="dog" class="pick_me">dog</p>
