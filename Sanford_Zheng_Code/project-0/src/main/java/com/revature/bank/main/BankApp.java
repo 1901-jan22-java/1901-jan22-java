@@ -67,9 +67,8 @@ public class BankApp {
 				username = s.nextLine();
 				validUser = MyUtils.isValidEmail(username);
 				keepTrying = !username.equalsIgnoreCase("exit");
-				if(!validUser && keepTrying) {
+				if(!validUser && keepTrying)
 					System.out.println(BankAppHelper.USERNAME_INVALID);
-				}
 			}
 			while(!validPass && keepTrying) {
 				System.out.print(BankAppHelper.CREATE_PASSWORD_PROMPT);
@@ -105,12 +104,13 @@ public class BankApp {
 			while(!validUser && keepTrying) {
 				System.out.println(BankAppHelper.LOGIN_USERNAME_PROMPT);
 				username = s.nextLine();
+				
 				validUser = MyUtils.isValidEmail(username);
 				keepTrying = !username.equalsIgnoreCase("exit");
-				if(!validUser) {
-					System.out.println(BankAppHelper.USERNAME_INVALID);
-				}
+				
+				if(!validUser) System.out.println(BankAppHelper.USERNAME_INVALID);
 			}
+			
 			while(!validPass && keepTrying) {
 				System.out.println(BankAppHelper.LOGIN_PASSWORD_PROMPT);
 				password = s.nextLine();
@@ -119,6 +119,7 @@ public class BankApp {
 				if(!validUser)
 					System.out.println(BankAppHelper.PASSWORD_INVALID);
 			}
+			
 			if(validUser && validPass && keepTrying) {
 				try {
 					if(bi.signIn(username, password)) {
@@ -131,6 +132,7 @@ public class BankApp {
 					System.out.println(BankAppHelper.LOGIN_USER_FAILURE);
 				}
 			}
+			
 		}
 		System.out.println(BankAppHelper.LOGIN_USER_EXIT);
 		return false;
