@@ -21,6 +21,7 @@ public class App {
     				+ "\n2. Log in"
     				+ "\n3. View Associate Statistics"
     				+ "\n4. Quit"
+    				+ "\n5. Update Grade for Associate"
     				);
     		String in = scan.nextLine();
     		int op = 0;
@@ -38,6 +39,7 @@ public class App {
     	     case 2: logIn(); break;
     		case 3: getStats(); break;
     		case 4: System.exit(0);
+    		case 5: UpdateAssociateGrade(); break;
     		default: System.out.println("You must enter a number: either 1, 2, or 3!"); welcome(); break;
     		}
 		
@@ -45,7 +47,26 @@ public class App {
 	}
 	
 	
-    public static void getStats() {
+    public static void UpdateAssociateGrade() {
+    	
+
+        System.out.println("Enter Associate's email for the grade: ");
+        String email = scan.nextLine();
+        System.out.println("Enter grade Percentage: ");
+        int grade = scan.nextInt();
+    	try {
+        	
+    	service.updateAssociateGrade(email, grade);
+    	} catch (Exception e) {
+            System.out.println("Unable to get data, try again....");
+            
+        }
+        return;
+		
+	}
+
+
+	public static void getStats() {
     	try {
     	
     	service.getAllAssociates();

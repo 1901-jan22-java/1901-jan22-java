@@ -86,15 +86,15 @@ public class DataAccessObject {
 		
 	}
 	
-	public void updateAssociateGrade(int grade, int aid) {
+	public void updateAssociateGrade(String email, int grade) {
 		
 		   try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 	            conn.setAutoCommit(false);
-	            String sql = "UPDATE ASSOCIATE set grade = ? WHERE aid = ?";
+	            String sql = "UPDATE ASSOCIATE set grade = ? WHERE email = ?";
 	            
 	            PreparedStatement ps = conn.prepareStatement(sql);
 	            ps.setInt(1, grade);
-	            ps.setInt(2,aid);
+	            ps.setString(2,email);
 	            ps.executeUpdate();
 	            
 		   } catch (SQLException e) {
@@ -105,9 +105,9 @@ public class DataAccessObject {
 		
 	
 	
-	public static void main(String[] args) {
-		DataAccessObject dao = new DataAccessObject();
-		dao.updateAssociateGrade(100, 8);
-	}
+//	public static void main(String[] args) {
+//		DataAccessObject dao = new DataAccessObject();
+//		dao.updateAssociateGrade(100, "seriouslydoggish@gmail.com");
+//	}
 
 }
