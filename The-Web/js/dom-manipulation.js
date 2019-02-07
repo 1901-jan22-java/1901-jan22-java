@@ -5,6 +5,73 @@ window.onload = function(){
         .addEventListener('click', runFizzBuzz);
 }
 
+/*
+DOM MANIPULATION AND SELECTION 
+- interact with DOM elements using JavaScript
+
+Finding Elements 
+document.getElementById(id)
+document.getElementsByTagName(name)
+document.getElementsByClassName(name)
+
+Changing Elements 
+e.innerHTML = 
+e.[attribute] =
+e.setAttribute(attr, value);
+e.style
+
+Addding/deleting elements 
+document.createElement
+e.appendChild
+e.removeChild
+e.replaceChild 
+document.write(text)
+
+various relationships between elements used to navigate:
+parentNode, childNodes[index], firstChild, lastChild, nextSibling, previousSibling
+
+EVENT HANDLING
+- Events are occurrences in our clientside environment that we can 
+respond to progarammatically 
+
+Types of events 
+input - blur, change, select, submit, reset, keydown, keypress, keyup..
+mouse - mousedown, mouseover, mouseout, mouseup
+click - click, dblclick
+load - onload, onrelease, onerror
+
+Event listeners
+- in line
+(in html)
+<div onclick = "doThings"><div>
+(in JS)
+function doThings(){ // some functinoality }
+--> not preffered; tightly couples your script 
+
+- method 
+[element].onclick = function(){ //some functionality}
+
+- event listener -> long form 
+[element].addEventListener(event, function, [useCapture])
+- event = type of event 
+- function = can be defined in the parameter but is usually a call 
+to a separate function. If you are calling a function from 
+the param, do NOT use (), this will immediately invoke the function 
+and will render the event listener useless 
+- useCapture - optional. default = false. This is how your listener
+will deal with event propagation, or how functions will be carried 
+out in the event of more than one event listener being applied to a 
+particular element (think nested elements, each with their own event
+listener). useCapture = true means that the events will "capture 
+inwards", or the listener applied to the outermost element will 
+happen first then propagate inwards. Whereas useCapture = false, the
+default option, means that events will "bubble outwards", or the 
+event applied to this particular element will happen first, 
+then the events applied to the parent elements 
+
+
+*/
+
 
 function fizzBuzz(n){
     /*
