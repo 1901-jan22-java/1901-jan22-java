@@ -8,7 +8,7 @@ public class AssociatesFactorloginTest {
 
 	@Test
 	public void test() {
-		assertTrue(AssociatesFactory.Login("malik1@gmail.com", "123") > 0);
+		assertTrue(AssociatesFactory.Login("malik1@gmail.com", "123") != null);
 	}
 
 }
