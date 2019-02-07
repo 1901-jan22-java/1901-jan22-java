@@ -48,10 +48,10 @@ end;
 /
 
 create or replace procedure getAssociate(
-    u_id in number
+    u_id in number, cursorParam out SYS_REFCURSOR
 )
 as
 begin
-    select * from Associates where a_id = u_id;
+    open cursorparam for select * from Associates where a_id = u_id;
 end;
 /
