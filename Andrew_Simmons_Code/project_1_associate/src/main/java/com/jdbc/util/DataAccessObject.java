@@ -24,7 +24,8 @@ public class DataAccessObject {
 					rs.getString("GRADE")
 			};
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
+			
 		}
 			return null;
 	}
