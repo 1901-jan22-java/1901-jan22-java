@@ -20,8 +20,8 @@ public class App {
     				+ "\n1. Create new account"
     				+ "\n2. Log in"
     				+ "\n3. View Associate Statistics"
-    				+ "\n4. Quit"
     				+ "\n5. Update Grade for Associate"
+    				+ "\n4. Quit"
     				);
     		String in = scan.nextLine();
     		int op = 0;
