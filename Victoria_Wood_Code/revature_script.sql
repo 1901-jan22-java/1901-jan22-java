@@ -138,7 +138,8 @@ BEGIN
 END;
 /
 
-
+insert into Associate (firstname, lastname, email, password, grade, adminuser) values ('Victoria', 'Wood', 'vwood@gm.slc.edu', '1234', 99, 0);
+insert into Associate (firstname, lastname, email, password, grade, adminuser) values ('V', 'Wood', 'torimadera@me.com', 'lol', 100, 1);
 
 --DUAL
 /*
