@@ -12,9 +12,6 @@ type_id number(10),
 type_name varchar2(20) UNIQUE NOT NULL,
 PRIMARY KEY (type_id));
 
-DROP Table Account;
-
-
 CREATE TABLE Account(
 account_number number(38),
 client_id number(15) NOT NULL,

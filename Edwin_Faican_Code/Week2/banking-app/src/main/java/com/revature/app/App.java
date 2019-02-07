@@ -6,6 +6,7 @@ import java.util.Scanner;
 import org.apache.log4j.Logger;
 import com.revature.account.Account;
 import com.revature.client.Client;
+import com.revature.exceptions.UsernameException;
 import com.jdbc.dao.ClientRepository;
 import com.jdbc.dao.AccountRepository;
 
@@ -43,7 +44,7 @@ public class App {
 	
 	//Create user accounts for a client to be able to log in. Save the username, password and personal information 
 	//To the database. 
-	public static Client createUserAccount(Scanner console, ClientRepository cliRepo) {
+	public static Client createUserAccount(Scanner console, ClientRepository cliRepo)  {
 		String username = "";
 		String pass = "";
 		boolean success = false;
@@ -53,11 +54,17 @@ public class App {
 		while(!success) {
 			username = console.nextLine();
 			logger.debug(username);
-			if(cliRepo.findClient(username).getFirstname() != null) {
-				System.out.print("The username you have chosen is already taken.\nTry again with a different username: ");
-			} else {
-				success = true;
+			try {
+				if(cliRepo.findClient(username).getFirstname() != null) {
+					logger.debug("The username you have chosen is already taken.\nTry again with a different username: ");
+					throw new UsernameException(username);
+				} else {
+					success = true;
+				}
+			} catch (UsernameException e) {
+
 			}
+
 		}
 		
 		success = false;
@@ -280,7 +287,7 @@ public class App {
 		
 		String pass = "";
 		
-		//Confirm identical paswords. 
+		//Confirm identical passwords. 
 		while(!success) {
 			System.out.print("Please enter a desired password: ");
 			pass = console.nextLine();
@@ -386,7 +393,7 @@ public class App {
 			}
 			System.out.println("----");
 			System.out.println("Welcome, " + client.getFirstname() + "!");
-			System.out.println("What would you like to do?\n\nWithdraw (W)\nDeposit (D)\nView Account (V)\nChoose Another Account (A)\nAccount Settings (S)\nLogout (L)\nTerminate Application (T)\n");
+			System.out.println("What would you like to do?\n\nWithdraw (W)\nDeposit (D)\nView Account Balance (V)\nChoose Another Account (A)\nAccount Settings (S)\nLogout (L)\nTerminate Application (T)\n");
 			String option = console.nextLine().toUpperCase();
 			
 			switch(option) {
