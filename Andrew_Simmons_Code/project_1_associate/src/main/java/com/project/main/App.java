@@ -36,7 +36,7 @@ public class App {
     		case 1: createAccount();  break;
     	
     	     case 2: logIn(); break;
-    		//case 3: getStats(); break;
+    		case 3: getStats(); break;
     		case 4: System.exit(0);
     		default: System.out.println("You must enter a number: either 1, 2, or 3!"); welcome(); break;
     		}
@@ -45,7 +45,20 @@ public class App {
 	}
 	
 	
-    public static void logIn() {
+    public static void getStats() {
+    	try {
+    	
+    	service.getAllAssociates();
+    	} catch (Exception e) {
+            System.out.println("Unable to get data, try again....");
+            
+        }
+        return;
+		
+	}
+
+
+	public static void logIn() {
         System.out.println("Enter your email: ");
         String email = scan.nextLine();
         System.out.println("Enter your password: ");

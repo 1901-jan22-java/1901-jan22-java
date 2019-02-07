@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DataAccessObject {
 	
@@ -47,6 +48,41 @@ public class DataAccessObject {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+	}
+	//String fn, String ln, String email, String password, int grade
+	
+	public void getAllAssociates() {
+		
+		  try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+			  
+			  String query = "SELECT * FROM ASSOCIATE";
+			  Statement statement = conn.createStatement();
+			  ResultSet rs = statement.executeQuery(query);
+			  while(rs.next()) {
+				  String firstname = rs.getString("FIRSTNAME");
+				  System.out.println(firstname);
+				  String lastname = rs.getString("LASTNAME");
+				  System.out.println(lastname);
+				  String eml = rs.getString("EMAIL");
+				  System.out.println(eml);
+				  String pw = rs.getString("PASSWORD");
+				  System.out.println(pw);
+				  String grades = rs.getString("GRADE");
+				  System.out.println(grades);
+			  }
+			  
+		  } catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	        	
+	
+		
+		
+		
+	
+		
+		
 		
 	}
 	
