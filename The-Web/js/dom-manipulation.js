@@ -21,7 +21,7 @@ e.setAttribute(attr, value);
 e.removeAttribute(attr);
 e.style
 
-Addding/deleting elements 
+Adding/deleting elements 
 document.createElement
 e.appendChild
 e.removeChild
