@@ -22,8 +22,6 @@ BEGIN
 END;
 /
 
-SELECT * FROM bankuser;
-SELECT * FROM bankaccount;
 
 drop table bankaccount;
 drop table bankuser;
@@ -47,3 +45,8 @@ BEGIN
     WHERE bankaccount.account_number = accID;
 END;
 /
+
+
+SELECT * FROM bankuser;
+SELECT * FROM bankaccount;
+commit;
