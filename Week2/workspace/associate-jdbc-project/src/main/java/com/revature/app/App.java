@@ -38,7 +38,17 @@ public class App {
 		}
 	}
 	
-	static void createAccount() {}
+	static void createAccount() {
+		System.out.println("Welcome! Enter your email address");
+		String email = scan.nextLine();
+		boolean valid = service.isUnique(email);
+		while(!valid) {
+			System.out.println("Sorry that email address is taken, please enter another");
+			email = scan.nextLine();
+			valid = service.isUnique(email);
+		}
+		System.out.println(); /////////////////////// stopped here will continue 
+	}
 	static void logIn() {
 		System.out.println("Welcome back! Please enter your email address");
 		String email = scan.nextLine();
