@@ -7,6 +7,7 @@ window.onload = function(){
 
 /*
 DOM MANIPULATION AND SELECTION 
+Document Object Model
 - interact with DOM elements using JavaScript
 
 Finding Elements 

@@ -1,0 +1,11 @@
+JSON
+JavaScript Object Notation
+
+-plain text both computer and human readable data interchange format
+-modeled after but NOT the same thing as JS objects
+-cannot represent functions or undefined values
+-keys must be in double quotes
+
+application program interface (API)
+descriptions of what an application has to offer
+at the interface level, what applications are available 
