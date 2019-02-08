@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        Forms are special HTML elemetns thatallow you to send SYCHRONOUS requests
+        They have action attributes which hold the url of the server location to send the request
+        They have method attributes which are the type of http method you want to send
+        Omitting the method attribute gves the form the default method type of GET
+        Input fields in a form must use the name attribute
+    -->
+
+    <form action="/test">
+        <input type="text" name="username" placeholder="Username">
+        <br>
+        <input type="password" name="pw" >
+        <input type="submit" value="log In!">
+    </form>
+</body>
+</html>
