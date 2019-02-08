@@ -112,7 +112,46 @@
     
 
     <script>
-        
+        //WELCOME TO AJAX
+        window.onload = function(){
+            $('#go').on('click', getSW);
+        }
+
+        function getSW(){
+            var id = $('#swID').val();
+            var url = `https://swapi.co/api/people/${id}/`;
+
+            //AJAX
+            //STEP 1 - create XHR
+            var xhr = new XMLHttpRequest();
+            /*
+            STEP 2 - Define onreadystatechange functionality 
+            really, here we define what we want to do with the request
+            does not have to be written directly after step 1 but is 
+            common to indicate that after we send our request we move on
+            with whatever code comes next
+            */
+           xhr.onreadystatechange = function(){
+               console.log(xhr.readyState)
+               if(xhr.readyState == 4 && xhr.status == 200){
+         
+                   jedi = JSON.parse(xhr.responseText);
+                   $('#output').html(jedi.name);
+               }
+           };
+
+           //STEP 3 - open request
+           xhr.open('GET', url); //(METHOD, URL, ASYNCH, USR, PWD)
+
+           //STEP 4 - SEND
+           xhr.send();
+
+           console.log('SENT REQUEST. RESPOSE IS ' + xhr.responseText);
+
+
+
+
+        }
         
         
     </script>
