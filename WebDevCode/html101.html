@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+
+<!--- 
+This is a comment!
+HTML - hypertext markup language is the standard language
+for structuring web pages
+It is a series of elements represented by tags, their attributes, and their contents.
+
+For every HTML page, there must be a descriptor of what kind of document it is for the browser to proerly 
+interpret it HTML 5 rids itself of the 
+long doctype description and simply uses <!DOCTYPE html> to signify what it is
+--->
+<html lang="en">
+<head>
+    <!--- This is where any metadata goes. We can also bring in external files (js, css, etc) inside of the head tag
+        Only two things in this tag will be explicitly seen on your page:
+        The title is what gets displayed on your tab, and the optional
+        icon is the image 
+    
+    
+    -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>HTML 101</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+
+  <style>
+      /*
+      */
+     li {
+         font-style: italic;
+         color:crimson
+
+
+     }
+  
+  
+  .class{
+      border: 3px dotted paleturquoise;
+      border-radius: 5px;
+      color: rgb(154, 20, 243);
+
+  }
+
+  /* id select */
+  #second{
+      color: yellow;
+  }
+
+  /*Various other selectors
+  
+  
+  E1 + E2
+ adjcant siblings selectors select all of element e2 that immediately follow the element type e1  
+  
+  */
+  input[type=checkbox]:checked + label
+  {
+      background-color: red
+
+  }
+
+  
+  
+  </style>
+  <link rel="stylesheet" href="css101.css">
+
+</head>
+<body>
+
+<button type = "button" onclick=
+"document.getElementById('demo').innerHTML = Date()">
+Click me to display Date and Time.</button>
+<p id = "demo"></p>
+
+    <!---- Content to be seen goes here!--->
+     <h1>About HTML</h1>
+     <h2 id="second">About HTML</h2>
+     <h3 id="third">About HTML</h3>
+     <h4 class="class">About HTML</h4>
+     <h5> About HTML
+     </h5>
+     <h6>About HTML</h6>
+     <p> About HTML (p)</p>
+     About HTML (nobounding element)
+    
+     <h4>Lists</h4>
+     There are two kinds of lists, ordered and unordered
+
+     <ul>
+        <li>One Item</li>
+        <li class="class">Second Item</li>
+
+     </ul>
+
+
+     <li>This is outside of any UL TAG</li>
+        <ol>
+            <li>One</li>
+            <li>Two</li>
+            <li>so on and so forth</li>
+        </ol>
+        <table>
+
+
+            This is my table
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Second Name</th>
+                    <th>School</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Andrew</td>
+                    <td>Simmons</td>
+                    <td>Westbury</td>
+                </tr>
+
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <br>
+
+            The following HR and BR are self closing tags
+        <hr>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <hr>
+        <br>
+        <br>
+        <iframe src="http://www.revature.com" frameborder="5px"></iframe>
+
+
+        <h4 class="class">Input Fields</h4>
+        Input fields allows users to enter information through your html page
+        While it is common to use these with forms, you do <b>not</b> have to use these
+        inside of forms
+        <br>
+
+        <input type="text" id="textInput" name="textInput" 
+        placeholder="This is a text input field">
+        <br>
+        <input type="number" name="100" id=""> <br>
+        <input type="password" name="Password input" id=""> <br>
+        <input type="radio" name="role" value="Associate"> Associate <br>
+        <input type="radio" name="role" value="Trainer"> Trainer <br>
+
+        Countries Traveled:
+        <input type="checkbox" name="Countries" id="Mexico" value="Mexico">
+        <label for="Mexico"></label> Mexico <br>
+        <input type="checkbox" name="Countries" id="Cuba" value="Cuba"> 
+        <label for="Cuba"></label> Cuba <br>
+</body>
+</html>
