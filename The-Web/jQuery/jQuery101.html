@@ -142,16 +142,30 @@
             Examples
         </h3>
 		
-			<div class="col">
-				<h3>To Buy:</h3>
-				<br>
-				<ul id="toBuy">
-					<li id="one" class="test">ribs</li>
-					<li id="two" class="test">fruits</li>
-					<li id="three" class="test">wine</li>
-				</ul>
-			</div>
-		
+        <div class="jumbotron">
+                <input type="text" id="newItem" class="form-control"
+                    placeholder="new item..." /> <br>
+                <button id="add" class="btn btn-primary">Add Item</button>
+                <div class="row">
+       <div class="col">
+                        <h3>To Buy:</h3>
+                        <br>
+                        <ul id="toBuy">
+                            <li id="one" class="test">ribs</li>
+                            <li id="two" class="test">fruits</li>
+                            <li id="three" class="test">wine</li>
+                        </ul>
+                    </div>
+        
+                    <div class="col">
+                        <h3>Purchased:</h3>
+                        <br>
+                        <ul id="bought">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr>
         <div class="jumbotron">
          
 
@@ -167,26 +181,66 @@
 
 
 <script>
-    //will write script directly in HTML
-    window.onload = function(){
-        $('#add').on('click', function(){
-            var text = $('#newItem').val();
-            var item = $(`<li>${text}</li>`);
-            /*
-            COULD use the standard create element method
-            var item = document.createElement('li');
-            item.innerHTML = text;
-            */
-            $('#toBuy').append(item);
-            $('#newItem').val('');
-        });
+//will write script directly in HTML
+window.onload = function(){
+    $('#add').on('click', function(){
+        var text = $('#newItem').val();
+        var item = $(`<li>${text}</li>`);
+        /*
+        COULD use the standard create element method as follows
+          var item = document.createElement('li');
+          item.innerHTML = text;
+        */
+        $('#toBuy').append(item);
+        $('#newItem').val('');
+    });
 
-        $('#toBuy').on('click', 'li', function(){
-            $('#bought').append(this);
-        });
-    }
+     $('#toBuy').on('click', 'li', function(){
+		$('#bought').append(this);
+    });
+    
+    
+setInterval(function () {
+    var seconds = new Date().getSeconds();
+    console.log('SECONDS ' + seconds);
+    var sdegree = seconds * 6;
+    var srotate = "rotate(" + sdegree + "deg)";
+
+    $("#sec").css({ "-moz-transform": srotate, "-webkit-transform": srotate });
+
+}, 1000);
+
+
+setInterval(function () {
+    var hours = new Date().getHours();
+    console.log("HOUR " + hours);
+    var mins = new Date().getMinutes();
+    var hdegree = hours * 30 + (mins / 2);
+
+    var hrotate = "rotate(" + hdegree + "deg)";
+
+    $("#hour").css({ "-moz-transform": hrotate, "-webkit-transform": hrotate });
+
+}, 1000);
+
+
+setInterval(function () {
+    var mins = new Date().getMinutes();
+    console.log("MINUTES: " + mins);
+    var mdegree = mins * 6;
+    var mrotate = "rotate(" + mdegree + "deg)";
+
+    $("#min").css({ "-moz-transform": mrotate, "-webkit-transform": mrotate });
+
+}, 1000);
+
+
+}
+
 
 </script>
+
+
   
 </body>
 
