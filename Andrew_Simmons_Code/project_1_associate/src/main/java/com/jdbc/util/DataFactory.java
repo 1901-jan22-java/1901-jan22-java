@@ -76,7 +76,7 @@ public class DataFactory {
 
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("You have not saving or checking account.");
 		}
 		RevatureBankApp.acctPage(email);
 	}
