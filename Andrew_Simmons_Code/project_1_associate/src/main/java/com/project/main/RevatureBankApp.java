@@ -29,20 +29,20 @@ public class RevatureBankApp {
 			try {
 				op = Integer.parseInt(in);
 			} catch (NumberFormatException e) {
-				System.out.println("You must enter a number: either 1, 2, or 3!");
+				System.out.println("You must enter a number: either 1, 2, or 3!");  //User must select these numbers or it will be prompt to ask you again.
 				welcome();
 				return;
 			}
 			switch (op) {
 			case 1:
-				createAccount();
+				createAccount(); /// Create a new user to be entered into the database
 				break;
 
 			case 2:
-				logIn();
+				logIn(); //Log into the account menu with email and password registered in the database
 				break;
 			case 3:
-				System.exit(0);
+				System.exit(0); //Stops Application
 
 			default:
 				System.out.println("You must enter a number: either 1, 2, or 3!");
@@ -72,7 +72,7 @@ public class RevatureBankApp {
 
 	public static void acctPage(String email) {
 
-		String temp = email; // will use this for the loop
+		String temp = email; // stores the user into a var for checking purposes 
 
 		while (true) {
 			System.out.println("Welcome current user: " + email + "!\n");
@@ -100,25 +100,25 @@ public class RevatureBankApp {
 			}
 			switch (op) {
 			case 1:
-				service.createCheckingAccount(temp);
+				service.createCheckingAccount(temp); //Creates the account type Checkings for the user that is log in
 				break;
 			case 2:
-				service.createSavingAccount(temp);
+				service.createSavingAccount(temp);  //Create the account type Saving for the user that is log in
 				break;
 			case 3:
-				CheckingWithdrawMoney(temp);
+				CheckingWithdrawMoney(temp); // Allows user to be able to withdraw money from the checking account
 				break;
 			case 4:
-				CheckingDepoistMoney(temp);
+				CheckingDepoistMoney(temp); // Allows user to be able to Deposit money from the checking account
 				break;
 			case 5:
-				SavingWithdrawMoney(temp);
+				SavingWithdrawMoney(temp); // Allows user to be able to withdraw money from the Saving account
 				break;
 			case 6:
-				SavingDepoistMoney(temp);
+				SavingDepoistMoney(temp); // Allows user to be able to withdraw money from the Saving account
 				break;
 			case 7:
-				ViewCurrentAmountOnAccounts(temp);
+				ViewCurrentAmountOnAccounts(temp); // Allows user to be able to see their amount in their account types
 			case 8:
 				System.exit(0);
 
