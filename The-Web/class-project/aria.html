@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <title>Aria</title>
+    <style>
+        div{
+            font-style:oblique;
+            font-size: 15px;
+            color:black;
+            background-color:honeydew;
+            border-color:midnightblue;
+            border-radius:25px;
+            padding:20px;
+            
+        }
+        
+        img{
+            max-width:100%;
+            width:auto;
+            height:auto;
+        }
+        #headingone{
+            font-style:oblique;
+            border-radius:15px;
+            padding:10px;
+            color: midnightblue;  
+        }
+    </style>
+  </head>
+  <body>
+        <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                  <h1 class="display-4">ARIA</h1>
+                  <p class="lead">This Page will introduce the very basic concepts of ARIA</p>
+                </div>
+              </div>
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+          <div class="card-header" id="headingOne">
+            <h2 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Introduction to Aria
+              </button>
+            </h2>
+          </div>
+      
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+                    ARIA, the Accessible Rich Internet Applications Suite, defines a way to make Web content and Web applications more accessible to people with disabilities.
+                     It especially helps with dynamic content and advanced user interface controls developed with Ajax, HTML, JavaScript, and related technologies.
+                     Currently certain functionality used in Web sites is not available to some users with disabilities, especially people who rely on screen readers and people who cannot use a mouse.
+                     ARIA addresses these accessibility challenges, for example, by defining new ways for functionality to be provided to assistive technology. With WAI-ARIA, developers can make advanced Web applications accessible 
+                     and usable to people with disabilities.</br>
+              <img src="https://lh4.googleusercontent.com/uHgXMIi78B3-b5SRbozWtwXpeerZkn3bG0Gr_4DPgGR6vmd36-JTp59brJUXFKSCRgNmpyv1FKWQJUrzEmC0UfdgKHE_MAsdXY-l3C90Tfdnpp5m7GecLp1wYNCpikIDFh2dp3KF" 
+              alt="DOM";>
+            </div>
+            <div>
+                
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h2 class="mb-0">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Using Aria Attributes and Features
+              </button>
+            </h2>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body">
+                    ARIA’s three main features:
+                    Roles - it defines what an element does 
+                    i.e     role=”navigation”(<nav>)
+                    Properties - it defines properties if elements 
+                    i.e aria-required=”true”
+                    States - special properties that define the current conditions of elements 
+                                    I.e     aria-disabled=”true”.
+                ARIA works by changing and augmenting the standard DOM accessibility tree. However, ARIA doesn’t augment any of the element’s inherent behavior.
+                Here is an example of some code using ARIA 
+                <code>
+                         tabindex="0" class="checkbox" role="checkbox" checked aria-checked="true">
+                                Receive promotional offers
+                            
+                </code>
+            
+                                     
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-header" id="headingThree">
+            <h2 class="mb-0">
+              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                Aria Capabilities 
+              </button>
+            </h2>
+          </div>
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+            <div class="card-body">
+                    Can add semantics to elements where no native semantics exist.
+                    Can express semantic patterns that do not exist in HTML like a menu or a tab.
+                    The role attribute can tell assistive technologies that the HTML element used is not actually what the element name suggest, but something else.
+             Not intended to influence browser behavior.
+                    <img src="https://lh4.googleusercontent.com/0Bh7rEx6T11NPpmXjo86HLsLkiPp7XPWtIfoZl2GhN-QRSb1foBsks0Qz6VlgIr-uR9A99E8XFxtIqRq1Nvv35TgD3SLH1IPPr__eQ0Yugrb44d-bF1YXBj1RnLA-Q9jZWDo3Qc_" 
+              alt="Roles";>
+                    
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  </body>
+</html>
