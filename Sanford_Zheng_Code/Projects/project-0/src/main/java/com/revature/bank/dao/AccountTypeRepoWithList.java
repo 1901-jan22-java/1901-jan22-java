@@ -1,12 +1,13 @@
 package com.revature.bank.dao;
 
 import com.jdbc.util.ConnectionFactory;
+import org.apache.log4j.Logger;
 
 import java.sql.*;
 import java.util.HashMap;
 
 /**
- * This will probably be deprecated.
+ * This will probably be deprecated. I think this is better probably though...
  *
  * @deprecated
  * @author Sanford Zheng
@@ -15,6 +16,7 @@ import java.util.HashMap;
 
 public class AccountTypeRepoWithList extends AccountTypeRepository{
 
+    private static final Logger logger = Logger.getLogger(AccountTypeRepoWithList.class);
     private static final HashMap<Integer, String> ACCOUNT_TYPES = new HashMap<>();
 
     static {
@@ -39,11 +41,12 @@ public class AccountTypeRepoWithList extends AccountTypeRepository{
     public static void addAccountTypeWithMap(String type_name) {
         if(ACCOUNT_TYPES.containsValue(type_name)) return;
         try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-            String query = "{call add_bank_account_types(?);}";
+            String sql = "insert into bank_account_types(account_type) value(?)";
 
-            CallableStatement cs = conn.prepareCall(query);
+            PreparedStatement cs = conn.prepareStatement(sql);
             cs.setString(1, type_name);
             cs.execute();
+            conn.commit();
         } catch( SQLException e ) {
             logger.error("SQLException occurred when adding account type: " + type_name, e);
         }

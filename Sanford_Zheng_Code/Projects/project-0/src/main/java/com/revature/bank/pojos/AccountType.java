@@ -9,6 +9,14 @@ public class AccountType {
         this.type = type;
     }
 
+    @Override
+    public String toString() {
+        return "AccountType{" +
+                "typeID=" + typeID +
+                ", type='" + type + '\'' +
+                '}';
+    }
+
     public Integer getTypeID() {
         return typeID;
     }
@@ -25,5 +33,4 @@ public class AccountType {
         this.type = type;
     }
 
-    
 }

@@ -87,7 +87,6 @@ public class AccountRepository {
 						rs.getDouble(4)
 				));
 			}
-
 		} catch (SQLException e) {
 			logger.error("SQLException has occurred in getAccounts("+id+")!", e);
 		}
@@ -123,7 +122,7 @@ public class AccountRepository {
 			logger.error("How did this happen? Overflow?", e);
 			return false;
 		} catch(NoSuchBankAccountException e) {
-			logger.error("NoSuchBankAccountException occured in depositBalance("+acc_id+", "+amount+")!", e);
+			logger.error("NoSuchBankAccountException occurred in depositBalance("+acc_id+", "+amount+")!", e);
 			return false;
 		}
 		return true;
@@ -133,7 +132,8 @@ public class AccountRepository {
 		InsufficientFundsException,
 		SQLException, NoSuchBankAccountException
 	{
-		
+		if(amount > getAccount(acc_id).getBalance())
+			throw new InsufficientFundsException();
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			String sql = "{call balance_tx(?)}";
 			
@@ -144,8 +144,6 @@ public class AccountRepository {
 			int updates = cs.executeUpdate();
 			
 			if(updates < 1) throw new NoSuchBankAccountException();
-			
-			conn.commit();
 		}
 	}
 	

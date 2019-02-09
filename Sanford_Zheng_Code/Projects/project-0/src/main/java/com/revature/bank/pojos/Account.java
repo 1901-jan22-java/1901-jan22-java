@@ -16,7 +16,7 @@ public class Account {
 		this.typeID = typeID;
 		this.balance = balance;
 	}
-	/* Overrided Methods */
+	/* Overridden Methods */
 
 	@Override
 	public String toString() {

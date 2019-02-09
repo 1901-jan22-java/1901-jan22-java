@@ -3,6 +3,7 @@ package com.revature.bank.app;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.revature.bank.pojos.User;
 import org.apache.log4j.Logger;
 
 import com.revature.bank.dao.AccountRepository;
@@ -19,7 +20,7 @@ public class BankApp {
 	private static final Logger logger = Logger.getLogger(BankApp.class);
 	
 	private BankingInterface bi;
-	private ArrayList<Account> accounts;
+//	private ArrayList<Account> accounts;
 	private Scanner s;
 
 	public BankApp(){
@@ -30,10 +31,9 @@ public class BankApp {
 	public static void main(String[] args) {
 		BankApp ba = new BankApp();
 		ba.banking();
-		ba.close();
 	}
 
-	private void banking(){
+	public void banking(){
 		boolean exit = false;
 		while(!exit) {
 			System.out.print(BankAppHelper.MAIN_MENU);
@@ -45,7 +45,6 @@ public class BankApp {
 					break;
 				case(2):
 					if(login()) {
-						interfaceSetup();
 						session();
 					}
 					break;
@@ -53,6 +52,8 @@ public class BankApp {
 					exit = true;
 			}
 		}
+		System.out.println(BankAppHelper.MAIN_MENU_EXIT);
+		close();
 	}
 
 	private boolean createNewUser(){
@@ -75,8 +76,8 @@ public class BankApp {
 				password = s.nextLine();
 				keepTrying = !password.equalsIgnoreCase("exit");
 				validPass = MyUtils.isValidPassword(password);
-				if(!validUser && keepTrying)
-					System.out.print(BankAppHelper.PASSWORD_INVALID);
+				if(!validPass && keepTrying)
+					System.out.println(BankAppHelper.PASSWORD_INVALID);
 			}
 			if(validUser && validPass && keepTrying) {
 				try {
@@ -86,7 +87,9 @@ public class BankApp {
 					return true;
 				} catch(UnableToGenerateKeyException e) {
 					logger.error("UnableToGenerateKeyException occurred in creating user!", e);
-					System.out.println(BankAppHelper.CREATE_USER_FAILURE);
+					System.out.println(BankAppHelper.createUserFailure(username, MyUtils.obfuscate(password, 3)));
+					validUser = false;
+					validPass = false;
 				}
 			}
 		}
@@ -102,52 +105,46 @@ public class BankApp {
 		String password = "";
 		while(keepTrying) {
 			while(!validUser && keepTrying) {
-				System.out.println(BankAppHelper.LOGIN_USERNAME_PROMPT);
+				System.out.print(BankAppHelper.LOGIN_USERNAME_PROMPT);
 				username = s.nextLine();
 				
 				validUser = MyUtils.isValidEmail(username);
 				keepTrying = !username.equalsIgnoreCase("exit");
 				
-				if(!validUser) System.out.println(BankAppHelper.USERNAME_INVALID);
+				if(!validUser && keepTrying) System.out.println(BankAppHelper.USERNAME_INVALID);
 			}
 			
 			while(!validPass && keepTrying) {
-				System.out.println(BankAppHelper.LOGIN_PASSWORD_PROMPT);
+				System.out.print(BankAppHelper.LOGIN_PASSWORD_PROMPT);
 				password = s.nextLine();
 				validPass = MyUtils.isValidPassword(password);
 				keepTrying = !password.equalsIgnoreCase("exit");
-				if(!validUser)
+				if(!validUser && keepTrying)
 					System.out.println(BankAppHelper.PASSWORD_INVALID);
 			}
 			
 			if(validUser && validPass && keepTrying) {
 				try {
-					if(bi.signIn(username, password)) {
-						System.out.println(BankAppHelper.LOGIN_USER_SUCCESS);
-						System.out.println(BankAppHelper.LOGIN_USER_EXIT);
-						return true;
-					}
-				} catch(NoSuchBankUserException e) {
-					logger.error("UnableToGenerateKeyException occurred in creating user!", e);
+					bi = new BankingInterface(new User(username, password));
+					System.out.println(BankAppHelper.LOGIN_USER_SUCCESS);
+					return true;
+				} catch (NoSuchBankUserException e) {
+					logger.error("NoSuchBankUserException occurred while signing in!", e);
 					System.out.println(BankAppHelper.LOGIN_USER_FAILURE);
+					validUser = false;
+					validPass = false;
 				}
 			}
-			
 		}
 		System.out.println(BankAppHelper.LOGIN_USER_EXIT);
 		return false;
 	}
 
-	private boolean interfaceSetup(){
-		boolean res = bi.setUp();
-		accounts = bi.getAccounts();
-		return res;
-	}
 
 	private void session(){
 		boolean exit = false;
 		while(!exit){
-			System.out.println(BankAppHelper.sessionMenu(bi));
+			System.out.print(BankAppHelper.sessionMenu(bi));
 			int selection = s.nextInt();
 			s.nextLine();
 			switch(selection) {
@@ -158,29 +155,31 @@ public class BankApp {
 				exit = true;
 				break;
 			default:
-				if(selection > 2 && selection < accounts.size()+3) {
+				if(selection > 2 && selection < bi.getAccounts().size()+3) {
 					editAccount(selection - 3);
 				} else 
-					System.out.println("Invalid Input!");
+					System.out.println(BankAppHelper.SESSION_INVALID_ACCOUNT_INDEX);
 			}
 		}
+		System.out.println(BankAppHelper.SESSION_LOGOUT);
 	}
 	
 	private void createNewAccount() {
 		boolean exit = false;
 		while(!exit) {
-			System.out.println(BankAppHelper.sessionAccountTypePrompt());
+			System.out.print(BankAppHelper.sessionAccountTypePrompt());
 			Integer select = s.nextInt();
 			s.nextLine();
 			try {
 				if(select >= 0 && select < BankingInterface.ACCOUNT_TYPES.size()) {
 					AccountRepository.addAccount(bi.getUser().getUserID(), select, 0.0);
+					exit = true;
 				} else {
-					System.out.println("Invalid Input: "+select);
+					System.out.println(BankAppHelper.SESSION_CREATE_ACCOUNT_TYPE_INVALID);
+					exit = s.nextLine().equalsIgnoreCase("exit");
 				}
-				exit = true;
 			} catch (UnableToGenerateKeyException e) {
-				logger.error("UnableToGenerateKeyException in createNewAccount", e);
+				logger.error("UnableToGenerateKeyException occurred while creating an account.", e);
 			}
 		}
 		return;
@@ -190,7 +189,7 @@ public class BankApp {
 		boolean exit = false;
 		while(!exit){
 			Account acc = bi.getAccounts().get(select);
-			System.out.println(BankAppHelper.sessionAccountPrompt(bi, select));
+			System.out.print(BankAppHelper.sessionAccountPrompt(bi, select));
 			int selection = s.nextInt();
 			s.nextLine();
 			System.out.print(BankAppHelper.SESSION_AMOUNT_PROMPT);

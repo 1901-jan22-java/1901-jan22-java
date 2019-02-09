@@ -11,12 +11,13 @@ public class User {
 		this.username = username;
 		this.password = password;
 	}
+
 	public User(Integer userID, String username, String password) {
 		this.userID = userID;
 		this.username = username;
 		this.password = password;
 	}
-	/* Overrided Methods */
+	/* Overridden Methods */
 	@Override
 	public String toString() {
 		return "User{" +

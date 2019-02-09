@@ -16,7 +16,7 @@ public class ConnectionFactory {
 	private static ConnectionFactory cf = null;
 	
 	private ConnectionFactory() {
-		logger.info("INSTANTIATED CONNECTIONFACTORY");
+		logger.info("INITIATED CONNECTIONFACTORY");
 	}
 	
 	public static synchronized ConnectionFactory getInstance() {

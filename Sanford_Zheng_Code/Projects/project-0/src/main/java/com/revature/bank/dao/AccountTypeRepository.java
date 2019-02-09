@@ -17,14 +17,14 @@ import zheng.sanford.utils.MyUtils;
 
 public class AccountTypeRepository {
 
-	protected static final Logger logger = Logger.getLogger(AccountTypeRepository.class);
+	private static final Logger logger = Logger.getLogger(AccountTypeRepository.class);
 
 	// Need to add trigger for adding account id
 	public static void addAccountType(String acc_type) throws
 			DuplicateAccountTypeException,
 			NoSQLUpdatesException
 	{
-		MyUtils.format(acc_type);
+		MyUtils.nameFormat(acc_type);
 		for(AccountType a: getAccountTypes())
 			if(a.getType().equalsIgnoreCase(acc_type)) throw new DuplicateAccountTypeException();
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -69,7 +69,7 @@ public class AccountTypeRepository {
 			ResultSet rs = conn.createStatement().executeQuery(sql);
 
 			while(rs.next()){
-				ats.add( new AccountType(rs.getInt("account_id"), rs.getString("account_type")) );
+				ats.add( new AccountType(rs.getInt("account_type_id"), rs.getString("account_type")) );
 			}
 		} catch ( SQLException e ) {
 			logger.error("SQLException occurred when getting account types!", e);

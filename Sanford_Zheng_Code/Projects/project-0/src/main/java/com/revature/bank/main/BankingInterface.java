@@ -21,7 +21,8 @@ public class BankingInterface {
      * TO-DO:
      *  How to handle this? Not sure... maybe not at all...
      *  just use AccountTypeRepository every time and deprecate
-     *  this instead? Well I'm using it globally should be hashmap but don't got time...
+     *  this instead? Well I'm using it globally. Should be
+     *  hashmap but don't got time...
      */
     public static final ArrayList<AccountType> ACCOUNT_TYPES = AccountTypeRepository.getAccountTypes();
     
@@ -35,30 +36,18 @@ public class BankingInterface {
         setUp();
     }
     
-    public boolean signIn(User user) throws NoSuchBankUserException {
-        return signIn(user.getUsername(), user.getPassword());
+    public void signIn(User user) throws NoSuchBankUserException {
+        signIn(user.getUsername(), user.getPassword());
     }
 
-    public boolean signIn(String username, String password) throws
+    public void signIn(String username, String password) throws
     	NoSuchBankUserException
     {
-    	try {
-    		user = UserRepository.getUser(username);
-    		if(user.getPassword().equals(password))
-    			return true;
-    	} catch (NoSuchBankUserException e) {
-    		logger.error("NoSuchBankUserException from signing in!", e);
-    		throw new NoSuchBankUserException();
-    	}
-    	return false;
+        user = UserRepository.getUser(username);
     }
 
-    public boolean setUp() {
-    	// if used for control flow
-        if(user == null || MyUtils.isValidEmail(user.getUsername()) || user.getUserID() == null)
-        	return false;
-        this.accounts = AccountRepository.getAccounts(user.getUserID());
-        return true;
+    public void setUp() {
+        accounts = AccountRepository.getAccounts(user.getUserID());
     }
 
     // Get safe clone

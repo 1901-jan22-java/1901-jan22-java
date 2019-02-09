@@ -47,13 +47,12 @@ public class UserRepository {
 
 			ResultSet rs = ps.executeQuery();
 
-			if(rs.getFetchSize() == 0)
-			    throw new NoSuchBankUserException();
-			
-		    user = new User(rs.getInt("user_id"), rs.getString("account_username"), rs.getString("account_password"));
-			
+			if(rs.next())
+		    	user = new User(rs.getInt("user_id"), rs.getString("account_username"), rs.getString("account_password"));
+			else
+				throw new NoSuchBankUserException();
 		} catch( SQLException e ) {
-			logger.error("SQLException occurred in getByUsername(" + username +")!", e);
+			logger.error("SQLException occurred in getUser(" + username +")!", e);
 		}
 		return user;
 	}
