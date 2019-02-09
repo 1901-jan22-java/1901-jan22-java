@@ -10,9 +10,11 @@
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"crossorigin="anonymous"></script>
+    
+    <script src="../js/myjavascript.js"></script>
+    <link rel="stylesheet" href="../css/mycss.css">
     <title>Week3KevinHW</title>
 
 </head>
@@ -31,67 +33,67 @@
     -----------------------------------------------------------------------------------<br>    
 </section>
 <br><hr>
-<section>
-  <h4>1. Fibonacci</h4>
+<button class="accordion">1. Fibonacci</button>
+<div class="panel">
   <p>
     Define function: fib(n) <br>
     Return the nth number in the fibonacci sequence.<br>
   </p>
-</section>
-<br><hr>
-<section>
-  <h4>2. Bubble Sort</h4>
+  <p id="answer1"></p>
+</div>
+<button class="accordion">2. Bubble Sort</button>
+<div class="panel">
   <p>
     Define function: bubbleSort(numArray)<br>
     Use the bubble sort algorithm to sort the array.<br>
     Return the sorted array.<br>
   </p>
-</section>
-<br><hr>
-<section>
-  <h4>3. Reverse String</h4>
+  <p id="answer2"></p>
+</div>
+<button class="accordion">3. Reverse String</button>
+<div class="panel">
   <p>
     Define function: reverseStr(someStr)<br>
     Reverse and return the String.<br>
   </p>
-</section>
-<br><hr>
-<section>
-  <h4>4. Factorial</h4>
+  <p id="answer3"></p>
+</div>
+<button class="accordion">4. Factorial</button>
+<div class="panel">
   <p>
     Define function: factorial(someNum)<br>
     Use recursion to compute and return the factorial of someNum.<br>
   </p>
-</section>
-<br><hr>
-<section>
-  <h4>5. Substring</h4>
+  <p id="answer4"></p>
+</div>
+<button class="accordion">5. Substring</button>
+<div class="panel">
   <p>
     Define function substring(someStr, length, offset)<br>
     Return the substring contained between offset and (offset + length) inclusively.<br>
     If incorrect input is entered, use the alert function and describe why the input was incorrect.<br>
   </p>
-</section>
-<br><hr>
-<section>
-  <h4>6. Even Number</h4>
+  <p id="answer5"></p>
+</div>
+<button class="accordion">6. Even Number</button>
+<div class="panel">
   <p>
     Define function: isEven(someNum)<br>
     Return true if even, false if odd.<br>
     Do not use % operator.<br>
   </p>
-</section>
-<br><hr>
-<section>
-  <h4>7. Palindrome</h4>
+  <p id="answer6"></p>
+</div>
+<button class="accordion">7. Palindrome</button>
+<div class="panel">
   <p>
     Define function isPalindrome(someStr)<br>
     Return true if someStr is a palindrome, otherwise return false<br>
   </p>
-</section>
-<br><hr>
-<section>
-  <h4>8. Shapes</h4>
+  <p id="answer7"></p>
+</div>
+<button class="accordion">8. Shapes</button>
+<div class="panel">
   <p>
     Define function: printShape(shape, height, character)<br>
     shape is a String and is either "Square", "Triangle", "Diamond".<br>
@@ -114,18 +116,18 @@
      ***<br>
       *<br>
   </p>
-</section>
-<br><hr>
-<section>
-  <h4>9. Object literal</h4>
+  <p id="answer8"></p>
+</div>
+<button class="accordion">9. Object literal</button>
+<div class="panel">
   <p>
     Define function traverseObject(someObj)<br>
     Print every property and it's value.<br>
   </p>
-</section>
-<br><hr>
-<section>
-  <h4>10. Delete Element</h4>
+  <p id="answer9"></p>
+</div>
+<button class="accordion">10. Delete Element</button>
+<div class="panel">
   <p>
     Define function deleteElement(someArr)<br>
     Print length<br>
@@ -133,10 +135,10 @@
     Print length<br>
     The lengths should be the same.<br>
   </p>
-</section>
-<br><hr>
-<section>
-  <h4>11. Splice Element</h4>
+  <p id="answer10"></p>
+</div>
+<button class="accordion">11. Splice Element</button>
+<div class="panel">
   <p>
     Define function spliceElement(someArr)<br>
     Print length<br>
@@ -144,38 +146,41 @@
     Print length<br>
     The lengths should be one less than the original length.<br>
   </p>
-</section>
-<br><hr>
-<section>
-  <h4>12. Defining an object using a constructor</h4>
+  <p id="answer11"></p>
+</div>
+<button class="accordion">12. Defining an object using a constructor</button>
+<div class="panel">
   <p>
     Define a function Person(name, age)<br>
     The following line should set a Person object to the variable john:<br>
       var john = new Person("John", 30);<br>
   </p>
-</section>
-<br><hr>
-<section>
-  <h4>13. Defining an object using an object literal</h4>
+  <p id="answer12"></p>
+</div>
+<button class="accordion">13. Defining an object using an object literal</button>
+<div class="panel">
   <p>
     Define function getPerson(name, age)<br>
     The following line should set a Person object to the variable john:<br>
       var john = getPerson("John", 30);<br>
   </p>
-</section>
-<br><hr>
-<section></section>
-  <h4>14. Display the current time on the top right of your HTML page, updating every second</h4>
-</section>
-<br><hr>
-<section>
-  <h4>15.  Descending order</h4>
+  <p id="answer13"></p>
+</div>
+<button class="accordion">14. Display the current time on the top right of your HTML page, updating every second</button>
+<div class="panel">
   <p>
-    Your task is to make a function that can take any non-negative<br> 
-    integer as a argument and return it with its digits in descending <br>
-    order. Essentially, rearrange the digits to create the highest possible number.<br>
+    Do time.
   </p>
-</section>
-<br><hr>
+  <p id="answer14"></p>
+</div>
+<button class="accordion">15.  Descending order</button>
+<div class="panel">
+    <p>
+        Your task is to make a function that can take any non-negative<br> 
+        integer as a argument and return it with its digits in descending <br>
+        order. Essentially, rearrange the digits to create the highest possible number.<br>
+    </p>
+    <p id="answer15"></p>
+</div>
 </body>
 </html>
