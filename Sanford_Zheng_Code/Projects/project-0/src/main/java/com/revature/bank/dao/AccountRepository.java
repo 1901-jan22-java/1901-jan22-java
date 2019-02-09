@@ -36,7 +36,7 @@ public class AccountRepository {
 			int updates = ps.executeUpdate();
 			if(updates < 1)
 				throw new UnableToGenerateKeyException();
-			conn.commit();
+//			conn.commit();
 		} catch (SQLException e) {
 		    logger.error("SQLException has occurred in addAccount()!", e);
 		}

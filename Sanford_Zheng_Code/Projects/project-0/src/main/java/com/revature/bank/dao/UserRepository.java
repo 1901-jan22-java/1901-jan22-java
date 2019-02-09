@@ -31,7 +31,7 @@ public class UserRepository {
 				throw new NoSuchBankUserException();
 			
 			user = new User(rs.getInt("user_id"), rs.getString("account_username"), rs.getString("account_password"));
-			conn.commit();
+//			conn.commit();
 		} catch( SQLException e ) {
 			logger.error("SQLException occurred in getByID(" + id +")!", e);
 		}

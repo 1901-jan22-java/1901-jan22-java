@@ -49,7 +49,7 @@ public class AccountTypeRepoWithList extends AccountTypeRepository{
             PreparedStatement cs = conn.prepareStatement(sql);
             cs.setString(1, type_name);
             cs.execute();
-            conn.commit();
+//            conn.commit();
         } catch( SQLException e ) {
             logger.error("SQLException occurred when adding account type: " + type_name, e);
         }

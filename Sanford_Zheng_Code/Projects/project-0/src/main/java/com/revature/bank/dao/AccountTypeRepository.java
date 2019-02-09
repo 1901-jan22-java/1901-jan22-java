@@ -37,7 +37,7 @@ public class AccountTypeRepository {
 				throw new NoSQLUpdatesException();
 			}
 			
-			conn.commit();
+//			conn.commit();
 		} catch ( SQLException e ) {
 			logger.error("SQLException occurred when adding account type " + acc_type +"!", e);
 		}
