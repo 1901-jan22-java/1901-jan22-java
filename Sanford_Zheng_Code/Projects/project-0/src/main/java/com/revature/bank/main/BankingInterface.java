@@ -40,10 +40,12 @@ public class BankingInterface {
         signIn(user.getUsername(), user.getPassword());
     }
 
-    public void signIn(String username, String password) throws
-    	NoSuchBankUserException
-    {
-        user = UserRepository.getUser(username);
+    public void signIn(String username, String password) throws NoSuchBankUserException {
+        user = UserRepository.getUser(username, password);
+        if(user.getPassword().equals(password)) {
+            user = null;
+            throw new NoSuchBankUserException();
+        }
     }
 
     public void setUp() {

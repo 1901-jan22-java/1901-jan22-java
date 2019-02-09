@@ -61,10 +61,11 @@ public class BankAppHelper {
     		"Exiting create new user...";
 
     /* LOGIN MENU */
-    public static final String LOGIN_USERNAME_PROMPT = "Username: ";
-    public static final String USERNAME_INVALID = "Invalid username!";
-    public static final String LOGIN_PASSWORD_PROMPT = "Password: ";
-    public static final String PASSWORD_INVALID = "Invalid password!";
+    public static final String LOGIN_PROMPT = "Login:";
+    public static final String LOGIN_USERNAME_PROMPT = "\tUsername: ";
+    public static final String USERNAME_INVALID = "Invalid username! Please try again.";
+    public static final String LOGIN_PASSWORD_PROMPT = "\tPassword: ";
+    public static final String PASSWORD_INVALID = "Invalid password! Please try again.";
 
     public static final String LOGIN_USER_SUCCESS = 
     		"Session has been created for user!\n"
@@ -89,7 +90,7 @@ public class BankAppHelper {
 
 
         if(as.isEmpty()){
-            sb.append("\tYou have no accounts under this user. :(");
+            sb.append("\tYou have no accounts under this user. :(\n");
         }else {
             for(int i = 0; i < as.size(); i++)
                 sb.append("\t(" + (i+3) + ")" + as.get(i).toString() + "\n");

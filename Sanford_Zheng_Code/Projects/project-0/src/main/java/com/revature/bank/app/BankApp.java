@@ -3,6 +3,7 @@ package com.revature.bank.app;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.revature.bank.exceptions.UserAlreadyExistsException;
 import com.revature.bank.pojos.User;
 import org.apache.log4j.Logger;
 
@@ -36,15 +37,19 @@ public class BankApp {
 	public void banking(){
 		boolean exit = false;
 		while(!exit) {
+			System.out.println();
 			System.out.print(BankAppHelper.MAIN_MENU);
 			int selection = s.nextInt();
 			s.nextLine();
 			switch(selection) {
 				case(1):
+					System.out.println();
 					createNewUser();
 					break;
 				case(2):
+					System.out.println();
 					if(login()) {
+						System.out.println();
 						session();
 					}
 					break;
@@ -52,6 +57,7 @@ public class BankApp {
 					exit = true;
 			}
 		}
+		System.out.println();
 		System.out.println(BankAppHelper.MAIN_MENU_EXIT);
 		close();
 	}
@@ -85,8 +91,8 @@ public class BankApp {
 					System.out.println(BankAppHelper.CREATE_USER_SUCCESS);
 					System.out.println(BankAppHelper.CREATE_USER_EXIT);
 					return true;
-				} catch(UnableToGenerateKeyException e) {
-					logger.error("UnableToGenerateKeyException occurred in creating user!", e);
+				} catch (UserAlreadyExistsException | UnableToGenerateKeyException e) {
+					logger.error("An Exception has occurred in BankApp.createNewUser()!", e);
 					System.out.println(BankAppHelper.createUserFailure(username, MyUtils.obfuscate(password, 3)));
 					validUser = false;
 					validPass = false;
@@ -104,6 +110,7 @@ public class BankApp {
 		String username = "";
 		String password = "";
 		while(keepTrying) {
+			System.out.println(BankAppHelper.LOGIN_PROMPT);
 			while(!validUser && keepTrying) {
 				System.out.print(BankAppHelper.LOGIN_USERNAME_PROMPT);
 				username = s.nextLine();

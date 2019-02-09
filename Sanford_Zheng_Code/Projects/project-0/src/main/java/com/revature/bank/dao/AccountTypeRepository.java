@@ -19,7 +19,7 @@ public class AccountTypeRepository {
 
 	private static final Logger logger = Logger.getLogger(AccountTypeRepository.class);
 
-	// Need to add trigger for adding account id
+	// Never used...
 	public static void addAccountType(String acc_type) throws
 			DuplicateAccountTypeException,
 			NoSQLUpdatesException
@@ -43,7 +43,7 @@ public class AccountTypeRepository {
 		}
 	}
 	
-	public static String getAccountTypeByID(int atid) {
+	public static String getAccountType(Integer atid) {
 		String at = null;
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			String query = "select * from bank_account_types where account_type_id = ?";
@@ -56,7 +56,7 @@ public class AccountTypeRepository {
 				at = rs.getString("account_type");
 			}
 		} catch( SQLException e ) {
-			logger.error("SQLException occurred when loading account types!", e);
+			logger.error("SQLException occurred in getAccountTypeByID("+atid+")!", e);
 		}
 		return at;
 	}
@@ -72,7 +72,7 @@ public class AccountTypeRepository {
 				ats.add( new AccountType(rs.getInt("account_type_id"), rs.getString("account_type")) );
 			}
 		} catch ( SQLException e ) {
-			logger.error("SQLException occurred when getting account types!", e);
+			logger.error("SQLException occurred in getAccountTypes()!", e);
 		}
 		return ats;
 	}
