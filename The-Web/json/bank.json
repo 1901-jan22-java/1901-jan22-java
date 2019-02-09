@@ -34,6 +34,13 @@
       "username": "testuser",
       "password": "12",
       "id": 5
+    },
+    {
+      "firstName": "kevin",
+      "lastName": "Ho",
+      "username": "kevinuser",
+      "password": "kevinpass",
+      "id": 6
     }
   ],
   "accounts": [
