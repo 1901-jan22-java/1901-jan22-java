@@ -1,21 +1,20 @@
 window.onload = function(){
     console.log("Page Loaded");
     currTime();
-    // document.getElementById('run-fib').addEventListener('click', runFibonacci);
-    // document.getElementById('run-bubblesort').addEventListener('click', runBubbleSort);
+    document.getElementById('run-fib').addEventListener('click', () => {runFibonacci(); clearFields();});
+    document.getElementById('run-bubble-sort').addEventListener('click', () => {runBubbleSort(); clearFields();});
     document.getElementById('run-reverse').addEventListener('click', () => {runReverseString(); clearFields();});
-    // document.getElementById('run-factorial').addEventListener('click', runFactorial);
-    // document.getElementById('run-substring').addEventListener('click', runSubString);
-    // document.getElementById('run-even-number').addEventListener('click', runEvenNumber);
+    document.getElementById('run-factorial').addEventListener('click', () => {runFactorial(); clearFields();});
+    document.getElementById('run-even-number').addEventListener('click', () => {runEvenNumber(); clearFields();});
     document.getElementById('run-palindrome').addEventListener('click', () => {runIsPalindrome(); clearFields();});
     // document.getElementById('run-object-literal').addEventListener('click', runObjectLiteral);
     document.getElementById('run-delete-element').addEventListener('click', runDeleteElement);
     document.getElementById('run-splice-element').addEventListener('click', runSpliceElement);
     // document.getElementById('run-define-contructor').addEventListener('click', runDefineContructor);
-    // document.getElementById('run-desc-order').addEventListener('click', runDescOrder);
+    document.getElementById('run-desc-order').addEventListener('click', () => {runDescOrder(); clearFields();});
 }
 
-var arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+var arr = [23, 45, 2, 77, 99, 3, 1, 19, 7, 41];
 
 function clearFields() {
     document.getElementById("number-input").value = "";
@@ -25,14 +24,44 @@ function clearFields() {
 // 1. Fibonacci 
 // Define function: fib(n) 
 // Return the nth number in the fibonacci sequence.
-
+var runFibonacci = () => {
+    let num = document.getElementById('number-input').value;
+    var nthFib = (num) => {
+        let fibArr = [];
+        let num1 = 0;
+        let num2 = 1;
+        for(let i = 1; i <= num; i++){
+            fibArr.push(num1);
+            let sum = num1 + num2;
+            num1 = num2;
+            num2 = sum;
+        }
+        return fibArr.pop();
+    }
+    document.getElementById('fib-answer').append(nthFib(num));
+}
 
 
 // 2. Bubble Sort
 // Define function: bubbleSort(numArray)
 // Use the bubble sort algorithm to sort the array.
 // Return the sorted array.
-
+var runBubbleSort = () => {
+    var bubbleSort = (arr) => {
+        let num = 0;
+        for(let i = 0; i < arr.length; i++){
+            for(let j = 0; j < arr.length; j++){
+                if(arr[j-1] > arr[j]){
+                    num = arr[j-1];
+                    arr[j-1] = arr[j];
+                    arr[j] = num;
+                }
+            }
+        }
+        return arr;
+    }
+    document.getElementById('bubblesort-answer').append(bubbleSort(arr));
+}
 
 // 3. Reverse String
 // Define function: reverseStr(someStr)
@@ -57,19 +86,32 @@ var runReverseString = () => {
 // 4. Factorial
 // Define function: factorial(someNum)
 // Use recursion to compute and return the factorial of someNum.
-
-
-// 5. Substring
-// Define function substring(someStr, length, offset)
-// Return the substring contained between offset and (offset + length) inclusively.
-// If incorrect input is entered, use the alert function and describe why the input was incorrect.
-
+var runFactorial = () => {
+    let num = document.getElementById('number-input').value;
+    var factorial = (num) => {
+        if(num == 0){
+            return 1;
+        } else {
+            return num * factorial(num-1);
+        }
+    }
+    document.getElementById('factorial-answer').append(factorial(num));
+}
 
 // 6. Even Number
 // Define function: isEven(someNum)
 // Return true if even, false if odd.
 // Do not use % operator.
-
+var runEvenNumber = () => {
+    let num = document.getElementById('number-input').value;
+    var evenNum = (num) => {
+        if((num & 1) == 0){
+            return true;
+        }
+        return false;
+    }
+    document.getElementById('evennum-answer').append(evenNum(num));
+}
 
 // 7. Palindrome
 // Define function isPalindrome(someStr)
@@ -139,7 +181,7 @@ var currTime = () => {
    minutes = checkTime(minutes);
    seconds = checkTime(seconds);
    document.getElementById("time").innerHTML = hours + ":" + minutes + ":" + seconds;
-   var t = setTimeout(function(){ currTime() }, 500);
+   var run = setTimeout(function(){ currTime(); }, 500);
 }
 
 var checkTime = (ms) => {
@@ -154,3 +196,17 @@ var checkTime = (ms) => {
 // Your task is to make a function that can take any non-negative 
 // integer as a argument and return it with its digits in descending 
 // order. Essentially, rearrange the digits to create the highest possible number.
+
+var runDescOrder = () => {
+    let num  =  document.getElementById('number-input').value
+    var descOrder = (num) => {
+        if(num > 0){
+            let numArr = String(num).split('');
+            let sortedNum = numArr.sort((a, b) => b-a ).join('');
+        return sortedNum;
+        } else {
+            return "No Negative Numbers!"
+        }
+    }
+    document.getElementById('desc-order-answer').append(descOrder(num));
+}

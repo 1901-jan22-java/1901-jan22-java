@@ -78,7 +78,7 @@ h2 {
 .ghost-button:active {
     background-color: #16A6B6;
   border-color: #16A6B6;
-  color: #181818;
+  color: #fff;
   transition: color 0.3s ease-in,
               background-color 0.3s ease-in,
               border-color 0.3s ease-in;
