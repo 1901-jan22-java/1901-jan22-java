@@ -72,16 +72,20 @@ public class BankApp {
 			while(!validUser && keepTrying) {
 				System.out.print(BankAppHelper.CREATE_USERNAME_PROMPT);
 				username = s.nextLine();
+
 				validUser = MyUtils.isValidEmail(username);
 				keepTrying = !username.equalsIgnoreCase("exit");
+
 				if(!validUser && keepTrying)
 					System.out.println(BankAppHelper.USERNAME_INVALID);
 			}
 			while(!validPass && keepTrying) {
 				System.out.print(BankAppHelper.CREATE_PASSWORD_PROMPT);
 				password = s.nextLine();
+
 				keepTrying = !password.equalsIgnoreCase("exit");
 				validPass = MyUtils.isValidPassword(password);
+
 				if(!validPass && keepTrying)
 					System.out.println(BankAppHelper.PASSWORD_INVALID);
 			}
@@ -90,6 +94,7 @@ public class BankApp {
 					UserRepository.createUser(username, password);
 					System.out.println(BankAppHelper.CREATE_USER_SUCCESS);
 					System.out.println(BankAppHelper.CREATE_USER_EXIT);
+
 					return true;
 				} catch (UserAlreadyExistsException | UnableToGenerateKeyException e) {
 					logger.error("An Exception has occurred in BankApp.createNewUser()!", e);
@@ -124,8 +129,10 @@ public class BankApp {
 			while(!validPass && keepTrying) {
 				System.out.print(BankAppHelper.LOGIN_PASSWORD_PROMPT);
 				password = s.nextLine();
+
 				validPass = MyUtils.isValidPassword(password);
 				keepTrying = !password.equalsIgnoreCase("exit");
+
 				if(!validUser && keepTrying)
 					System.out.println(BankAppHelper.PASSWORD_INVALID);
 			}
@@ -164,8 +171,9 @@ public class BankApp {
 			default:
 				if(selection > 2 && selection < bi.getAccounts().size()+3) {
 					editAccount(selection - 3);
-				} else 
+				} else {
 					System.out.println(BankAppHelper.SESSION_INVALID_ACCOUNT_INDEX);
+				}
 			}
 		}
 		System.out.println(BankAppHelper.SESSION_LOGOUT);
@@ -177,6 +185,7 @@ public class BankApp {
 			System.out.print(BankAppHelper.sessionAccountTypePrompt());
 			Integer select = s.nextInt();
 			s.nextLine();
+			
 			try {
 				if(select >= 0 && select < BankingInterface.ACCOUNT_TYPES.size()) {
 					AccountRepository.addAccount(bi.getUser().getUserID(), select, 0.0);
@@ -196,11 +205,15 @@ public class BankApp {
 		boolean exit = false;
 		while(!exit){
 			Account acc = bi.getAccounts().get(select);
+
 			System.out.print(BankAppHelper.sessionAccountPrompt(bi, select));
 			int selection = s.nextInt();
 			s.nextLine();
+
 			System.out.print(BankAppHelper.SESSION_AMOUNT_PROMPT);
 			Double amt = s.nextDouble();
+			s.nextLine();
+
 			switch(selection) {
 			case(1):
 				bi.withdraw(acc, amt);

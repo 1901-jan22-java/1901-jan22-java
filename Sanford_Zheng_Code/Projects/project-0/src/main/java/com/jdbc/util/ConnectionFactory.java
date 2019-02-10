@@ -23,7 +23,7 @@ public class ConnectionFactory {
 		if(cf == null) {
 			cf = new ConnectionFactory();
 		}
-		logger.info("RETURNING CONNECTIONFACTORY INSTANCE " + cf.getClass());
+		logger.info("RETURNING CONNECTIONFACTORY INSTANCE: " + cf.getClass());
 		return cf;
 	}
 	
