@@ -1,26 +1,32 @@
 {
-    "users" : [
-        {
-            "id" : 1,
-            "firstname": "Genesis",
-            "lastname": "Bonds",
-            "username": "gb123",
-            "password": "123"
-        },
-        {
-            "id" : 2,
-            "firstname": "John",
-            "lastname": "Doe",
-            "username": "anon",
-            "password": "ymous"
-        }
-    ],
-
-    "accounts" : [
-        {
-            "id" : 1,
-            "userId": 1,
-            "balance": 1000.93
-        }
-    ]
+  "users": [
+    {
+      "id": 1,
+      "firstname": "Genesis",
+      "lastname": "Bonds",
+      "username": "gb123",
+      "password": "123"
+    },
+    {
+      "id": 2,
+      "firstname": "John",
+      "lastname": "Doe",
+      "username": "anon",
+      "password": "ymous"
+    },
+    {
+      "id": 3,
+      "firstname": "21",
+      "lastname": "Savage",
+      "username": "ogod",
+      "password": "scraight up"
+    }
+  ],
+  "accounts": [
+    {
+      "id": 1,
+      "userId": 1,
+      "balance": 1000.93
+    }
+  ]
 }

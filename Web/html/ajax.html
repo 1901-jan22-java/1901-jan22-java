@@ -94,10 +94,54 @@
             <hr>
             <h4>Leverage AJAX to Use the Force</h4>
             <input type="number" id="swID" class="form-control col-4">
-            <h5>Welcome to the force <span id="output"></span></h6>
+            <h5> <span id="output"></span></h6>
             <button id="go" class="btn btn-primary">Go!</button>
     <script>
-        
+        //Welcome to ajax
+        // window.onload = function(){
+        //     $('#go').on('click', getSW);
+        // };
+
+        // var getSW = () => {
+        //     var id = $('#swID').val();
+        //     var url = `https://swapi.co/api/people/${id}`;
+        //     //AJAX
+        //     //Step 1 - Create XHR
+        //     var xhr = new XMLHttpRequest();
+        //     //Step 2 - Define onreadystatechange functionality
+        //     xhr.onreadystatechange = function(){
+        //         console.log(xhr.readyState)
+        //         if(xhr.readyState == 4 && xhr.status == 200){
+        //             jedi = JSON.parse(xhr.responseText);
+        //             $('#output').html(jedi.name);
+        //         }
+        //     };
+
+        //     //Step 3 - Open request
+        //     xhr.open('GET', url);//(Method, URL, Asych, USR, PWD)
+        //     //Step 4 - Send
+        //     xhr.send();
+        // } 
+
+        window.onload = function(){
+            $('#go').on('click', getSub);
+        };
+
+        var getSub = () => {
+            var value = $('#swID').val();
+            var url = `https://jsonplaceholder.typicode.com/comments/${value}`;
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    response = JSON.parse(xhr.responseText);
+                    $('#output').html(response.body + " from " + response.email)
+                }
+            };
+
+            xhr.open('GET', url);
+            xhr.send();
+        }
+
     </script>
      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>

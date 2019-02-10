@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JavaScript Assignment</title>
+    <link rel="stylesheet" href="../css/jsAssignment.css"></link>   
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway" rel="stylesheet"> 
+</head>
+<body>
+<!-- 14. Display the current time on the top right of your HTML page, 
+updating every second. -->
+<span id="time"></span>
+
+<div class="header">
+    <h1>JavaScript Assignment</h1>  
+</div>
+
+<div class="inputs">
+    <input id="number-input" type="number" placeholder="Enter Numbers Here">
+    <input id="string-input" type="string" placeholder="Enter Strings Here">
+</div>
+
+<div class="qAndA">
+
+    <div id="question-buttons">
+        <p>1. Fibonacci 
+                Define function: fib(n) 
+                Return the nth number in the fibonacci sequence.</p>
+        <a class="ghost-button" id="run-fib">Fibonacci</a> <br>
+        <div id="fib-answer">Nth Number of the Fibinacci: </div> <br>
+    </div>    
+        <br>
+    <div id="question-buttons">
+        <p>2. Bubble Sort
+                Define function: bubbleSort(numArray)
+                Use the bubble sort algorithm to sort the array.
+                Return the sorted array.</p>
+        <a class="ghost-button" id="run-bubble-sort">Bubble Sort</a> <br>
+        <div id="bubblesort-answer">Bubble Sort: </div> <br>
+    </div>
+        <br>
+    <div id="question-buttons">
+        <p>3. Reverse String
+                Define function: reverseStr(someStr)
+                Reverse and return the String.</p>
+        <a class="ghost-button" id="run-reverse">Reverse String</a> <br>
+        <div id="reverse-answer">Your String Reversed: </div> <br>
+    </div>
+        <br>
+    <div id="question-buttons">
+        <p>4. Factorial
+                Define function: factorial(someNum)
+                Use recursion to compute and return the factorial of someNum.</p>
+        <a class="ghost-button" id="run-factorial">Factorial</a> <br>
+        <div id="factorial-answer">Factorial: </div> <br>
+    </div>   
+        <br>
+    <div id="question-buttons">
+        <p>5. Substring
+                Define function substring(someStr, length, offset)
+                Return the substring contained between offset and (offset + length) inclusively.
+                If incorrect input is entered, use the alert function and describe why the input was incorrect.</p>
+        <a class="ghost-button" id="run-substring">Substring</a> <br>
+        <div id="substring-answer">Substring: </div> <br>
+    </div>
+        <br>
+    <div id="question-buttons">
+        <p>6. Even Number
+                Define function: isEven(someNum)
+                Return true if even, false if odd.
+                Do not use % operator.</p>
+        <a class="ghost-button" id="run-even-number">Even Number</a> <br>
+        <div id="evennum-answer">Even Numbers: </div> <br>
+    </div>    
+        <br>
+    <div id="question-buttons">
+        <p>7. Palindrome
+                Define function isPalindrome(someStr)
+                Return true if someStr is a palindrome, otherwise return false.</p> 
+        <a class="ghost-button" id="run-palindrome">Palindrome</a> <br>
+        <div id="palindrome-answer">Palindrome? </div> <br>
+    </div>
+        <br>
+    <div id="question-buttons">    
+        <p>9. Object literal
+                Define function traverseObject(someObj)
+                Print every property and it's value.</p>
+        <a class="ghost-button" id="run-object-literal">Object Literal</a> <br>
+        <div id="objlit-answer">Object Literal </div> <br>
+    </div>
+        <br>
+    <div id="question-buttons">
+        <p>10. Delete Element
+                Define function deleteElement(someArr)
+                Print length
+                Delete the third element in the array.
+                Print length
+                The lengths should be the same.</p>
+        <a class="ghost-button" id="run-delete-element">Delete Element</a> <br>
+        <div id="delete-element-answer">3rd Element deleted: </div> <br>
+    </div>
+        <br>
+    <div id="question-buttons"> 
+        <p>11. Splice Element
+                Define function spliceElement(someArr)
+                Print length
+                Splice the third element in the array.
+                Print length
+                The lengths should be one less than the original length.</p>   
+        <a class="ghost-button" id="run-splice-element">Splice Element</a> <br>
+        <div id="splice-answer">3rd element Spliced: </div> <br>
+    </div>
+        <br>
+    <div id="question-buttons">  
+        <p>12. Defining an object using a constructor
+                Define a function Person(name, age)
+                The following line should set a Person object to the variable john:
+                    var john = new Person("John", 30); </p>  
+        <a class="ghost-button" id="run-define-contructor">Define Contructor</a> <br>
+        <div id="def-constructor-answer">Define Constructor: </div> <br>
+    </div>
+        <br>
+    <div id="question-buttons">
+        <p>15.  Descending order
+                Your task is to make a function that can take any non-negative 
+                integer as a argument and return it with its digits in descending 
+                order. Essentially, rearrange the digits to create the highest possible number.</p>
+        <a class="ghost-button" id="run-desc-order">Descending Order</a> <br>
+        <div id="desc-order-answer">Descending Order: </div> <br>
+    </div>    
+
+</div>
+    
+<script src="../js/jsAssignment.js" ></script>
+</body>
+</html>

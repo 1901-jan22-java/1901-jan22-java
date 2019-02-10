@@ -1,0 +1,85 @@
+body {
+    height: auto;
+    margin: 10px;
+    background-color: #F5F5F5;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Open Sans', sans-serif;
+    color: #181818;
+    font-weight: 400;
+}
+
+h1 {
+    color: #16A6B6;
+    font-family: 'Raleway', sans-serif;
+}
+
+h2 {
+    color: rgba(0, 0, 0, 0.801);
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.inputs {
+    margin: 0 auto;
+}
+
+.qAndA {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    margin-top: 50px;
+    height: auto;
+}
+
+#question-buttons {
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px dashed #F26554 ;
+}
+
+#number-input {
+    margin-right: 50px;
+}
+
+#time {
+    text-align: right;
+    color: #F26554;
+    font-size: 20px;
+}
+
+.ghost-button {
+    display: inline-block;
+    font-size: 15px;
+    cursor: pointer;
+    width: 150px;
+    height: 20px;
+    line-height: 25px;
+    padding: 8px;
+    color: #181818;
+    background-color: transparent;
+    border: 2px solid #181818;
+    text-align: center;
+    align-items: center;
+    outline: none;
+    text-decoration: none;
+    transition: color 0.3s ease-out,
+              background-color 0.3s ease-out,
+              border-color 0.3s ease-out;
+}
+
+.ghost-button:hover,
+.ghost-button:active {
+    background-color: #16A6B6;
+  border-color: #16A6B6;
+  color: #181818;
+  transition: color 0.3s ease-in,
+              background-color 0.3s ease-in,
+              border-color 0.3s ease-in;
+}

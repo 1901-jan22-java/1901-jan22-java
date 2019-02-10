@@ -37,14 +37,10 @@ public class App {
 			UserView.addUser();
 			break;
 		case 3:
-			closeApp(choice);
+			System.out.println("Have a great day!");
+			System.exit(choice);
 			break;
 		}
 		scan.close();
-	}
-	
-	public static void closeApp(int choice) {
-		System.out.println("Have a great day!");
-		System.exit(choice);
 	}
 }
