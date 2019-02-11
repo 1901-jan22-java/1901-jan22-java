@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DOM Manipulation</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+</head>
+<body>
+    <div class="row">
+        <div class="col-4">
+
+        </div>
+        <div class="col-8">
+            <hr>    
+            <h5>FizzBuzz</h5>
+            Enter your number n: 
+            <input type="number" id="fbn" class="form-control col-2" min="0">
+            <button class="btn btn-primary" id="runFizz">FizzBuzz!</button>
+            <input type="submit" value="FizzBuzz!!!">
+        
+            <table class="table table-sm table-hover col-4" hidden="true" id="buzz-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Fizzbuzz'ed!</th>
+                    </tr>
+                </thead>
+                <tbody id="buzz-table-body"></tbody>
+            </table>
+        </div>
+    </div>
+        
+
+    <!--One way to include JS in HTML. 
+    <script>alert('Hi this is JS!')</script> -->
+    <script type="Text/JavaScript" src="../js/DOM-Manipuation.js"></script>
+
+</body>
+</html>

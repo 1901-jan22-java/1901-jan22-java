@@ -1,0 +1,31 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstname": "Edwin",
+      "lastname": "Faican",
+      "username": "woopwoop",
+      "password": "123123"
+    },
+    {
+      "id": 2,
+      "firstname": "Ed",
+      "lastname": "Fai",
+      "username": "woop",
+      "password": "124124"
+    },
+    {
+      "firstname": "21iwi",
+      "username": "kjsnwkj",
+      "password": "kjsnkw",
+      "id": 4
+    }
+  ],
+  "accounts": [
+    {
+      "id": 1,
+      "userId": 1,
+      "balance": 500
+    }
+  ]
+}
