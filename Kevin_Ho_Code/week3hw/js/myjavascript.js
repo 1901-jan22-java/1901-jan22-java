@@ -3,9 +3,9 @@ window.onload = function(){
     $('#question2').on('click', runBubbleSort);
     $('#question3').on('click', runReverseStr);
     $('#question4').on('click', runFactorial);
-/*    $('#question5').on('click', substring);
+    $('#question5').on('click', runSubstring);
     $('#question6').on('click', isEven);
-    $('#question7').on('click', isPalindrome);
+/*    $('#question7').on('click', isPalindrome);
     $('#question9').on('click', traverseObject);
     $('#question10').on('click', deleteElement);
     $('#question11').on('click', spliceElement);
@@ -29,29 +29,8 @@ window.onload = function(){
 
 }
 
-//question 5
-function substring(someStr, length, offset){
-    if(length > someStr.length){
-        alert("length is greater than string length");
-        return "";
-    }
-    else if(offset > someStr.length || offset+length > someStr.length){
-        alert("trying to access numbers outside of string length");
-        return "";
-    }
-    return someStr.substring(offset, offset+length);
-}
-
 //question 6
 function isEven(someNum){
-/*  runs into too much recursion problem  
-    if(someNum == 1)
-        return false;
-    else if(someNum == 0)
-        return true;
-    else 
-        return isEven(someNum-2);*/
-
     while(someNum > 0)
         someNum -= 2;
     return someNum == 0;
@@ -188,5 +167,33 @@ function factorial(someNum){
         return 1;
     else
         return someNum * factorial(someNum-1);
+}
+
+//question 5
+function runSubstring(){
+    var str    = $('#ques5a').val();
+    var length = parseInt($('#ques5b').val());
+    var offset = parseInt($('#ques5c').val());
+    
+    if(length > str.length){
+        alert("length is greater than string length");
+    }
+    else if(offset > str.length || offset + length > str.length){
+        alert("trying to access numbers outside of string length");
+    } else{
+        substring(str, length, offset);
+        
+        $("#answer5").parent().find("p").slice(1).remove();
+
+        var answer = document.createElement("p");
+        answer.innerHTML = substring(str, length, offset);
+        $("#answer5").append(answer);
+    }
+}
+function substring(someStr, length, offset){
+    var str = "";
+    for(let i = offset; i <= length; i++)
+        str += someStr.charAt(i);
+    return str;
 }
 
