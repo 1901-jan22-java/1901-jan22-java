@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AJAX Intro</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous">
+
+    
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+
+        <div class="jumbotron">
+                <h1>AJAX: Asynchronous JavaScript And XML</h1>
+                <h5>About AJAX</h5>
+                <ul>
+                    <li>NOT a programming language! It is a series of interactions between<br>
+                         JavaScript, the HTML DOM, and the XMLHttpRequest
+                        object from the browser
+                    </li>
+                    <li>It is "asynchronous" because AJAX can exchange information with a <br>
+                        server "behind the scenes" -- meaning, there is no need to reload <br>
+                        the page in order to display the content received from the response
+                    </li>
+                    <li>Requests will not have to wait for a response from a prior request<br>
+                        in order to be sent
+                    </li>
+                </ul>
+                <h5>About the XMLHttpRequest object</h5>
+                <ul>
+                    <li>Supported by most modern browsers *cough* dont use IE *cough*</li>
+                    <li>Used to exchange data with a server</li>
+                    <li>
+                        <code>
+                    var xhr = new XMLHttpRequest();
+                </code>
+                    </li>
+                    <li>The object has various methods and properties</li>
+                    <li>
+                        <b>Important Methods</b>
+                        <ul>
+                            <li>
+                                <code>new XMLHttpRequest()</code> --> creates new object</li>
+                            <li>
+                                <code>abort()</code> --> cancels the current request</li>
+                            <li>
+                                <code>getAllResponseHeaders()</code> &
+                                <code>getResponseHeader()</code> --> get response metadata</li>
+                            <li>
+                                <code>open(method, url, async, username, pwd)</code> -> specify request;
+                                <ul>
+                                    <li>method = HTTP verb</li>
+                                    <li>URL = location to send request</li>
+                                    <li>async = whether to execute request asynchronously or not; usually true</li>
+                                    <li>username and password = optional server credentials</li>
+                                </ul>
+                            </li>
+                            <li><code>send(content)</code> -> send the request. content = request body; optional</li>
+                            <li><code>setRequestHeader()</code>--> set name/value pair in request header</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <b>Important Properties:</b>
+                        <ul>
+                            <li>onreadystatechange - defines a function to be executed when the ready state property changes</li>
+                            <li>readyState - holds the XHR status
+                                <ul>
+                                    <li>0 - request not initialized </li>
+                                    <li>1 - server connection established</li>
+                                    <li>2 - request received</li>
+                                    <li>3 - server is processing request</li>
+                                    <li>4 - response is ready</li>
+                                </ul>
+                            </li>
+                            <li>responseText - response body as string</li>
+                            <li>responseXML - response body as XML</li>
+                            <li>status - HTTP response code (200)</li>
+                            <li>statusText - HTTP response text (OK) </li>
+                            
+                        </ul>
+                    </li>
+                </ul>
+                <h5>AJAX Workflow</h5>
+                <ol>
+                    <li>create XMLHttpRequest object</li>
+                    <li>define onreadystatechange function</li>
+                    <li>open request</li>
+                    <li>send request</li>
+                </ol>
+                <li> If we have more than one AJAX task on a page, define one function for executing XHR and one function to handle 
+                    each of the tasks and pass to the xhr function as a callback
+                </li>
+            </div>
+        
+            <hr>
+            <h4>Leverage AJAX to Use the Force</h4>
+            <input type="number" id="swID" class="form-control col-4">
+            <h5>Welcome to the force <span id="output"></span></h6>
+            <button id="go" class="btn btn-primary">Go!</button>
+            <br>
+           
+            <hr>
+            <h4> Find Fun Facts About Numbers</h4>
+            <input type="number" id="nID" class="form-control col-4">
+            <h5>Fun Fact: <span id="out"></span></h5>
+            <button id="go1" class="btn btn-primary">Go!</button>
+        
+        
+    
+
+    <script>
+        //WELCOME TO AJAX
+        window.onload = function(){
+            $('#go').on('click', getSW);
+            $('#go1').on('click', getNum)
+        }
+        
+        function getSW(){
+            var id = $('#swID').val();
+            var url = `https://swapi.co/api/people/${id}/`;
+
+            //AJAX
+            //STEP 1 - create XHR
+            var xhr = new XMLHttpRequest();
+
+            /*STEP 2 - Define onreadystatechange functionality really,
+            really, here we define what we want to do with the request does not have to be 
+            written directly after step 1 but it is common to indicate that after we send our
+            request we move on with whatever code comes next
+            */
+
+            xhr.onreadystatechange = function(){
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    console.log("succesfully received response" + xhr.responseText);
+                    var jedi = JSON.parse(xhr.responseText);
+                    $('#output').html(jedi.name);
+                }
+            };
+
+            //STEP 3 - open request
+            xhr.open('GET', url); //(METHOD, URL, ASYNC, USR, PWD)
+
+            //STEP 4 - SEND
+            xhr.send();
+
+            console.log('SENT REQUEST. RESPONSE IS'+ xhr.responseText);
+
+
+        }
+
+       /*  window.onload = function(){
+            $("go1").on("click", getNum)
+        } */
+
+        function getNum(){
+            var id = $("nID").val();
+            var url = `http://numbersapi.com/#${id}?json`;
+            
+            var xhr = new XMLHttpRequest();
+
+            xhr.onreadystatechange = function() { 
+                if(xhr.readyState == 4 && xhr.status == 200){
+                    console.log("successfully received response" + xhr.responseText);
+                    var number = JSON.parse(xhr.responseText);
+                    $('out').html(number.text);
+                }
+            };
+
+            xhr.open('GET', url);
+            xhr.send();
+           
+        }
+
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS HW</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous">
+
+    
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+    crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="jumbotron">
+        <h1>Java Script HW Assignment</h1>
+        <h4>Victoria Wood</h4>
+        <hr>
+
+        <h4>Fibonacci</h4>
+
+        Enter your number:
+        <input type="number" id="fbn" class="form control col-2" min="0"> 
+        <button class="btn btn-primary" id="fib">Fib it!</button>
+        <h5>Your number is <span id="output"></span></h5>
+
+        <br>
+        <hr>
+        <h4>Click here to see bubble sort performed on this array: [5, 1, 8, 2, 7]</h4>
+        <button class="btn btn-primary" id="bubble">Bubble Sort!</button>
+        <h5>Sorted list: <span id="outputb"></span></h5>
+
+        <br>
+        <hr>
+        <h4>Reverse String</h4>
+        Enter a string to reverse:
+        <input type="text" id="rev" class="form control col-2" min="0">
+        <button class="btn btn-primary" id="rvs">Reverse!</button>
+        <h5>Your string reversed is: <span id="outputstr"></span> </h5>
+
+        <br>
+        <hr>
+        <h4>Sub-String</h4>
+        Enter string:
+        <input type="text" id="str" class="form control col-2">
+        <br>
+        Enter beginning index:
+        <input type="number" id="offset" class="form control col-2">
+        <br>
+        Enter length of substring:
+        <input type="number" id="length" class="form control col-2">
+        <br>
+        <button class="btn btn-primary" id="sub">Get SubString!</button>
+        <h5>Your substring is: <span id="outputsub"></span></h5>
+
+        <br>
+        <hr>
+        <h4>Palindrome Test</h4>
+        Enter string:
+        <input type="text" id="palin">
+        <button class="btn btn-primary" id="p">Check Palindrome</button>
+        <h5>Is it a palindrome? <span id="outputp"></span></h5>
+
+        <br>
+        <hr>
+        <h4>Enter information to be stored in an object</h4>
+        Enter First Name:
+        <input type="text" id="fn">
+        Enter Last Name:
+        <input type="text" id = "ln">
+        Enter Age:
+        <input type="number" id="age" min="0">
+        <button class="btn btn-primary" id="obj">Create Object</button>
+        <h5>Check console for printout of all object properties</h5>
+
+        <br>
+        <hr>
+        <h4>Delete Third Element in Array [1, 4, 6, 8, 9] </h4>
+        <button class="btn btn-primary" id="delete">Delete Element</button>
+        <h5>New Array: <span id="outputarr"></span></h5>
+        <h6>Check console to see length of array before and after deletion. </h6>
+
+        <br>
+        <hr>
+        <h4>Create new Person Object Using Constructor</h4>
+        Enter first name: 
+        <input type="text" id ="name"> <br>
+        Enter age:
+        <input type="number" id="age1"> <br>
+        <button class="btn btn-primary" id="person">Create Person</button>
+        <h5>New Person: <span id="outputperson"></span></h5>
+
+        <br>
+        <hr>
+        <h4>Create new Person Object Using Literal</h4>
+        Enter first name: 
+        <input type="text" id ="name1"> <br>
+        Enter age:
+        <input type="number" id="age2"> <br>
+        <button class="btn btn-primary" id="person1">Create Person</button>
+        <h5>New Person: <span id="outputperson1"></span></h5>
+
+        <br>
+        <hr>
+        <h4>Descending Order</h4>
+        Enter any large non-negative integer:
+        <input type="text" id="desc"> <br>
+        <button class = "btn btn-primary" id= "go">Go!</button>
+        <h5>Your new number in descending order is <span id="outdesc"></span></h5>
+
+    </div>
+
+
+    <script>
+        window.onload = function(){
+            $("#fib").on('click', runFib);
+            $("#bubble").on('click', runBubble);
+            $('#rvs').on('click', runReverse);
+            $('#sub').on('click', runSub);
+            $('#p').on('click', runPalindrome);
+            $("#obj").on('click', runTrav);
+            $("#delete").on('click', runDelete);
+            $("#person").on('click', createPersonObj);
+            $('#person1').on('click', runGetPerson);
+            $('#go').on('click', runDesc);
+        }
+    /* 
+    1. Fibonacci 
+    Define function: fib(n) 
+    Return the nth number in the fibonacci sequence.
+    */
+
+    function fib(n){
+        if(n <= 1) return 1;
+        return fib(n - 2) + fib(n - 1);
+    }
+
+    function runFib(){
+        var n = document.getElementById("fbn").value;
+        var f = fib(n);
+        $('#output').html(f);
+    }
+
+    /*
+    2. Bubble Sort
+    Define function: bubbleSort(numArray)
+    Use the bubble sort algorithm to sort the array.
+    Return the sorted array.
+    */
+
+    function bubbleSort(numArray){
+        var i = 0;
+        while(i<numArray.length){
+            var j = 0;
+            while(j<numArray.length-1){
+                if(numArray[j]>numArray[j+1]){
+                    var a = numArray[j+1];
+                    numArray[j+1] = numArray[j];
+                    numArray[j] = a;
+                }
+                j++;
+            }
+            i++;
+        }
+        return numArray;
+    }
+
+    function runBubble(){
+        var nums = [5, 1, 8, 2, 7];
+        $("#outputb").html(bubbleSort(nums));
+    }
+
+    /*
+    3. Reverse String
+    Define function: reverseStr(someStr)
+    Reverse and return the String.
+    */
+
+    function reverseStr(someStr){
+        var reverse = "";
+        for(s in someStr){
+            reverse =  someStr[s] + reverse;
+        }
+        return reverse;
+    }
+
+    function runReverse(){
+        var str = document.getElementById("rev").value;
+        $("#outputstr").html(reverseStr(str));
+    }
+
+    /*
+    5. Substring
+    Define function substring(someStr, length, offset)
+    Return the substring contained between offset and (offset + length) inclusively.
+    If incorrect input is entered, use the alert function and 
+    describe why the input was incorrect.
+    */
+
+    function subString(someStr, length, offset){
+        var i = 0;
+        var sub = "";
+        while(i < length){
+            var index = offset + i;
+            sub = sub + someStr[index];
+            i++;
+        }
+        return sub;
+    }
+
+    function runSub(){
+        var str = document.getElementById("str").value;
+        var offset = Number(document.getElementById("offset").value);
+        var length = Number(document.getElementById("length").value);
+        if(offset > str.length){
+            alert("You entered an invalid index to begin the substring");
+        }
+        else if(length + offset > str.length){
+            alert("You entered an invalid input for length of substring");
+            console.log(offset + length);
+        } else {
+            $('#outputsub').html(subString(str, length, offset));
+        }
+    }
+
+    /*
+    7. Palindrome
+    Define function isPalindrome(someStr)
+    Return true if someStr is a palindrome, otherwise return false
+    */
+
+    function isPalindrome(someStr){
+        var i = 0;
+        while(i<someStr.length){
+            if(someStr[i]!=someStr[someStr.length-(i+1)]){
+                return false;
+            }
+            i++;
+        }
+        return true;
+    }
+
+    function runPalindrome(){
+        var str = document.getElementById("palin").value;
+        if(isPalindrome(str) == true){
+            $('#outputp').html('Yes');
+        }else{
+            $('#outputp').html('No');
+        }
+    }
+
+
+    /*
+    9. Object literal
+    Define function traverseObject(someObj)
+    Print every property and it's value.
+    */
+
+    function traverseObject(someObj){
+        for(p in someObj){
+            console.log(`The property ${p} of object is ${someObj[p]}`);
+        }
+    }
+
+    function runTrav(){
+        var obj = {
+            fn : document.getElementById('fn').value,
+            ln : document.getElementById('ln').value,
+            age : document.getElementById('age').value
+        };
+        traverseObject(obj);
+    }
+
+    /*
+    10. Delete Element
+    Define function deleteElement(someArr)
+    Print length
+    Delete the third element in the array.
+    Print length
+    The lengths should be the same.
+    */
+
+    function deleteElement(someArr){
+        console.log(`The length of the original array is ${someArr.length}`);
+        someArr[2]=null;
+        console.log(`The length of the array after the third element was deleted is ${someArr.length}`)
+        return someArr;
+    }
+
+    function runDelete(){
+        var arr = [1, 4, 6, 8, 9];
+        var newArr = deleteElement(arr);
+        $("#outputarr").html(newArr);
+    }
+
+    /*
+    12. Defining an object using a constructor
+    Define a function Person(name, age)
+    The following line should set a Person object to the variable john:
+	var john = new Person("John", 30);
+    */
+
+    function Person(name, age){
+        this.name = name;
+        this.age = age;
+    }
+
+    function createPersonObj(){
+        var age = document.getElementById("age1").value;
+        var name = document.getElementById("name").value;
+        var person = Person(name, age);
+        console.log(person);
+        $("#outputperson").html(person.name + " " + person.age);
+    }
+
+    /*
+    13. Defining an object using an object literal
+    Define function getPerson(name, age)
+    The following line should set a Person object to the variable john:
+	var john = getPerson("John", 30);
+    */
+
+    function getPerson(name, age){
+        var obj = {
+            name : name,
+            age : age
+        };
+        return obj;
+    }
+
+    function runGetPerson(){
+        var age = document.getElementById("age2").value;
+        var name = document.getElementById("name1").value;
+        var person = getPerson(name, age);
+        console.log(person);
+        $("#outputperson1").html(person.name + " " + person.age);
+    }
+
+    /*
+    15.  Descending order
+    Your task is to make a function that can take any non-negative 
+    integer as a argument and return it with its digits in descending 
+    order. Essentially, rearrange the digits to create the highest possible number.
+    
+    */
+
+    function descOrder(num){
+        var arr = [];
+        for(i in num){
+            arr.push(num[i]);
+        }
+        arr = bubbleSort(arr);
+        console.log(arr);
+        var i = 0;
+        var str = "";
+        var length = arr.length;
+        while(i < length){
+            str = str + arr.pop();
+            i++;
+        } 
+        return str;       
+    }
+
+    function runDesc(){
+        var n = document.getElementById('desc').value;
+        $('#outdesc').html(descOrder(n));
+    }
+
+
+
+    </script>
+
+</body>
+</html>
