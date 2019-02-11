@@ -2,23 +2,25 @@ window.onload = function(){
     console.log("Page Loaded");
     currTime();
     document.getElementById('run-fib').addEventListener('click', () => {runFibonacci(); clearFields();});
-    document.getElementById('run-bubble-sort').addEventListener('click', () => {runBubbleSort(); clearFields();});
+    document.getElementById('run-bubble-sort').addEventListener('click', () => {runBubbleSort();});
     document.getElementById('run-reverse').addEventListener('click', () => {runReverseString(); clearFields();});
     document.getElementById('run-factorial').addEventListener('click', () => {runFactorial(); clearFields();});
     document.getElementById('run-even-number').addEventListener('click', () => {runEvenNumber(); clearFields();});
     document.getElementById('run-palindrome').addEventListener('click', () => {runIsPalindrome(); clearFields();});
-    // document.getElementById('run-object-literal').addEventListener('click', runObjectLiteral);
-    document.getElementById('run-delete-element').addEventListener('click', runDeleteElement);
-    document.getElementById('run-splice-element').addEventListener('click', runSpliceElement);
+    document.getElementById('run-delete-element').addEventListener('click', () => {runDeleteElement();  clearFields();});
+    document.getElementById('run-splice-element').addEventListener('click', () => {runSpliceElement();  clearFields();});
     // document.getElementById('run-define-contructor').addEventListener('click', runDefineContructor);
     document.getElementById('run-desc-order').addEventListener('click', () => {runDescOrder(); clearFields();});
 }
 
-var arr = [23, 45, 2, 77, 99, 3, 1, 19, 7, 41];
 
-function clearFields() {
+var clearFields = () => {
     document.getElementById("number-input").value = "";
     document.getElementById("string-input").value = "";
+}
+
+var clearAnswer = (id) => {
+    document.getElementById(id).innerHTML = "";
 }
 
 // 1. Fibonacci 
@@ -38,7 +40,7 @@ var runFibonacci = () => {
         }
         return fibArr.pop();
     }
-    document.getElementById('fib-answer').append(nthFib(num));
+    document.getElementById('fib-answer').innerHTML = (nthFib(num));
 }
 
 
@@ -47,7 +49,8 @@ var runFibonacci = () => {
 // Use the bubble sort algorithm to sort the array.
 // Return the sorted array.
 var runBubbleSort = () => {
-    var bubbleSort = (arr) => {
+    let arr = document.getElementById('string-input').value.split(', ');
+    var bubbleSort = (array) => {
         let num = 0;
         for(let i = 0; i < arr.length; i++){
             for(let j = 0; j < arr.length; j++){
@@ -58,9 +61,9 @@ var runBubbleSort = () => {
                 }
             }
         }
-        return arr;
+        return array;
     }
-    document.getElementById('bubblesort-answer').append(bubbleSort(arr));
+    document.getElementById('bubblesort-answer').innerHTML = (bubbleSort(arr));
 }
 
 // 3. Reverse String
@@ -79,7 +82,7 @@ var runReverseString = () => {
         var revStr = arr.reverse().join('');
         return revStr;
     }
-    document.getElementById('reverse-answer').append(reverseString(str));
+    document.getElementById('reverse-answer').innerHTML = (reverseString(str));
 }
 
 
@@ -95,7 +98,7 @@ var runFactorial = () => {
             return num * factorial(num-1);
         }
     }
-    document.getElementById('factorial-answer').append(factorial(num));
+    document.getElementById('factorial-answer').innerHTML = (factorial(num));
 }
 
 // 6. Even Number
@@ -110,7 +113,7 @@ var runEvenNumber = () => {
         }
         return false;
     }
-    document.getElementById('evennum-answer').append(evenNum(num));
+    document.getElementById('evennum-answer').innerHTML = (evenNum(num));
 }
 
 // 7. Palindrome
@@ -123,7 +126,7 @@ var runIsPalindrome = () => {
         let revStr = lower.split('').reverse().join('');
         return revStr === lower ? true : false;
     }
-    document.getElementById('palindrome-answer').append(isPalindrome(str));
+    document.getElementById('palindrome-answer').innerHTML = (isPalindrome(str));
 }
 
 
@@ -139,13 +142,14 @@ var runIsPalindrome = () => {
 // Print length
 // The lengths should be the same.
 var runDeleteElement = () => {
-    var deleteElement = (arr) => {
+    let arr = document.getElementById('string-input').value.split(', ');
+    var deleteElement = (array) => {
         console.log(arr.length);
         delete arr[2];
         console.log(arr.length);
-        return arr;
+        return array;
     }
-    document.getElementById('delete-element-answer').append(deleteElement(arr) + "  -----  Array Length: " + arr.length);
+    document.getElementById('delete-element-answer').innerHTML = (deleteElement(arr) + "  -----  Array Length: " + arr.length);
 }
 
 
@@ -156,13 +160,14 @@ var runDeleteElement = () => {
 // Print length
 // The lengths should be one less than the original length.
 var runSpliceElement = () => {
-    var spliceElement = (arr) => {
+    let arr = document.getElementById('string-input').value.split(', ');
+    var spliceElement = (array) => {
      console.log(arr.length);
      arr.splice(2, 1);
      console.log(arr.length);
-     return arr;
+     return array;
     }
-    document.getElementById('splice-answer').append(spliceElement(arr) + "  -----  Array Length: " + arr.length);
+    document.getElementById('splice-answer').innerHTML = (spliceElement(arr) + "  -----  Array Length: " + arr.length);
 }
 
 // 12. Defining an object using a constructor
@@ -208,5 +213,5 @@ var runDescOrder = () => {
             return "No Negative Numbers!"
         }
     }
-    document.getElementById('desc-order-answer').append(descOrder(num));
+    document.getElementById('desc-order-answer').innerHTML = (descOrder(num));
 }
