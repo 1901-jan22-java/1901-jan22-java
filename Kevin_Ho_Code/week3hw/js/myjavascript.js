@@ -1,7 +1,7 @@
 window.onload = function(){
     $('#question1').on('click', runfib);
-/*    $('#question2').on('click', bubbleSort);
-    $('#question3').on('click', reverseStr);
+    $('#question2').on('click', runBubbleSort);
+/*    $('#question3').on('click', reverseStr);
     $('#question4').on('click', factorial);
     $('#question5').on('click', substring);
     $('#question6').on('click', isEven);
@@ -27,44 +27,6 @@ window.onload = function(){
         });
     }
 
-}
-//question 1
-function runfib(){
-    var n = $('#ques1').val();
-    var values = fib(n);
-    
-    $("#answer1").parent().find("p").slice(1).remove();
-
-    var answer = document.createElement("p");
-    answer.innerHTML = values;
-    $("#answer1").append(answer);
-}
-function fib(n){
-    var numbers = [];
-    numbers.push(0);
-    numbers.push(1);
-    for(var i = 2; i < n; i++)
-        numbers.push(numbers[i-2]+numbers[i-1]);
-    return numbers[numbers.length-1];
-}
-
-//question 2
-function bubbleSort(numArray){
-    var index = numArray.length;
-		while(index >= 0)
-		{
-			for(var i = 0; i < index; i++)
-			{
-				if(numArray[i] > numArray[i+1])
-				{
-					var temp = numArray[i];
-					numArray[i] = numArray[i+1];
-					numArray[i+1] = temp;
-				}
-			}
-			index--;
-        }
-    return numArray;
 }
 
 //question 3
@@ -160,4 +122,52 @@ function Person(name, age){
 //question 13
 function getPerson(name, age){
     return {name : name, age : age};
+}
+
+//question 1
+function runfib(){
+    var n = $('#ques1').val();
+    var values = fib(n);
+    
+    $("#answer1").parent().find("p").slice(1).remove();
+
+    var answer = document.createElement("p");
+    answer.innerHTML = values;
+    $("#answer1").append(answer);
+}
+function fib(n){
+    var numbers = [];
+    numbers.push(0);
+    numbers.push(1);
+    for(var i = 2; i < n; i++)
+        numbers.push(numbers[i-2]+numbers[i-1]);
+    return numbers[numbers.length-1];
+}
+
+//question 2
+function runBubbleSort(){
+    var x = [6, 5, 8, 9, 1, 2, 4, 3, 7];
+
+    $("#answer2").parent().find("p").slice(2).remove();
+
+    var answer = document.createElement("p");
+    answer.innerHTML = bubbleSort(x);
+    $("#answer2").append(answer);
+}
+function bubbleSort(numArray){
+    var index = numArray.length;
+		while(index >= 0)
+		{
+			for(var i = 0; i < index; i++)
+			{
+				if(numArray[i] > numArray[i+1])
+				{
+					var temp = numArray[i];
+					numArray[i] = numArray[i+1];
+					numArray[i+1] = temp;
+				}
+			}
+			index--;
+        }
+    return numArray;
 }
