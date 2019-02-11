@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="This html file contains everything for the Week 3 assignment">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JS Assignment</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    
+    <div class="container">
+        <form class="mx-3 my-3">
+            <div class="form-group">
+                <label for="problem_1" class="row">Problem#1: Fibonacci - Enter your input below.</label>
+                <div class="row">
+                    <input type="text" class="form-control mr-3 col-6" id="problem_1_input" 
+                        placeholder="Enter your input here">
+                    <button class="btn btn-outline-primary" id="problem_1_btn">Submit</button>
+                </div>
+                <div class="row">
+                    <label for="problem_1_output" class="col-form-label mr-2">Result: </label>
+                    <output class="col-form-label" id="problem_1_output" name="result">...</output>
+                </div>
+            </div>
+        </form>
+    </div>
+    <hr>
+
+    <div class="container">
+        <form class="mx-3 my-3">
+            <div class="form-group">
+                <label for="problem_2" class="row">
+                    Problem#2: Bubblesort - Enter numbers (separated by spaces) 
+                    in the input field below.</label>
+                <div class="row">
+                    <input type="text" class="form-control mr-3 col-6" id="problem_2_input"
+                        placeholder="Enter your input here">
+                    <button class="btn btn-outline-primary" id="problem_2_btn">Submit</button>
+                </div>
+                <div class="row">
+                    <label for="problem_2_output" class="col-form-label mr-2">Result: </label>
+                    <output class="col-form-label" id="problem_2_output" name="result">...</output>
+                </div>
+            </div>
+        </form>
+    </div>
+    <hr>
+
+    <div class="container">
+        <form class="mx-3 my-3">
+            <div class="form-group">
+                <label for="problem_3" class="row">
+                    Problem#3: Reverse String - 
+                    Type anything in the input field below.
+                </label>
+                <div class="row">
+                    <input type="text" class="form-control mr-3 col-6" id="problem_3_input"
+                        placeholder="Enter your input here">
+                    <button class="btn btn-outline-primary" id="problem_3_btn">Submit</button>
+                </div>
+                <div class="row">
+                    <label for="problem_3_output" class="col-form-label mr-2">Result: </label>
+                    <output class="col-form-label" id="problem_3_output" name="result">...</output>
+                </div>
+            </div>
+        </form>
+    </div>
+    <hr>
+
+    <div class="container">
+        <form class="mx-3 my-3">
+            <div class="form-group">
+                <label for="problem_4" class="row">Problem#4: Factorial - Enter a number.</label>
+                <div class="row">
+                    <input type="text" class="form-control mr-3 col-6" id="problem_4_input"
+                        placeholder="Enter your input here">
+                    <button class="btn btn-outline-primary" id="problem_4_btn">Submit</button>
+                </div>
+                <div class="row">
+                    <label for="problem_4_output" class="col-form-label mr-2">Result: </label>
+                    <output class="col-form-label" id="problem_4_output" name="result">...</output>
+                </div>
+            </div>
+        </form>
+    </div>
+    <hr>
+
+    <div class="container">
+        <form class="mx-3 my-3">
+            <div class="form-group">
+                <label for="problem_5" class="row">Problem#5: Substring - Enter your input string, 
+                    then enter your offset and length. Delimit the three items with a comma.
+                </label>
+                <div class="row">
+                    <input type="text" class="form-control mr-3 col-6" id="problem_5_input"
+                        placeholder="this is an example,0,18">
+                    <button class="btn btn-outline-primary" id="problem_5_btn">Submit</button>
+                </div>
+                <div class="row">
+                    <label for="problem_5_output" class="col-form-label mr-2">Result: </label>
+                    <output class="col-form-label" id="problem_5_output" name="result">...</output>
+                </div>
+            </div>
+        </form>
+    </div>
+    <hr>
+
+    <div class="container">
+        <form class="mx-3 my-3">
+            <div class="form-group">
+                <label for="problem_6" class="row">Problem#6: isEven - Enter your number below.
+                </label>
+                <div class="row">
+                    <input type="text" class="form-control mr-3 col-6" id="problem_6_input"
+                        placeholder="Enter your input here">
+                    <button class="btn btn-outline-primary" id="problem_6_btn">Submit</button>
+                </div>
+                <div class="row">
+                    <label for="problem_6_output" class="col-form-label mr-2">Result: </label>
+                    <output class="col-form-label" id="problem_6_output" name="result">...</output>
+                </div>
+            </div>
+        </form>
+    </div>
+    <hr>
+
+    <div class="container">
+        <form class="mx-3 my-3">
+            <div class="form-group">
+                <label for="problem_7" class="row">Problem#7: Palindrome - Enter your string below.
+                </label>
+                <div class="row">
+                    <input type="text" class="form-control mr-3 col-6" id="problem_7_input"
+                        placeholder="Enter your input here">
+                    <button class="btn btn-outline-primary" id="problem_7_btn">Submit</button>
+                </div>
+                <div class="row">
+                    <label for="problem_7_output" class="col-form-label mr-2">Result: </label>
+                    <output class="col-form-label" id="problem_7_output" name="result">...</output>
+                </div>
+            </div>
+        </form>
+    </div>
+    <hr>
+
+    <div class="container">
+        <form class="mx-3 my-3">
+            <div class="form-group">
+                <label for="problem_12" class="row">
+                    Problem#12: Person Constructor - 
+                    Enter its name and age below.
+                </label>
+                <div class="row">
+                    <input type="text" class="form-control mr-3 col-6" id="problem_12_input"
+                        placeholder="i.e: John, 30">
+                    <button class="btn btn-outline-primary" id="problem_12_btn">Submit</button>
+                </div>
+                <div class="row">
+                    <label for="problem_12_output" class="col-form-label mr-2">Result: </label>
+                    <output class="col-form-label" id="problem_12_output" name="result">...</output>
+                </div>
+            </div>
+        </form>
+    </div>
+    <hr>
+
+    <div class="container">
+        <form class="mx-3 my-3">
+            <div class="form-group">
+                <label for="problem_13" class="row">
+                    Problem#13: Person Literal - 
+                    Enter its name and age below.
+                </label>
+                <div class="row">
+                    <input type="text" class="form-control mr-3 col-6" id="problem_13_input"
+                        placeholder="i.e: John, 30">
+                    <button class="btn btn-outline-primary" id="problem_13_btn">Submit</button>
+                </div>
+                <div class="row">
+                    <label for="problem_13_output" class="col-form-label mr-2">Result: </label>
+                    <output class="col-form-label" id="problem_13_output" name="result">...</output>
+                </div>
+            </div>
+        </form>
+    </div>
+    <hr>
+
+    <div class="container">
+        <form class="mx-3 my-3">
+            <div class="form-group">
+                <label for="problem_14" class="row">
+                    Problem#14: Time display
+                </label>
+                <div class="row">
+                    <label for="problem_14_output" class="col-form-label mr-2">Result: </label>
+                    <output class="col-form-label" id="problem_14_output" name="result">...</output>
+                </div>
+            </div>
+        </form>
+    </div>
+    <hr>
+
+    <script>
+        window.onload = function(){
+            document.getElementById("problem_1_btn").addEventListener("click", fib);
+            document.getElementById("problem_2_btn").addEventListener("click", bubblesort);
+            document.getElementById("problem_3_btn").addEventListener("click", reverseString);
+            document.getElementById("problem_4_btn").addEventListener("click", fact);
+            document.getElementById("problem_5_btn").addEventListener("click", substring);
+            document.getElementById("problem_6_btn").addEventListener("click", isEven);
+            document.getElementById("problem_7_btn").addEventListener("click", palindrome);
+            document.getElementById("problem_12_btn").addEventListener("click", makePerson);
+            document.getElementById("problem_13_btn").addEventListener("click", makePersonLiterally);
+            // document.getElementById("problem_14_btn").addEventListener("load", );
+        }
+
+        function fib(event){
+            event.preventDefault();
+            const n = document.getElementById("problem_1_input").value;
+            const cache = [0,1,1];
+            if(n <= 2) return cache[n];
+            let i = 3;
+            while(i <= n){
+                let a = cache[(i-1) % 3];
+                let b = cache[(i-2) % 3];
+                cache[i % 3] = a + b;
+                i++;
+            }
+            document.getElementById('problem_1_output').value = cache[n%3];
+        }
+
+        function bubblesort(event){
+            event.preventDefault();
+            const str = document.getElementById("problem_2_input").value;
+            const arr = str.split(' ');
+            console.log(arr);
+            for (let i = 0; i < arr.length; i++) {
+                for (let j = 0; j < arr.length - i - 1; j++) {
+                    if (arr[j] > arr[j + 1]) {
+                        var temp = arr[j];
+                        arr[j] = arr[j + 1];
+                        arr[j + 1] = temp;
+                    }
+                }
+            }
+            console.log(arr);
+            document.getElementById('problem_2_output').value = arr;
+        }
+
+        function reverseString(event){
+            event.preventDefault();
+            const str = document.getElementById("problem_3_input").value;
+            document.getElementById('problem_3_output').value = str.split('').reverse().join('');
+        }
+
+        function fact(event){
+            event.preventDefault();
+            let n = document.getElementById("problem_4_input").value;
+            let result = 1;
+            while(n>0) {
+                result*=n;
+                n--;
+            }
+            document.getElementById('problem_4_output').value = result;
+        }
+
+        function substring(event){
+            event.preventDefault();
+            const data = document.getElementById("problem_5_input").value.split(",");
+            const str = data[0];
+            const length = data[1];
+            const offset = data[2];
+            let result;
+            if(str.length-offset < length || str.length < offset ){
+                alert("ERROR");
+            } else {
+                result = str.split("").splice(length,offset).join("");
+            }
+            document.getElementById('problem_5_output').value = result;
+        }
+
+        function isEven(event){
+            event.preventDefault();
+            const n = document.getElementById("problem_6_input").value;
+            let temp = Math.floor(n/2);
+            temp*=2;
+            const result = ( n == temp );
+            document.getElementById('problem_6_output').value = result;
+        }
+
+        function palindrome(event){
+            event.preventDefault();
+            const str = document.getElementById("problem_7_input").value;
+            const reverseStr = str.split("").reverse().join("");
+            result = (str === reverseStr);
+            document.getElementById('problem_7_output').value = result;
+        }
+
+        function makePerson(event){
+            event.preventDefault();
+            const data = document.getElementById("problem_12_input").value.split(',');
+            function person(name,age){
+                this.name = name;
+                this.age = age;
+            }
+            let newPerson = new person(data[0],data[1]);
+            document.getElementById('problem_12_output').value = 
+                `${newPerson.name} is a new person, who is ${newPerson.age} years old!`;
+        }
+        
+        function makePersonLiterally(event){
+            event.preventDefault();
+            const data = document.getElementById("problem_13_input").value.split(',');
+            let newPerson = {
+                name: data[0],
+                age: data[1]
+            };
+            document.getElementById('problem_13_output').value = 
+                `${newPerson.name} is a new person, who is ${newPerson.age} years old!`;
+        }
+
+    setInterval(function () {
+        document.getElementById('problem_14_output').value = new Date();
+    }, 1000);
+        
+    </script>
+
+</body>
+</html>
