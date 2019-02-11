@@ -1,8 +1,8 @@
 window.onload = function(){
     $('#question1').on('click', runfib);
     $('#question2').on('click', runBubbleSort);
-/*    $('#question3').on('click', reverseStr);
-    $('#question4').on('click', factorial);
+    $('#question3').on('click', runReverseStr);
+/*    $('#question4').on('click', factorial);
     $('#question5').on('click', substring);
     $('#question6').on('click', isEven);
     $('#question7').on('click', isPalindrome);
@@ -29,13 +29,6 @@ window.onload = function(){
 
 }
 
-//question 3
-function reverseStr(someStr){
-    var str = "";
-    for(var i = someStr.length-1; i >=0; i--)
-        str += someStr.charAt(i);
-    return str;
-}
 
 //question 4
 function factorial(someNum){
@@ -170,4 +163,21 @@ function bubbleSort(numArray){
 			index--;
         }
     return numArray;
+}
+
+//question 3
+function runReverseStr(){
+    var n = $('#ques3').val();
+    
+    $("#answer3").parent().find("p").slice(1).remove();
+
+    var answer = document.createElement("p");
+    answer.innerHTML = reverseStr(n);
+    $("#answer3").append(answer);
+}
+function reverseStr(someStr){
+    var str = "";
+    for(var i = someStr.length-1; i >=0; i--)
+        str += someStr.charAt(i);
+    return str;
 }
