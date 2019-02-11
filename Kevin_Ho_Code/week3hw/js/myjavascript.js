@@ -195,13 +195,17 @@ function isPalindrome(someStr){
 //question 9
 function runTraverseObject(){
     var n = $('#ques9').val();
-
+    var obj = n.split(",");
+    
+    
     traverseObject(n);
 }
 function traverseObject(someObj){
     for(let x of someObj)
     {
-        console.log(x);
+        var answer = document.createElement("p");
+        answer.innerHTML = x;
+        $("#answer9").append(answer);
     }
 }
 
