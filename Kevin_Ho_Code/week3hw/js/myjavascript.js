@@ -4,7 +4,7 @@ window.onload = function(){
     $('#question3').on('click', runReverseStr);
     $('#question4').on('click', runFactorial);
     $('#question5').on('click', runSubstring);
-    $('#question6').on('click', isEven);
+    $('#question6').on('click', runIsEven);
 /*    $('#question7').on('click', isPalindrome);
     $('#question9').on('click', traverseObject);
     $('#question10').on('click', deleteElement);
@@ -29,12 +29,6 @@ window.onload = function(){
 
 }
 
-//question 6
-function isEven(someNum){
-    while(someNum > 0)
-        someNum -= 2;
-    return someNum == 0;
-}
 
 //question 7
 function isPalindrome(someStr){
@@ -197,3 +191,18 @@ function substring(someStr, length, offset){
     return str;
 }
 
+//question 6
+function runIsEven(){
+    var n = $('#ques6').val();
+    
+    $("#answer6").parent().find("p").slice(1).remove();
+
+    var answer = document.createElement("p");
+    answer.innerHTML = isEven(n);
+    $("#answer6").append(answer);
+}
+function isEven(someNum){
+    while(someNum > 0)
+        someNum -= 2;
+    return someNum == 0;
+}
