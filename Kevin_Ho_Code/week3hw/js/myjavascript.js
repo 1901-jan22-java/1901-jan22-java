@@ -5,11 +5,11 @@ window.onload = function(){
     $('#question4').on('click', runFactorial);
     $('#question5').on('click', runSubstring);
     $('#question6').on('click', runIsEven);
-/*    $('#question7').on('click', isPalindrome);
-    $('#question9').on('click', traverseObject);
-    $('#question10').on('click', deleteElement);
+    $('#question7').on('click', runIsPalindrome);
+    $('#question9').on('click', runTraverseObject);
+    $('#question10').on('click', runDeleteElement);
     $('#question11').on('click', spliceElement);
-    $('#question12').on('click', Person);
+/*    $('#question12').on('click', Person);
     $('#question13').on('click', getPerson);
 */
     var acc = document.getElementsByClassName("accordion");
@@ -26,41 +26,8 @@ window.onload = function(){
                 panel.style.display = "block";
         });
     }
-
 }
 
-
-//question 7
-function isPalindrome(someStr){
-    var startIndex = 0;
-	var endIndex = someStr.length-1;
-    
-    while(startIndex < endIndex)
-	{
-	    if(someStr.charAt(startIndex) != someStr.charAt(endIndex))
-		    return false;
-		
-	    startIndex++;
-		endIndex--;
-	}
-		
-	return true;
-}
-
-//question 9
-function traverseObject(someObj){
-    for(let x of someObj)
-    {
-        console.log(x);
-    }
-}
-
-//question 10
-function deleteElement(someArr){
-    console.log(someArr.length);
-    delete someArr[3];
-    console.log(someArr.length);
-}
 
 //question 11
 function spliceElement(someArr){
@@ -205,4 +172,53 @@ function isEven(someNum){
     while(someNum > 0)
         someNum -= 2;
     return someNum == 0;
+}
+
+//question 7
+function runIsPalindrome(){
+    var n = $('#ques7').val();
+    
+    $("#answer7").parent().find("p").slice(1).remove();
+
+    var answer = document.createElement("p");
+    answer.innerHTML = isPalindrome(n);
+    $("#answer7").append(answer);
+}
+function isPalindrome(someStr){
+    var startIndex = 0;
+	var endIndex = someStr.length-1;
+    
+    while(startIndex < endIndex)
+	{
+	    if(someStr.charAt(startIndex) != someStr.charAt(endIndex))
+		    return false;
+		
+	    startIndex++;
+		endIndex--;
+	}
+		
+	return true;
+}
+
+//question 9
+function runTraverseObject(){
+    var n = $('#ques9').val();
+    traverseObject(n);
+}
+function traverseObject(someObj){
+    for(let x of someObj)
+    {
+        console.log(x);
+    }
+}
+
+//question 10
+function runDeleteElement(){
+    var n = $('#ques10').val().split(',');
+    deleteElement(n);
+}
+function deleteElement(someArr){
+    console.log(someArr.length);
+    delete someArr[3];
+    console.log(someArr.length);
 }
