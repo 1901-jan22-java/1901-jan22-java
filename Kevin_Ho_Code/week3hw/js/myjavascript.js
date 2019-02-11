@@ -8,10 +8,8 @@ window.onload = function(){
     $('#question7').on('click', runIsPalindrome);
     $('#question9').on('click', runTraverseObject);
     $('#question10').on('click', runDeleteElement);
-    $('#question11').on('click', spliceElement);
-/*    $('#question12').on('click', Person);
-    $('#question13').on('click', getPerson);
-*/
+    $('#question11').on('click', runSpliceElement);
+
     var acc = document.getElementsByClassName("accordion");
     var i;
 
@@ -29,12 +27,6 @@ window.onload = function(){
 }
 
 
-//question 11
-function spliceElement(someArr){
-    console.log(someArr.length);
-    someArr.splice(3);
-    console.log(someArr.length);
-}
 
 //question 12
 function Person(name, age){
@@ -203,6 +195,7 @@ function isPalindrome(someStr){
 //question 9
 function runTraverseObject(){
     var n = $('#ques9').val();
+
     traverseObject(n);
 }
 function traverseObject(someObj){
@@ -215,10 +208,33 @@ function traverseObject(someObj){
 //question 10
 function runDeleteElement(){
     var n = $('#ques10').val().split(',');
+    $("#answer10").parent().find("p").slice(1).remove();
+
+    var answer1 = document.createElement("p");
+    answer1.innerHTML = n.length;
+    $("#answer10").append(answer1);
     deleteElement(n);
+    var answer2 = document.createElement("p");
+    answer2.innerHTML = n.length;
+    $("#answer10").append(answer2);   
 }
 function deleteElement(someArr){
-    console.log(someArr.length);
     delete someArr[3];
-    console.log(someArr.length);
+}
+
+//question 11
+function runSpliceElement(){
+    var n = $('#ques11').val().split(',');
+    $("#answer11").parent().find("p").slice(1).remove();
+
+    var answer1 = document.createElement("p");
+    answer1.innerHTML = n.length;
+    $("#answer11").append(answer1);
+    spliceElement(n);
+    var answer2 = document.createElement("p");
+    answer2.innerHTML = n.length;
+    $("#answer11").append(answer2);
+}
+function spliceElement(someArr){
+    someArr.splice(3);
 }
