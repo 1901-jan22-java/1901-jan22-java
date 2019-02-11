@@ -2,8 +2,8 @@ window.onload = function(){
     $('#question1').on('click', runfib);
     $('#question2').on('click', runBubbleSort);
     $('#question3').on('click', runReverseStr);
-/*    $('#question4').on('click', factorial);
-    $('#question5').on('click', substring);
+    $('#question4').on('click', runFactorial);
+/*    $('#question5').on('click', substring);
     $('#question6').on('click', isEven);
     $('#question7').on('click', isPalindrome);
     $('#question9').on('click', traverseObject);
@@ -27,15 +27,6 @@ window.onload = function(){
         });
     }
 
-}
-
-
-//question 4
-function factorial(someNum){
-    if(someNum == 1)
-        return 1;
-    else
-        return someNum * factorial(someNum-1);
 }
 
 //question 5
@@ -181,3 +172,21 @@ function reverseStr(someStr){
         str += someStr.charAt(i);
     return str;
 }
+
+//question 4
+function runFactorial(){
+    var n = $('#ques4').val();
+    
+    $("#answer4").parent().find("p").slice(1).remove();
+
+    var answer = document.createElement("p");
+    answer.innerHTML = factorial(n);
+    $("#answer4").append(answer);
+}
+function factorial(someNum){
+    if(someNum == 1)
+        return 1;
+    else
+        return someNum * factorial(someNum-1);
+}
+
