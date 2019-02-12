@@ -42,49 +42,51 @@
       <hr class="my-2">
       <p class="lead">15 Questions</p>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minus autem enim nulla neque voluptatibus voluptas
-        modi ducimus, reiciendis quasi magnam id maiores, delectus quibusdam laboriosam aperiam ex natus, laborum
-        rerum!
+        Create an HTML file that takes in input and carries out at least 10 of the following functions and manipulates
+        the DOM to show the outcome. Please put the question itself as a comment above each answer. Use either
+        JavaScript, jQuery, or both (but know the difference!).
       </p>
     </div>
   </div>
 
   <div class="q-container">
-    <div id="q1" class="quests">
-      <h4>Question: 1</h4>
+    <div class="quests">
+      <h4>Question 1: Fibonacci</h4>
       <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione velit magni accusamus consequuntur corporis recusandae maiores, explicabo, sed nam a reprehenderit laboriosam assumenda corrupti sequi, libero at doloremque! Blanditiis, suscipit.
+        Define function: fib(n)<br>
+        Return the nth number in the fibonacci sequence.
       </p>
-      <label class="text-priamry" for="q1">Input: </label>
-      <input type="text" class="form-control form-control-sm" name="" id="q1-input" aria-describedby="helpId"
+
+      <label for="q1-input">Input:</label>
+      <input id="q1-input" type="number" type="text" class="form-control form-control-sm" name="" aria-describedby="helpId"
         placeholder="">
       <hr class="my-2">
-      <p class="lead">
-        <button class="btn btn-primary" type="submit">Execute!</button>
-      </p>
+
+      <button id="q1-button" class="btn btn-primary" type="submit">Execute</button>
+      <hr class="my-2">
+
+      <label for="q1-output">Output:</label>
+      <p><span id="q1-output"></span></p>
     </div>
 
-    <div id="q2" class="quests">
-      <h4>Question: 2</h4>
+    <div class="quests">
+      <h4>Question 2: Bubble Sort</h4>
       <p>
-        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ratione velit magni accusamus consequuntur corporis recusandae maiores, explicabo, sed nam a reprehenderit laboriosam assumenda corrupti sequi, libero at doloremque! Blanditiis, suscipit.
+        Define function: bubbleSort(numArray)<br>
+        Use the bubble sort algorithm to sort the array.
+        Return the sorted array.
       </p>
-      <label for="q2">Input: </label>
-      <input type="text" class="form-control form-control-sm" name="" id="q2-input" aria-describedby="helpId"
+
+      <label for="q2-input">Input:</label>
+      <input id="q2-input" type="text" class="form-control form-control-sm" name="" aria-describedby="helpId"
         placeholder="">
       <hr class="my-2">
-      <p class="lead">
-        <button class="btn btn-primary" type="submit">Execute!</button>
-      </p>
+
+      <button id="q2" class="btn btn-primary" type="submit">Execute</button>
+      <span id="q2-output"></span>
     </div>
+    
   </div>
-
-
-  <form>
-  </form>
-
-  <!-- Optional JavaScript -->
-  <script src="./js/hw.js"></script>
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -93,6 +95,10 @@
     crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
     crossorigin="anonymous"></script>
+    
+  <!-- Optional JavaScript -->
+  <script src="./js/hw.js"></script>
+
 </body>
 
 </html>

@@ -1,36 +1,14 @@
-// 14
-setInterval(() => {
-    var date = new Date();
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var seconds = date.getSeconds();
-    var ampm = 'AM';
-    if (hours > 12) {
-        hours -= 12;
-        ampm = 'PM';
-    }
-    if (hours == 0) {
-        hours = 12;
-    }
-    if (minutes < 10) {
-        minutes = '0' + minutes;
-    }
-    if (seconds < 10) {
-        seconds = '0' + seconds;
-    }
-    $("#time").html(`${hours}:${minutes}:${seconds} ${ampm}`);
-}, 1000);
 
 // 1
 fib = {
     list: [1, 1],
     calc: function (n) {
         if (typeof n !== 'number') return n;
-        if (this.list[n] != null) return this.list[n];
-        for (let i = this.store.length; i <= n; i++) {
-            this.list[i] = this.list[i - 1] + this.list[i - 2];
+        if (fib.list[n] != null) return fib.list[n];
+        for (let i = fib.list.length; i <= n; i++) {
+            fib.list[i] = fib.list[i - 1] + fib.list[i - 2];
         }
-        return this.list[n];
+        return fib.list[n];
     }
 };
 
@@ -200,7 +178,28 @@ var peopleObj = {
     }
 }
 
-
+// 14
+setInterval(() => {
+    var date = new Date();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    var ampm = 'AM';
+    if (hours > 12) {
+        hours -= 12;
+        ampm = 'PM';
+    }
+    if (hours == 0) {
+        hours = 12;
+    }
+    if (minutes < 10) {
+        minutes = '0' + minutes;
+    }
+    if (seconds < 10) {
+        seconds = '0' + seconds;
+    }
+    $("#time").html(`${hours}:${minutes}:${seconds} ${ampm}`);
+}, 1000);
 
 // 15
 function biggestNumWith(num) {
@@ -216,3 +215,11 @@ function biggestNumWith(num) {
     }
     return parseInt(res);
 }
+
+$("#q1-button").click(function (){
+    var input = Number.parseInt($('#q1-input').val());
+    console.log(input);
+    var output = fib.calc(input);
+    console.log(output);
+    $('#q1-output').html(`${output}`);
+});
