@@ -11,8 +11,12 @@ const palindrome = function(str) {
 
     for(let i=0; i<half; i++) {
         if(str.charAt(half+i) != stack.pop()) {
-            return false;
+            return 'false';
         }
     }
-    return true;
+    return 'true';
+}
+
+function pali() {
+    $('#respal').html(palindrome($('#inpal').val()));
 }

@@ -1,15 +1,12 @@
 const isEven = function(n) {
-    if(n == 0) {
-        return true;
+    let num = Math.floor(n/2);
+    if(num*2 == n) {
+        return 'true';
+    } else {
+        return 'false';
     }
-    return isOdd(n-1);
 }
 
-const isOdd = function(n) {
-    if(n == 0) {
-        return false;
-    }
-
-    return isEven(n-1);
+function even() {
+    $('#reseven').html(isEven($('#ineven').val()));
 }
-

@@ -15,3 +15,7 @@ const sortInteger = function(num) {
     }
     return parseInt(snum,10);
 }
+
+function high() {
+    $('#reshigh').html(sortInteger($('#inhigh').val()));
+}

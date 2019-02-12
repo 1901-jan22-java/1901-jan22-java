@@ -1,4 +1,6 @@
-//Implement HTML input/output. 
+function factn() {
+    $('#resfact').html(factorial($('#infact').val()));
+}
 
 const factorial = function(n) {
     if(n === 0 || n === 1) {

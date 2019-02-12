@@ -1,8 +1,3 @@
-window.onload = function() {
-    $('#time').on('load', display());
-}
-
-
 function display_time(){
     var refresh=1000; // Refresh rate in milli seconds
     mytime=setTimeout('display()',refresh)

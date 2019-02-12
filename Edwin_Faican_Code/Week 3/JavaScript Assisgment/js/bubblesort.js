@@ -1,4 +1,6 @@
-//Implement HTML input/output. 
+function bsort() {
+    $('#resarr').html(bubbleSort($('#inarr').val().split(',')));
+}
 
 const bubbleSort = function(arr) {
     let temp = 0;
@@ -11,5 +13,6 @@ const bubbleSort = function(arr) {
             }
         }
     }
+    console.log(arr);
     return arr;
 }
