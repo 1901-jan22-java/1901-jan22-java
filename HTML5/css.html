@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Images</title>
+  </head>
+  <body>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="C:/Users/torimadera/my_git_repos/1901-jan22-java/Victoria_Wood_Code/Week3/htmlandcss/css3/css3.html">Home <span class="sr-only"></span></a>
+              </li>
+              </ul>
+              </div>
+              </nav>
+    <h1>New Features with Images in CSS 3</h1>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+    
+    
+    <style> 
+            div {<p><b>Note:</b> This example does not work in Internet Explorer 9 and earlier versions.</p>
+              width: 100px;
+              height: 100px;
+              background-color: red;
+              position: relative;
+              -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+              -webkit-animation-duration: 4s; /* Safari 4.0 - 8.0 */
+              animation-name: example;
+              animation-duration: 4s;
+              animation-iteration-count: 3;
+            }
+            
+            /* Safari 4.0 - 8.0 */
+            @-webkit-keyframes example {
+              0%   {background-color:red; left:0px; top:0px;}
+              25%  {background-color:yellow; left:200px; top:0px;}
+              50%  {background-color:blue; left:200px; top:200px;}
+              75%  {background-color:green; left:0px; top:200px;}
+              100% {background-color:red; left:0px; top:0px;}
+            }
+            
+            /* Standard syntax */
+            @keyframes example {
+              0%   {background-color:red; left:0px; top:0px;}
+              25%  {background-color:yellow; left:200px; top:0px;}
+              50%  {background-color:blue; left:200px; top:200px;}
+              75%  {background-color:green; left:0px; top:200px;}
+              100% {background-color:red; left:0px; top:0px;}
+            }
+            </style>
+            img {
+    /* Specifies that the center of each photo
+       should align with the center of the scroll
+       container in the X axis when snapping */
+    scroll-snap-align: none center;
+}
+.photoGallery {
+    width: 500px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    /* Requires that the scroll position always be
+       at a snap position when the scrolling
+       operation completes. */
+    scroll-snap-type: x mandatory;
+}
+<div class="photoGallery">
+    <img src="img1.jpg">
+    <img src="img2.jpg">
+    <img src="img3.jpg">
+    <img src="img4.jpg">
+    <img src="img5.jpg">
+</div>
+
+
+
+
+
+  </body>
+</html>

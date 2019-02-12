@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>JavaScript Assignment</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <link rel="stylesheet" href="./css/stuff.css">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+    crossorigin="anonymous">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">JS Assignment</a>
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+      aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">Questions</a>
+          <div class="dropdown-menu" aria-labelledby="dropdownId">
+            <a class="dropdown-item" href="#q1">Question 1</a>
+            <a class="dropdown-item" href="#q2">Question 2</a>
+          </div>
+        </li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <p class="time-display">Time: <span id="time"></span></p>
+      </form>
+    </div>
+  </nav>
+
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4"><b>Week 3: JavaScript Assignment</b></h1>
+      <hr class="my-2">
+      <p class="lead">15 Questions</p>
+      <p>
+        Create an HTML file that takes in input and carries out at least 10 of the following functions and manipulates
+        the DOM to show the outcome. Please put the question itself as a comment above each answer. Use either
+        JavaScript, jQuery, or both (but know the difference!).
+      </p>
+    </div>
+  </div>
+
+  <div class="q-container">
+    <div class="quests">
+      <h4>Question 1: Fibonacci</h4>
+      <p>
+        Define function: fib(n)<br>
+        Return the nth number in the fibonacci sequence.
+      </p>
+
+      <label for="q1-input">Input:</label>
+      <input id="q1-input" type="number" class="form-control form-control-sm" name="" aria-describedby="helpId"
+        placeholder="">
+      <hr class="my-2">
+
+      <button id="q1-button" class="btn btn-primary" type="submit">Execute</button>
+      <hr class="my-2">
+
+      <label for="q1-output">Output:</label>
+      <p><span id="q1-output"></span></p>
+    </div>
+
+    <div class="quests">
+      <h4>Question 2: Bubble Sort</h4>
+      <p>
+        Define function: bubbleSort(numArray)<br>
+        Use the bubble sort algorithm to sort the array.
+        Return the sorted array.
+      </p>
+
+      <label for="q2-input">Input:</label>
+      <input id="q2-input" type="text" class="form-control form-control-sm" name="" aria-describedby="helpId"
+        placeholder="">
+      <hr class="my-2">
+
+      <button id="q2-button" class="btn btn-primary" type="submit">Execute</button>
+      <hr class="my-2">
+
+      <label for="q2-output">Output:</label>
+      <p><span id="q2-output"></span></p>
+    </div>
+
+    <div class="quests">
+      <h4>Question 3: Reverse String</h4>
+      <p>
+        Define function: reverseStr(someStr)<br>
+        Reverse and return the String.
+      </p>
+
+      <label for="q3-input">Input:</label>
+      <input id="q3-input" type="text" class="form-control form-control-sm" name="" aria-describedby="helpId"
+        placeholder="">
+      <hr class="my-2">
+
+      <button id="q3-button" class="btn btn-primary" type="submit">Execute</button>
+      <hr class="my-2">
+
+      <label for="q3-output">Output:</label>
+      <p><span id="q3-output"></span></p>
+    </div>
+
+    <div class="quests">
+      <h4>Question 4: Factorial </h4>
+      <p>
+        Define function: factorial(someNum) <br>
+        Use recursion to compute and return the factorial of someNum.
+      </p>
+
+      <label for="q4-input">Input:</label>
+      <input id="q4-input" type="number" class="form-control form-control-sm" name="" aria-describedby="helpId"
+        placeholder="">
+      <hr class="my-2">
+
+      <button id="q4-button" class="btn btn-primary" type="submit">Execute</button>
+      <hr class="my-2">
+
+      <label for="q4-output">Output:</label>
+      <p><span id="q4-output"></span></p>
+    </div>
+
+    <div class="quests">
+      <h4>Question 5: Substring </h4>
+      <p>
+        Define function substring(someStr, length, offset) <br>
+        Return the substring contained between offset and (offset + length) inclusively. <br>
+        If incorrect input is entered, use the alert function and describe why the input was incorrect.
+      </p>
+
+      <label for="q5-input">String:</label>
+      <input id="q5-input1" type="text" class="form-control form-control-sm" name="" aria-describedby="helpId"
+        placeholder="">
+      <hr class="my-2">
+
+      <label for="q5-input">Length:</label>
+      <input id="q5-input2" type="number" class="form-control form-control-sm" name="" aria-describedby="helpId"
+        placeholder="">
+      <hr class="my-2">
+
+      <label for="q5-input">Offset:</label>
+      <input id="q5-input3" type="number" class="form-control form-control-sm" name="" aria-describedby="helpId"
+        placeholder="">
+      <hr class="my-2">
+
+      <button id="q5-button" class="btn btn-primary" type="submit">Execute</button>
+      <hr class="my-2">
+
+      <label for="q5-output">Output:</label>
+      <p><span id="q5-output"></span></p>
+    </div>
+
+    <div class="quests">
+      <h4>Question 6: Even Number</h4>
+      <p>
+        Define function: isEven(someNum) <br>
+        Return true if even, false if odd. <br>
+        Do not use % operator.
+      </p>
+
+      <label for="q6-input">Input:</label>
+      <input id="q6-input" type="number" class="form-control form-control-sm" name="" aria-describedby="helpId"
+        placeholder="">
+      <hr class="my-2">
+
+      <button id="q6-button" class="btn btn-primary" type="submit">Execute</button>
+      <hr class="my-2">
+
+      <label for="q6-output">Output:</label>
+      <p><span id="q6-output"></span></p>
+    </div>
+
+    <div class="quests">
+      <h4>Question 7: Palindrome </h4>
+      <p>
+        Define function isPalindrome(someStr) <br>
+        Return true if someStr is a palindrome, otherwise return false
+      </p>
+
+      <label for="q7-input">Input:</label>
+      <input id="q7-input" type="text" class="form-control form-control-sm" name="" aria-describedby="helpId"
+        placeholder="">
+      <hr class="my-2">
+
+      <button id="q7-button" class="btn btn-primary" type="submit">Execute</button>
+      <hr class="my-2">
+
+      <label for="q7-output">Output:</label>
+      <p><span id="q7-output"></span></p>
+    </div>
+
+    <div class="quests">
+      <h4>Question 8: Shapes</h4>
+      <p>
+        Define function: printShape(shape, height, character) <br>
+        shape is a String and is either "Square", "Triangle", "Diamond". <br>
+        height is a Number and is the height of the shape. <br>
+        Assume the number is odd.
+        **Character is a String that represents the contents of the shape. Assume this String contains just one
+        character.** <br>
+        *Use a switch statement to determine which shape was passed in.
+        Use the console.log function to print the desired shape.* <br>
+        Example for printShape("Square", 3, "%"); <br>
+        \%\%\% <br>
+        \%\%\% <br>
+        \%\%\% <br>
+        Example for printShape("Triangle", 3, "$"); <br>
+        &dollar; <br>
+        &dollar;&dollar; <br>
+        &dollar;&dollar;&dollar; <br>
+        Example for printShape("Diamond", 5, "*"); <br>
+        &nbsp;&nbsp;&ast; <br>
+        &nbsp;&ast;&ast;&ast; <br>
+        &ast;&ast;&ast;&ast;&ast; <br>
+        &nbsp;&ast;&ast;&ast; <br>
+        &nbsp;&nbsp;&ast; <br>
+      </p>
+
+      <label for="q8-input1">Shape:</label>
+      <input id="q8-input1" type="text" class="form-control form-control-sm" name="" aria-describedby="helpId"
+        placeholder="">
+      <hr class="my-2">
+
+      <label for="q8-input2">Height:</label>
+      <input id="q8-input2" type="number" class="form-control form-control-sm" name="" aria-describedby="helpId"
+        placeholder="">
+      <hr class="my-2">
+
+      <label for="q8-input3">Character:</label>
+      <input id="q8-input3" type="text" class="form-control form-control-sm" name="" aria-describedby="helpId"
+        placeholder="">
+      <hr class="my-2">
+
+      <button id="q8-button" class="btn btn-primary" type="submit">Execute</button>
+      <hr class="my-2">
+
+      <label for="q8-output">Output:</label>
+      <p><span id="q8-output"></span></p>
+    </div>
+
+
+    <div class="quests">
+      <h4>Question 10: Delete Element </h4>
+      <p>
+        Define function deleteElement(someArr)
+        Print length
+        Delete the third element in the array.
+        Print length
+        The lengths should be the same.
+      </p>
+
+      <label for="q10-input">Input:</label>
+      <input id="q10-input" type="text" class="form-control form-control-sm" name="" aria-describedby="helpId"
+        placeholder="">
+      <hr class="my-2">
+
+      <button id="q10-button" class="btn btn-primary" type="submit">Execute</button>
+      <hr class="my-2">
+
+      <label for="q10-output">Output:</label>
+      <p><span id="q10-output"></span></p>
+    </div>
+
+
+    <div class="quests">
+      <h4>Question 15: Descending Order </h4>
+      <p>
+        Your task is to make a function that can take any non-negative integer as a argument and return it with its
+        digits in descending order. Essentially, rearrange the digits to create the highest possible number.
+      </p>
+
+      <label for="q15-input">Input:</label>
+      <input id="q15-input" type="number" class="form-control form-control-sm" name="" aria-describedby="helpId"
+        placeholder="">
+      <hr class="my-2">
+
+      <button id="q15-button" class="btn btn-primary" type="submit">Execute</button>
+      <hr class="my-2">
+
+      <label for="q15-output">Output:</label>
+      <p><span id="q15-output"></span></p>
+    </div>
+
+  </div>
+
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    crossorigin="anonymous"></script>
+
+  <!-- Optional JavaScript -->
+  <script src="./js/hw.js"></script>
+
+</body>
+
+</html>
