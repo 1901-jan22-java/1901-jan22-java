@@ -1,3 +1,26 @@
+// 14
+setInterval(() => {
+    var date = new Date();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    var ampm = 'AM';
+    if (hours > 12) {
+        hours -= 12;
+        ampm = 'PM';
+    }
+    if (hours == 0) {
+        hours = 12;
+    }
+    if (minutes < 10) {
+        minutes = '0' + minutes;
+    }
+    if (seconds < 10) {
+        seconds = '0' + seconds;
+    }
+    $("#time").html(`${hours}:${minutes}:${seconds} ${ampm}`);
+}, 1000);
+
 // 1
 fib = {
     list: [1, 1],
@@ -46,8 +69,6 @@ function reverseStr(s) {
 }
 
 // 4
-// Do not go too high... space complexity will not scale down
-// number can only hold so much
 factorial = {
     list: [1, 1],
     calc: function (n) {
@@ -148,10 +169,9 @@ function traverseObject(obj) {
 }
 
 // 10
-
 function deleteElement(arr) {
     console.log(arr.length);
-    if (arr.length > 2) arr[2] = null;
+    if (arr.length > 2) delete arr[2];
     console.log(arr.length);
     return arr;
 }
@@ -160,7 +180,7 @@ function spliceElement(arr) {
     console.log(arr.length);
     if (arr.length > 2) arr2 = arr.splice(2, 1);
     console.log(arr.length);
-    return arr;
+    return arr2;
 }
 // 12
 function Person(name, age) {
@@ -180,22 +200,7 @@ var peopleObj = {
     }
 }
 
-// 14
-setInterval(() => {
-    var date = new Date();
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var seconds = date.getSeconds();
-    var ampm = 'AM';
-    if (hours > 12) {
-        hours -= 12;
-        ampm = 'PM';
-    }
-    if (hours == 0) {
-        hours = 12;
-    }
-    $("#time").html(`${hours}:${minutes}:${seconds} ${ampm}`);
-}, 1000);
+
 
 // 15
 function biggestNumWith(num) {
@@ -207,7 +212,7 @@ function biggestNumWith(num) {
     }
     var res = "";
     for (let i = 9; i >= 0; i--) {
-        res += (''+i).repeat(count[i]);
+        res += ('' + i).repeat(count[i]);
     }
     return parseInt(res);
 }

@@ -1,0 +1,26 @@
+nav {
+    position: absolute;
+}
+
+.q-container {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.quests {
+    width: 50%;
+    border: 5px solid rgb(62, 64, 78);
+    border-radius: 25px;
+    padding: 25px;
+    margin: 5px;
+}
+
+.time-display {
+    color:white;
+    font-size: 20px;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px;
+}
