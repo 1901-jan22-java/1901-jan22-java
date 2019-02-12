@@ -9,11 +9,27 @@
   configure other details like parameters and 
   when to initialize our servlets-->
   
+  <!-- SERLVET CONTEXT
+  	parameter(s) applied to every servlet in the context of 
+  	this application-->
+  	<context-param>
+  		<param-name>envVar</param-name>
+  	    <param-value>This is an example of when we would need servlet context.
+  	    this value is now available in all servlets in the app</param-value>
+  	</context-param>
+  
   <!-- Below  we are telling our web container that the following 
   class is a servlet and will be called Hello-->
   <servlet>
   	<servlet-name>Hello</servlet-name>
   	<servlet-class>com.revature.servlets.HelloServlet</servlet-class>
+  	<!-- SERVLET CONFIG is configuration information (parameters) 
+  	for a particular servlet -->
+  	<init-param>
+  		<param-name>secret</param-name>
+  		<param-value>This is top secret info </param-value>
+  	</init-param>
+  	<load-on-startup>1</load-on-startup>
   </servlet>
   
   <!-- give our servlet(by its nickname) an endpoint to 
