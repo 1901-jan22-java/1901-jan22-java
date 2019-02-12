@@ -1,0 +1,32 @@
+<html>
+<body>
+<button id="press"> Press me! </button>
+<div id="text"></div>
+
+
+
+<script>
+
+window.onload = function(){
+	document.getElementById("press").addEventListener("click", function(){
+			
+			
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4){
+				document.getElementById("text").innerHTML = xhr.responseText;
+			}
+		};
+		
+		xhr.open("GET", "http://localhost:8085/hello-servlets/world");
+		xhr.send();
+	
+	});
+}
+
+
+
+</script>
+</body>
+
+</html>
