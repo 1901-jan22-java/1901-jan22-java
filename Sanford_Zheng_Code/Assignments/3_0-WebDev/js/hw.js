@@ -111,24 +111,24 @@ function printShape(s, h, c) {
         case ('Square'):
             for (let i = 0; i < h; i++) {
                 res += c.repeat(h);
-                res += '\n';
+                res += '\n<br>';
             }
             break;
         case ('Triangle'):
             for (let i = 0; i < h; i++) {
                 res += c.repeat(i + 1);
-                res += '\n';
+                res += '\n<br>';
             }
             break;
         case ('Diamond'):
 
             for (let i = 0; i < h; i++) {
                 if (i < h / 2) {
-                    res += ' '.repeat(Math.floor(h / 2) - i) + c.repeat(2 * i + 1);
+                    res += '&nbsp;'.repeat(Math.floor(h / 2) - i) + c.repeat(2 * i + 1);
                 } else {
-                    res += ' '.repeat(i - Math.floor(h / 2)) + c.repeat(2 * (h - i) - 1);
+                    res += '&nbsp;'.repeat(i - Math.floor(h / 2)) + c.repeat(2 * (h - i) - 1);
                 }
-                res += '\n';
+                res += '\n<br>';
             }
             break;
         default:
@@ -222,4 +222,81 @@ $("#q1-button").click(function (){
     var output = fib.calc(input);
     console.log(output);
     $('#q1-output').html(`${output}`);
+});
+$("#q2-button").click(function (){
+    var input = $('#q2-input').val().split(',');
+    console.log(input);
+    var output = bubbleSort(input);
+    console.log(output);
+    $('#q2-output').html(`${output}`);
+});
+$("#q3-button").click(function (){
+    var input = $('#q3-input').val();
+    console.log(input);
+    var output = reverseStr(input);
+    console.log(output);
+    $('#q3-output').html(`${output}`);
+});
+$("#q4-button").click(function (){
+    var input = Number.parseInt($('#q4-input').val());
+    console.log(typeof input);
+    var output = factorial.calc(input);
+    console.log(output);
+    $('#q4-output').html(`${output}`);
+});
+$("#q5-button").click(function (){
+    var input1 = $('#q5-input1').val();
+    var input2 = Number.parseInt($('#q5-input2').val());
+    var input3 = Number.parseInt($('#q5-input3').val());
+    console.log(typeof input1);
+    console.log(typeof input2);
+    console.log(typeof input3);
+    var output = substring(input1, input2, input3);
+    console.log(output);
+    $('#q5-output').html(`${output}`);
+});
+$("#q6-button").click(function (){
+    var input = Number.parseInt($('#q6-input').val());
+    console.log(input);
+    var output = isEven(input);
+    console.log(output);
+    $('#q6-output').html(`${output}`);
+});
+$("#q7-button").click(function (){
+    var input = $('#q7-input').val();
+    console.log(input);
+    var output = isPalindrome(input);
+    console.log(output);
+    $('#q7-output').html(`${output}`);
+});
+$("#q8-button").click(function (){
+    var i1 = $('#q8-input1').val();
+    var i2 = Number.parseInt($('#q8-input2').val());
+    var i3 = $('#q8-input3').val();
+
+    console.log(i1);
+    console.log(i2);
+    console.log(i3);
+    
+    var output = printShape(i1, i2, i3);
+    console.log(output);
+    $('#q8-output').html(`${output}`);
+});
+
+// 10
+$("#q10-button").click(function (){
+    var input = $('#q10-input').val().split(',');
+    console.log(input);
+    var output = deleteElement(input);
+    console.log(output);
+    $('#q10-output').html(`${output}`);
+});
+
+
+$("#q15-button").click(function (){
+    var i1 = Number.parseInt($('#q15-input').val());
+    console.log(i1);
+    var output = biggestNumWith(i1);
+    console.log(output);
+    $('#q15-output').html(`${output}`);
 });
