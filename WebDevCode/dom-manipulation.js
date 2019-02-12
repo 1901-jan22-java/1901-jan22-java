@@ -85,7 +85,7 @@ function fizzBuzz(n){
 function runFizzBuzz(){
     var n = document.getElementById('fbn').value;
     var values = fizzBuzz(n);
-
+    innerText = values[i];
 
     document.getElementById('buzzTable')
         .removeAttribute('hidden');

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JavaScript Homework</title>
+</head>
+
+<body onload=display_ct();>
+    <span id='ct'></span>
+
+
+ 
+
+ 
+
+
+    <script type="text/javascript">
+        // Question One Fib sequence
+        function runfibby()
+        {
+          var n = document.getElementById('fib').value;
+          var values = fibonacci(num);
+          var d = document.getElementById('fib2').innerHTML
+        }
+
+        function fibonacci(num) {
+        
+
+
+            var a = 1, b = 0, temp;
+
+            while (num >= 0) {
+                temp = a;
+                a = a + b;
+                b = temp;
+                num--;
+            }
+
+            return b;
+        }
+
+
+       
+        console.log(fibonacci(10));
+        //10 : 55 = 5 x 11 should be 89
+
+        //Question Two -Bubble Sort
+
+        var a = [33, 103, 3, 726, 200, 984, 198, 764, 9];
+
+        function bubbleSort(a) {
+            var swapped;
+            do {
+                swapped = false;
+                for (var i = 0; i < a.length - 1; i++) {
+                    if (a[i] > a[i + 1]) {
+                        var temp = a[i];
+                        a[i] = a[i + 1];
+                        a[i + 1] = temp;
+                        swapped = true;
+                    }
+                }
+            } while (swapped);
+        }
+
+        bubbleSort(a);
+        console.log(a);
+
+        //Question Three 
+        //- String Reverse method we loop to iterate through each letter of the string and create a new reversed string:
+        function reverse(str) {
+            let reversed = "";
+            for (var i = str.length - 1; i >= 0; i--) {
+                reversed += str[i];
+            }
+            return reversed;
+        }
+
+
+        //Question Four
+        // The JavaScript method to calculate the factorial of a number.
+
+        function factorial(x) {
+
+            if (x === 0) {
+                return 1;
+            }
+            return x * factorial(x - 1);
+
+        }
+        console.log(factorial(5));
+
+
+        //Question Five 
+        function substring(someStr, length, offset) {
+            if (offset < 0) {
+                alert("Offset is less than zero");
+            }
+            else if (offset + length > someStr.length) {
+                alert("Offset is greater than length of the string");
+            }
+            else {
+                return str.substr(offset, offset + length);
+            }
+        }
+
+
+
+
+        //Question Six
+
+        function isEven(x) {
+            let isEven = true; //Determine this variable to be true if the number is even
+            //The idea is to start with a boolean flag variable as true and switch it nth times.
+            for (var i = 1; i <= x; i++)
+                isEven = !isEven;
+
+            return isEven;
+
+        }
+        console.log(isEven(5)); //should return false
+
+
+
+        /* 
+        Question 7
+         JavaScript Palindrome checker
+         */
+
+        // Example string
+        const string1 = 'level';
+        const string2 = 'house';
+
+        const isPalindrome = (string) => string == string.split('').reverse().join('');
+
+        // Test
+        isPalindrome(string1); // true
+        isPalindrome(string2); // false
+
+
+        //Question 9
+
+        function traverseObject(someObj) {
+            for (var propName in someObj) {
+                propValue = someObj[propName]
+                console.log(propName, propValue);
+            }
+        }
+
+
+        //question 12
+        var Person = function (name, age) {
+            this.name = name;
+            this.age = age;
+
+            this.setAge = function (age) {
+                this.age = age;
+            };
+
+            this.toString = function () {
+                return ["Name = ", this.name, ", Age = ", this.age].join("");
+            };
+        };
+
+        //Question 14
+        // Display current time on html document updating each seconds
+        function display_c() {
+            var refresh = 1000; // Refresh rate in milli seconds
+            mytime = setTimeout('display_ct()', refresh)  // Make use of the set timeout method which calls my function to evalute the given expression
+        }
+
+        function display_ct() {
+            var x = new Date() // Date instance alows us to represent the grab the current time
+            document.getElementById('ct').innerHTML = x;
+            display_c();
+        }
+
+
+
+
+    </script>
+
+</body>
+
+</html>

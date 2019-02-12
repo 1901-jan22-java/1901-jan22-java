@@ -1,42 +1,67 @@
 {
-
-    "users": [
-{
-
-    
-    "id" : 1,
-    "firstName" : "Gensis",
-    "lastName" : "Bonds",
-    "username" : "gb123",
-    "password" : "123"
-
-
-},
-{
-
-    "id" : 2,
-    "firstName" : "John",
-    "lastName" : "Doe",
-    "username" : "anon",
-    "password" : "ymous"
-
-
-}
-    ],
-    "Accounts": [
-        {
-
-
-            "id" : 1,
-            "userid" : 1,
-            "balance" : 1000.20
-        }
-
-
-
-
-    ]
-
-
-    
+  "users": [
+    {
+      "id": 1,
+      "firstName": "Genesis",
+      "lastName": "Bonds",
+      "username": "gb123",
+      "password": "123"
+    },
+    {
+      "id": 2,
+      "firstName": "John",
+      "lastName": "Doe",
+      "username": "anon",
+      "password": "ymous"
+    },
+    {
+      "id": 3,
+      "firstName": "Calvin",
+      "lastName": "Klein",
+      "username": "fashionkilla",
+      "password": "123"
+    },
+    {
+      "firstName": "Artur",
+      "lastName": "Rownicki",
+      "username": "ar1212",
+      "password": "12",
+      "id": 4
+    },
+    {
+      "firstName": "Gen",
+      "lastName": "Bo",
+      "username": "testuser",
+      "password": "12",
+      "id": 5
+    },
+    {
+      "firstName": "Not me",
+      "lastName": "Okay",
+      "username": "dog",
+      "password": "dog",
+      "id": 6
+    },
+    {
+      "firstName": "Not me",
+      "lastName": "Okay",
+      "username": "dog",
+      "password": "dog",
+      "id": 7
+    },
+    {
+      "firstName": "Not me",
+      "lastName": "Okay",
+      "username": "dog",
+      "password": "dog",
+      "id": 8
+    }
+  ],
+  "accounts": [
+    {
+      "id": 1,
+      "userId": 1,
+      "balance": 1000.93
+    }
+  ]
 }
