@@ -1,7 +1,62 @@
 window.onload = function(){
     $('#register').on('click', addUser);
     $('#uname').on('blur', isUnique);
+    $('#login').on('click', logIn);
 }
+
+function logIn(){
+    var username = $('#unamelog').val();
+    var password = $('#passlog').val();
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4){
+            var user = JSON.parse(xhr.responseText);
+            if(user.length == 0 ){
+                alert("Invalid credentials!");
+            } else{
+                var logged = user[0];
+                if(logged.password == password){
+                    //show valid login
+                    alert('welcome, ' + logged.firstName);
+                    displayUserAccounts(logged);
+                }
+                else{
+                    alert("Invalid Credentials ")
+                }
+            }
+        }
+    }
+    xhr.open("GET", `http://localhost:3000/users?username=${username}`);
+    xhr.send();
+}
+
+function displayUserAccounts(user){
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4){
+            console.log(xhr.status  + ": " + xhr.statusText);
+            console.log(xhr.getAllResponseHeaders);
+            var accounts = JSON.parse(xhr.responseText);
+
+            if(accounts.length == 0){
+                $('body').html(`Hey ${user.firstName}, you dont
+                have any accounts! Let's change that!`);
+            }
+            else{
+                var text = `You have ${accounts.length} account(s):`;
+                for(let a of accounts){
+                    text += `<br>Account No.${a.id} has a balance of ${a.balance}`;
+                }
+                $('body').html(text);
+
+            }
+        }
+    }
+    xhr.open("GET", `http://localhost:3000/accounts?userId=${user.id}`);
+    xhr.send();
+}
+
 
 function addUser(){
 
