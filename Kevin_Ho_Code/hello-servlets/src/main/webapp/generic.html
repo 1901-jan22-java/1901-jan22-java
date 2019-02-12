@@ -5,26 +5,21 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="myservlet" method="post">
-    Type something：<input type="text" name="info" id="info">
-    <input type="submit" value="submit" id="submit">
-</form>
+    <button id="press">Press me!</button>
+    <div id = "text"></div>
 <script>
 window.onload= function(){
-	$("#submit").on("click", runme);
-}
-
-function runme(){
-	var x = $(#info).val();
-    
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState == 4){
-            alert(x);
-        }
-    }
-    xhr.open("GET", `http://localhost:8086/hello-servlets/generic.html`);
-    xhr.send();
+	document.getElementById("press").addEventListener("click", function(){
+		var xhr = new XMLHttpRequest();
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState == 4){
+				document.getElementById("text").innerHTML = xhr.responseText;
+			}
+		};
+		
+		xhr.open("GET", "http://localhost:8085/hello-servlets/world");
+		xhr.send();
+	});
 }
 </script>
 </body>

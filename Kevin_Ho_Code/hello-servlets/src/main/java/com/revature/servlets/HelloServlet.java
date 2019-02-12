@@ -24,6 +24,7 @@ public class HelloServlet extends GenericServlet {
 	 */
 	private static final long serialVersionUID = -5429702260507628282L;
 	private static Logger log = Logger.getLogger(HelloServlet.class);
+	static int requestCount = 0;
 	
 	/* first method of servlet lifecycle
 	 * here is where we initialize the servlet, potentially with servlet variables or special logging functionality
@@ -44,12 +45,22 @@ public class HelloServlet extends GenericServlet {
 	@Override
 	public void service(ServletRequest req, ServletResponse res) throws ServletException, IOException {
 		//SERVICE METHOD INSIDE OF A GENERICSERVLET MUST BE OVERRIDDEN
-		String text = "HELLO WORLD! This is a response from our generic servlet!";
+		log.trace("Servicing things");
+		//get servlet context and config info
+		String context = getServletContext().getInitParameter("envVar");
+		String config = getServletConfig().getInitParameter("secret");
+		
+		String text = "<h1>HELLO WORLD!</h1>"
+					+	"<br>This is a response from our generic servlet!"
+					+	"<br><hr><br><li>Request #" + ++requestCount
+					+	"<li>Servlet Context: " + context + 
+						"<li>Servlet Config: " + config;
 		
 		//PrintWriter - used to write text responses
 		PrintWriter writer = res.getWriter();
-		writer.write(text);
 		
+		
+		writer.write(text);
 	}
 
 	/*
