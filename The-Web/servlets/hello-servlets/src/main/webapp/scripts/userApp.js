@@ -15,8 +15,8 @@ function loadRegisterView(){
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4 && xhr.status == 200){
             $('#view').html(xhr.responseText);
-        }
+        }   
     }
-    xhr.open("GET", "loadRegView");
+    xhr.open("GET", "register.view");
     xhr.send();
 }
