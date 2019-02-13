@@ -34,12 +34,12 @@ public class UserServlet extends HttpServlet {
 		PrintWriter writer = resp.getWriter();
 		resp.setContentType("application/json");
 		writer.write(json);
-	
 	}
 	
 	/*
-	 * working with FORM data!
+	 * working with FORM data! Not going to use often at all
 	 */
+	/*
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String username = req.getParameter("username");
@@ -48,8 +48,28 @@ public class UserServlet extends HttpServlet {
 		User u = new User(username, password, data);
 		service.addUser(u);
 		doGet(req, resp);
-	}
+	} */
 
+	//Responds to POST requests with request body
+	@Override
+	protected void doPost(HttpServletRequest req, 
+		HttpServletResponse resp) throws ServletException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		User u = mapper.readValue(req.getInputStream(), User.class);
+		if(service.getByUsername(u.getUsername())==null){
+			//no conflict, can create user
+			service.addUser(u);
+			resp.setStatus(201);
+			doGet(req, resp);
+		}
+		else{
+			//username is already used. set http response status to conflict
+			resp.setStatus(409);
+		}
+
+		
+		
+	}
 }
 
 
@@ -69,6 +89,21 @@ class UserService{
 	
 	public void addUser(User u) {
 		users.add(u);
+	}
+
+	public User getByUsername(String username){
+		//want to get user by username that matches 
+		//could loop through each user 
+		// for(User u : users){
+		// 	if(username.equalsIgnoreCase(u.getUsername())){
+		// 		return u;
+		// 	}
+		// }
+
+		return users.stream()
+		.filter( user -> user.getUsername().equalsIgnoreCase(username))
+		.findFirst()
+		.orElse(null);
 	}
 }
 
