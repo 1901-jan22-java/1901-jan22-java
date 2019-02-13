@@ -23,7 +23,8 @@ public class HelloServlet extends GenericServlet {
 	private static final long serialVersionUID = -5429702260507628282L;
 
 	private static Logger log = Logger.getLogger(HelloServlet.class);
-	
+
+	static int requestCount = 0;
 	/*
 	 * First method of servlet lifecycle 
 	 * here is where we initialize the servlet, potentially with 
@@ -49,13 +50,21 @@ public class HelloServlet extends GenericServlet {
 		log.trace("Servicing requests to HelloWorld");
 		//SERVICE METHOD INSIDE OF A GENERICSERVLET MUST BE OVERRIDEN
 		
-		String text = "HELLO WORLD! This is a response from our generic servlet!";
+		//get servlet context and config info 
+		String context = getServletContext().getInitParameter("envVar");
+		String config = getServletConfig().getInitParameter("secret");
+		
+		String text = "<h1>HELLO WORLD!</h1>"
+				+ "<br>This is a response from our generic servlet!"
+				+ "<br><hr><br><li>Request #" + ++requestCount
+				+"<li>Servlet Context: " + context +
+				"<li>Servlet Config: " + config;
 		
 		//PrintWriter - used to write text responses 
 		PrintWriter writer = res.getWriter();
 		
+		res.setContentType("text/html");
 		writer.write(text);
-		
 	}
 	
 	/*
