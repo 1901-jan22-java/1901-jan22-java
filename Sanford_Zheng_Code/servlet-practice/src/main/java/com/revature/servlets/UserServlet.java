@@ -41,21 +41,33 @@ public class UserServlet extends HttpServlet {
 		pw.write(json);
 	}
 	
+//	@Override
+//	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+//			throws ServletException, IOException
+//	{
+//		String username = req.getParameter("username");
+//		String password = req.getParameter("password");
+//		String data = req.getParameter("data");
+//		
+//		User u = new User(username, password, data);
+//		
+//		service.addUser(u);
+//		
+//		doGet(req, resp);
+//	}
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException
 	{
-		String username = req.getParameter("username");
-		String password = req.getParameter("password");
-		String data = req.getParameter("data");
-		
-		User u = new User(username, password, data);
+		ObjectMapper mapper = new ObjectMapper();
+
+		User u = mapper.readValue(req.getInputStream(), User.class);
 		
 		service.addUser(u);
 		
 		doGet(req, resp);
 	}
-	
 }
 
 class UserService {
