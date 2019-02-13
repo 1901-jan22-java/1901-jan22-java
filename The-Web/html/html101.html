@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<!--
+    This is a comment!
+    HTML - HyperText Markup Language is the standard language 
+    for structuring web pages
+    It is a series of elements represented by tags, their attributes, 
+    and their contents. 
+
+    For every HTML page, there must be a descriptor of what kind of 
+    document it is for the browser to propertly interpret it 
+    HTML 5 rids itself of the long doctype description and simply 
+    uses <!DOCTYPE html> to signify what it is 
+-->
+<html lang="en">
+<head>
+    <!-- This is where any metadata goes. We can also bring in 
+    external files (js, css, etc) inside of the head tag 
+    Only two things in this tag will be explicitly seen on your
+    page:
+    The title is the text displayed on your tab, and the optional
+    icon is the image displayed-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 101</title>
+
+    <style>
+        /* This is a comment in CSS
+        below, i am styling every li element*/
+        li {
+            font-style: italic;
+            color: #8741a2 !important;
+        }
+
+        /* below we are styling everything of the class "class"*/
+        .class{
+            border: 3px dotted paleturquoise;
+            border-radius: 5px;
+            color: red;
+        }
+
+        /* id selector */
+        #second{
+            color: yellow;
+        }
+
+        /* Various other selectors */
+
+        /*
+        E1 + E2 
+        adjacent sibling selector, selects all of element e2 that 
+        immediately follow the element type e1
+        */
+        input[type=checkbox]:checked + label{
+            background-color: green;
+            font-style: italic;
+        }
+
+    </style>
+    <!-- EXTERNAL STYLE SHEET-->
+    <link rel="stylesheet" href="../css/css101.css">
+
+</head>
+<body>
+    <!-- Content to be seen goes here!-->
+    Click <a href="#tables">here</a> to see tables <br>
+    Click <a href="#inputs">here</a> to see inputs <br>
+    Click <a href="https://www.revature.com">here</a> to see the Revature home page
+    
+    <h1>About HTML (h1)</h1>
+    <h2 id="second">About HTML (h2)</h2>
+    <h3 id="third">About HTML (h3)</h3>
+    <h4 class="class">About HTML (h4)</h4>
+    <h5>About HTML (h5)</h5>
+    <h6>About HTML (h6)</h6>
+
+    <!-- in line styling with CSS-->
+    <p style="background-color: yellow; font-style: italic;">About HTML (p)</p>
+    About HTML (no bounding element)
+
+    <a name="lists">
+    <h4>Lists</h4></a>
+    There are two kinds of lists, ordered and unordered 
+    <ul>
+        <li>one item</li>
+        <li class="class">second item</li>
+    </ul>
+
+
+    <li>This is outside of any UL tag</li>
+
+    <ol>
+        <li>One</li>
+        <li>two</li>
+        <li>so on and so forth</li>
+    </ol>
+
+    <a name="tables"><h4>Tables!</h4></a>
+    <table>
+        <thead>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>School</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Genesis</td>
+                <td>Bonds</td>
+                <td>Duke</td>
+            </tr>
+            <tr>
+                <td>Mark</td>
+                <td>Zuckerbergggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg</td>
+                <td>Harvard</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    The following HR and BR are self closing tags:
+    <hr>
+    <br>
+    <br>
+    <br>
+    <hr>
+    <br>
+    <br>
+    <iframe src="https://www.revature.com" frameborder="5px"></iframe>
+
+
+    <a name="inputs"><h4 class="class">Input fields</h4></a>
+    Input fields allow users to enter information through your HTML page 
+    While it is common to use these with forms, you do <b>not</b> have to 
+    use these inside of forms 
+
+    <br>
+    <input type="text" id="textInput" name="textInput"
+             placeholder="This is a text input field"> <br>
+    <input type="number" max="100" min="0"> <br>
+    <input type="password" placeholder="Password input"> <br>
+
+    <input type="radio" name="role" value="Associate"> Associate <br>
+    <input type="radio" name="role" value="Trainer"> Trainer <br>
+
+    Countries Traveled:
+    <input type="checkbox" name="countries" value="mexico"> 
+    <label for="mexico">Mexico</label> <br>
+    <input type="checkbox" name="countries" value="cuba">
+    <label for="cuba">Cuba</label> <br>
+
+
+
+    <div>
+
+
+    </div>
+
+
+    this is an example of when i would use 
+        <span class="someClassWithStyling">element</span>
+
+    <code>public static void main(String[] args){}</code>
+
+
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+/*
+Basic style sheet to demonstrate what external sheets look like
+*/
+
+p{
+    font-variant-caps: all-small-caps;
+    background-color: purple;
+}
+
+#third{
+    color: blue;
+}
+
+.class{
+    border: 5px dotted fuchsia;
+}
