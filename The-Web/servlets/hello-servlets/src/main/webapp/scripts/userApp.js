@@ -1,21 +1,22 @@
 window.onload = function(){
-	$('#goToSubmit').on('click', loadRegisterView);
-	$('#logIn').on('click',logIn);
+    $('#goToSubmit').on('click', loadRegisterView);
+    $('#logIn').on('click', logIn);
 }
 
 function logIn(){
-	
+    //function to log user in 
 }
 
 function loadRegisterView(){
-	console.log("Load register view function");
-	
-	var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function(){
-        if(xhr.readyState==4 && xhr.status == 200){
-        	$("#view").html(xhr.responseText);
+    //function to load view to add new user
+    console.log("load register view function");
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            $('#view').html(xhr.responseText);
         }
-	}
-	xhr.open("GET", "loadRegView");
-	xhr.send();
+    }
+    xhr.open("GET", "loadRegView");
+    xhr.send();
 }
