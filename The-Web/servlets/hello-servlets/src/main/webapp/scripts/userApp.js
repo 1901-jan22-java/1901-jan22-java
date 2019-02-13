@@ -1,6 +1,5 @@
 window.onload = function(){
-    $('#goToSubmit').on('click', loadRegisterView);
-    $('#logIn').on('click', logIn);
+	loadLogInView();
 }
 
 function logIn(){
@@ -19,4 +18,17 @@ function loadRegisterView(){
     }
     xhr.open("GET", "register.view");
     xhr.send();
+}
+
+function loadLogInView(){
+	console.log("load login view");
+	
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status == 200){
+		    $('#goToSubmit').on('click', loadRegisterView);
+		}
+	}
+	xhr.open("GET", "login.view");
+	xhr.send();
 }
