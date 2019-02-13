@@ -1,5 +1,18 @@
 window.onload = function(){
-	loadLogInView();
+   loadLoginView();
+}
+
+function loadLoginView(){
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            $('#view').html(xhr.responseText);
+            $('#goToSubmit').on('click', loadRegisterView);
+            $('#logIn').on('click', logIn);
+        }   
+    }
+    xhr.open("GET", "login.view");
+    xhr.send();
 }
 
 function logIn(){
@@ -14,21 +27,9 @@ function loadRegisterView(){
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4 && xhr.status == 200){
             $('#view').html(xhr.responseText);
+            $('#goToLogin').on('click', loadLoginView);
         }   
     }
     xhr.open("GET", "register.view");
     xhr.send();
-}
-
-function loadLogInView(){
-	console.log("load login view");
-	
-	var xhr = new XMLHttpRequest();
-	xhr.onreadystatechange = function(){
-		if(xhr.readyState == 4 && xhr.status == 200){
-		    $('#goToSubmit').on('click', loadRegisterView);
-		}
-	}
-	xhr.open("GET", "login.view");
-	xhr.send();
 }
