@@ -13,7 +13,8 @@ window.onload = function(){
     document.getElementById('run-desc-order').addEventListener('click', () => {runDescOrder(); clearFields();});
 }
 
-
+console.log(0.1+0.2==0.3)
+console.log(1+2==3)
 var clearFields = () => {
     document.getElementById("number-input").value = "";
     document.getElementById("string-input").value = "";
