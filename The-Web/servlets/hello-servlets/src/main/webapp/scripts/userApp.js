@@ -1,6 +1,18 @@
 window.onload = function(){
-    $('#goToSubmit').on('click', loadRegisterView);
-    $('#logIn').on('click', logIn);
+   loadLoginView();
+}
+
+function loadLoginView(){
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            $('#view').html(xhr.responseText);
+            $('#goToSubmit').on('click', loadRegisterView);
+            $('#logIn').on('click', logIn);
+        }   
+    }
+    xhr.open("GET", "login.view");
+    xhr.send();
 }
 
 function logIn(){
@@ -15,6 +27,7 @@ function loadRegisterView(){
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4 && xhr.status == 200){
             $('#view').html(xhr.responseText);
+            $('#goToLogin').on('click', loadLoginView);
         }   
     }
     xhr.open("GET", "register.view");
