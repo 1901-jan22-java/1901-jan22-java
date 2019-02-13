@@ -21,7 +21,8 @@ public class LoadViewsServlet extends HttpServlet{
 		String[] uri = req.getRequestURI().split("/");
 		String resource = uri[uri.length-1];
 		
-		String resourcePath = "partials/" + resource.substring(0, resource.length()-5) +".html";
+		String resourcePath = "partials/" + 
+			resource.substring(0, resource.length()-5) +".html";
 		log.info(resourcePath);
 		log.info("LOAD VIEW REQUEST SENT TO: " + req.getRequestURI());
 		req.getRequestDispatcher(resourcePath).forward(req, resp); 
