@@ -56,8 +56,19 @@ public class UserServlet extends HttpServlet {
 		HttpServletResponse resp) throws ServletException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		User u = mapper.readValue(req.getInputStream(), User.class);
-		service.addUser(u);
-		doGet(req, resp);
+		if(service.getByUsername(u.getUsername())==null){
+			//no conflict, can create user
+			service.addUser(u);
+			resp.setStatus(201);
+			doGet(req, resp);
+		}
+		else{
+			//username is already used. set http response status to conflict
+			resp.setStatus(409);
+		}
+
+		
+		
 	}
 }
 
@@ -78,6 +89,21 @@ class UserService{
 	
 	public void addUser(User u) {
 		users.add(u);
+	}
+
+	public User getByUsername(String username){
+		//want to get user by username that matches 
+		//could loop through each user 
+		// for(User u : users){
+		// 	if(username.equalsIgnoreCase(u.getUsername())){
+		// 		return u;
+		// 	}
+		// }
+
+		return users.stream()
+		.filter( user -> user.getUsername().equalsIgnoreCase(username))
+		.findFirst()
+		.orElse(null);
 	}
 }
 
