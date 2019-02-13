@@ -1,4 +1,5 @@
 # ajax
+
 * Asynchronous JavaScript and XML
 * ignore the XML part of that word, JSON is frequently used
 * the ability to send requests from JavaScript **asynchronously**
@@ -6,13 +7,13 @@
   * when we get the response, then we will handle it
   * do not have to wait in the meantime (think about when you text or email someone... do you have to wait for a response?)
 * AJAX has four steps
-  1. create object
-  +  define onreadystatechange function
-  +  open request *(can configure HTTP method and url)*
-  +  send request *(can send data in request body)*
-* naive example - do not run
+  1. create object  
+  2. open request *(can configure HTTP method and url)*
+  3. send request *(can send data in request body)*
 
-```
+naive example - do not run
+
+```javascript
 var xhr = new XMLHttpRequest();
 
 xhr.onreadystatechange = function(){
@@ -28,11 +29,12 @@ xhr.send();
 
 ```
 
-### creating the object
+## creating the object
+
 * most of the time, the object we need is XMLHttpRequest
 * older versions of IE had a different object from everyone else
 
-```
+```javascript
 var xhr;
 if(XMLHttpRequest) {
   xhr = new XMLHttpRequest();
@@ -41,7 +43,8 @@ if(XMLHttpRequest) {
 }
 ```
 
-### onreadystatechange
+## onreadystatechange
+
 * most notably, XMLHttpRequest has members called `readystate`, `status` and `responseText`
 * the `onreadystatechange` function is called whenever the `readystate` member changes
 
@@ -58,14 +61,15 @@ if(XMLHttpRequest) {
   * this is a naive example because we only handle when the status code is `200`
 * `responseText` is the response body represented as a string
 
-### open request
+## open request
+
 * `open(method, url, async)`
   * **method** - the HTTP method
   * **url**    - the url to send the request to
   * **async**  - true or false *(default is true)*
 
+## send request
 
-### send request
 * `send(string)`
 * sends the request
 * **string** is optional
@@ -73,11 +77,12 @@ if(XMLHttpRequest) {
   * cannot use with GET requests
 
 ### example
+
 * open a browser and enter following url: `https://pokeapi.co/api/v2/pokemon/pikachu/`
 * we are going to get that data using JavaScript
 * you can enter the following into JSFiddle *(JavaScript section)*
 
-```
+```javascript
 var xhr = new XMLHttpRequest();
 
 xhr.onreadystatechange = function(){
