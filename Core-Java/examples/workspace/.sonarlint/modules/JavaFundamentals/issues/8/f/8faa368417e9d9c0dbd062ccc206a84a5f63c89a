@@ -1,0 +1,16 @@
+
+qsquid:S1197"8Move the array designator from the variable to the type.(∫¸◊‘˘ˇˇˇˇ8Ù®‡·á-HüRMINORZ
+CODE_SMELL
+ksquid:S1854"7Remove this useless assignment to local variable "arr".(‰∞©∑8ù”‡·á-H¶RMAJORZ
+CODE_SMELL
+\squid:S1481")Remove this unused "arr2" local variable.(éæ›	8Ù®‡·á-H°RMINORZ
+CODE_SMELL
+ksquid:S1854"8Remove this useless assignment to local variable "arr2".(éæ›	8Ù®‡·á-H¢RMAJORZ
+CODE_SMELL
+\squid:S1481"(Remove this unused "arr" local variable.(‰∞©∑8ù”‡·á-H•RMINORZ
+CODE_SMELL
+ksquid:S1197"8Move the array designator from the variable to the type.(éæ›	8Ù®‡·á-HûRMINORZ
+CODE_SMELL
+l
+squid:S106"9Replace this use of System.out or System.err by a logger.(ˇ—ç8Œ „·á-H©RMAJORZ
+CODE_SMELL

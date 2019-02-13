@@ -1,0 +1,20 @@
+
+‚squid:S2095H"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(öÚ¥ùÿÿÿÿ8Â§Ù«Š-HDRBLOCKERZBUG
+vsquid:S2095J"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(·¦Ã…8³çÎÓŠ-H’RBLOCKERZBUG
+_squid:S11483"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8³çÎÓŠ-H”RMINORZVULNERABILITY
+squid:S2095‰"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ÀÖĞ½8³çÎÓŠ-HRBLOCKERZBUG
+vsquid:S2095+"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(Óé¬ö8³çÎÓŠ-H‘RBLOCKERZBUG
+`squid:S1148Â"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8³çÎÓŠ-H˜RMINORZVULNERABILITY
+_squid:S1148z"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8³çÎÓŠ-H–RMINORZVULNERABILITY
+`squid:S1148˜"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8³çÎÓŠ-H—RMINORZVULNERABILITY
+’squid:S2293$"YReplace the type specification in this constructor call with the diamond operator ("<>").(–ª×Öıÿÿÿÿ8³çÎÓŠ-HŒRMINORZ
+CODE_SMELL
+{squid:S2095r"GUse try-with-resources or close this "ResultSet" in a "finally" clause.(áÍ†©øÿÿÿÿ8³çÎÓŠ-HRBLOCKERZBUG
+squid:S2095·"OUse try-with-resources or close this "CallableStatement" in a "finally" clause.(¬¹Å8³çÎÓŠ-H“RBLOCKERZBUG
+~squid:S2095k"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ÍÓé8³çÎÓŠ-HRBLOCKERZBUG
+zsquid:S2095)"GUse try-with-resources or close this "Statement" in a "finally" clause.(Ë«Æşûÿÿÿÿ8ÙÃ©ªŠ-H4RBLOCKERZBUG
+_squid:S1148S"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8³çÎÓŠ-H•RMINORZVULNERABILITY
+“squid:S2293³"YReplace the type specification in this constructor call with the diamond operator ("<>").(–ª×Öıÿÿÿÿ8³çÎÓŠ-HRMINORZ
+CODE_SMELL
+‡squid:ModifiersOrderCheck"EReorder the modifiers to comply with the Java Language Specification.(ãëæş8³çÎÓŠ-H‹RMINORZ
+CODE_SMELL

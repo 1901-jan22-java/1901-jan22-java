@@ -1,0 +1,8 @@
+
+’squid:S2293&"YReplace the type specification in this constructor call with the diamond operator ("<>").(¦ê…şÿÿÿÿ8‡ÊÏ‰ˆ-HãRMINORZ
+CODE_SMELL
+xsquid:S21471"DCombine this catch with the one at line 47, which has the same body.(ï­£Ä8¹ââ‰ˆ-HìRMINORZ
+CODE_SMELL
+_squid:S11480"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8¹ââ‰ˆ-HíRMINORZVULNERABILITY
+_squid:S11482"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8¹ââ‰ˆ-HîRMINORZVULNERABILITY
+_squid:S1148"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ8Ÿ§ ‰ˆ-HØRMINORZVULNERABILITY
