@@ -17,6 +17,18 @@ function addUser(){
 		//here is where we do things with our response.
 		//but what do we want to respond with?
 		if(xhttp.readyState == 4){
+			if(xhttp.status == 201){
+				console.log("successfully added user");
+				//bring user to login page
+			}
+			else if(xhttp.status == 409){
+				//add field for error messages to let user know something went wrong	
+			
+			}
+			else{
+				//take to error page
+			
+			}
 			console.log(xhttp.status);
 			console.log(xhttp.responseText);
 		}

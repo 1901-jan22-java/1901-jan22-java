@@ -49,11 +49,19 @@ public class UserServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
-		System.out.println("in post method");
 		ObjectMapper mapper = new ObjectMapper();
 		User u = mapper.readValue(req.getInputStream(), User.class);
-		service.addUser(u);
-		doGet(req, resp);
+		if(service.getByUsername(u.getUsername())==null){
+			//no conflict. can create user
+			service.addUser(u);
+			resp.setStatus(201);
+			doGet(req, resp);
+			
+		}
+		else{
+			//username is already used. set http response status to conflict
+			resp.setStatus(409);
+		}
 	}
 }
 
@@ -74,5 +82,23 @@ class UserService{
 	
 	public void addUser(User u) {
 		users.add(u);
+	}
+	
+	public User getByUsername(String username){
+		//want to get user by username that matches
+		//could loop through each user
+		/*for(User u : users){
+			if(username.equalsIgnoreCase(u.getUsername())){
+				return u;
+			}
+		}
+		return null;
+		*/
+		
+		return 	users.stream()
+				.filter(user -> user.getUsername().equalsIgnoreCase(username))
+				.findAny()
+				.orElse(null);
+		
 	}
 }
