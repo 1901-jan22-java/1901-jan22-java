@@ -16,7 +16,19 @@ function loadLoginView(){
 }
 
 function logIn(){
-    //function to log user in 
+    var user = {
+        username: $('#username').val(), 
+        password: $('#password').val()};
+    var json = JSON.stringify(user);
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        //define functionality later 
+    }
+    xhr.open("POST", "login");
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(json);
+
 }
 
 function loadRegisterView(){
