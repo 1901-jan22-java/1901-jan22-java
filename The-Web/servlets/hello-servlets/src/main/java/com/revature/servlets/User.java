@@ -5,8 +5,7 @@ public class User {
 	private String username;
 	private String password;
 	private String data;
-	
-	
+
 	public User(){}
 	
 	public User(String username, String password, String data) {
@@ -33,8 +32,5 @@ public class User {
 	public void setData(String data) {
 		this.data = data;
 	}
-	
-	
-	
 
 }

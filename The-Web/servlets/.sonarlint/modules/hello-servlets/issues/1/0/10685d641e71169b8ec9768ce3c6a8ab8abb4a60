@@ -1,0 +1,8 @@
+
+‘squid:S2293;"YReplace the type specification in this constructor call with the diamond operator ("<>").(ŸÆô¼üÿÿÿÿ8¢´›-HZRMINORZ
+CODE_SMELL
+‰squid:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(»İóùÿÿÿÿ8À¨Æ›-H`RMAJORZBUG
+^squid:S1989""(Add a "try/catch" block for "getWriter".(¼½Ù†8ÛÙÔ›-HjRMINORZVULNERABILITY
+lsquid:S1989 "1Add a "try/catch" block for "writeValueAsString".(ÄÛ·¿üÿÿÿÿ8ÛÙÔ›-HiRMINORZVULNERABILITY
+`squid:S19892"$Add a "try/catch" block for "doGet".(—ôÖ¢øÿÿÿÿ8·¡œ-H°RMINORZVULNERABILITY
+`squid:S19892"$Add a "try/catch" block for "doGet".(—ôÖ¢øÿÿÿÿ8·¡œ-H±RMINORZVULNERABILITY
