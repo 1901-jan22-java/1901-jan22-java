@@ -36,7 +36,7 @@ public class UserServlet extends HttpServlet {
 	/*
 	 * working with FORM data!
 	 */
-	@Override
+/*	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
@@ -45,7 +45,16 @@ public class UserServlet extends HttpServlet {
 		service.addUser(u);
 		doGet(req, resp);
 	}
-
+*/
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
+			throws ServletException, IOException {
+		System.out.println("in post method");
+		ObjectMapper mapper = new ObjectMapper();
+		User u = mapper.readValue(req.getInputStream(), User.class);
+		service.addUser(u);
+		doGet(req, resp);
+	}
 }
 
 
