@@ -25,18 +25,21 @@ public class UserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
 			throws ServletException, IOException {
 		List<User> users = service.getAllUser();
+		
 		ObjectMapper mapper = new ObjectMapper();
 		String json = mapper.writeValueAsString(users);
-
+		
 		PrintWriter writer = resp.getWriter();
 		resp.setContentType("application/json");
 		writer.write(json);
 	}
-	
+	/*
+	 * working with FORM data!
+	 */
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException{
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String username = req.getParameter("username");
-		String password = req.getParameter("parameter");
+		String password = req.getParameter("password");
 		String data = req.getParameter("bio");
 		User u = new User(username, password, data);
 		service.addUser(u);
@@ -44,6 +47,8 @@ public class UserServlet extends HttpServlet {
 	}
 
 }
+
+
 
 
 class UserService{
@@ -58,7 +63,7 @@ class UserService{
 		return users;
 	}
 	
-	public void addUser(User u){
+	public void addUser(User u) {
 		users.add(u);
 	}
 }
