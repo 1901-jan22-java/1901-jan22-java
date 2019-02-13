@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<display-name>hello-servlets</display-name>
+	<!-- Below we are telling our web container that the following class is 
+		a servlet and will be called 'Hello' -->
+	<context-param>
+		<param-name>envVar</param-name>
+		<param-value>This is an example of when we would need servlet context. This value is now available to all servlets in the app</param-value>
+	</context-param>
+	<servlet>
+		<servlet-name>Hello</servlet-name>
+		<servlet-class>com.revature.servlets.HelloServlet</servlet-class>
+		<init-param>
+			<param-name>secret</param-name>
+			<param-value>This is top secret info.</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<!-- Give our servlet (by its nickname) an end-point to be accessed via 
+		requests -->
+	<servlet-mapping>
+		<servlet-name>Hello</servlet-name>
+		<url-pattern>/world</url-pattern>
+	</servlet-mapping>
+</web-app>

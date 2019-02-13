@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<title>Woop!</title>
+
+</head>
+<body>
+	<button id="btn">Push to see!</button>
+	<p id="result"></p>
+</body>
+
+<script>
+	window.onload = function() {
+		$('#btn').on('click', request);
+	}
+	
+	function request() {
+		var url = 'http://localhost:8085/hello-servlets/myHttp';
+		var xhr = new XMLHttpRequest();
+		
+		xhr.onreadystatechange = function(){
+			if(xhr.readyState === 4) {
+				$('#result').html(xhr.responseText);
+			}
+		}
+		xhr.open('GET', url);
+		xhr.send();
+	}
+	
+	
+</script>
+
+</html>

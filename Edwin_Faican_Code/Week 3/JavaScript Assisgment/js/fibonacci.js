@@ -1,14 +1,8 @@
-window.onload = function() {
-    $('#fib').on('click', fibn);
-    document.getElementById('fib').addEventListener('click', fibn);
-}
-
 function fibn() {
     $('#resfib').html(fib($('#infib').val()));
 }
 
 const fib = function(n) {
-    console.log(n);
     if(n == 0) {
         return 0;
     }
