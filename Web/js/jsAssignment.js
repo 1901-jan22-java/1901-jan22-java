@@ -215,3 +215,6 @@ var runDescOrder = () => {
     }
     document.getElementById('desc-order-answer').innerHTML = (descOrder(num));
 }
+
+
+let ans = ( 7 || 0 ) ? "hello" : world;
