@@ -40,10 +40,16 @@ window.onload = function() {
 		var xhr = new XMLHttpRequest();
 		
 		xhr.onreadystatechange = function(){
-			console.log("I'm here!");
-			if(this.readystate == 4){
-				console.log(xhr.status);
-				console.log(xhr.responseText);
+			console.log(this.readyState + " " + this.status);
+			if(this.readyState == 4){
+				if(xhr.status == 201){
+					console.log(xhr.status);
+					console.log(xhr.responseText);
+				} else if( xhr.status == 409) {
+					
+				} else {
+					
+				}
 			}
 			
 		};

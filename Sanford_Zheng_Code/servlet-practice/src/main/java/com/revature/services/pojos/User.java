@@ -1,4 +1,4 @@
-package com.revature.servlets.pojos;
+package com.revature.services.pojos;
 
 import java.io.Serializable;
 

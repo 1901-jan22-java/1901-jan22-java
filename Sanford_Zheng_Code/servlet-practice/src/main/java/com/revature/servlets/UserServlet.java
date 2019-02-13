@@ -2,7 +2,6 @@ package com.revature.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.servlets.pojos.User;
+import com.revature.services.UserService;
+import com.revature.services.pojos.User;
 
 @WebServlet("/users")
 public class UserServlet extends HttpServlet {
@@ -60,31 +60,17 @@ public class UserServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException
 	{
+		
 		ObjectMapper mapper = new ObjectMapper();
 
 		User u = mapper.readValue(req.getInputStream(), User.class);
 		
-		service.addUser(u);
-		
-		doGet(req, resp);
+		if(service.getByUsername(u.getUsername()) == null) {
+			service.addUser(u);
+			resp.setStatus(201);
+			doGet(req, resp);
+		}else {
+			resp.setStatus(409);
+		}
 	}
-}
-
-class UserService {
-	static List<User> users = new ArrayList<>();
-
-	static {
-		users.add(new User("gb1", "123", "this is a user"));
-		users.add(new User("gb2", "123", "this is a user"));
-		users.add(new User("gb3", "123", "this is a user"));
-	}
-	
-	public List<User> getAllUsers() {
-		return users;
-	}
-	
-	public void addUser(User u) {
-		users.add(u);
-	}
-	
 }
