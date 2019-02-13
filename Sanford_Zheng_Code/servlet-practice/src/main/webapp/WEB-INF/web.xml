@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<display-name>servlet-practice</display-name>
+
+	<!-- SERVLET CONTEXT parameters applied to every servlet in the context of the container -->
+	<context-param>
+		<param-name>envVar</param-name>
+		<param-value>
+		This is an example of when we would need servlet context. This value is now available in all servlets in the app
+		</param-value>
+	</context-param>
+
+	<servlet>
+		<servlet-name>Hello</servlet-name>
+		<servlet-class>com.revature.servlets.HelloServlet</servlet-class>
+		<!-- SERVLET CONFIG is configutaiton information (parameters for a particular servlet -->
+		<init-param>
+			<param-name>secret</param-name>
+			<param-value>This is top secret info!</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>Hello</servlet-name>
+		<url-pattern>/world</url-pattern>
+	</servlet-mapping>
+</web-app>

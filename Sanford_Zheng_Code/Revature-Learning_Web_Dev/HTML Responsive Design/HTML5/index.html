@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+    crossorigin="anonymous">
+
+  <style>
+    p {
+        font-size: 24px;
+      }
+
+      .media {
+        margin-left : 25%;
+      }
+
+      .font {
+        font-size: 24px;
+      }
+    
+    </style>
+
+  <title>HTML 5!</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Home <span class="sr-only"></span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#intro">Introduction</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#added">Added Elements</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#api">Added API</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#input">Input Types</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#code">Coding Practices</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="jumbotron">
+    <h1 class="display-4">HTML 5!</h1>
+    <p class="lead">This is a description of what HTML 5 is and how it differs from previous versions of HTML.</p>
+    <hr class="my-4">
+    <p>HTML 5 both introduces and removes detailing present in previous versions. </p>
+    <button type="button" class="btn btn-danger" disabled>Can't Touch Me!</button>
+  </div>
+  <br>
+  <br>
+  <div class="shadow p-3 mb-5 bg-white rounded container" id="intro">
+    <h1>Introduction</h1>
+    <p>
+      HTML stands for HyperText Markup Language. It provides properties and behaviors of web page content by
+      implementing a markup
+      based pattern to it. Prior to being updated to the latest iteration, HTML had not been updated since the year
+      2000. Webpages
+      required the use of external plug-ins in order to perform certain functionality like playing video media. <br>
+    </p>
+    <p>
+      <b>HTML 5</b> was released in 2008 with the goal to simplify and improve upon previous version of HTML by
+      introducing support
+      for new multimedia as well as simplifying the language to make it more readable to humans without losing
+      intrepretation
+      by a machine.
+    </p>
+    <p>
+      With HTML 5, new features could be added while remaining <i>backwards-compatible</i> with older software. Because
+      of this, adoption
+      of HTML 5 was very large from the start.
+    </p>
+
+    <p>
+      The adoption of HTML 5 also allowed for media to be played without the need for external plug-ins or helper
+      software.
+      This allowed for a more streamlined user experience.
+    </p>
+
+  </div>
+  <br>
+  <br>
+  <br>
+  <div class="shadow p-3 mb-5 bg-white rounded container" id="added">
+    <header>
+      <h1>New Elements in HTML 5</h1>
+      <h2>A full list of all the newly added elements can be found <a href="https://www.w3schools.com/html/html5_new_elements.asp"
+          target="_blank">here</a></h2>
+      <h3>HEADER</h3>
+      <h4>HTML 5 has a variety of new elements including the <i>Header</i> element used here!</h4>
+      <h6>A header is a container used to represent introductory content and typically contains one or more heading
+        elements, a logo, or an icon.</h6>
+    </header>
+    <br>
+    <br>
+    <h3>Figure and Figcaption</h3>
+    <figure class=" figure">
+      <img src="https://memegenerator.net/img/instances/54884830/i-know-html5-css3.jpg" alt="HTML 5 meme">
+      <figcaption class="figure-caption">Isn't this fun? Captions below an image!</figcaption>
+    </figure>
+
+    <h3>SVG </h3>
+    <p>
+      SVG's are scalable vector graphics and are used to define graphics to the Web <br>
+      Here's a circle:
+    </p>
+    <svg width="100" height="100">
+      <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" />
+    </svg><br>
+    <p>
+      Heres a logo:
+    </p>
+    <svg height="130" width="500">
+      <defs>
+        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:rgb(255,255,0);stop-opacity:1" />
+          <stop offset="100%" style="stop-color:rgb(255,0,0);stop-opacity:1" />
+        </linearGradient>
+      </defs>
+      <ellipse cx="100" cy="70" rx="85" ry="55" fill="url(#grad1)" />
+      <text fill="#ffffff" font-size="45" font-family="Verdana" x="50" y="86">SVG</text>
+      Sorry, your browser does not support inline SVG.
+    </svg>
+    <br><br><br><br>
+    <h3>Video</h3>
+    It is possible to create video tags to enclose a video from a specified source:<br>
+    <video class="media" width="320" height="240" controls>
+      <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <h3>Details</h3>
+    <p>
+      HTML 5 details tag adds data that can be shown/hidden with a click
+    </p>
+    <details>
+      <summary>Copyright 1999-2018.</summary>
+      <p> - by Refsnes Data. All Rights Reserved.</p>
+      <p>All content and graphics on this web site are the property of the company Refsnes Data.</p>
+    </details>
+
+    <h3>Ruby</h3>
+    <p>
+      Ruby helps format East Asian typography <br>
+      Without Ruby :漢 ㄏㄢˋ <br>
+      <br>
+      With Ruby:
+      <ruby>
+        漢 <rt> ㄏㄢˋ </rt>
+      </ruby>
+      <br><br>
+    </p>
+
+    <h3>BDI</h3>
+    <p>
+      The BDI tag stands for Bi-Directional Isolation and is used to isolate a portion of text that is formatted
+      differently from the surronding <text class="br">
+        Here is an example using some Arabic text
+
+
+      </text>
+      <li>User <bdi>jdoe</bdi>: 80 points</li>
+      <li>User<bdi> إيان</bdi>: 90 points</li>
+    </p>
+    <br>
+    <br>
+    <h3>Mark</h3>
+    <p>You can also mark text which essentially adds a <mark>highlight</mark> to the selected text!</p>
+    <br>
+    <br>
+    <h3>NAV!</h3>
+    <p>Nav is used to define a set of navigation links. One such application of nav is within a navigation bar like the
+      one at the top of this page!</p>
+    <br>
+    <br>
+    <h3>WBR</h3>
+    <p>With the WBR tag, a <i>Word Break Opportunity</i> is specified. This means that for any long line that may need
+      to be truncated,
+      rather than chosing a natural break, you can suggest a more desireable break as so. Example :
+      Thisisallonelineofstraighttext<wbr>thatuponresizingmaybreakintolittletinyittybittypieces<wbr>whereverwewantedtobreaktheline
+                </p>
+      <h3><u>New Semantic Elements in HTML 5</u></h3>
+      <ul class="font">
+        <li>article</li>
+        <li>aside</li>
+        <li>details</li>
+        <li>figcaption</li>
+        <li>figure</li>
+        <li>footer</li>
+        <li>header</li>
+        <li>main</li>
+        <li>mark</li>
+        <li>nav</li>
+        <li>section</li>
+        <li>summary</li>
+        <li>time</li>
+      </ul>
+      <br>
+      <figure class="figure">
+        <img src="https://www.hostinger.com/tutorials/wp-content/uploads/sites/2/2017/03/differences-between-html-and-html5.png"
+          alt="HTML4->5">
+        <figcaption class="figure-caption">This cuts down on writing!</figcaption>
+      </figure>
+
+  </div>
+
+  <div class="shadow p-3 mb-5 bg-white rounded container" id="api">
+    <h1>Added API Functionality in HTML5</h1>
+    <ul class="font">
+      <li> <b> HTML Geolocation </b>- obtain geographical position of a user</li>
+      <li> <b> HTML Drag and Drop-Allows </b> you to grab an object and move it to another location</li>
+      <li> <b> HTML Local Storage </b>-Is now used instead of cookies. It can hold a larger amount of data and is
+        persisted when the browser closes without affecting website performance </li>
+      <li> <b>HTML Application Cache -offers offline browsing and increases speed and resilience </b></li>
+      <li> <b>HTML Web Workers- A JavaScript code that runs in the background. For example a counter that runs in the
+          background. </b></li>
+    </ul>
+  </div>
+
+  <div class="shadow p-3 mb-5 bg-white rounded container" id="input">
+    <h1>Input Types and Attributes</h1>
+    <h5>HTML 5 introduced a variety of new input types and input attributes to interact with a user.</h5>
+    <h3>Input Types:</h3>
+    <div class="row">
+      <div class="col-6">
+        <ul class="font">
+          <li>color:</li>
+          <li>date </li>
+          <li>datetime </li>
+          <li>datetime-local </li>
+          <li>email </li>
+          <li>month </li>
+          <li>number </li>
+          <li>range </li>
+          <li>search </li>
+          <li>tel </li>
+          <li>time </li>
+          <li>url </li>
+          <li>week </li>
+        </ul>
+      </div>
+      <div class="col-6">
+        <ul class="font">
+          <li><input type="color" value="#e66465"></li>
+          <li><input type="date"></li>
+          <li><input type="datetime"></li>
+          <li><input type="datetime-local"></li>
+          <li><input type="email"></li>
+          <li><input type="month"></li>
+          <li><input type="number"></li>
+          <li><input type="range"></li>
+          <li><input type="search"></li>
+          <li><input type="tel"></li>
+          <li><input type="time"></li>
+          <li><input type="url"></li>
+          <li><input type="week"></li>
+        </ul>
+
+      </div>
+    </div>
+
+    <h3>Input Attributes:</h3>
+    <ul class="font list-inline">
+      <li>autocomplete</li>
+      <li>autofocus</li>
+      <li>form</li>
+      <li>formaction</li>
+      <li>formenctype</li>
+      <li>formmethod</li>
+      <li>formnovalidate</li>
+      <li>formtarget</li>
+      <li>heightandwidth</li>
+      <li>list</li>
+      <li>minandmax</li>
+      <li>multiple</li>
+      <li>pattern</li>
+      <li>placeholder</li>
+      <li>required</li>
+      <li>step</li>
+    </ul>
+  </div>
+
+  <div class="shadow p-3 mb-5 bg-white rounded container" id="code">
+    <h1>Coding Practices </h1><br>
+    <p>HTML 5 allows for some practices that arent considered the best</p>
+    <ul class="font">
+      <li>Elements should be in all lower case</li>
+      <li>Attributes names should also be all lower case</li>
+      <li>When using =. Put whatever you are assigning in quotes and dont leave a space in between the = and "</li>
+      <li>Elements dont have to be closed but they <b>ALWAYS SHOULD</b></li>
+      <li>When dealing with images always add the height and width and use the alt attribute</li>
+      <li>You can ommit the html, body, and head tag but it is not recommended</li>
+
+
+    </ul>
+
+
+  </div>
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+    crossorigin="anonymous"></script>
+</body>
+<!--Zack & Edwin-->
+
+</html>
