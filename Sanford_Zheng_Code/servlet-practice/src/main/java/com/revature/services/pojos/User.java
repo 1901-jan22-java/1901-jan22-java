@@ -2,12 +2,8 @@ package com.revature.services.pojos;
 
 import java.io.Serializable;
 
-@SuppressWarnings("unused")
 public class User implements Serializable {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5275421969034803395L;
 	
 	private String username;

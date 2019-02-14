@@ -10,14 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-@WebServlet("/view")
+@WebServlet("*.view")
 public class LoadViewsServlet extends HttpServlet {
 	
+	private static final long serialVersionUID = 3014802713949514627L;
 	private static Logger log = Logger.getLogger(LoadViewsServlet.class);
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String resourcePath = "partials/" + process(req, resp) + ".html";
+		String resourcePath = "html/" + process(req, resp) + ".html";
 		
 		log.info(resourcePath);
 		log.info("LOADING " + req.getRequestURI());

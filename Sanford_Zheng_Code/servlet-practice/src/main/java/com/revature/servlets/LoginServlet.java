@@ -19,7 +19,8 @@ import com.revature.services.pojos.User;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
-	UserService service = new UserService();
+	private static final long serialVersionUID = 2344344391072246335L;
+	private UserService service = new UserService();
 	private static Logger log = Logger.getLogger(LoginServlet.class);
 
 	@Override
@@ -44,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 			
 			PrintWriter writer = resp.getWriter();
 			resp.setContentType("application/json");
-			writer.write(mapper.writeValueAsString(userStored));
+			writer.write(mapper.writeValueAsString(storedUser));
 		}
 	}
 
