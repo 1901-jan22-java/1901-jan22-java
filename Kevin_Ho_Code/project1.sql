@@ -48,15 +48,46 @@ drop table ers_users;
 drop table ers_reimbursement;
 
 create sequence ers_reimbursement_status_seq;
-create sequence ers_reimbursement_type_seq;
-create sequence ers_user_roles_seq;
-create sequence ers_users_seq;
-create sequence ers_reimbursement_seq;
-
-CREATE OR REPLACE TRIGGER ers_reimbursement_status_trigger
+CREATE OR REPLACE TRIGGER ers_status_trigger
 BEFORE INSERT ON ers_reimbursement_status
 FOR EACH ROW
 BEGIN
-    SELECT ers_reimbursement_status_seq.nextval into :new.account_number FROM dual;
+    SELECT ers_reimbursement_status_seq.nextval into :new.reimb_status_id FROM dual;
+END;
+/
+
+create sequence ers_reimbursement_type_seq;
+CREATE OR REPLACE TRIGGER ers_type_trigger
+BEFORE INSERT ON ers_reimbursement_type
+FOR EACH ROW
+BEGIN
+    SELECT ers_reimbursement_type_seq.nextval into :new.reimb_type_id FROM dual;
+END;
+/
+
+create sequence ers_user_roles_seq;
+CREATE OR REPLACE TRIGGER ers_user_roles_trigger
+BEFORE INSERT ON ers_user_roles
+FOR EACH ROW
+BEGIN
+    SELECT ers_user_roles_seq.nextval into :new.ers_user_role_id FROM dual;
+END;
+/
+
+create sequence ers_users_seq;
+CREATE OR REPLACE TRIGGER ers_users_trigger
+BEFORE INSERT ON ers_users
+FOR EACH ROW
+BEGIN
+    SELECT ers_users_seq.nextval into :new.ers_users_id FROM dual;
+END;
+/
+
+create sequence ers_reimbursement_seq;
+CREATE OR REPLACE TRIGGER ers_reimbursement_trigger
+BEFORE INSERT ON ers_reimbursement
+FOR EACH ROW
+BEGIN
+    SELECT ers_reimbursement_seq.nextval into :new.reimb_id FROM dual;
 END;
 /
