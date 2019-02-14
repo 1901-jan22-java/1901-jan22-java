@@ -1,0 +1,25 @@
+<div class=jumbotron>
+  <h3><i>Angular supports data binding which is a mechanism for coordinating parts of a template iwth parts of a component. (TS)</i></h3>
+  <br>
+
+  <h5>String Interpolation</h5>
+  String interpolation uses curly braces to display data represented in the component or to evaluate expressions. {{text}}, {{bool}}, {{count}}, {{colorProp}}, {{currentTime | date:'medium' | uppercase}}
+
+  <br>
+  <hr>
+  <br>
+  <h5>Event Binding!</h5>
+  <i>The process of linking actions to DM events on elements</i>
+  {{ count }} 
+  <button (click)="increment()" class="btn btn-secondary">Increment!</button>
+  <br>
+  <hr>
+  <br>
+  <h5 [style.background-color]="colorProp">Property Binding</h5>
+  <i>This allows us to apply a property to a DOM element dynamically! Often used with attribute directives.</i>
+  <button (click)="increment()" class="btn btn-secondary">Second Button!</button>
+
+  <h5>Two Way Data Binding</h5>
+  <input type="text" [(ngModel)]="username" (click)="changeColorByName()">
+
+</div>>

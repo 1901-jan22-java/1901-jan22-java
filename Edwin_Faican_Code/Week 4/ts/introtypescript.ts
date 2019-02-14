@@ -121,3 +121,23 @@ class Point3D extends Point{
 
 let pointB = new Point3D(2,4,6);
 console.log(pointB.getDistance());
+
+//private access modifier
+class Animal{
+    private name: string;
+
+    constructor(name: string){
+        this.name = name;
+    }
+
+    getName() {
+        return this.name;
+    }
+
+    setName(name: string): void {
+        this.name = name;
+    }
+}
+
+let animal = new Animal('Puppy');
+//cannot access animal.name;
