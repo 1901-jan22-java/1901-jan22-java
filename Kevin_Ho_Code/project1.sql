@@ -34,8 +34,29 @@ reimb_receipt blob,
 reimb_author number not null,
 reimb_resolver number,
 reimb_status_id number not null,
-reim_type_id number not null,
-constraint ers_users_fk_auth, ers_users_fk_reslvr foreign key () references ers_users(user_role_id),
+reimb_type_id number not null,
+constraint ers_users_fk_auth foreign key (reimb_author) references ers_users(ers_users_id),
+constraint ers_users_fk_reslvr foreign key (reimb_resolver) references ers_users(ers_users_id),
 constraint ers_reimbursement_status_fk foreign key (reimb_status_id) references ers_reimbursement_status(reimb_status_id),
 constraint ers_reimbursement_type_fk foreign key (reimb_type_id) references ers_reimbursement_type(reimb_type_id)
 );
+
+drop table ers_reimbursement_status;
+drop table ers_reimbursement_type;
+drop table ers_user_roles;
+drop table ers_users;
+drop table ers_reimbursement;
+
+create sequence ers_reimbursement_status_seq;
+create sequence ers_reimbursement_type_seq;
+create sequence ers_user_roles_seq;
+create sequence ers_users_seq;
+create sequence ers_reimbursement_seq;
+
+CREATE OR REPLACE TRIGGER ers_reimbursement_status_trigger
+BEFORE INSERT ON ers_reimbursement_status
+FOR EACH ROW
+BEGIN
+    SELECT ers_reimbursement_status_seq.nextval into :new.account_number FROM dual;
+END;
+/
