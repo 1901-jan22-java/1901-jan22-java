@@ -14,11 +14,10 @@ import org.apache.log4j.Logger;
 @WebServlet("/myHTTP")
 public class MyHTTPServlet extends HttpServlet {
 
-	/*
-	 * 
-	 */
-	
+	@SuppressWarnings("unused")
 	private static Logger logger = Logger.getLogger(MyHTTPServlet.class);
+	
+	private static final long serialVersionUID = -7201933054284569968L;
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -31,5 +30,6 @@ public class MyHTTPServlet extends HttpServlet {
 		
 		writer.write("RAND");
 	}
+	
 	
 }
