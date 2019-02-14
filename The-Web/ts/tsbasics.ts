@@ -176,3 +176,125 @@ protected can also be accessed in deriving classes
  }
 
  let pointB = new Point3D(3, 4, 5);
+
+
+ 
+//understanding private 
+class Animal{
+    private name: string;
+    constructor(name: string){
+        this.name = name;
+    }
+
+    getName(): string{
+        return this.name;
+    }
+
+    setName(name: string): void{
+        this.name = name;
+    }
+}
+
+let animal = new Animal('Puppy');
+//console.log(animal.name); //will not work; name is private
+console.log(animal.getName()); //works. using Encapsulation***
+//animal.name = 'Tomcat'; //same; still does not work
+animal.setName('Tomcat');
+
+//understanding protected 
+class Person {
+    protected name: string;
+    constructor(name: string){
+        this.name = name;
+    }
+}
+
+class Employee extends Person{
+    private department: string;
+    constructor(name: string, department: string){
+        super(name);
+        this.department = department;
+    }
+
+    public getElevatorPitch(){
+        return `Hello, my name is ${this.name} and I work
+        in ${this.department}.`;
+    }
+}
+
+let emp1 = new Employee("John", "Sales" );
+//console.log(emp1.name); //cannot access name directly outside of subclass
+console.log(emp1.getElevatorPitch()); //works fine
+
+
+/* READONLY modifier
+    You can make properties read only. 
+    These properties must be initialized at their declaration or in the constructor
+    Allows you to work in a functional way(unexpected mutation is bad)
+    Can use modifier in interfaces as well. Can be initialized but not reassigned
+*/
+
+class Car{
+    readonly brand: string;
+    readonly numWheels = 4;
+}
+
+let c1 = new Car();
+//c1.brand = 'Honda'; //does not work as car is created without brand
+console.log(c1.numWheels); //can access
+console.log(c1.brand);
+// c1.numWheels = 10; // reassignment will not work
+
+class Car2{
+    readonly brand: string;
+    readonly numWheels= 4;
+    constructor(brand: string){
+        this.brand = brand;
+    }
+}
+
+let c2 = new Car2('Honda');//can be set via constructor
+let c3 = new Car2('Toyota');
+//c2.brand = 'Hyundai'; //still not able to be reassigned
+
+
+/*  STATIC
+Thus far, we've only discussed instance members of a class. But it's important
+to note that we have static members, which are visible on the class itself
+and not instances
+*/
+
+class Calculator{
+    static add(a: number, b: number):number{
+        return a+b;
+    }
+
+    static subtract(a:number, b:number):number{
+        return a-b;
+    }
+}
+
+let numb = Calculator.add(10, 3);
+
+/* ABSTRACT CLASS
+Abstract classes are base classes from which other classes may be derived. They
+may not be instantiated directly. Unlike an interface, an abstract class may
+contain implementation details for its members. The abstract keyword is used
+to define abstract classes as well as abstract methods within an abstract class
+
+Methods within an abstract class that are marked abstract have no implementation
+and must be implemented in derived classes; they must use the abstract keyword;
+*/
+abstract class Account{
+    abstract generateReports():void;
+}
+
+class CheckingAccount extends Account{
+    generateReports(){
+        console.log('concrete');
+    }
+}
+
+
+//Typescript also supports 
+//https://www.typescriptlang.org/docs/handbook/generics.html
