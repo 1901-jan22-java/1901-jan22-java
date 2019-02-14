@@ -1,7 +1,14 @@
 package com.revature.servlets;
 
-import javax.servlet.http.HttpServlet;
+import java.io.IOException;
 
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/resource")
 public class ResourcesServlet extends HttpServlet{
 /*
 With servlets, we may not always want to simply 
@@ -17,6 +24,9 @@ Forward - client sends a request to server with a
     - original req/resp pair gets retuned, 
     - URL does not change 
     - req.getRequestDispatcher.forward();
+    - the RequestDispatcher is an interface whose 
+    implementation defines an object which can dispatch the 
+    request to any resources on the server 
 Redirect - client sends a request /a. servlet responds with 
     a status code of 300-399 and instructions ot send a 
     new request to /b. client sends a request to /b and 
@@ -25,5 +35,21 @@ Redirect - client sends a request /a. servlet responds with
     - new req/resp pair 
     - resp.sendRedirect();
 */
+	
+	
+    
+//FORWARDS 
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.getRequestDispatcher("resource.html").forward(req, resp);
+	}
+	
+	
+	@Override
+		protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+			// TODO Auto-generated method stub
+			super.doPost(req, resp);
+		}
+	
 
 }
