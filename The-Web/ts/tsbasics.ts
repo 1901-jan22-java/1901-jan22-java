@@ -130,3 +130,49 @@ let u1: User = {
         return 100;
     }
 }
+
+/* CLASSES
+classes in TS are similar to classes in most OOP languages 
+properties are made public by defauly but can be made private 
+or protected
+- when a member is private, it cannot be accessed from outside 
+of its containing class
+- protected acts similarly to private, except members declared 
+protected can also be accessed in deriving classes 
+- public entities can be accessed anywhere 
+ */
+ class Point{
+     x: number;
+     y: number;
+
+     constructor(x: number, y: number){
+         this.x = x; //must use "this" to refer to instance vars
+         this.y = y;
+     }
+     //in classes, functions are called methods and no longer use the function keyword
+     getDistance(){ //from 0,0
+         return Math.sqrt(this.x*this.x + this.y*this.y);
+     }
+ }
+
+ let pointA = new Point(5, 10);
+ pointA.x = 10; 
+ console.log(pointA.getDistance());
+
+ class Point3D extends Point{
+    z:number;
+
+    constructor(x: number, y:number, z:number){
+        //constructors in derived(sub) classes must contain a call to super
+        super(x,y);
+        this.z = z;
+    }
+
+    //overriding Point's getDistance(). must be of same return type
+    getDistance(){
+        let dist = super.getDistance();
+        return Math.sqrt(dist*dist + this.z*this.z );
+    }
+ }
+
+ let pointB = new Point3D(3, 4, 5);
