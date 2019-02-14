@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <h4>Leverage AJAX to Use the Force</h4>
+    <input type="number" id="swID" class="form-control col-4">
+    <h5>Welcome to the force <span id="output"></span></h6>
+    <button id="go" class="btn btn-primary">Go!</button>
+
+    <script
+        src="https://code.jquery.com/jquery-3.3.1.js"
+        integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+        crossorigin="anonymous">
+    </script>
+    <script>
+        window.onload = function () {
+            $('#go').on('click', getSW);
+        }
+
+        function getSW(){
+            var id = $('#swID').val();
+            var url = `https://pokeapi.co/api/v2/pokemon/${id}`;
+            //ajax
+            //step 1 create xhr
+            var xhr = new XMLHttpRequest();
+
+            //step 2 define onreadstatechange functionality 
+            xhr.onreadystatechange = function (){
+                console.log(xhr.readyState);
+                if (xhr.readyState == 4 && xhr.status == 200){
+                    //console.log('successfully got: ' + xhr.responseText);
+                    let jedi = JSON.parse(xhr.responseText);
+                    $('#output').html(jedi.name);
+                }
+            };
+
+            //step 3 open
+            xhr.open('GET', url);
+
+            xhr.send();
+
+            console.log('Sent request and got: ' + xhr.responseText);
+
+        } 
+    </script>
+</body>
+</html>

@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="./functions.js"></script>
+</head>
+<body>
+    <div class="container">
+        <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+            <a class="navbar-brand" href="#">
+                <img src="./AAYBicon.png" alt="A A Y icon for A A Y apps" width="32px">
+                JavaScript Assignment
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+                
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                </ul>
+                Problem 14: 
+                <form class="form-inline my-2 my-lg-0">
+                    <a id="currentTime" class="form-control"><b></b></a>
+                </form>
+            </div>
+        </nav>
+    </div>
+
+    <!--
+        Fibonacci
+    -->
+    <br>
+    <br>
+    <br>
+    <div class="d-inline-flex p-2 bd-highlight">
+        Fibonacci        
+    </div>
+    <div class="d-inline-flex p-2 bd-highlight">
+        <input type="number" name="fibInput" id="fibIn">
+        <input type="submit" name="fibSubmit" id="fibSub">
+    </div>
+    <div class="d-inline-flex p-2 bd-highlight">
+        <div id="fibOut">Result: </div>      
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <!--
+        Bubble Sort
+
+    <div class="d-inline-flex p-2 bd-highlight">
+        Bubble Sort
+    </div>
+    <div class="d-inline-flex p-2 bd-highlight">
+        <input type="number" name="bubbleInput" id="bubbleIn">
+        <input type="submit" name="bubbleSubmit" id="bubbleSub">
+    </div>
+    <div class="d-inline-flex p-2 bd-highlight">
+        <div id="bubbleOut">Result: </div>      
+    </div>
+
+    <br>
+    <br>
+    <br>    -->
+
+    <!--
+        Reverse String
+    -->
+    <div class="d-inline-flex p-2 bd-highlight">
+        Reverse String
+    </div>
+    <div class="d-inline-flex p-2 bd-highlight">
+        <input type="text" name="reverseInput" id="reverseIn">
+        <input type="submit" name="reverseSubmit" id="reverseSub">
+    </div>
+    <div class="d-inline-flex p-2 bd-highlight">
+        <div id="reverseOut">Result: </div>      
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <!--
+        Factorial
+    -->
+    <div class="d-inline-flex p-2 bd-highlight">
+        Factorial
+    </div>
+    <div class="d-inline-flex p-2 bd-highlight">
+        <input type="number" name="factorialInput" id="factorialIn">
+        <input type="submit" name="factorialSubmit" id="factorialSub">
+    </div>
+    <div class="d-inline-flex p-2 bd-highlight">
+        <div id="factorialOut">Result: </div>      
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <!--
+        Substring
+    -->
+    <div class="d-inline-flex p-2 bd-highlight">
+        Substring
+    </div>
+    <div class="d-inline-flex p-2 bd-highlight">
+        <input type="text" name="substringInput" id="substringIn" placeholder="string">
+        <input type="number" name="substringOffsetInput" id="substringOffset" placeholder="Offset">
+        <input type="number" name="substringLengthInput" id="substringLength" placeholder="Length">
+        <input type="submit" name="substringSubmit" id="substringSub">
+    </div>
+    <div class="d-inline-flex p-2 bd-highlight">
+        <div id="substringOut">Result: </div>      
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <!--
+        Even Number
+    -->
+    <div class="d-inline-flex p-2 bd-highlight">
+        Even Number
+    </div>
+    <div class="d-inline-flex p-2 bd-highlight">
+        <input type="number" name="evenNumberInput" id="evenNumberIn">
+        <input type="submit" name="evenNumberSubmit" id="evenNumberSub">
+    </div>
+    <div class="d-inline-flex p-2 bd-highlight">
+        <div id="evenNumberOut">Result: </div>      
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <!--
+        Palindrome
+    -->
+    <div class="d-inline-flex p-2 bd-highlight">
+        Palindrome
+    </div>
+    <div class="d-inline-flex p-2 bd-highlight">
+        <input type="number" name="PalindromeInput" id="PalindromeIn">
+        <input type="submit" name="PalindromeSubmit" id="PalindromeSub">
+    </div>
+    <div class="d-inline-flex p-2 bd-highlight">
+        <div id="PalindromeOut">Result: </div>      
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <!--
+        Person Object
+    -->
+    <div class="d-inline-flex p-2 bd-highlight">
+        Person Creator
+    </div>
+    <div class="d-inline-flex p-2 bd-highlight">
+        <input type="text" name="PersonInput" id="PersonIn" value="John">
+        <input type="number" name="PersonNumInput" id="PersonNumIn" value="30">
+        <input type="submit" name="PersonSubmit" id="PersonSub">
+    </div>
+    <div class="d-inline-flex p-2 bd-highlight">
+        <div id="PersonOut">Result: </div>      
+    </div>
+
+    <br>
+    <br>
+    <br>
+    <!--
+        Descending order
+    -->
+    <div class="d-inline-flex p-2 bd-highlight">
+        Descending order
+    </div>
+    <div class="d-inline-flex p-2 bd-highlight">
+        <input type="number" name="desOrderInput" id="desOrderIn">
+        <input type="submit" name="desOrderSubmit" id="desOrderSub">
+    </div>
+    <div class="d-inline-flex p-2 bd-highlight">
+        <div id="desOrderOut">Result: </div>      
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+</body>
+</html>
