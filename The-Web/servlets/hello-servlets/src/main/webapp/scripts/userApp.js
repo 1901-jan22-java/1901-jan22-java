@@ -23,7 +23,13 @@ function logIn(){
 
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){
-        //define functionality later 
+        if(xhr.readyState == 4)
+        	if(xhr.status == 200){
+        		console.log(xhr.responseText);
+        		var user = JSON.parse();
+        		alert(`Welcome, ${user.username}!!!!`);
+        	}
+        	else if(xhr.status == )
     }
     xhr.open("POST", "login");
     xhr.setRequestHeader("Content-type", "application/json");

@@ -44,7 +44,7 @@ public class LoginServlet extends HttpServlet {
 			// if we want user info immediately, do this
 			PrintWriter writer = resp.getWriter();
 			resp.setContentType("application/json");
-			writer.write(mapper.writeValueAsString(u));
+			writer.write(mapper.writeValueAsString(storedUser));
 			
 			
 			
