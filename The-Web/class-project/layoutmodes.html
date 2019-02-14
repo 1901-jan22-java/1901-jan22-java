@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    .flexbox {
+    display: flex;
+    justify-content: space-between;
+  }
+
+span {
+    background-color: lightblue;
+}
+
+.wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: minmax(100px, auto);
+  }
+  .one {
+    grid-column: 1 / 3;
+    grid-row: 1;
+    background-color: coral
+  }
+  .two { 
+    grid-column: 3 / 4;
+    grid-row: 1 / 3;
+    background-color: #65256956
+  }
+  .three {
+    grid-column: 1;
+    grid-row: 2 / 5;
+    background-color: royalblue
+  }
+  .four {
+    grid-column: 3;
+    grid-row: 3;
+    background-color: teal
+  }
+  .five {
+    grid-column: 2;
+    grid-row: 4;
+    background-color: slateblue
+  }
+  .six {
+    grid-column: 3;
+    grid-row: 4;
+    background-color: olive
+  }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Layout Modes</a>
+        <button class="navbar-toggler" type="button" 
+            data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+            aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#normalflow">Normal Flow <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="#FlexBox">Flex Box </a>
+                </li>
+                <li class="nav-item active">
+                        <a class="nav-link" href="#Grid">Grid </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <h1>Layout Modes</h1>
+    <h3>A layout Mode is an Algorithm that determines the position in sizes of the boxes.</h3>
+    <h3>There are several Layout Modes</h3>
+    <br>
+    <br>
+    <div id="normalflow" class="e1">
+        <h3>Now let's look at the Normal flow</h3>
+        <p>Normal flow is how the browser lays out HTML pages by default when you do nothing to control page layout.</p>
+        <h3>By default, the browser will display this code as follows:</h3>
+        <div class="box">
+            <p>One <span>November</span> night in the year 1782, so the story runs, two brothers sat over their winter fire in the little French town of Annonay, watching the grey smoke-wreaths from the hearth curl up the wide chimney. Their names were Stephen and Joseph Montgolfier, they were papermakers by trade, and were noted as possessing thoughtful minds and a deep interest in all scientific knowledge and new discovery.</p>
+            <p>Before that night—a memorable night, as it was to prove—hundreds of millions of people had watched the rising smoke-wreaths of their fires without drawing any special inspiration from the fact.”</p>
+        </div>
+    
+        <p>I love my cat.</p>
+        
+        <ul>
+            <li>Buy cat food</li>
+            <li>Exercise</li>
+            <li>Cheer up friend</li>
+        </ul>
+            
+        <p>The end!</p>
+    </div>
+    <br>
+    <br>
+
+
+
+    <div>
+        <h2>The Display Property</h2>
+        <p>The display property — Standard values such as block, inline or inline-block can change how elements behave in normal flow</p>
+        <div>
+            <span class="d-block bg-primary">Block</span>
+            <p>Starts on a new line, and takes up the whole width</p>
+        </div>
+        <br>
+        <br>
+        <div>
+            <div class="d-inline bg-success">Inline</div>
+            <div class="d-inline bg-success">Inline</div>
+            <p>Displays an element as an inline element. Any height and width properties will have no effect</p>
+        </div>
+        <br>
+        <br>
+        <div class="d-inline-block bg-warning">
+            <h3>inline-block</h3>
+            Boot that strap!
+        </div>
+        <div class="d-inline-block bg-warning">
+            <h3>inline-block</h3>
+            Strap that boot!
+        </div>
+        <p>Displays an element as an inline-level block container. The element itself is formatted as an inline element, but you can apply height and width values</p>
+    </div>
+    <br>
+    <br>
+    <br>
+
+
+
+
+    <div id="FlexBox" class="e2">
+        <h3>Now let's look at the Flex Box</h3>
+        <p>The main idea behind the flex layout is to give the container the ability to alter <br>
+            its items' width/height (and order) to best fill the available space <br>
+            (mostly to accommodate to all kind of display devices and screen sizes). <br>
+            A flex container expands items to fill available free space, or shrinks them to prevent overflow.</p>
+        <h3>Here is what it looks like:</h3>
+
+        <div class="flexbox">
+            <div>
+                One
+                <br>
+
+            </div>
+            <div>Two</div>
+            <div>Three
+                <br>has
+                <br>extra
+                <br>text
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <br>
+
+
+    <h3>Lastly, let's see what the grid layout does</h3>
+
+    <p>Like tables, grid layout enables an author to align elements into columns and rows. <br> 
+        However, many more layouts are either possible or easier with CSS grid than they were with tables. <br> 
+        For example, a grid container's child elements could position themselves so they actually overlap and layer, similar to CSS positioned elements.</p>
+
+    <div id="Grid" class="e3">
+        <div class="wrapper">
+                <div class="one">
+                    One
+                    <br>
+                    grid-column: 1 / 3;
+                    <br>
+                    grid-row: 1;
+                    <br>
+                    background-color: coral
+                </div>
+                <div class="two">
+                    Two
+                    <br>
+                    grid-column: 3 / 4;
+                    <br>
+                    grid-row: 1 / 3;
+                    <br>
+                    background-color: #65256956
+                </div>
+                <div class="three">
+                    Three
+                    <br>
+                    grid-column: 1;
+                    <br>
+                    grid-row: 2 / 5;
+                    <br>
+                    background-color: royalblue
+                </div>
+                <div class="four">
+                    Four
+                    <br>
+                    grid-column: 3;
+                    <br>
+                    grid-row: 3;
+                    <br>
+                    background-color: teal
+                </div>
+                <div class="five">
+                    Five
+                    <br>
+                    grid-column: 2;
+                    <br>
+                    grid-row: 4;
+                    <br>
+                    background-color: slateblue
+                </div>
+                <div class="six">
+                    Six
+                    <br>
+                    grid-column: 3;
+                    <br>
+                    grid-row: 4;
+                    <br>
+                    background-color: olive
+                </div>
+        </div>
+    </div>
+
+
+    <h3>Joshua Vanderzee, Malik White, Michael Koerber</h3>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+</body>
+</html>

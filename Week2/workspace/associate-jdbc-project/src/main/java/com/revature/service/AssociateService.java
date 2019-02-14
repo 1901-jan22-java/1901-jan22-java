@@ -8,8 +8,7 @@ public class AssociateService {
 	static AssociateRepository repo = new AssociateRepository();
 	
 	public Associate logIn(String email, String pw) {
-		Associate a = new Associate();
-		a = repo.getByEmail(email);
+		Associate a = repo.getByEmail(email);
 		if(a == null) return null;
 		else {
 			if(a.getPassword().equals(pw)) {
@@ -17,6 +16,12 @@ public class AssociateService {
 			}
 		}
 		return null;
+	}
+	
+	public boolean isUnique(String email) {
+		Associate a = repo.getByEmail(email);
+		if(a == null) return true;
+		return false;
 	}
 
 }
