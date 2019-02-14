@@ -1,6 +1,7 @@
 package com.revature.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.services.UserService;
 import com.revature.services.pojos.User;
@@ -16,7 +19,9 @@ import com.revature.services.pojos.User;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
-	UserService service = new UserService();
+	private static final long serialVersionUID = 2344344391072246335L;
+	private UserService service = new UserService();
+	private static Logger log = Logger.getLogger(LoginServlet.class);
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,15 +31,21 @@ public class LoginServlet extends HttpServlet {
 
 		User storedUser = service.getByUsername(u.getUsername());
 
-		if (storedUser == null || !storedUser.getPassword().equals(u.getPassword())) {
+		if (storedUser == null) {
 			resp.setStatus(418);
+		} else if (!storedUser.getPassword().equals(u.getPassword())) {
+			resp.setStatus(409);
 		} else {
 			resp.setStatus(200);
 			
 			HttpSession session = req.getSession();
 			session.setAttribute("user", u);
 			
+			log.info("CREATED SESSION " + session.getId());
 			
+			PrintWriter writer = resp.getWriter();
+			resp.setContentType("application/json");
+			writer.write(mapper.writeValueAsString(storedUser));
 		}
 	}
 

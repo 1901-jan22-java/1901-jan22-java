@@ -9,7 +9,7 @@ function loadLoginView(){
             $('#view').html(xhr.responseText);
             $('#goToSubmit').on('click', loadRegisterView);
             $('#logIn').on('click', logIn);
-        }   
+        }
     }
     xhr.open("GET", "login.view");
     xhr.send();

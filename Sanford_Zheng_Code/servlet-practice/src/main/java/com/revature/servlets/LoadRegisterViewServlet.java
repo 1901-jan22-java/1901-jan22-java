@@ -16,6 +16,11 @@ public class LoadRegisterViewServlet extends HttpServlet{
 	 * @see javax.servlet.http.HttpServlet#doGet(javax.servlet.http.HttpServletRequest, javax.servlet.http.HttpServletResponse)
 	 */
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 2829093218948798330L;
+
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException

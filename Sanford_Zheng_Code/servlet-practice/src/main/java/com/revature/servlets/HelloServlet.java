@@ -12,9 +12,6 @@ import org.apache.log4j.Logger;
 
 public class HelloServlet extends GenericServlet {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4816592117303807796L;
 	
 	private final static Logger logger = Logger.getLogger(HelloServlet.class);
