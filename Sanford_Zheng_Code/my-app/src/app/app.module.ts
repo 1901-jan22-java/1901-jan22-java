@@ -5,13 +5,15 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { DataBindingComponent } from './components/data-binding/data-binding.component';
+import { DirectivesComponent } from './components/directives/directives.component';
 
 // DECORATORS
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    DataBindingComponent
+    DataBindingComponent,
+    DirectivesComponent
   ],
   /*
   exports: []
