@@ -7,9 +7,37 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DirectivesComponent implements OnInit {
 
+  showIf = true;
+  numArr = [1, 5, 6, 9, 192, 1841984];
+  employees = [
+    {
+      name: 'Genesis',
+      role: 'Trainer'
+    },
+    {
+      name: 'Genesis',
+      role: 'Trainer'
+    },
+    {
+      name: 'Genesis',
+      role: 'Trainer'
+    },
+    {
+      name: 'Genesis',
+      role: 'Trainer'
+    },
+    {
+      name: 'Kevin',
+      role: 'Associate'
+    }    
+  ];
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  toggleIf(){
+    this.showIf = !this.showIf;
+  }
 }
