@@ -1,15 +1,12 @@
 package com.revature.bank.app;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.revature.bank.main.BankingInterface;
 import com.revature.bank.pojos.Account;
 import com.revature.bank.pojos.AccountType;
 
 public class BankAppHelper {
-
 
     public BankAppHelper(){
     }

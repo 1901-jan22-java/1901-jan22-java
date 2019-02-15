@@ -1,20 +1,18 @@
 package com.revature.bank.app;
 
-import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.revature.bank.exceptions.UserAlreadyExistsException;
-import com.revature.bank.pojos.User;
 import org.apache.log4j.Logger;
 
 import com.revature.bank.dao.AccountRepository;
 import com.revature.bank.dao.UserRepository;
 import com.revature.bank.exceptions.NoSuchBankUserException;
 import com.revature.bank.exceptions.UnableToGenerateKeyException;
+import com.revature.bank.exceptions.UserAlreadyExistsException;
 import com.revature.bank.main.BankingInterface;
 import com.revature.bank.pojos.Account;
-
-import zheng.sanford.utils.MyUtils;
+import com.revature.bank.pojos.User;
+import com.revature.utils.MyUtils;
 
 public class BankApp {
 

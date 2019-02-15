@@ -2,7 +2,11 @@ package com.revature.bank.exceptions;
 
 public class UnableToGenerateKeyException extends Exception {
 
-    public UnableToGenerateKeyException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 7148595128874689195L;
+	public UnableToGenerateKeyException() {
         super();
     }
     public UnableToGenerateKeyException(String message) {

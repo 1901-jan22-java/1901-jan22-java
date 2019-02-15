@@ -2,7 +2,11 @@ package com.revature.bank.exceptions;
 
 public class NoSuchBankAccountException extends Exception{
 
-    public NoSuchBankAccountException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4908343625785027553L;
+	public NoSuchBankAccountException() {
         super();
     }
     public NoSuchBankAccountException(String message) {

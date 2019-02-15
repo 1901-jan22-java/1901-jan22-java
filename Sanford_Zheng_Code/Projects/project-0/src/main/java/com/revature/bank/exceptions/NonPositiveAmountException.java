@@ -2,7 +2,11 @@ package com.revature.bank.exceptions;
 
 public class NonPositiveAmountException extends Exception {
 
-    public NonPositiveAmountException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -7796843148748595998L;
+	public NonPositiveAmountException() {
         super();
     }
     public NonPositiveAmountException(String message) {

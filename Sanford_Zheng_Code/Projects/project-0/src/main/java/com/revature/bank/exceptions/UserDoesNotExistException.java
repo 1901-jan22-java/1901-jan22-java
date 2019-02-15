@@ -2,7 +2,11 @@ package com.revature.bank.exceptions;
 
 public class UserDoesNotExistException extends Exception {
 
-    public UserDoesNotExistException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8802872199745823558L;
+	public UserDoesNotExistException() {
         super();
     }
     public UserDoesNotExistException(String message) {

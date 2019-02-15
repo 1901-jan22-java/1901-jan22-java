@@ -2,7 +2,11 @@ package com.revature.bank.exceptions;
 
 public class UserAlreadyExistsException extends Exception {
 
-    public UserAlreadyExistsException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4984840041658876977L;
+	public UserAlreadyExistsException() {
         super();
     }
     public UserAlreadyExistsException(String message) {

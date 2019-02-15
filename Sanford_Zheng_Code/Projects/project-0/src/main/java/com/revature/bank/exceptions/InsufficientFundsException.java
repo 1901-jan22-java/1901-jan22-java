@@ -2,7 +2,11 @@ package com.revature.bank.exceptions;
 
 public class InsufficientFundsException extends Exception {
 
-    public InsufficientFundsException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4208000402297495468L;
+	public InsufficientFundsException() {
         super();
     }
     public InsufficientFundsException(String message) {

@@ -13,12 +13,10 @@ import com.revature.bank.pojos.Account;
 import com.revature.bank.pojos.AccountType;
 import com.revature.bank.pojos.User;
 
-import zheng.sanford.utils.MyUtils;
-
 public class BankingInterface {
 
     /**
-     * TO-DO:
+     * TODO:
      *  How to handle this? Not sure... maybe not at all...
      *  just use AccountTypeRepository every time and deprecate
      *  this instead? Well I'm using it globally. Should be

@@ -10,8 +10,8 @@ function loadRegisterView() {
             console.log("I made it");
             if (this.status > 199 && this.status < 300) {
                 $('#view').html(xhr.responseText);
-                $('#register').click(registerUser());
-                $('#goToLogin').click(loadLoginView());
+                $('#register').click(registerUser);
+                $('#goToLogin').click(loadLoginView);
             } else {
                 // ERROR HERE!
             }
@@ -27,10 +27,11 @@ function loadLoginView() {
 
     xhr.onreadystatechange = function () {
         if (this.readyState == 4) {
+        	console.log("I'm here");
             if (this.status > 199 && this.status < 300) {
                 $('#view').html(xhr.responseText);
-                $('#login').click(loginUser());
-                $('#goToRegister').click(loadRegisterView());
+                $('#login').click(loginUser);
+                $('#goToRegister').click(loadRegisterView);
             } else {
                 // ERROR HERE!
             }
@@ -74,7 +75,7 @@ function loginUser() {
     xhr.onreadystatechange = function () {
         if (this.readyState == 4) {
             if (this.status > 199 && this.status < 300) {
-                // REDIRECT TO UI HERE OR SOMETHING!
+            	$('#view').html(xhr.responseText);
             } else {
                 // REDIRECT TO ERROR HERE!
             }

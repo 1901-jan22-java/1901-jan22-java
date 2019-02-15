@@ -12,8 +12,7 @@ import com.jdbc.util.ConnectionFactory;
 import com.revature.bank.exceptions.DuplicateAccountTypeException;
 import com.revature.bank.exceptions.NoSQLUpdatesException;
 import com.revature.bank.pojos.AccountType;
-
-import zheng.sanford.utils.MyUtils;
+import com.revature.utils.MyUtils;
 
 public class AccountTypeRepository {
 

@@ -2,7 +2,11 @@ package com.revature.bank.exceptions;
 
 public class DuplicateAccountTypeException extends Exception {
 
-    public DuplicateAccountTypeException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 3849810672718968190L;
+	public DuplicateAccountTypeException() {
         super();
     }
     public DuplicateAccountTypeException(String message) {

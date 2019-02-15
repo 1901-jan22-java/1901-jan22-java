@@ -12,7 +12,11 @@ package com.revature.bank.exceptions;
  */
 public class UnableToAddAccountException extends Exception{
 
-    public UnableToAddAccountException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -4164467145939472953L;
+	public UnableToAddAccountException() {
         super();
     }
     public UnableToAddAccountException(String message) {

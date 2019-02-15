@@ -24,12 +24,11 @@ public class UserServlet extends HttpServlet {
 	UserService service = new UserService();
 	
 	/*
-	 * Jackson ObjectMapper to send respose of all users
+	 * Jackson ObjectMapper to send response of all users
 	 * as a JSON string.
 	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		List<User> users = service.getAllUsers();
 		
 		ObjectMapper mapper = new ObjectMapper();

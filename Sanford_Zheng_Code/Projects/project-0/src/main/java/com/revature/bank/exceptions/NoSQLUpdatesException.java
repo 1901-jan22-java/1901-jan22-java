@@ -2,7 +2,11 @@ package com.revature.bank.exceptions;
 
 public class NoSQLUpdatesException extends Exception {
 
-    public NoSQLUpdatesException() {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2724131829166108463L;
+	public NoSQLUpdatesException() {
         super();
     }
     public NoSQLUpdatesException(String message) {

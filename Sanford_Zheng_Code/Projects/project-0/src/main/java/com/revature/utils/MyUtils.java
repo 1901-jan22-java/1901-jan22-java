@@ -1,6 +1,5 @@
-package zheng.sanford.utils;
+package com.revature.utils;
 
-import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
