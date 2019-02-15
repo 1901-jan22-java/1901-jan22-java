@@ -26,10 +26,7 @@ So what is dependency injection? Well, at a high level it is a design
   providedIn: 'root'
 })
 export class UserService {
-  /* Dummy service to understand how these things work
-  */
 
-  userList: User[] = [];
 
   constructor() { }
 }

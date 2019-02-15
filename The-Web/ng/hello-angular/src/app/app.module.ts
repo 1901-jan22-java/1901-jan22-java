@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -9,6 +10,10 @@ import { DirectivesComponent } from './components/directives/directives.componen
 import { SquarerootPipe } from './pipes/squareroot.pipe';
 import { AppRoutingModule } from './app-routing.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { HttpComponent } from './components/http/http.component';
+
 
 // DECORATORS
 @NgModule({// indicates that the following class is an angular module
@@ -22,7 +27,10 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     DataBindingComponent,
     DirectivesComponent,
     SquarerootPipe,
-    NavbarComponent
+    NavbarComponent,
+    LoginComponent,
+    RegisterComponent,
+    HttpComponent
   ], /* , exports: []
     would be classes that need to be accessible to the components
     of other modules. However, we're not making a multi-module
@@ -34,7 +42,8 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     */
     BrowserModule,
     FormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
 
   providers: [
