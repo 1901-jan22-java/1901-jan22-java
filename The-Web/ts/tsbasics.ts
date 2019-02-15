@@ -182,6 +182,7 @@ protected can also be accessed in deriving classes
 //understanding private 
 class Animal{
     private name: string;
+
     constructor(name: string){
         this.name = name;
     }
@@ -196,6 +197,7 @@ class Animal{
 }
 
 let animal = new Animal('Puppy');
+//let animal2 = new Animal();//no overriden constructors  
 //console.log(animal.name); //will not work; name is private
 console.log(animal.getName()); //works. using Encapsulation***
 //animal.name = 'Tomcat'; //same; still does not work
