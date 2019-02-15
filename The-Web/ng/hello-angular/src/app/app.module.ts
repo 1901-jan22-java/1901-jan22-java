@@ -13,6 +13,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { HttpComponent } from './components/http/http.component';
+import { UserService } from './services/user.service';
 
 
 // DECORATORS
@@ -48,6 +49,7 @@ import { HttpComponent } from './components/http/http.component';
 
   providers: [
       /** services (@Injectable) */
+      UserService
   ],
   bootstrap: [AppComponent]
   /** Refers to the root component - where the bootstrapping process
