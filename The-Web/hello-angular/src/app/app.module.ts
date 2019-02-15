@@ -9,6 +9,7 @@ import { DataBindingComponent } from './components/data-binding/data-binding.com
 import { SquarerootPipe } from './pipes/squareroot.pipe';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { FormsModule } from '@angular/forms';
     HomeComponent,
     DataBindingComponent,
     SquarerootPipe,
-    NavbarComponent
+    NavbarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
