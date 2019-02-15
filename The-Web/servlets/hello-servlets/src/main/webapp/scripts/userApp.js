@@ -26,9 +26,7 @@ function logIn(){
         if(xhr.readyState == 4){
             if(xhr.status == 200){
                 //logged in successfully
-                console.log(xhr.responseText);
-                var user = JSON.parse(xhr.responseText);
-                alert(`Welcome, ${user.username}!!!!`);
+              $('#view').html(xhr.responseText);    
             }
             else if(xhr.status == 418){
                 //encountered known problem (wrong password/user not in system)
