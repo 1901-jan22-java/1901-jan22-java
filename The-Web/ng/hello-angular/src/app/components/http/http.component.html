@@ -23,17 +23,17 @@ Get all users:
   <li *ngFor="let u of users">{{ u.firstName}} {{u.lastName}} </li>
 </ol>
 
-<form action="/action_page.php" class="mx-3">
-  <div class="form-group">
-    <label for="email">Email address:</label>
-    <input type="email" class="form-control" id="email">
+<br>
+Get User by Username!
+<br>
+<input type="text" [(ngModel)]="unameInput">
+<button (click)="getUser()">Find User!</button>
+
+<div *ngIf="user != null">
+  <li>User Id: {{user.id}}</li>
+  <li>First Name: {{user.firstName}}</li>
+  <li>Last Name: {{user.lastName}} </li>
+</div>
+<div class="alert alert-danger" role="alert" *ngIf="notFound">
+    No User found!
   </div>
-  <div class="form-group">
-    <label for="pwd">Password:</label>
-    <input type="password" class="form-control" id="pwd">
-  </div>
-  <div class="checkbox">
-    <label><input type="checkbox"> Remember me</label>
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>

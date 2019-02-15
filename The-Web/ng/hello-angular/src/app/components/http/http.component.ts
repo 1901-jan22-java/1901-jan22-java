@@ -9,6 +9,9 @@ import { User } from 'src/app/models/user.model';
 })
 export class HttpComponent implements OnInit {
   users: User[] = [];
+  unameInput: string;
+  user: User = null;
+  notFound = false;
 
   constructor(private uService: UserService) {
     console.log('IN HTTP COMPONENT CONSTRUCTOR');
@@ -34,16 +37,18 @@ export class HttpComponent implements OnInit {
     );
   }
 
-  getUser(un:string, pw:string){
-    this.uService.getUsers().subscribe(
-      resp => {
-        if(resp != null){
-          for(let e of this.users){
-            console.log(e);
-          }
+  getUser() {
+    this.uService.getByUsername(this.unameInput).subscribe(
+      u => {
+        if (u.length === 0) {
+          console.log('array is empty ');
+          this.notFound = true;
+        } else {
+          console.log(u);
+          this.user = u[0];
         }
       }
-    )
+    );
   }
 
 }
