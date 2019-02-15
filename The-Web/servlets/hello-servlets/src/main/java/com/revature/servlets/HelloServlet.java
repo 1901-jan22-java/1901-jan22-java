@@ -74,7 +74,7 @@ public class HelloServlet extends GenericServlet {
 	@Override
 	public void destroy() {
 		super.destroy();
-		log.trace("Destroying Helloi World");
+		log.trace("Destroying Hello World");
 	}
 
 }
