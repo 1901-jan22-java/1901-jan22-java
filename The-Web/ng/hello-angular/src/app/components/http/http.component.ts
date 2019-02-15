@@ -9,7 +9,7 @@ import { User } from 'src/app/models/user.model';
 })
 export class HttpComponent implements OnInit {
   users: User[] = [];
-  unameInput: string;
+  unameInput: string = 'test';
   user: User = null;
   notFound = false;
 
@@ -50,5 +50,7 @@ export class HttpComponent implements OnInit {
       }
     );
   }
+
+
 
 }
