@@ -30,7 +30,6 @@ reimb_amount number not null,
 reim_submitted timestamp not null,
 reim_resolved timestamp,
 reimb_description varchar2(250),
-reimb_receipt blob,
 reimb_author number not null,
 reimb_resolver number,
 reimb_status_id number not null,
@@ -91,3 +90,9 @@ BEGIN
     SELECT ers_reimbursement_seq.nextval into :new.reimb_id FROM dual;
 END;
 /
+
+select * from ers_user_roles;
+insert into ers_user_roles values (0, 'employee');
+insert into ers_user_roles values (1, 'manager');
+
+commit;
