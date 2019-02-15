@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { User } from '../models/user.model';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 /*
 A service is a special class that can contain a value, function or
@@ -23,10 +23,13 @@ So what is dependency injection? Well, at a high level it is a design
  declare what a class needs as opposed to creating instances yourself.
 */
 
+
+const httpOptions = {
+  headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
+
 @Injectable()
 export class UserService {
-
-
   /*
   our first use of Dependency Injection!
   here, by declaring a private variable and defining its type, we are
@@ -45,5 +48,10 @@ export class UserService {
 
   public getByUsername(username: string){
     return this.http.get<User[]>(`${this.url}/users?username=${username}`);
+  }
+
+  // POST
+  public addUser(user: User) {
+    return this.http.post<User>(`${this.url}/users`, user, httpOptions );
   }
 }
