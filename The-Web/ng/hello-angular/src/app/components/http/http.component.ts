@@ -34,4 +34,16 @@ export class HttpComponent implements OnInit {
     );
   }
 
+  getUser(un:string, pw:string){
+    this.uService.getUsers().subscribe(
+      resp => {
+        if(resp != null){
+          for(let e of this.users){
+            console.log(e);
+          }
+        }
+      }
+    )
+  }
+
 }
