@@ -38,8 +38,12 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  // sreturns an observable
+  // returns an observable
   public getUsers() {
     return this.http.get<User[]>(`${this.url}/users`);
+  }
+
+  public getByUsername(username: string){
+    return this.http.get<User[]>(`${this.url}/users?username=${username}`);
   }
 }
