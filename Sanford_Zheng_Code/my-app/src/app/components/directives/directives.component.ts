@@ -7,6 +7,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DirectivesComponent implements OnInit {
 
+  showIf = true;
+  numArr = [1,5,6,7,125978];
+  placeholder = 0;
+  buttonClass = 'btn btn-warning';
+  class = ['primary', 'secondary', 'warning'];
+  employees = [
+    {
+      name: 'Sanford Zheng',
+      role: 'Associate',
+    },{
+      name: 'Genesis Bonds',
+      role: 'Trainer'
+    }
+  ];
+
   constructor() { }
 
   ngOnInit() {

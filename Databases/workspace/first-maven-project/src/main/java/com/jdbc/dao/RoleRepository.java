@@ -16,7 +16,6 @@ import com.jdbc.util.ConnectionFactory;
 
 import oracle.jdbc.OracleTypes;
 
-
 public class RoleRepository {
 	
 	final static Logger logger = Logger.getLogger(RoleRepository.class);
@@ -190,7 +189,6 @@ public class RoleRepository {
 				roles.add(r);
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return roles;

@@ -1,3 +1,60 @@
-<p>
-  what is going on?
-</p>
+<div>
+  <h1>Understanding Directives</h1>
+
+  <h6>Angular <b>Directives</b> are special pre-built instructions
+    that typically renderHTML code or provide additional functionality</h6>
+  <hr>
+  <p>There are three types of directives:</p>
+  <ul>
+    <li><b>Custom Directives using the decorator <code>@Directive</code>.</b> -
+      This is added to a TypeScript class.
+      Furthermore, The @Component decorator is actually a special form of the
+      @Directive decorator. In practice, you’ll
+      use @Directive when creating your own custom directives. </li>
+    <li><b>Structural Directives</b> - This will add/remove/or update the
+      contents of the DOM. It basically changes the
+      webpage’s layout. <code>*ngFor</code> and <code>*ngIf</code> which we’ll
+      explain in a moment are common examples
+      of
+      structural directives. The following is a quick example of their usage.
+      Again, we’ll dive deeper into their usage
+      in a moment. </li>
+    <li><b>Attribute Directives</b> - The final form is an attribute directive.
+      An attribute directive will change the
+      look and feel or behavior of an element. Examples of attribute directives
+      are <code>ngModel</code>, <code>ngClass</code>,
+      and <code>ngStyle</code>. We cover ngModel in a separate video when we
+      explain two-way data-binding. Here, you’ll
+      see usage of ngClass.</li>
+  </ul>
+  <hr>
+  <div class="custom-container">
+    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample"
+      role="button" aria-expanded="false" aria-controls="collapseExample"
+      style="margin: 5px;">
+      Link with href
+    </a>
+    <button class="btn btn-primary" type="button" data-toggle="collapse"
+      data-target="#collapseExample" aria-expanded="false"
+      aria-controls="collapseExample" style="margin: 5px;">
+      Button with data-target
+    </button>
+  </div>
+  <div class="collapse" id="collapseExample">
+    <div class="card card-body">
+      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry
+      richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes
+      anderson cred nesciunt sapiente ea proident.
+    </div>
+  </div>
+  <hr>
+  <p>Directives Practice Examples:</p>
+  <ul *ngFor="let e of employees" [ngSwitch]="e.role">
+    <li *ngSwitchCase="'Trainer'" class="text-warning">
+      {{e.name}}
+    </li>
+    <li *ngSwitchCase="'Associate'" class="text-success">
+      {{e.role}}, {{e.name}}
+    </li>
+  </ul>
+</div>
