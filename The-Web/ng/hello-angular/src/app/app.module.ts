@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { DataBindingComponent } from './components/data-binding/data-binding.component';
 import { DirectivesComponent } from './components/directives/directives.component';
+import { SquarerootPipe } from './pipes/squareroot.pipe';
+import { AppRoutingModule } from './app-routing.module';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 // DECORATORS
 @NgModule({// indicates that the following class is an angular module
@@ -17,7 +20,9 @@ import { DirectivesComponent } from './components/directives/directives.componen
     AppComponent,
     HomeComponent,
     DataBindingComponent,
-    DirectivesComponent
+    DirectivesComponent,
+    SquarerootPipe,
+    NavbarComponent
   ], /* , exports: []
     would be classes that need to be accessible to the components
     of other modules. However, we're not making a multi-module
@@ -28,7 +33,8 @@ import { DirectivesComponent } from './components/directives/directives.componen
      * by classes within this current module
     */
     BrowserModule,
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
 
   providers: [
