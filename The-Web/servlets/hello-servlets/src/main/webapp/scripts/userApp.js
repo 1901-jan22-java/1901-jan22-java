@@ -18,12 +18,27 @@ function loadLoginView(){
 function logIn(){
     var user = {
         username: $('#username').val(), 
-        password: $('#password').val()};
+        password: $('#pw').val()};
     var json = JSON.stringify(user);
 
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){
-        //define functionality later 
+        if(xhr.readyState == 4){
+            if(xhr.status == 200){
+                //logged in successfully
+                console.log(xhr.responseText);
+                var user = JSON.parse(xhr.responseText);
+                alert(`Welcome, ${user.username}!!!!`);
+            }
+            else if(xhr.status == 418){
+                //encountered known problem (wrong password/user not in system)
+                console.log(xhr.responseText);
+                alert("Wrong login!");
+            }
+            else{
+                //some other error, likely send to error page
+            }
+        }
     }
     xhr.open("POST", "login");
     xhr.setRequestHeader("Content-type", "application/json");
