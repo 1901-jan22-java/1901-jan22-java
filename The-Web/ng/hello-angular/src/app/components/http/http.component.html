@@ -22,3 +22,18 @@ Get all users:
 <ol>
   <li *ngFor="let u of users">{{ u.firstName}} {{u.lastName}} </li>
 </ol>
+
+<br>
+Get User by Username!
+<br>
+<input type="text" [(ngModel)]="unameInput">
+<button (click)="getUser()">Find User!</button>
+
+<div *ngIf="user != null">
+  <li>User Id: {{user.id}}</li>
+  <li>First Name: {{user.firstName}}</li>
+  <li>Last Name: {{user.lastName}} </li>
+</div>
+<div class="alert alert-danger" role="alert" *ngIf="notFound">
+    No User found!
+  </div>
