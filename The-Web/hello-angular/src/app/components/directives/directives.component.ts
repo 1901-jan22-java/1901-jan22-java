@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-directives',
@@ -9,21 +10,24 @@ export class DirectivesComponent implements OnInit {
 
   showIf = true;
   numArr = [1, 5, 6, 9, 192, 1841984];
+  placeholder = 0;
+  buttonClass = 'btn btn-warning';
+  class = ['primary', 'secondary', 'warning', 'danger', 'light', 'dark'];
   employees = [
     {
-      name: 'Genesis',
+      name: 'Genesis1',
       role: 'Trainer'
     },
     {
-      name: 'Genesis',
+      name: 'Genesis2',
       role: 'Trainer'
     },
     {
-      name: 'Genesis',
+      name: 'Genesis3',
       role: 'Trainer'
     },
     {
-      name: 'Genesis',
+      name: 'Genesis4',
       role: 'Trainer'
     },
     {
@@ -39,5 +43,8 @@ export class DirectivesComponent implements OnInit {
 
   toggleIf(){
     this.showIf = !this.showIf;
+    this.placeholder++;
+    this.buttonClass = `btn btn-${this.class[this.placeholder % 6]}`;
   }
+
 }

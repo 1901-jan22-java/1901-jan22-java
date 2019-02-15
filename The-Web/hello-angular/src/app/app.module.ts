@@ -3,19 +3,25 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DirectivesComponent } from './directives/directives.component';
-import { HomeComponent } from './home/home.component';
-import { DataBindingComponent } from './data-binding/data-binding.component';
+import { DirectivesComponent } from './components/directives/directives.component';
+import { HomeComponent } from './components/home/home.component';
+import { DataBindingComponent } from './components/data-binding/data-binding.component';
+import { SquarerootPipe } from './pipes/squareroot.pipe';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     DirectivesComponent,
     HomeComponent,
-    DataBindingComponent
+    DataBindingComponent,
+    SquarerootPipe,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule
   ],
   providers: [],
