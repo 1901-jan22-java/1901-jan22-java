@@ -11,11 +11,21 @@ that typically renderHTML code or provide additional functionality</h6>
 </ul>
 
 <hr>
-<h5>Demonstrating Structural Directives</h5>
-<button class="btn btn-warning" (click)="toggleIf()">Test *ngIf</button>
+<h5>Demonstrating Structural and Attribute Directives</h5>
+<button [ngClass]="buttonClass" (click)="toggleIf()">Test *ngIf</button>
 <div *ngIf="showIf">Using ngIf!!!!</div>
 <br>
 Check out *ngFor with this list! <br>
 <ul>
   <li *ngFor="let n of numArr">number is: {{n}}</li>
+</ul>
+
+<br> 
+Display every employee in my list of employees
+<br>
+<ul *ngFor="let e of employees" [ngSwitch]="e.role">
+  <li *ngSwitchCase="'Trainer'" class="text-warning">
+        {{e.name}}</li>
+  <li *ngSwitchCase="'Associate'" class="text-success">
+      {{e.role}}, {{e.name}}</li>
 </ul>
