@@ -1,0 +1,49 @@
+<div class="jumbotron">
+  <h1>Understanding HTTP requests with Angular</h1>
+  <br>
+  <i>Most front-end applications communicate with backend
+    services over HTTP. One common approach to asynchronous
+    requests and responses with Angular is to use Observables 
+    and the HttpClientModule </i>
+<br><hr><br>
+
+<h3>So what are <a href="https://developer.telerik.com/topics/web-development/introduction-observables-angular-developers/">Observables</a>?</h3>
+<br>
+Obserables are arrays whose items arrive asynchronously over time. Obserables
+help you manage asynchronous data, such as data coming from a backend service. Obserables are
+used within Angular iself, including its event system and http client service. To use observables, Angular 
+uses a third-party library called <a href="https://www.learnrxjs.io/">Reactive Extensions (RxJs)</a>.
+</div>
+
+<hr>
+<br>
+<h3>Demo</h3>
+Get all users:
+<ol>
+  <li *ngFor="let u of users">{{ u.firstName}} {{u.lastName}} </li>
+</ol>
+
+<br>
+Get User by Username!
+<br>
+<input type="text" [(ngModel)]="unameInput" class="form-control col-4">
+<button (click)="getUser()">Find User!</button>
+
+<div *ngIf="user != null">
+  <li>User Id: {{user.id}}</li>
+  <li>First Name: {{user.firstName}}</li>
+  <li>Last Name: {{user.lastName}} </li>
+</div>
+<div class="alert alert-danger" role="alert" *ngIf="notFound">
+    No User found!
+  </div>
+
+  <br>
+  <hr>
+  Add user!
+  <br>
+  <input type="text" placeholder="Username" [(ngModel)]="username" class="form-control col-4">
+  <input type="password" placeholder="Password" [(ngModel)]="pw" class="form-control col-4">
+  <input type="text" placeholder="First Name" [(ngModel)]="fn" class="form-control col-4">
+  <input type="text" placeholder="Last Name" [(ngModel)]="ln" class="form-control col-4">
+<button (click)="addUser()">Add!</button>
