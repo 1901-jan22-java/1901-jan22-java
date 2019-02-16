@@ -10,7 +10,7 @@ export class DataBindingComponent implements OnInit {
   bool = true;
   count = 0;
   color = 0x00000;
-  colorProp = '#000000';
+  colorProp = '#FFFFFF';
   currentTime;
   username = "Username";
 
@@ -25,7 +25,7 @@ export class DataBindingComponent implements OnInit {
   }
 
   changeColor() {
-    this.color = this.color + 0x000010;
+    this.color--;
     this.colorProp = '#' + this.color;
     return this.colorProp;
   }

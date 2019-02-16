@@ -1,0 +1,19 @@
+<h3>Demo</h3>
+Get all users: 
+<ol>
+  <li *ngFor="let u of users">{{ u.firstname }} {{ u.lastname }}</li>
+</ol>
+
+<input type="text" id="getUser" [(ngModel)]="username" placeholder="Username">
+<button class="btn btn-dark" id="btn" (click)="getUser()" >Get User</button>
+{{ result.firstname }} {{ result.lastname }} 
+
+<br>
+<hr>
+Add User!
+<br>
+<input type="text" [(ngModel)]="un" class="form-control col-3" placeholder="Username">
+<input type="text" [(ngModel)]="pw" class="form-control col-5" placeholder="Password">
+<input type="text" [(ngModel)]="fn" class="form-control col-9" placeholder="First Name">
+<input type="text" [(ngModel)]="ln" class="form-control col-2" placeholder="Last Name">
+<button class="btn btn-warning" (click)="addUser()">Add User</button>

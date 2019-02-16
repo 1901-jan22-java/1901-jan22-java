@@ -9,14 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.apache.log4j.Logger;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.users.User;
 
 @WebServlet("/home")
 public class HomeServlet extends HttpServlet {
-	UserService service = new UserService();
 	private static Logger log = Logger.getLogger(HomeServlet.class);
 	
 	@Override

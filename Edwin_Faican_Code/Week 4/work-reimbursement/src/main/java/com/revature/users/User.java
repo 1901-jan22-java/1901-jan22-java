@@ -3,18 +3,19 @@ package com.revature.users;
 public class User {
 	private int userId;
 	private String username;
-	private int password;
+	private String pass;
+	private int aPassword;
 	private String firstname;
 	private String lastname;
 	private String email;
-	private int role;
+	private String role;
 
 	public User() {}
 
-	public User(int userId, String username, String password, String firstname, String lastname, String email, int role) {
+	public User(int userId, String username, String pass, String firstname, String lastname, String email, String role) {
 		this.userId = userId;
 		this.username = username;
-		this.password = generatePassword(password);
+		this.aPassword = generatePassword(pass);
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.email = email;
@@ -49,13 +50,6 @@ public class User {
 		this.username = username;
 	}
 
-	public int getPassword() {
-		return password;
-	}
-
-	public void setPassword(int password) {
-		this.password = password;
-	}
 
 	public String getFirstname() {
 		return firstname;
@@ -81,16 +75,38 @@ public class User {
 		this.email = email;
 	}
 
-	public int getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(int role) {
+	public void setRole(String role) {
 		this.role = role;
-	};
+	}
+	
+	public String getPass() {
+		return pass;
+	}
+
+	public void setPass(String pass) {
+		this.pass = pass;
+	}
+
 	
 	public String toString() {
 		return "User: " + firstname + " "  + lastname;
 	}
 
+	public int getaPassword() {
+		return aPassword;
+	}
+
+	public void setaPassword(int aPassword) {
+		this.aPassword = aPassword;
+	}
+	
+	public void setaPassword(String pass) {
+		this.aPassword = generatePassword(pass);
+	}
+
+	
 }

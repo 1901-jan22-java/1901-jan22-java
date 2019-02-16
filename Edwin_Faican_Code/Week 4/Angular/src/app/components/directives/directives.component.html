@@ -1,0 +1,15 @@
+<h5>Demonstrating Structural Directives</h5>
+<button [ngClass]=buttonClass (click)="toggleIf()">Test *ngIf</button>
+<div *ngIf="showIf" >Using ngIf!!!</div>
+<br>
+<hr>
+Check out *ngFor with this list!<br>
+<ul>
+  <li *ngFor="let n of numArr">Number is: {{ n }}</li>
+</ul>
+<hr>
+This is for the object array with various properties.
+<ul *ngFor="let employee of employees" [ngSwitch]="employee.role">
+  <li *ngSwitchCase="'person'" class="text-warning">{{ employee.name }}</li>
+  <li *ngSwitchCase="'awesome'" class="text-success">{{ employee.role }}, {{ employee.name }}</li>
+</ul>
