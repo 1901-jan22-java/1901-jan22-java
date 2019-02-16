@@ -9,6 +9,10 @@ export class DirectivesComponent implements OnInit {
 
   showIf = true;
   numArr = [1, 5, 6, 9, 192, 1841984];
+  placeholder = 0;
+  buttonClass = 'btn btn-warning';
+  class = ['primary', 'secondary', 'warning', 'danger',
+  'light', 'dark'];
   employees = [
     {
       name: 'Genesis',
@@ -64,6 +68,8 @@ export class DirectivesComponent implements OnInit {
 
   toggleIf() {
     this.showIf = !this.showIf;
+    this.placeholder++;
+    this.buttonClass =  `btn btn-${this.class[this.placeholder % 6]}`;
   }
 
 }
