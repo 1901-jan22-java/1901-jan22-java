@@ -23,6 +23,7 @@ function loadRegisterView(){
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4 && xhr.status == 200){
             $('#view').html(xhr.responseText);
+        	$('#addUser').on('click', addUser);
             $('#goToLogin').on('click', loadLoginView);
         }   
     }
@@ -56,7 +57,52 @@ function logIn(){
     xhr.open("POST", "login");
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.send(json);
-
 }
 
+function addUser(){
+	console.log("clicked");
+	if($('#role').attr('checked'))
+	{
+		var user = {
+	        username: $('#username').val(), 
+	        password: $('#password').val(),
+	        fn: $('#fn').val(),
+	        ln: $('#ln').val(),
+	        email: $('#email').val(),
+	        role: 1
+		};
+	}
+	else
+	{
+		var user = {
+		        username: $('#username').val(), 
+		        password: $('#pw').val(),
+		        fn: $('#fn').val(),
+		        ln: $('#ln').val(),
+		        email: $('#email').val(),
+		        role: 0
+			};
+	}
+	    var json = JSON.stringify(user);
 
+	    var xhr = new XMLHttpRequest();
+	    xhr.onreadystatechange = function(){
+	        if(xhr.readyState == 4){
+	            if(xhr.status == 200){
+	                //logged in successfully
+	            	alert("yayayayayyay");
+	            }
+	            else if(xhr.status == 409){
+	                //
+	                console.log(xhr.responseText);
+	                alert("nononononoo");
+	            }
+	            else{
+	                //some other error, likely send to error page
+	            }
+	        }
+	    }
+	    xhr.open("POST", "registerUser");
+	    xhr.setRequestHeader("Content-type", "application/json");
+	    xhr.send(json);
+}

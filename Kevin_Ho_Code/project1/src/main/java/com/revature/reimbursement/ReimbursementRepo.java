@@ -10,13 +10,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
-
 import com.revature.user.User;
 import com.revature.util.ConnectionFactory;
 
 public class ReimbursementRepo {
-	final static Logger log = Logger.getLogger(ReimbursementRepo.class);
 	public List<Reimbursement> getReimbursements(User user)
 	{
 		List<Reimbursement> tmp = new ArrayList<Reimbursement>();
@@ -42,7 +39,6 @@ public class ReimbursementRepo {
 			}
 			
 		} catch (SQLException e) {
-			log.debug("Sql failed");
 			e.printStackTrace();
 		}
 		
@@ -73,7 +69,6 @@ public class ReimbursementRepo {
 			}
 			
 		} catch (SQLException e) {
-			log.debug("sql failed");
 			e.printStackTrace();
 		}
 		
@@ -105,7 +100,6 @@ public class ReimbursementRepo {
 			}
 			
 		} catch (SQLException e) {
-			log.debug("sql failed");
 			e.printStackTrace();
 		}
 		
@@ -150,7 +144,6 @@ public class ReimbursementRepo {
 			}
 			
 		} catch (SQLException e) {
-			log.debug("add reimbursement Failed");
 			e.printStackTrace();
 		}
 		return reimb;
@@ -171,7 +164,6 @@ public class ReimbursementRepo {
 			
 			cs.execute();
 		} catch (SQLException e) {
-			log.debug("add reimbursement Failed");
 			e.printStackTrace();
 		}
 		

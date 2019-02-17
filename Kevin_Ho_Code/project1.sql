@@ -8,17 +8,14 @@ create table ers_reimbursement_status(
 reimb_status_id number primary key,
 reimb_status varchar2(10) not null
 );
-
 create table ers_reimbursement_type(
 reimb_type_id number primary key,
 reimb_type varchar2(10) not null
 );
-
 create table ers_user_roles(
 ers_user_role_id number primary key,
 user_role varchar2(10) not null
 );
-
 create table ers_users(
 ers_users_id number primary key,
 ers_username varchar2(50) unique, 
@@ -29,7 +26,6 @@ user_email varchar2(150) unique,
 user_role_id number,
 constraint user_roles_fk foreign key (user_role_id) references ers_user_roles(ers_user_role_id)
 );
-
 create table ers_reimbursement(
 reimb_id number primary key,
 reimb_amount number not null,
@@ -46,17 +42,14 @@ constraint ers_reimbursement_status_fk foreign key (reimb_status_id) references 
 constraint ers_reimbursement_type_fk foreign key (reimb_type_id) references ers_reimbursement_type(reimb_type_id)
 );
 
-
-create sequence ers_reimbursement_status_seq;
-CREATE OR REPLACE TRIGGER ers_status_trigger
-BEFORE INSERT ON ers_reimbursement_status
-FOR EACH ROW
-BEGIN
-    SELECT ers_reimbursement_status_seq.nextval into :new.reimb_status_id FROM dual;
-END;
-/
+drop sequence ers_reimbursement_type_seq;
+drop sequence ers_users_seq;
+drop sequence ers_reimbursement_seq;
 
 create sequence ers_reimbursement_type_seq;
+create sequence ers_users_seq;
+create sequence ers_reimbursement_seq;
+
 CREATE OR REPLACE TRIGGER ers_type_trigger
 BEFORE INSERT ON ers_reimbursement_type
 FOR EACH ROW
@@ -64,17 +57,6 @@ BEGIN
     SELECT ers_reimbursement_type_seq.nextval into :new.reimb_type_id FROM dual;
 END;
 /
-
-create sequence ers_user_roles_seq;
-CREATE OR REPLACE TRIGGER ers_user_roles_trigger
-BEFORE INSERT ON ers_user_roles
-FOR EACH ROW
-BEGIN
-    SELECT ers_user_roles_seq.nextval into :new.ers_user_role_id FROM dual;
-END;
-/
-
-create sequence ers_users_seq;
 CREATE OR REPLACE TRIGGER ers_users_trigger
 BEFORE INSERT ON ers_users
 FOR EACH ROW
@@ -82,8 +64,6 @@ BEGIN
     SELECT ers_users_seq.nextval into :new.ers_users_id FROM dual;
 END;
 /
-
-create sequence ers_reimbursement_seq;
 CREATE OR REPLACE TRIGGER ers_reimbursement_trigger
 BEFORE INSERT ON ers_reimbursement
 FOR EACH ROW
@@ -91,7 +71,6 @@ BEGIN
     SELECT ers_reimbursement_seq.nextval into :new.reimb_id FROM dual;
 END;
 /
-
 CREATE OR REPLACE PROCEDURE resolve (
 r_id            in number,
 new_status      in number,
@@ -108,9 +87,27 @@ BEGIN
 END;
 /
 
+select * from ers_reimbursement_status;
+select * from ers_reimbursement_type;
+select * from ers_user_roles;
 select * from ers_users;
+select * from ers_reimbursement;
 
+insert into ers_reimbursement_status values(1, 'Pending');
+insert into ers_reimbursement_status values(2, 'Approved');
+insert into ers_reimbursement_status values(3, 'Denied');
+insert into ers_reimbursement_type(reimb_type) values('Lodging');
+insert into ers_reimbursement_type(reimb_type) values('Food');
+insert into ers_reimbursement_type(reimb_type) values('travel');
 insert into ers_user_roles values (0, 'employee');
 insert into ers_user_roles values (1, 'manager');
+insert into ers_users (ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id) 
+                values ('kevinuser', 'kevinpass', 'kevin', 'ho', 'kevho48@gmail.com', 0);
+insert into ers_users (ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id) 
+                values ('kevinuser2', 'kevinpass2', 'kevin', 'ho', 'kevho482@gmail.com', 1);
+insert into ers_reimbursement(reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id) 
+                        values(1000, '17-FEB-2019', '18-FEB-2019', 'Hi there', 1, 2, 2, 1);
+insert into ers_reimbursement(reimb_amount, reimb_submitted, reimb_description, reimb_author, reimb_status_id, reimb_type_id) 
+                        values(1000, '17-FEB-2019', 'Hi there', 1, 1, 1);
 
 commit;
