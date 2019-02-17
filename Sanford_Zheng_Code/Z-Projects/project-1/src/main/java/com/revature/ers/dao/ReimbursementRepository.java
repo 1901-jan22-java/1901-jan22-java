@@ -11,11 +11,11 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.jdbc.utils.ConnectionFactory;
-import com.revature.ers.dao.pojos.Reimbursement;
+import com.revature.ers.dao.pojos.ReimbursementDAO;
 import com.revature.ers.interfaces.Repository;
 import com.revature.ers.services.Receipt;
 
-public class ReimbursementRepository implements Repository<Reimbursement> {
+public class ReimbursementRepository implements Repository<ReimbursementDAO> {
 
 	private static Logger log = Logger.getLogger(ReimbursementRepository.class);
 	
@@ -24,7 +24,7 @@ public class ReimbursementRepository implements Repository<Reimbursement> {
 	}
 
 	@Override
-	public boolean create(Reimbursement newItem) {
+	public boolean create(ReimbursementDAO newItem) {
 		
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			
@@ -44,8 +44,8 @@ public class ReimbursementRepository implements Repository<Reimbursement> {
 	}
 
 	@Override
-	public Reimbursement read(Integer itemId) {
-		Reimbursement res = null;
+	public ReimbursementDAO read(Integer itemId) {
+		ReimbursementDAO res = null;
 		
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			
@@ -66,7 +66,7 @@ public class ReimbursementRepository implements Repository<Reimbursement> {
 				Integer status_id = rs.getInt("reimb_status_id");
 				Integer type_id = rs.getInt("reimb_type_id");
 				
-				res = new Reimbursement( id, amount, submitted, resolved, description,
+				res = new ReimbursementDAO( id, amount, submitted, resolved, description,
 						receipt, author_id, resolver_id, status_id, type_id );
 			}
 			
@@ -78,8 +78,8 @@ public class ReimbursementRepository implements Repository<Reimbursement> {
 	}
 
 	@Override
-	public List<Reimbursement> readAll() {
-		List<Reimbursement> res = new ArrayList<>();
+	public List<ReimbursementDAO> readAll() {
+		List<ReimbursementDAO> res = new ArrayList<>();
 		
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			
@@ -99,7 +99,7 @@ public class ReimbursementRepository implements Repository<Reimbursement> {
 				Integer status_id = rs.getInt("reimb_status_id");
 				Integer type_id = rs.getInt("reimb_type_id");
 				
-				res.add(new Reimbursement( id, amount, submitted, resolved, description,
+				res.add(new ReimbursementDAO( id, amount, submitted, resolved, description,
 						receipt, author_id, resolver_id, status_id, type_id ));
 			}
 			
@@ -111,14 +111,14 @@ public class ReimbursementRepository implements Repository<Reimbursement> {
 	}
 
 	@Override
-	public Reimbursement update(Integer itemId, Reimbursement newItem) {
+	public ReimbursementDAO update(Integer itemId, ReimbursementDAO newItem) {
 		// TODO Auto-generated method stub
 		
 		return null;
 	}
 
 	@Override
-	public boolean delete(Reimbursement item) {
+	public boolean delete(ReimbursementDAO item) {
 		// TODO Auto-generated method stub
 		return false;
 	}

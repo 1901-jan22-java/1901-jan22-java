@@ -2,7 +2,8 @@ package com.revature.ers.dao.pojos;
 
 import java.io.Serializable;
 
-public class User implements Serializable {
+public class UserDAO implements Serializable {
+	
 	private Integer user_id;
 	private String username;
 	private String password;
@@ -11,11 +12,11 @@ public class User implements Serializable {
 	private String email;
 	private Integer role_id;
 	
-	public User() {
+	public UserDAO() {
 		super();
 	}
 
-	public User(Integer user_id, String username, String password, String first_name, String last_name, String email,
+	public UserDAO(Integer user_id, String username, String password, String first_name, String last_name, String email,
 			Integer role_id) {
 		super();
 		this.user_id = user_id;

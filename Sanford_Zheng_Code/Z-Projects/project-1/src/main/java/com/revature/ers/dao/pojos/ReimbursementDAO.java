@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 import com.revature.ers.services.Receipt;
 
-public class Reimbursement implements Serializable {
+public class ReimbursementDAO implements Serializable {
 	
 	private Integer reimb_id;
 	private Integer amount;
@@ -19,11 +19,11 @@ public class Reimbursement implements Serializable {
 	private Integer reimb_status_id;
 	private Integer reimb_type_id;
 	
-	public Reimbursement() {
+	public ReimbursementDAO() {
 		super();
 	}
 
-	public Reimbursement(Integer reimb_id, Integer amount, Date submitted, Date resolved,
+	public ReimbursementDAO(Integer reimb_id, Integer amount, Date submitted, Date resolved,
 			String reimb_description, Receipt receipt, Integer author_id, Integer resovler_id, Integer reimb_status_id,
 			Integer reimb_type_id) {
 		super();

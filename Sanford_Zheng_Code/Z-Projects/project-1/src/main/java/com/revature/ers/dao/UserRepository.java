@@ -10,10 +10,10 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.jdbc.utils.ConnectionFactory;
-import com.revature.ers.dao.pojos.User;
+import com.revature.ers.dao.pojos.UserDAO;
 import com.revature.ers.interfaces.Repository;
 
-public class UserRepository implements Repository<User> {
+public class UserRepository implements Repository<UserDAO> {
 
 	private static Logger log = Logger.getLogger(UserRepository.class);
 
@@ -22,15 +22,15 @@ public class UserRepository implements Repository<User> {
 	}
 
 	@Override
-	public boolean create(User newItem) {
+	public boolean create(UserDAO newItem) {
 		// TODO Auto-generated method stub
 
 		return false;
 	}
 
 	@Override
-	public User read(Integer itemId) {
-		User res = null;
+	public UserDAO read(Integer itemId) {
+		UserDAO res = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -48,7 +48,7 @@ public class UserRepository implements Repository<User> {
 				String email = rs.getString("email");
 				Integer role_id = rs.getInt("role_id");
 
-				res = new User(id, username, password, first_name, last_name, email, role_id);
+				res = new UserDAO(id, username, password, first_name, last_name, email, role_id);
 			}
 
 		} catch (SQLException e) {
@@ -59,8 +59,8 @@ public class UserRepository implements Repository<User> {
 	}
 
 	@Override
-	public List<User> readAll() {
-		List<User> res = new ArrayList<>();
+	public List<UserDAO> readAll() {
+		List<UserDAO> res = new ArrayList<>();
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -77,7 +77,7 @@ public class UserRepository implements Repository<User> {
 				String email = rs.getString("email");
 				Integer role_id = rs.getInt("role_id");
 
-				res.add(new User(id, username, password, first_name, last_name, email, role_id));
+				res.add(new UserDAO(id, username, password, first_name, last_name, email, role_id));
 			}
 
 		} catch (SQLException e) {
@@ -88,13 +88,13 @@ public class UserRepository implements Repository<User> {
 	}
 
 	@Override
-	public User update(Integer itemId, User newItem) {
+	public UserDAO update(Integer itemId, UserDAO newItem) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean delete(User item) {
+	public boolean delete(UserDAO item) {
 		// TODO Auto-generated method stub
 
 		return false;
