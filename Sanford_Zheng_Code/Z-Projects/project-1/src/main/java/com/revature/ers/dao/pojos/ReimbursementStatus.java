@@ -3,6 +3,7 @@ package com.revature.ers.dao.pojos;
 import java.io.Serializable;
 
 public class ReimbursementStatus implements Serializable {
+	
 	private Integer status_id;
 	private String reimb_status;
 	
@@ -28,6 +29,5 @@ public class ReimbursementStatus implements Serializable {
 	public void setReimb_status(String reimb_status) {
 		this.reimb_status = reimb_status;
 	}
-	
 	
 }

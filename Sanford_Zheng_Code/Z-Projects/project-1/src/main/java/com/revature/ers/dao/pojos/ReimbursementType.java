@@ -3,6 +3,7 @@ package com.revature.ers.dao.pojos;
 import java.io.Serializable;
 
 public class ReimbursementType implements Serializable {
+	
 	private Integer type_id;
 	private String reimb_type;
 	public ReimbursementType() {

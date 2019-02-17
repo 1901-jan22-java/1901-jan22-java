@@ -1,5 +1,5 @@
 package com.revature.ers.dto;
 
-public class ReimbursementDTO {
+public class UserDataTransfer {
 
 }

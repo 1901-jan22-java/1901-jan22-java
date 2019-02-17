@@ -6,6 +6,12 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.SQLException;
 
+/**
+ * I have no idea what to do here...
+ * 
+ * @author Sanford
+ *
+ */
 public class Receipt implements Serializable, Blob {
 	
 	private String details;

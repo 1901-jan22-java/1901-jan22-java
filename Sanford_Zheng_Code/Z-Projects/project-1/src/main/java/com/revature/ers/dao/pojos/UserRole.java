@@ -3,6 +3,7 @@ package com.revature.ers.dao.pojos;
 import java.io.Serializable;
 
 public class UserRole implements Serializable {
+	
 	private Integer role_id;
 	private String	user_role;
 	public UserRole() {
@@ -13,6 +14,7 @@ public class UserRole implements Serializable {
 		this.role_id = role_id;
 		this.user_role = user_role;
 	}
+	
 	public Integer getRole_id() {
 		return role_id;
 	}
@@ -25,4 +27,5 @@ public class UserRole implements Serializable {
 	public void setUser_role(String user_role) {
 		this.user_role = user_role;
 	} 
+	
 }

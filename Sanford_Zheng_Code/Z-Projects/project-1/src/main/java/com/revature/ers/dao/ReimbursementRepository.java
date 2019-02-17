@@ -18,58 +18,68 @@ import com.revature.ers.services.Receipt;
 public class ReimbursementRepository implements Repository<ReimbursementDAO> {
 
 	private static Logger log = Logger.getLogger(ReimbursementRepository.class);
-	
+
 	static {
 		log.info("ReimbursementRepository Class Instantiated.");
 	}
 
 	@Override
 	public boolean create(ReimbursementDAO newItem) {
-		
+
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			
-			String sql = "insert into ers_reimbursement() values()";
+
+			String sql = "insert into ers_reimbursement(amount, submitted, resolved, "
+					+ "reimb_description, receipt, author_id, resolver_id, reimb_status_id, "
+					+ "reimb_type_id) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			
-			ResultSet rs = ps.executeQuery();
-			while(rs.next()) {
-			}
-			
+			ps.setInt(1, newItem.getAmount());
+			ps.setDate(2, newItem.getSubmitted());
+			ps.setDate(3, newItem.getResolved());
+			ps.setString(4, newItem.getReimb_description());
+			ps.setBlob(5, newItem.getReceipt());
+			ps.setInt(6, newItem.getAuthor_id());
+			ps.setInt(7, newItem.getResolver_id());
+			ps.setInt(8, newItem.getReimb_status_id());
+			ps.setInt(9, newItem.getReimb_type_id());
+
+			if (ps.executeUpdate() <= 0)
+				return false;
+
 		} catch (SQLException e) {
 			log.error("SQLException in ReimbursementRepository.readAll()", e);
 			return false;
 		}
-		
+
 		return true;
 	}
 
 	@Override
 	public ReimbursementDAO read(Integer itemId) {
 		ReimbursementDAO res = null;
-		
+
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			
+
 			String sql = "select * from ers_reimbursement where reimb_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, itemId);
-			
+
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				Integer id = rs.getInt("reimb_id");
 				Integer amount = rs.getInt("amount");
 				Date submitted = rs.getDate("submitted");
 				Date resolved = rs.getDate("resolved");
 				String description = rs.getString("reimb_description");
-				Receipt receipt = (Receipt)rs.getBlob("receipt");
+				Receipt receipt = (Receipt) rs.getBlob("receipt");
 				Integer author_id = rs.getInt("author_id");
 				Integer resolver_id = rs.getInt("resolver_id");
 				Integer status_id = rs.getInt("reimb_status_id");
 				Integer type_id = rs.getInt("reimb_type_id");
-				
-				res = new ReimbursementDAO( id, amount, submitted, resolved, description,
-						receipt, author_id, resolver_id, status_id, type_id );
+
+				res = new ReimbursementDAO(id, amount, submitted, resolved, description, receipt, author_id,
+						resolver_id, status_id, type_id);
 			}
-			
+
 		} catch (SQLException e) {
 			log.error("SQLException in ReimbursementRepository.readAll()", e);
 		}
@@ -80,29 +90,29 @@ public class ReimbursementRepository implements Repository<ReimbursementDAO> {
 	@Override
 	public List<ReimbursementDAO> readAll() {
 		List<ReimbursementDAO> res = new ArrayList<>();
-		
+
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			
+
 			String sql = "select * from ers_reimbursement";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			
+
 			ResultSet rs = ps.executeQuery();
-			while(rs.next()) {
+			while (rs.next()) {
 				Integer id = rs.getInt("reimb_id");
 				Integer amount = rs.getInt("amount");
 				Date submitted = rs.getDate("submitted");
 				Date resolved = rs.getDate("resolved");
 				String description = rs.getString("reimb_description");
-				Receipt receipt = (Receipt)rs.getBlob("receipt");
+				Receipt receipt = (Receipt) rs.getBlob("receipt");
 				Integer author_id = rs.getInt("author_id");
 				Integer resolver_id = rs.getInt("resolver_id");
 				Integer status_id = rs.getInt("reimb_status_id");
 				Integer type_id = rs.getInt("reimb_type_id");
-				
-				res.add(new ReimbursementDAO( id, amount, submitted, resolved, description,
-						receipt, author_id, resolver_id, status_id, type_id ));
+
+				res.add(new ReimbursementDAO(id, amount, submitted, resolved, description, receipt, author_id,
+						resolver_id, status_id, type_id));
 			}
-			
+
 		} catch (SQLException e) {
 			log.error("SQLException in ReimbursementRepository.readAll()", e);
 		}
@@ -113,7 +123,7 @@ public class ReimbursementRepository implements Repository<ReimbursementDAO> {
 	@Override
 	public ReimbursementDAO update(Integer itemId, ReimbursementDAO newItem) {
 		// TODO Auto-generated method stub
-		
+
 		return null;
 	}
 
@@ -122,5 +132,5 @@ public class ReimbursementRepository implements Repository<ReimbursementDAO> {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 }

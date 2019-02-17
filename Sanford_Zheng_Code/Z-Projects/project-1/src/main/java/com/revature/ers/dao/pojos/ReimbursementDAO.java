@@ -2,7 +2,6 @@ package com.revature.ers.dao.pojos;
 
 import java.io.Serializable;
 import java.sql.Date;
-import java.time.LocalDate;
 
 import com.revature.ers.services.Receipt;
 
@@ -15,7 +14,7 @@ public class ReimbursementDAO implements Serializable {
 	private String reimb_description;
 	private Receipt receipt;
 	private Integer author_id;
-	private Integer resovler_id;
+	private Integer resolver_id;
 	private Integer reimb_status_id;
 	private Integer reimb_type_id;
 	
@@ -24,7 +23,7 @@ public class ReimbursementDAO implements Serializable {
 	}
 
 	public ReimbursementDAO(Integer reimb_id, Integer amount, Date submitted, Date resolved,
-			String reimb_description, Receipt receipt, Integer author_id, Integer resovler_id, Integer reimb_status_id,
+			String reimb_description, Receipt receipt, Integer author_id, Integer resolver_id, Integer reimb_status_id,
 			Integer reimb_type_id) {
 		super();
 		this.reimb_id = reimb_id;
@@ -34,7 +33,7 @@ public class ReimbursementDAO implements Serializable {
 		this.reimb_description = reimb_description;
 		this.receipt = receipt;
 		this.author_id = author_id;
-		this.resovler_id = resovler_id;
+		this.resolver_id = resolver_id;
 		this.reimb_status_id = reimb_status_id;
 		this.reimb_type_id = reimb_type_id;
 	}
@@ -95,12 +94,12 @@ public class ReimbursementDAO implements Serializable {
 		this.author_id = author_id;
 	}
 
-	public Integer getResovler_id() {
-		return resovler_id;
+	public Integer getResolver_id() {
+		return resolver_id;
 	}
 
-	public void setResovler_id(Integer resovler_id) {
-		this.resovler_id = resovler_id;
+	public void setResolver_id(Integer resolver_id) {
+		this.resolver_id = resolver_id;
 	}
 
 	public Integer getReimb_status_id() {

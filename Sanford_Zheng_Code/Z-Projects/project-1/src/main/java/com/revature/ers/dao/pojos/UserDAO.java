@@ -84,5 +84,4 @@ public class UserDAO implements Serializable {
 		this.role_id = role_id;
 	}
 	
-	
 }
