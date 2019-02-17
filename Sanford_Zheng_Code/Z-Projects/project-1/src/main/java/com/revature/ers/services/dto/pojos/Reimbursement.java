@@ -1,4 +1,4 @@
-package com.revature.ers.dto.pojos;
+package com.revature.ers.services.dto.pojos;
 
 import java.sql.Date;
 
@@ -16,4 +16,5 @@ public class Reimbursement {
 	private Integer resovler_id;
 	private Integer reimb_status_id;
 	private Integer reimb_type_id;
+	
 }

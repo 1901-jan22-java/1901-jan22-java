@@ -44,6 +44,7 @@ public class HomeServlet extends HttpServlet{
 			"	<h1>Welcome, "+ user.getUsername() +"</h1>\r\n" + 
 			"	<i>"+user.getData() +"</i>\r\n";
 			List<User> users = service.getAllUser();
+			
 			html += " <h4>User Info List</h4><br> "
 					+ "<table>" + 
 					"        <thead>" + 
@@ -54,14 +55,16 @@ public class HomeServlet extends HttpServlet{
 					"            </tr>" + 
 					"        </thead>" + 
 					"        <tbody>";
-			for(User u : users) {
-				html+=
-					"            <tr>" + 
-					"                <td>" + u.getUsername() + "</td>" + 
+			
+			for (User u : users) {
+				html += "            <tr>" + 
+			"                <td>" + u.getUsername() + "</td>" + 
 					"                <td>"+ u.getPassword() + "</td>" + 
 					"                <td>" + u.getData() + "</td>" + 
-					"            </tr>"; }
-				html +=	"  </tbody>\r\n" + 
+					"            </tr>";
+			}
+			
+			html +=	"  </tbody>\r\n" + 
 					"    </table>";
 
 		

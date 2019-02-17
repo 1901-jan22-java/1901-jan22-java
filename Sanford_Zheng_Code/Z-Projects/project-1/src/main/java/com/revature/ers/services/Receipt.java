@@ -8,10 +8,12 @@ import java.sql.SQLException;
 
 /**
  * I have no idea what to do here...
+ * TODO: Figure it out...
  * 
  * @author Sanford
  *
  */
+@SuppressWarnings("serial")
 public class Receipt implements Serializable, Blob {
 	
 	private String details;

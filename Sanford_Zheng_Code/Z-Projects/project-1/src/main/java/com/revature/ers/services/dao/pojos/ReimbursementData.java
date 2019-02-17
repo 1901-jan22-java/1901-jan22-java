@@ -1,11 +1,13 @@
-package com.revature.ers.dao.pojos;
+package com.revature.ers.services.dao.pojos;
 
 import java.io.Serializable;
 import java.sql.Date;
 
 import com.revature.ers.services.Receipt;
 
-public class ReimbursementDAO implements Serializable {
+public class ReimbursementData implements Serializable {
+	
+	private static final long serialVersionUID = 3307178767541629256L;
 	
 	private Integer reimb_id;
 	private Integer amount;
@@ -18,11 +20,10 @@ public class ReimbursementDAO implements Serializable {
 	private Integer reimb_status_id;
 	private Integer reimb_type_id;
 	
-	public ReimbursementDAO() {
+	public ReimbursementData() {
 		super();
 	}
-
-	public ReimbursementDAO(Integer reimb_id, Integer amount, Date submitted, Date resolved,
+	public ReimbursementData(Integer reimb_id, Integer amount, Date submitted, Date resolved,
 			String reimb_description, Receipt receipt, Integer author_id, Integer resolver_id, Integer reimb_status_id,
 			Integer reimb_type_id) {
 		super();

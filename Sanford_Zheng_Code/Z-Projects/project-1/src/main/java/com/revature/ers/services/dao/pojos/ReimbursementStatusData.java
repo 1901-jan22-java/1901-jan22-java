@@ -1,17 +1,18 @@
-package com.revature.ers.dao.pojos;
+package com.revature.ers.services.dao.pojos;
 
 import java.io.Serializable;
 
-public class ReimbursementStatus implements Serializable {
+public class ReimbursementStatusData implements Serializable {
+	
+	private static final long serialVersionUID = -8619754400352499884L;
 	
 	private Integer status_id;
 	private String reimb_status;
 	
-	public ReimbursementStatus() {
+	public ReimbursementStatusData() {
 		super();
 	}
-	
-	public ReimbursementStatus(Integer status_id, String reimb_status) {
+	public ReimbursementStatusData(Integer status_id, String reimb_status) {
 		super();
 		this.status_id = status_id;
 		this.reimb_status = reimb_status;

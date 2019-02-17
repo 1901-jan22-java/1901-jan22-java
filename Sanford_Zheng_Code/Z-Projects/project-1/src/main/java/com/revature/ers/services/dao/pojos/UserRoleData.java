@@ -1,15 +1,19 @@
-package com.revature.ers.dao.pojos;
+package com.revature.ers.services.dao.pojos;
 
 import java.io.Serializable;
 
-public class UserRole implements Serializable {
+public class UserRoleData implements Serializable {
+	
+	private static final long serialVersionUID = 6108176418976538722L;
 	
 	private Integer role_id;
 	private String	user_role;
-	public UserRole() {
+	
+	public UserRoleData() {
 		super();
 	}
-	public UserRole(Integer role_id, String user_role) {
+	
+	public UserRoleData(Integer role_id, String user_role) {
 		super();
 		this.role_id = role_id;
 		this.user_role = user_role;

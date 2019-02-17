@@ -1,4 +1,4 @@
-package com.revature.ers.dao;
+package com.revature.ers.services.dao;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -11,11 +11,11 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.jdbc.utils.ConnectionFactory;
-import com.revature.ers.dao.pojos.ReimbursementDAO;
 import com.revature.ers.interfaces.Repository;
 import com.revature.ers.services.Receipt;
+import com.revature.ers.services.dao.pojos.ReimbursementData;
 
-public class ReimbursementRepository implements Repository<ReimbursementDAO> {
+public class ReimbursementRepository implements Repository<ReimbursementData> {
 
 	private static Logger log = Logger.getLogger(ReimbursementRepository.class);
 
@@ -24,7 +24,7 @@ public class ReimbursementRepository implements Repository<ReimbursementDAO> {
 	}
 
 	@Override
-	public boolean create(ReimbursementDAO newItem) {
+	public boolean create(ReimbursementData newItem) {
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -54,8 +54,8 @@ public class ReimbursementRepository implements Repository<ReimbursementDAO> {
 	}
 
 	@Override
-	public ReimbursementDAO read(Integer itemId) {
-		ReimbursementDAO res = null;
+	public ReimbursementData read(Integer itemId) {
+		ReimbursementData res = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -76,7 +76,7 @@ public class ReimbursementRepository implements Repository<ReimbursementDAO> {
 				Integer status_id = rs.getInt("reimb_status_id");
 				Integer type_id = rs.getInt("reimb_type_id");
 
-				res = new ReimbursementDAO(id, amount, submitted, resolved, description, receipt, author_id,
+				res = new ReimbursementData(id, amount, submitted, resolved, description, receipt, author_id,
 						resolver_id, status_id, type_id);
 			}
 
@@ -88,8 +88,8 @@ public class ReimbursementRepository implements Repository<ReimbursementDAO> {
 	}
 
 	@Override
-	public List<ReimbursementDAO> readAll() {
-		List<ReimbursementDAO> res = new ArrayList<>();
+	public List<ReimbursementData> readAll() {
+		List<ReimbursementData> res = new ArrayList<>();
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -109,7 +109,7 @@ public class ReimbursementRepository implements Repository<ReimbursementDAO> {
 				Integer status_id = rs.getInt("reimb_status_id");
 				Integer type_id = rs.getInt("reimb_type_id");
 
-				res.add(new ReimbursementDAO(id, amount, submitted, resolved, description, receipt, author_id,
+				res.add(new ReimbursementData(id, amount, submitted, resolved, description, receipt, author_id,
 						resolver_id, status_id, type_id));
 			}
 
@@ -121,14 +121,14 @@ public class ReimbursementRepository implements Repository<ReimbursementDAO> {
 	}
 
 	@Override
-	public ReimbursementDAO update(Integer itemId, ReimbursementDAO newItem) {
+	public ReimbursementData update(Integer itemId, ReimbursementData newItem) {
 		// TODO Auto-generated method stub
 
 		return null;
 	}
 
 	@Override
-	public boolean delete(ReimbursementDAO item) {
+	public boolean delete(ReimbursementData item) {
 		// TODO Auto-generated method stub
 		return false;
 	}

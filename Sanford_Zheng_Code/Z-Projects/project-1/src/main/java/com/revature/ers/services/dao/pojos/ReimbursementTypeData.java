@@ -1,19 +1,23 @@
-package com.revature.ers.dao.pojos;
+package com.revature.ers.services.dao.pojos;
 
 import java.io.Serializable;
 
-public class ReimbursementType implements Serializable {
+public class ReimbursementTypeData implements Serializable {
+	
+	private static final long serialVersionUID = 2282033233090845335L;
 	
 	private Integer type_id;
 	private String reimb_type;
-	public ReimbursementType() {
+	
+	public ReimbursementTypeData() {
 		super();
 	}
-	public ReimbursementType(Integer type_id, String reimb_type) {
+	public ReimbursementTypeData(Integer type_id, String reimb_type) {
 		super();
 		this.type_id = type_id;
 		this.reimb_type = reimb_type;
 	}
+	
 	public Integer getType_id() {
 		return type_id;
 	}

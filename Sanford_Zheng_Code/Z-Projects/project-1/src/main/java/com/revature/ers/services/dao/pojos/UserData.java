@@ -1,8 +1,10 @@
-package com.revature.ers.dao.pojos;
+package com.revature.ers.services.dao.pojos;
 
 import java.io.Serializable;
 
-public class UserDAO implements Serializable {
+public class UserData implements Serializable {
+	
+	private static final long serialVersionUID = 52744644002238317L;
 	
 	private Integer user_id;
 	private String username;
@@ -12,11 +14,11 @@ public class UserDAO implements Serializable {
 	private String email;
 	private Integer role_id;
 	
-	public UserDAO() {
+	public UserData() {
 		super();
 	}
 
-	public UserDAO(Integer user_id, String username, String password, String first_name, String last_name, String email,
+	public UserData(Integer user_id, String username, String password, String first_name, String last_name, String email,
 			Integer role_id) {
 		super();
 		this.user_id = user_id;

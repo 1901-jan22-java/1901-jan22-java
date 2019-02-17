@@ -1,4 +1,4 @@
-package com.revature.ers.dao;
+package com.revature.ers.services.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,10 +10,10 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.jdbc.utils.ConnectionFactory;
-import com.revature.ers.dao.pojos.UserDAO;
 import com.revature.ers.interfaces.Repository;
+import com.revature.ers.services.dao.pojos.UserData;
 
-public class UserRepository implements Repository<UserDAO> {
+public class UserRepository implements Repository<UserData> {
 
 	private static Logger log = Logger.getLogger(UserRepository.class);
 
@@ -22,15 +22,15 @@ public class UserRepository implements Repository<UserDAO> {
 	}
 
 	@Override
-	public boolean create(UserDAO newItem) {
+	public boolean create(UserData newItem) {
 		// TODO Auto-generated method stub
 
 		return false;
 	}
 
 	@Override
-	public UserDAO read(Integer itemId) {
-		UserDAO res = null;
+	public UserData read(Integer itemId) {
+		UserData res = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -48,7 +48,7 @@ public class UserRepository implements Repository<UserDAO> {
 				String email = rs.getString("email");
 				Integer role_id = rs.getInt("role_id");
 
-				res = new UserDAO(id, username, password, first_name, last_name, email, role_id);
+				res = new UserData(id, username, password, first_name, last_name, email, role_id);
 			}
 
 		} catch (SQLException e) {
@@ -59,8 +59,8 @@ public class UserRepository implements Repository<UserDAO> {
 	}
 
 	@Override
-	public List<UserDAO> readAll() {
-		List<UserDAO> res = new ArrayList<>();
+	public List<UserData> readAll() {
+		List<UserData> res = new ArrayList<>();
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -77,7 +77,7 @@ public class UserRepository implements Repository<UserDAO> {
 				String email = rs.getString("email");
 				Integer role_id = rs.getInt("role_id");
 
-				res.add(new UserDAO(id, username, password, first_name, last_name, email, role_id));
+				res.add(new UserData(id, username, password, first_name, last_name, email, role_id));
 			}
 
 		} catch (SQLException e) {
@@ -88,13 +88,13 @@ public class UserRepository implements Repository<UserDAO> {
 	}
 
 	@Override
-	public UserDAO update(Integer itemId, UserDAO newItem) {
+	public UserData update(Integer itemId, UserData newItem) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean delete(UserDAO item) {
+	public boolean delete(UserData item) {
 		// TODO Auto-generated method stub
 
 		return false;

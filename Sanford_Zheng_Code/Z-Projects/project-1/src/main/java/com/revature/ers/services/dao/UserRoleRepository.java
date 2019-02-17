@@ -1,4 +1,4 @@
-package com.revature.ers.dao;
+package com.revature.ers.services.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,17 +12,17 @@ import java.util.Map.Entry;
 import org.apache.log4j.Logger;
 
 import com.jdbc.utils.ConnectionFactory;
-import com.revature.ers.dao.pojos.ReimbursementStatus;
 import com.revature.ers.interfaces.Repository;
+import com.revature.ers.services.dao.pojos.UserRoleData;
 
-public class ReimbursementStatusRepository implements Repository<ReimbursementStatus> {
+public class UserRoleRepository implements Repository<UserRoleData> {
 
-	private static Logger log = Logger.getLogger(ReimbursementStatusRepository.class);
+	private static Logger log = Logger.getLogger(UserRoleRepository.class);
 
 	private static final HashMap<Integer, String> image = new HashMap<>();
 
 	static {
-		log.info("ReimbursementStatusRepository Class Instantiated.");
+		log.info("UserRoleRepository Class Instantiated.");
 	}
 
 	public static HashMap<Integer, String> getTable() {
@@ -33,71 +33,73 @@ public class ReimbursementStatusRepository implements Repository<ReimbursementSt
 	}
 
 	@Override
-	public boolean create(ReimbursementStatus newItem) {
+	public boolean create(UserRoleData newItem) {
 		// TODO Auto-generated method stub
+
 		return false;
 	}
 
 	@Override
-	public ReimbursementStatus read(Integer itemId) {
-		ReimbursementStatus res = null;
+	public UserRoleData read(Integer itemId) {
+		UserRoleData res = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
-			String sql = "select * from ers_reimbursement_status where status_id = ?";
+			
+			String sql = "select * from ers_user_role where role_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, itemId);
 
 			ResultSet rs = ps.executeQuery();
-			if (rs.next()) {
-				Integer id = rs.getInt("status_id");
-				String status = rs.getString("reimb_status");
+			while (rs.next()) {
+				Integer id = rs.getInt("role_id");
+				String role = rs.getString("user_role");
 
-				image.put(id, status);
-				res = new ReimbursementStatus(id, status);
+				image.put(id, role);
+				res = new UserRoleData(id, role);
 			}
-
+			
 		} catch (SQLException e) {
-			log.error("SQLException in ReimbursementStatusRepository.readAll()", e);
+			log.error("SQLException in UserRoleRepository.readAll()", e);
 		}
 
 		return res;
 	}
 
 	@Override
-	public List<ReimbursementStatus> readAll() {
-		List<ReimbursementStatus> res = new ArrayList<>();
+	public List<UserRoleData> readAll() {
+		List<UserRoleData> res = new ArrayList<>();
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
-			String sql = "select * from ers_reimbursement_status";
+			
+			String sql = "select * from ers_user_role";
 			PreparedStatement ps = conn.prepareStatement(sql);
 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Integer id = rs.getInt("status_id");
-				String status = rs.getString("reimb_status");
+				Integer id = rs.getInt("role_id");
+				String role = rs.getString("user_role");
 
-				image.put(id, status);
-				res.add(new ReimbursementStatus(id, status));
+				image.put(id, role);
+				res.add(new UserRoleData(id, role));
 			}
-
+			
 		} catch (SQLException e) {
-			log.error("SQLException in ReimbursementStatusRepository.readAll()", e);
+			log.error("SQLException in UserRoleRepository.readAll()", e);
 		}
 
 		return res;
 	}
 
 	@Override
-	public ReimbursementStatus update(Integer itemId, ReimbursementStatus newItem) {
+	public UserRoleData update(Integer itemId, UserRoleData newItem) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean delete(ReimbursementStatus item) {
+	public boolean delete(UserRoleData item) {
 		// TODO Auto-generated method stub
+
 		return false;
 	}
 }

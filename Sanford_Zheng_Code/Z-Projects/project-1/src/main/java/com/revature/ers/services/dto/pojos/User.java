@@ -1,4 +1,4 @@
-package com.revature.ers.dto.pojos;
+package com.revature.ers.services.dto.pojos;
 
 public class User {
 	

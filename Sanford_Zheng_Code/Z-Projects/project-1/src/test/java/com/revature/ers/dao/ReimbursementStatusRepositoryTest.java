@@ -4,6 +4,12 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+/**
+ * Seriously though... this name is crazy long...
+ * 
+ * @author Sanford
+ *
+ */
 public class ReimbursementStatusRepositoryTest {
 
 	@Test

@@ -1,4 +1,4 @@
-package com.revature.ers.dao;
+package com.revature.ers.services.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,10 +12,10 @@ import java.util.Map.Entry;
 import org.apache.log4j.Logger;
 
 import com.jdbc.utils.ConnectionFactory;
-import com.revature.ers.dao.pojos.ReimbursementType;
 import com.revature.ers.interfaces.Repository;
+import com.revature.ers.services.dao.pojos.ReimbursementTypeData;
 
-public class ReimbursementTypeRepository implements Repository<ReimbursementType> {
+public class ReimbursementTypeRepository implements Repository<ReimbursementTypeData> {
 
 	private static Logger log = Logger.getLogger(ReimbursementTypeRepository.class);
 
@@ -33,15 +33,15 @@ public class ReimbursementTypeRepository implements Repository<ReimbursementType
 	}
 
 	@Override
-	public boolean create(ReimbursementType newItem) {
+	public boolean create(ReimbursementTypeData newItem) {
 		// TODO Auto-generated method stub
 
 		return false;
 	}
 
 	@Override
-	public ReimbursementType read(Integer itemId) {
-		ReimbursementType res = null;
+	public ReimbursementTypeData read(Integer itemId) {
+		ReimbursementTypeData res = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -55,7 +55,7 @@ public class ReimbursementTypeRepository implements Repository<ReimbursementType
 				String type = rs.getString("reimb_type");
 
 				image.put(id, type);
-				res = new ReimbursementType(id, type);
+				res = new ReimbursementTypeData(id, type);
 			}
 
 		} catch (SQLException e) {
@@ -66,8 +66,8 @@ public class ReimbursementTypeRepository implements Repository<ReimbursementType
 	}
 
 	@Override
-	public List<ReimbursementType> readAll() {
-		List<ReimbursementType> res = new ArrayList<>();
+	public List<ReimbursementTypeData> readAll() {
+		List<ReimbursementTypeData> res = new ArrayList<>();
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -80,7 +80,7 @@ public class ReimbursementTypeRepository implements Repository<ReimbursementType
 				String type = rs.getString("reimb_type");
 
 				image.put(id, type);
-				res.add(new ReimbursementType(id, type));
+				res.add(new ReimbursementTypeData(id, type));
 			}
 
 		} catch (SQLException e) {
@@ -91,13 +91,13 @@ public class ReimbursementTypeRepository implements Repository<ReimbursementType
 	}
 
 	@Override
-	public ReimbursementType update(Integer itemId, ReimbursementType newItem) {
+	public ReimbursementTypeData update(Integer itemId, ReimbursementTypeData newItem) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean delete(ReimbursementType item) {
+	public boolean delete(ReimbursementTypeData item) {
 		// TODO Auto-generated method stub
 		return false;
 	}
