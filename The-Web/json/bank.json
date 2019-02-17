@@ -36,6 +36,7 @@
       "id": 5
     },
     {
+<<<<<<< HEAD
       "firstName": "Mike",
       "lastName": "Koerber",
       "username": "Mkoerber",
@@ -47,6 +48,19 @@
       "lastName": "Archer",
       "username": "BlackTurtleNeck",
       "password": "password",
+=======
+      "firstName": "hi",
+      "lastName": "hi",
+      "username": "newUser",
+      "password": "123",
+      "id": 6
+    },
+    {
+      "firstName": "234",
+      "lastName": "234",
+      "username": "myuser",
+      "password": "234",
+>>>>>>> master
       "id": 7
     }
   ],
