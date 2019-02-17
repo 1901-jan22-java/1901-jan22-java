@@ -34,9 +34,12 @@
   <br>{{ count }}
   <button (click)="increment()">Increment!</button>
 <br>
-  <b>{{currentTime | date:'medium' | uppercase}}</b> <br>
+  <b>{{currentTime |  date:'medium' | uppercase}}</b> <br>
   <b>{{10000000000 | currency }} </b>
 
+  <br>
+  Use of custom pipe...  
+  {{ 1000 | squareroot }}
 
   <hr>
   <h5>Two-Way Data Binding</h5>
