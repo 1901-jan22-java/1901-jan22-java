@@ -1,27 +1,19 @@
 package com.revature.reimbursement;
 
+import java.sql.Date;
+
 public class Reimbursement {
 	private int reimbId;
-	private int amount;
-	private String submitted;
-	private String resolved;
+	private double amount;
+	private Date submitted;
+	private Date resolved;
 	private String description;
 	private int author;
 	private int resolver;
 	private int statusId;
 	private int typeId;
 	
-	public Reimbursement(int reimbId, int amount, String submitted, int author,
-			 int statusId, int typeId) {
-		this.reimbId = reimbId;
-		this.amount = amount;
-		this.submitted = submitted;
-		this.author = author;
-		this.statusId = statusId;
-		this.typeId = typeId;
-	}
-	
-	public Reimbursement(int reimbId, int amount, String submitted, String resolved, String description, int author,
+	public Reimbursement(int reimbId, double amount, Date submitted, Date resolved, String description, int author,
 			int resolver, int statusId, int typeId) {
 		this.reimbId = reimbId;
 		this.amount = amount;
@@ -34,6 +26,10 @@ public class Reimbursement {
 		this.typeId = typeId;
 	}
 
+	public Reimbursement() {
+	}
+
+
 	public int getReimbId() {
 		return reimbId;
 	}
@@ -42,27 +38,27 @@ public class Reimbursement {
 		this.reimbId = reimbId;
 	}
 
-	public int getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(int amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 
-	public String getSubmitted() {
+	public Date getSubmitted() {
 		return submitted;
 	}
 
-	public void setSubmitted(String submitted) {
+	public void setSubmitted(Date submitted) {
 		this.submitted = submitted;
 	}
 
-	public String getResolved() {
+	public Date getResolved() {
 		return resolved;
 	}
 
-	public void setResolved(String resolved) {
+	public void setResolved(Date resolved) {
 		this.resolved = resolved;
 	}
 
