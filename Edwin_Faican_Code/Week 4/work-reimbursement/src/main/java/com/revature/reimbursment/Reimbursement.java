@@ -12,13 +12,13 @@ public class Reimbursement {
 	private String desc;
 	private Blob reciept;
 	private int statusid;
-	private int type;
+	private String type;
 	private int author;
 	private int resolver;
 	
 	public Reimbursement() {};
 	
-	public Reimbursement(int reimbId, BigDecimal reimbAmount, Date submitted, Date resolved, String desc, Blob reciept, int statusid, int type, int author, int resolver) {
+	public Reimbursement(int reimbId, BigDecimal reimbAmount, Date submitted, Date resolved, String desc, Blob reciept, int statusid, int author, int resolver, String type) {
 		this.reimbId = reimbId;
 		this.reimbAmount = reimbAmount;
 		this.submitted = submitted;
@@ -73,10 +73,10 @@ public class Reimbursement {
 	public void setStatusid(int statusid) {
 		this.statusid = statusid;
 	}
-	public int getType() {
-		return type;
+	public String getType() {
+		return type.toUpperCase();
 	}
-	public void setType(int type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 	public int getAuthor() {

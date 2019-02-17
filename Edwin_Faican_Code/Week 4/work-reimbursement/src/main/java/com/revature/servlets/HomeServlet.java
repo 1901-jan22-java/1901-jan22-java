@@ -19,18 +19,16 @@ public class HomeServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		log.debug("We enter home!");
 		HttpSession session = req.getSession();
 		//Get user from session
 		User user = (User) session.getAttribute("user");
-		log.debug(user.toString());
+
 		if(user.getUsername() == null) {
 			//no user stored in seesion.
 			//Should not be able to access the home page.
 			//redirect to login. 
 			resp.sendRedirect("index.html");
 		} else {
-			resp.setStatus(200);
 			ObjectMapper mapper = new ObjectMapper();
 			String json = mapper.writeValueAsString(user);
 			//Welcome page for user

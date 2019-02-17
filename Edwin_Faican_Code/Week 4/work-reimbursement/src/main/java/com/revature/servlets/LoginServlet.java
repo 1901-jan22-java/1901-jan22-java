@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet{
 //			writer.write(mapper.writeValueAsString(storedUser));
 			HttpSession session = req.getSession();
 			session.setAttribute("user", storedUser);
-			resp.sendRedirect("/home");
+			resp.sendRedirect("home");
 		} else {
 			resp.setStatus(404);
 		}

@@ -43,7 +43,7 @@ function login() {
                 console.log()
                 loadWelcomeView(xhr.responseText);
             } else {
-                console.log('Username/password incorrect!');
+                console.log(xhr.status);
                 $('#log-error').text('Username/Password incorrect!');
             }
         }
@@ -124,10 +124,12 @@ function loadWelcomeView(user) {
     xhr.onreadystatechange = function() {
         if(xhr.readyState === 4) {
             if(xhr.status === 200) {
+                console.log('We are in here.');
                 $('#view').html(xhr.responseText);
-                var user = JSON.parse(user);
-                $('#welcome').val(`Welcome, ${user.firstname}!`);
-                $('#info').val(`Here is your account info: ${user.firstname} ${user.lastname} : ${user.username}, ${user.email}, ${user.role}`);
+                var u = JSON.parse(user);
+                $('#welcome').text(`Welcome, ${u.firstname}!`);
+                $('#info').text(`Name: ${u.firstname} ${u.lastname}, Username: ${u.username}, Email: ${u.email}, Role: ${u.role}`);
+                $('#addReimb').on('click', showAdd);
             } else {
                 $('#view').html(xhr.responseText);
             }
@@ -136,4 +138,57 @@ function loadWelcomeView(user) {
 
     xhr.open('GET', url);
     xhr.send();
+}
+
+function showAdd() {
+    var xhr = new XMLHttpRequest();
+    var url = 'newReimb.view';
+
+    xhr.onreadystatechange = function() {
+        if(xhr.readyState === 4) {
+            if(xhr.status === 200) {
+                $('#options').html(xhr.responseText);
+                $('#addnewreimb').on('click', submitReimb);
+            } else {
+                console.log("Redirect to an error page.");
+                $('#view').html(xhr.responseText);
+            }
+        } 
+    }
+
+    xhr.open('GET', url);
+    xhr.send();
+}
+
+//Need to find a way to retain user information between functions. 
+function submitReimb() {
+    var reimb = {
+        author: 2,
+        reimbAmount: $('#amount').val(),
+        type: $('#type').val(),
+        desc: $('#desc').val(),
+    };
+
+    var json = JSON.stringify(reimb);
+    console.log(json);
+    var xhr = new XMLHttpRequest();
+    var url = 'addReimb';
+
+    xhr.onreadystatechange = function() {
+        if(xhr.readyState === 4) {
+            if(xhr.status === 201) {
+                $('#options').html("Success!");
+                console.log(xhr.responseText);
+            } else if(xhr.status === 409) {
+                console.log('Something conflicted');
+                $('#un-error').html(xhr.responseText);
+            } else if(xhr.status === 418) {
+                console.log('Semething else went wrong.');
+                $('#em-error').html(xhr.responseText);
+            }
+        }
+    }
+
+    xhr.open('POST', url);
+    xhr.send(json);
 }

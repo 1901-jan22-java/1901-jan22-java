@@ -39,7 +39,7 @@ public class UserRepository {
 				user.setUsername(rs.getString("username"));
 				user.setaPassword(rs.getInt("password"));
 				user.setEmail(rs.getString("email"));
-				user.setRole(roles.get((rs.getInt("user_role_id"))));
+				user.setRole(roles.get((rs.getInt("user_role_id") - 1)));
 			}
 			
 		} catch (SQLException e) {

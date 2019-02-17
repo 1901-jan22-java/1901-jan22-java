@@ -89,15 +89,15 @@ INSERT INTO User_Roles VALUES(1, 'Employee');
 INSERT INTO User_Roles VALUES(2, 'Finance Manager');
 
 --Insert values into reimb roles--
-INSERT INTO Reimbursement_Type VALUES(1, 'Lodging');
-INSERT INTO Reimbursement_Type VALUES(2, 'Travel');
-INSERT INTO Reimbursement_Type VALUES(1, 'Food');
-INSERT INTO Reimbursement_Type VALUES(1, 'Other');
+INSERT INTO Reimbursement_Type VALUES(1, 'LODGING');
+INSERT INTO Reimbursement_Type VALUES(2, 'TRAVEL');
+INSERT INTO Reimbursement_Type VALUES(3, 'FOOD');
+INSERT INTO Reimbursement_Type VALUES(4, 'OTHER');
 
 --Insert Values into reimb status--
-INSERT INTO Reimbursement_Status VALUES(1, 'Pending');
-INSERT INTO Reimbursement_Status VALUES(2, 'Approved');
-INSERT INTO Reimbursement_Status VALUES(3, 'Denied');
+INSERT INTO Reimbursement_Status VALUES(1, 'PENDING');
+INSERT INTO Reimbursement_Status VALUES(2, 'APPROVED');
+INSERT INTO Reimbursement_Status VALUES(3, 'DENIED');
 
 --Insert sample values into User Table--
 INSERT INTO Users(firstname, lastname, username, password, email, user_role_id) VALUES('Edwin', 'Faican', 'edwinx', '1234','no@no.com',1);
