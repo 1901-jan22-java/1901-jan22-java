@@ -13,7 +13,6 @@ import java.sql.SQLException;
  * @author Sanford
  *
  */
-@SuppressWarnings("serial")
 public class Receipt implements Serializable, Blob {
 	
 	private String details;

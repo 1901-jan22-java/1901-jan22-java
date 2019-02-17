@@ -17,10 +17,10 @@ import com.revature.ers.services.dao.pojos.ReimbursementData;
 
 public class ReimbursementRepository implements Repository<ReimbursementData> {
 
-	private static Logger log = Logger.getLogger(ReimbursementRepository.class);
+	private static final Logger log = Logger.getLogger(ReimbursementRepository.class);
 
-	static {
-		log.info("ReimbursementRepository Class Instantiated.");
+	public ReimbursementRepository() {
+		log.info("ReimbursementRepository Object Instantiated.");
 	}
 
 	@Override

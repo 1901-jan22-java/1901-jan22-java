@@ -17,7 +17,7 @@ import com.revature.ers.services.dao.pojos.ReimbursementStatusData;
 
 public class ReimbursementStatusRepository implements Repository<ReimbursementStatusData> {
 
-	private static Logger log = Logger.getLogger(ReimbursementStatusRepository.class);
+	private static final Logger log = Logger.getLogger(ReimbursementStatusRepository.class);
 
 	private static final HashMap<Integer, String> image = new HashMap<>();
 
