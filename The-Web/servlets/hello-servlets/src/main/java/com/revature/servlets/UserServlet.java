@@ -12,12 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.service.DummyUserService;
 
 @WebServlet("/users")
 public class UserServlet extends HttpServlet {
-	
-	UserService service = new UserService();
-	
+
+	DummyUserService service = new DummyUserService();
 	
 	/*
 	 * Use Jackson ObjectMapper to send response of all users 
@@ -40,37 +40,38 @@ public class UserServlet extends HttpServlet {
 	/*
 	 * working with FORM data!
 	 */
+//	@Override
+//	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//		String username = req.getParameter("username");
+//		String password = req.getParameter("password");
+//		String data = req.getParameter("bio");
+//		User u = new User(username, password, data);
+//		
+//		service.addUser(u);
+//		doGet(req, resp);
+//	}
+	
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String username = req.getParameter("username");
-		String password = req.getParameter("password");
-		String data = req.getParameter("bio");
-		User u = new User(username, password, data);
-		service.addUser(u);
-		doGet(req, resp);
+	protected void doPost(HttpServletRequest req, 
+		HttpServletResponse resp) throws ServletException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		User u = mapper.readValue(req.getInputStream(), User.class);
+		if(service.getByUsername(u.getUsername())==null){
+			//no conflict, can create user
+			service.addUser(u);
+			resp.setStatus(201);
+			doGet(req, resp);
+		}
+		else{
+			//username is already used. set http response status to conflict
+			resp.setStatus(409);
+		}
+
 	}
 
 }
 
 
-
-
-class UserService{
-	static List<User> users = new ArrayList<User>();
-	static {
-		users.add(new User("gb", "123", "this is a user"));
-		users.add(new User("test", "user", "test"));
-		users.add(new User("Beyonce", "knowles", "is awesome"));
-	}
-	
-	public List<User> getAllUser(){
-		return users;
-	}
-	
-	public void addUser(User u) {
-		users.add(u);
-	}
-}
 
 
 

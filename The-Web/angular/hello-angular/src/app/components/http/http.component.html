@@ -1,0 +1,33 @@
+<div class="jumbotron">
+  <h1>Understanding HTTP requests with Angular</h1>
+</div>
+
+<br>
+
+<h3>Demo</h3>
+Get all users:
+
+<ol>
+  <li *ngFor="let u of users">{{ u.firstName}} {{u.lastName}} </li>
+</ol>
+
+<h3>Get By Username</h3>
+
+<input type="text" [(ngModel)]="usernameInput">
+<button id="getUser" (click)="getUserByUsername(usernameInput)">Get User</button>
+<div *ngIf="user != null">
+  <li>{{ user.id }}</li>
+  <li>{{ user.firstName }}</li>
+  <li>{{ user.lastName }}</li>
+</div>
+
+<br>
+<hr>
+Add User
+<br>
+
+<input type="text" [(ngModel)]="username" class="form-control col-4" placeholder="Username">
+<input type="password" [(ngModel)]="pw" class="form-control col-4" placeholder="password">
+<input type="text" [(ngModel)]="fn" class="form-control col-4" placeholder="First Name">
+<input type="text" [(ngModel)]="ln" class="form-control col-4" placeholder="Last Name">
+<button (click)="addUser()">Add</button>

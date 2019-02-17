@@ -1,0 +1,27 @@
+<div class="jumbotron">
+<h3><i>Angular Supports Data Binding, a mechanism for coordinating parts of a template with parts of a component</i></h3>
+
+Text from component : {{ text }}
+<br>
+Boolean : {{ bool }}
+<br>
+count : {{ count }}
+<br>
+
+<h5 [style.background-color]="colorProp">Property Binding</h5>
+
+
+<button class="btn btn-outline-success" (click)="increment()">Increment</button>
+
+<h5>Two-Way Data Binding</h5>
+<input type="text" [(ngModel)]="username">
+{{ username }}
+
+<br>
+
+Use Custom pipe...
+<br>
+{{ 1000 | squareroot }}
+
+
+</div>
