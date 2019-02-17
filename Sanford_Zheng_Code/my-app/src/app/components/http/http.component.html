@@ -1,0 +1,14 @@
+<div class="jumbotron jumbotron-fluid custom-flexbox">
+  <h5>Users in test.json:</h5>
+  <ul *ngFor="let u of users">
+    <li>{{u.username}}</li>
+  </ul>
+
+  <hr class="my-2">
+
+  <h5>Find user by this username:</h5>
+  <form id="userform">
+    <input type="text" name="username" placeholder="Username...">
+  </form>
+  <span>Output: {{ user.username }}</span>
+</div>
