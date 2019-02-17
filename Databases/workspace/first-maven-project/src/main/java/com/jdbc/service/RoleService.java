@@ -1,5 +1,5 @@
 package com.jdbc.service;
 
-public class RoleServic {
+public class RoleService {
 
 }

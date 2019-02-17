@@ -60,9 +60,4 @@ public class MyUtils {
         if(pwd == null) return false;
         return pwd.matches(PASSWORD_REGEX);
     }
-	
-	public static void main(String[] args) {
-		System.out.println(obfuscate(nameFormat("SaNfoRd zHeNg",
-				"CASEY NEISTAT", "PHILLY D DeFRaNco", "FORMATTING QUICK!"), 0));
-	}
 }
