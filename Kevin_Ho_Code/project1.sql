@@ -1,3 +1,9 @@
+drop table ers_reimbursement;
+drop table ers_users;
+drop table ers_reimbursement_status;
+drop table ers_reimbursement_type;
+drop table ers_user_roles;
+
 create table ers_reimbursement_status(
 reimb_status_id number primary key,
 reimb_status varchar2(10) not null
@@ -27,8 +33,8 @@ constraint user_roles_fk foreign key (user_role_id) references ers_user_roles(er
 create table ers_reimbursement(
 reimb_id number primary key,
 reimb_amount number not null,
-reim_submitted timestamp not null,
-reim_resolved timestamp,
+reimb_submitted timestamp not null,
+reimb_resolved timestamp,
 reimb_description varchar2(250),
 reimb_author number not null,
 reimb_resolver number,
@@ -40,11 +46,6 @@ constraint ers_reimbursement_status_fk foreign key (reimb_status_id) references 
 constraint ers_reimbursement_type_fk foreign key (reimb_type_id) references ers_reimbursement_type(reimb_type_id)
 );
 
-drop table ers_reimbursement_status;
-drop table ers_reimbursement_type;
-drop table ers_user_roles;
-drop table ers_users;
-drop table ers_reimbursement;
 
 create sequence ers_reimbursement_status_seq;
 CREATE OR REPLACE TRIGGER ers_status_trigger
@@ -91,7 +92,24 @@ BEGIN
 END;
 /
 
-select * from ers_user_roles;
+CREATE OR REPLACE PROCEDURE resolve (
+r_id            in number,
+new_status      in number,
+new_resolved    in date,
+new_resolver    in number
+)
+AS
+BEGIN
+    UPDATE ers_reimbursement
+    SET reimb_resolved = new_resolved,
+        reimb_resolver = new_resolver,
+        reimb_status_id = new_status
+    WHERE reimb_id = r_id;
+END;
+/
+
+select * from ers_users;
+
 insert into ers_user_roles values (0, 'employee');
 insert into ers_user_roles values (1, 'manager');
 
