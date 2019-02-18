@@ -7,8 +7,8 @@ import java.sql.Date;
 public class Reimbursement {
 	private int reimbId;
 	private BigDecimal reimbAmount;
-	private Date submitted;
-	private Date resolved;
+	private long submitted;
+	private long resolved;
 	private String desc;
 	private Blob reciept;
 	private int statusid;
@@ -18,13 +18,13 @@ public class Reimbursement {
 	
 	public Reimbursement() {};
 	
-	public Reimbursement(int reimbId, BigDecimal reimbAmount, Date submitted, Date resolved, String desc, Blob reciept, int statusid, int author, int resolver, String type) {
+	public Reimbursement(int reimbId, BigDecimal reimbAmount, Date submitted, Date resolved, String desc,  int statusid, int author, int resolver, String type) {
 		this.reimbId = reimbId;
 		this.reimbAmount = reimbAmount;
-		this.submitted = submitted;
-		this.resolved = resolved;
+		this.submitted = submitted.getTime();
+		//this.resolved = new Date(resolved.getTime());
 		this.desc = desc;
-		this.reciept = reciept;
+		//this.reciept = reciept;
 		this.statusid = statusid;
 		this.type = type;
 		this.author = author;
@@ -43,17 +43,17 @@ public class Reimbursement {
 	public void setReimbAmount(BigDecimal reimbAmount) {
 		this.reimbAmount = reimbAmount;
 	}
-	public Date getSubmitted() {
+	public long getSubmitted() {
 		return submitted;
 	}
 	public void setSubmitted(Date submitted) {
-		this.submitted = submitted;
+		this.submitted = submitted.getTime();
 	}
-	public Date getResolved() {
+	public long getResolved() {
 		return resolved;
 	}
 	public void setResolved(Date resolved) {
-		this.resolved = resolved;
+		this.resolved = resolved.getTime();
 	}
 	public String getDesc() {
 		return desc;

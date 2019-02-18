@@ -8,12 +8,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jdbc.dao.ReimbursementRepository;
 import com.revature.reimbursment.Reimbursement;
+import com.revature.users.User;
 
 @WebServlet("/addReimb")
 public class AddReimbServlet extends HttpServlet{
@@ -21,9 +23,13 @@ public class AddReimbServlet extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession();
+		User user = (User) session.getAttribute("user");
+		log.info(user.toString());
 		ReimbursementRepository rRepo = new ReimbursementRepository();
 		ObjectMapper  mapper = new ObjectMapper();
 		Reimbursement reimb = mapper.readValue(req.getInputStream(), Reimbursement.class);
+		reimb.setAuthor(user.getUserId());
 		log.info(reimb.getAuthor() + " " + reimb.getDesc() + reimb.getType() + reimb.getReimbAmount());
 		reimb = rRepo.newReimb(reimb);
 		

@@ -18,7 +18,7 @@ public class ReimbursementRepository {
 	final static Logger log = Logger.getLogger(ReimbursementRepository.class);
 	
 	
-	public static List<String> reimbTypes() {
+	public List<String> reimbTypes() {
 		List<String> types = new ArrayList<String>();
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			String sql = "SELECT * FROM Reimbursement_Type ORDER BY reimb_type_id ASC";
@@ -41,7 +41,7 @@ public class ReimbursementRepository {
 		List<Reimbursement> reimbs = new ArrayList<Reimbursement>();
 		List<String> types = reimbTypes();
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			String sql = "SELECT * FROM Reimbursement WHERE reimb_resolved IS NULL ORDER BY reimb_submitted ASC";
+			String sql = "SELECT * FROM Reimbursement WHERE reimb_resolver IS NULL ORDER BY reimb_submitted ASC";
 			//Create String array holding names of columns that are auto-generated
 			String[] keys = {"reimb_id"};
 			PreparedStatement ps = conn.prepareStatement(sql,keys);
@@ -49,7 +49,7 @@ public class ReimbursementRepository {
 			ResultSet pk = ps.executeQuery();
 
 			while(pk.next()) {
-				Reimbursement temp = new Reimbursement(pk.getInt("reimb_id"), pk.getBigDecimal("reimb_amount"), pk.getDate("reimb_submitted"), pk.getDate("reimb_resolved"), pk.getString("reimb_description"), pk.getBlob("reimb_reciept"), pk.getInt("reimb_author"), pk.getInt("reimb_resolver"), pk.getInt("reimb_status_id"), types.get(pk.getInt("reimb_type_id") - 1));
+				Reimbursement temp = new Reimbursement(pk.getInt("reimb_id"), pk.getBigDecimal("reimb_amount"), pk.getDate("reimb_submitted"), pk.getDate("reimb_resolved"), pk.getString("reimb_description"),pk.getInt("reimb_status_id"), pk.getInt("reimb_author"), pk.getInt("reimb_resolver"), types.get(pk.getInt("reimb_type_id") - 1));
 				reimbs.add(temp);
 			}
 			
@@ -75,7 +75,7 @@ public class ReimbursementRepository {
 			ResultSet pk = ps.executeQuery();
 
 			while(pk.next()) {
-				Reimbursement temp = new Reimbursement(pk.getInt("reimb_id"), pk.getBigDecimal("reimb_amount"), pk.getDate("reimb_submitted"), pk.getDate("reimb_resolved"), pk.getString("reimb_description"), pk.getBlob("reimb_reciept"), pk.getInt("reimb_author"), pk.getInt("reimb_resolver"), pk.getInt("reimb_status_id"), types.get(pk.getInt("reimb_type_id") - 1));
+				Reimbursement temp = new Reimbursement(pk.getInt("reimb_id"), pk.getBigDecimal("reimb_amount"), pk.getDate("reimb_submitted"), pk.getDate("reimb_resolved"), pk.getString("reimb_description"), pk.getInt("reimb_author"), pk.getInt("reimb_resolver"), pk.getInt("reimb_status_id"), types.get(pk.getInt("reimb_type_id") - 1));
 				reimbs.add(temp);
 			}
 			
@@ -88,7 +88,7 @@ public class ReimbursementRepository {
 	}
 	
 	
-	public static Reimbursement newReimb(Reimbursement reimb) {
+	public Reimbursement newReimb(Reimbursement reimb) {
 		List<String> types = reimbTypes();
 		Date date = new Date(System.currentTimeMillis());
 		
@@ -132,7 +132,7 @@ public class ReimbursementRepository {
 			
 			cs.setInt(1, reimb.getReimbId());
 			cs.setInt(2, reimb.getResolver());
-			cs.setDate(3, reimb.getResolved());
+			cs.setDate(3, new Date(reimb.getResolved()));
 			cs.setInt(4,  reimb.getStatusid());
 			
 			cs.execute();
@@ -144,18 +144,18 @@ public class ReimbursementRepository {
 	}
 	
 	
-	public static void main(String[] args) {
+//	public static void main(String[] args) {
 //		List<Reimbursement> reimbs = findAllReimbs();
 //		for(Reimbursement r : reimbs) {
 //			log.info(r.toString());
 //		}
-		Reimbursement reimb = new Reimbursement();
-		reimb.setAuthor(2);
-		reimb.setDesc("THIS IS A TEST");
-		reimb.setReimbAmount(new BigDecimal("200"));
-		reimb.setType("LODGING");
-		reimb = newReimb(reimb);
-		log.info(reimb.toString());
+//		Reimbursement reimb = new Reimbursement();
+//		reimb.setAuthor(2);
+//		reimb.setDesc("THIS IS A TEST");
+//		reimb.setReimbAmount(new BigDecimal("200"));
+//		reimb.setType("LODGING");
+//		reimb = newReimb(reimb);
+//		log.info(reimb.toString());
 //		Reimbursement reimb = new Reimbursement();
 //		reimb.setReimbId(26);
 //		reimb.setResolver(2);
@@ -163,6 +163,6 @@ public class ReimbursementRepository {
 //		reimb.setStatusid(3);
 //		resolve(reimb);
 //		log.info(reimb.toString());
-	}
+//	}
 	
 }

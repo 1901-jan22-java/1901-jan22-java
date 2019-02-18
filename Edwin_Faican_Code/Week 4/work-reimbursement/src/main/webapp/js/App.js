@@ -41,14 +41,16 @@ function login() {
         if(xhr.readyState === 4) {
             if(xhr.status === 200) {
                 console.log()
-                loadWelcomeView(xhr.responseText);
+                loadEmployeeView(xhr.responseText);
+            } else if(xhr.status === 202) {
+                loadManagerView(xhr.responseText);
             } else {
-                console.log(xhr.status);
                 $('#log-error').text('Username/Password incorrect!');
             }
         }
     }
      xhr.open('POST', url);
+     xhr.setRequestHeader("Content-type", "application/json");
      xhr.send(json);
 }
 
@@ -101,7 +103,11 @@ function newUser() {
     xhr.onreadystatechange = function() {
         if(xhr.readyState === 4) {
             if(xhr.status === 201) {
-                $('#view').html(xhr.responseText);
+                if(userRole == 'employee') {
+                    loadEmployeeView(user);
+                } else {
+                    leadManagerView(user);
+                }
             } else if(xhr.status === 409) {
                 console.log('Username already exists.');
                 $('#un-error').html(xhr.responseText);
@@ -113,13 +119,14 @@ function newUser() {
     }
 
     xhr.open('POST', url);
+    xhr.setRequestHeader("Content-type", "application/json");
     xhr.send(json);
 }
 
-function loadWelcomeView(user) {
+function loadEmployeeView(user) {
     console.log(user);
     var xhr = new XMLHttpRequest();
-    var url = 'home.view';
+    var url = 'employeeHome.view';
 
     xhr.onreadystatechange = function() {
         if(xhr.readyState === 4) {
@@ -130,6 +137,30 @@ function loadWelcomeView(user) {
                 $('#welcome').text(`Welcome, ${u.firstname}!`);
                 $('#info').text(`Name: ${u.firstname} ${u.lastname}, Username: ${u.username}, Email: ${u.email}, Role: ${u.role}`);
                 $('#addReimb').on('click', showAdd);
+            } else {
+                $('#view').html(xhr.responseText);
+            }
+        } 
+    }
+
+    xhr.open('GET', url);
+    xhr.send();
+}
+
+function loadManagerView(user) {
+    console.log(user);
+    var xhr = new XMLHttpRequest();
+    var url = 'managerHome.view';
+
+    xhr.onreadystatechange = function() {
+        if(xhr.readyState === 4) {
+            if(xhr.status === 200) {
+                console.log('We are in here.');
+                $('#view').html(xhr.responseText);
+                var u = JSON.parse(user);
+                $('#welcome').text(`Welcome, ${u.firstname}!`);
+                $('#info').text(`Name: ${u.firstname} ${u.lastname}, Username: ${u.username}, Email: ${u.email}, Role: ${u.role}`);
+                $('#reviewReimb').on('click', showRev);
             } else {
                 $('#view').html(xhr.responseText);
             }
@@ -163,7 +194,6 @@ function showAdd() {
 //Need to find a way to retain user information between functions. 
 function submitReimb() {
     var reimb = {
-        author: 2,
         reimbAmount: $('#amount').val(),
         type: $('#type').val(),
         desc: $('#desc').val(),
@@ -190,5 +220,30 @@ function submitReimb() {
     }
 
     xhr.open('POST', url);
+    xhr.setRequestHeader("Content-type", "application/json");
     xhr.send(json);
+}
+
+//Implement behavior to refresh reimbursment list without adding to the list over and over. 
+function showRev() {
+    var xhr = new XMLHttpRequest();
+    var url = 'reviewReimb';
+
+    xhr.onreadystatechange = function() {
+        if(xhr.readyState === 4) {
+            if(xhr.status === 200) {
+                var reimbs = JSON.parse(xhr.responseText);
+                console.log(reimbs);
+                for(let i=0; i<reimbs.length; i++) {
+                    $('#data').append(`<tr><td><a id="resolve">Select</a></td><td>${reimbs[i].author}</td><td>${reimbs[i].reimbAmount}</td><td>${reimbs[i].type}</td><td>${reimbs[i].desc}</td><td>${new Date(reimbs[i].submitted)}</td>></tr>`);
+                }
+            } else {
+                console.log("Redirect to an error page.");
+                $('#view').html(xhr.responseText);
+            }
+        } 
+    }
+
+    xhr.open('GET', url);
+    xhr.send();
 }

@@ -30,11 +30,12 @@ public class NewUserServlet extends HttpServlet{
 		} else if(uRepo.findUserByEmail(u.getEmail()).getFirstname() == null){
 			log.info("This is the passed in user: " + u.getFirstname() + u.getLastname() + u.getPass() + u.getEmail() + u.getUsername() + u.getRole());
 			u.setaPassword(u.getPass());
-			uRepo.newUser(u.getFirstname(), u.getLastname(), u.getUsername(), u.getaPassword(), u.getEmail(), u.getRole());
+			User user = uRepo.newUser(u.getFirstname(), u.getLastname(), u.getUsername(), u.getaPassword(), u.getEmail(), u.getRole());
 			resp.setStatus(201);
+			String json = mapper.writeValueAsString(user);
 			PrintWriter writer = resp.getWriter();
-			resp.setContentType("text/html");
-			writer.write("Success");
+			resp.setContentType("application/json");
+			writer.write(json);
 		} else {
 			resp.setStatus(418);
 			PrintWriter writer = resp.getWriter();

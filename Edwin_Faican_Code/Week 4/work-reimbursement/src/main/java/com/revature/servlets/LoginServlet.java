@@ -37,9 +37,7 @@ public class LoginServlet extends HttpServlet{
 		} else if(User.checkPass(u.getPass(),storedUser.getaPassword())){
 			log.debug("We found the user.");
 			resp.setStatus(200);
-//			resp.setContentType("application/json");
-//			PrintWriter writer = resp.getWriter();
-//			writer.write(mapper.writeValueAsString(storedUser));
+
 			HttpSession session = req.getSession();
 			session.setAttribute("user", storedUser);
 			resp.sendRedirect("home");

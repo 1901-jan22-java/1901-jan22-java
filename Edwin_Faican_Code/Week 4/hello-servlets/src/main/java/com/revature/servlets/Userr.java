@@ -1,20 +1,20 @@
 package com.revature.servlets;
 
-public class User {
+public class Userr {
 	private String username;
 	private String password;
 	private String data;
 
 	
 	
-	public User(String username, String password, String data) {
+	public Userr(String username, String password, String data) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.data = data;
 	}
 	
-	public User() {};
+	public Userr() {};
 	
 
 	public String getUsername() {

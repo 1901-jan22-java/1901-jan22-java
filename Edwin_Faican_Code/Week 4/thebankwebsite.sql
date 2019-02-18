@@ -26,13 +26,14 @@ reimb_type_id number(10),
 reimb_type varchar2(10),
 PRIMARY KEY(reimb_type_id))
 /
+DROP TABLE REIMBURSEMENT;
 CREATE TABLE REIMBURSEMENT(
 reimb_id number(10),
 reimb_amount number(38,2) NOT NULL,
 reimb_submitted timestamp NOT NULL,
 reimb_resolved timestamp,
 reimb_description varchar2(250) NOT NULL,
-reimb_reciept blob NOT NULL,
+--reimb_reciept blob NOT NULL,
 reimb_author number(10) NOT NULL,
 reimb_resolver number(10),
 reimb_status_id number(10) NOT NULL,
@@ -103,8 +104,8 @@ INSERT INTO Reimbursement_Status VALUES(3, 'DENIED');
 INSERT INTO Users(firstname, lastname, username, password, email, user_role_id) VALUES('Edwin', 'Faican', 'edwinx', '1234','no@no.com',1);
 
 --Insert sample values into Reimbursement Table--
-INSERT INTO Reimbursement(reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_reciept, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id) VALUES (200, '01-Mar-18', '01-Mar-19', 'Woop Woop', '0f0000', 1, 2, 2, 1);
-INSERT INTO Reimbursement(reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_reciept, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id) VALUES (200, '17-Apr-11', '17-Apr-19', 'Heart you', '7700f0', 1, 2, 2, 1);
+INSERT INTO Reimbursement(reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id) VALUES (200, '01-Mar-18', '01-Mar-19', 'Woop Woop',  1, 2, 2, 1);
+INSERT INTO Reimbursement(reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id) VALUES (200, '17-Apr-11', '17-Apr-19', 'Heart you',  1, 2, 2, 1);
 
 --DROP TABLE REIMBURSEMENT;
 SELECT * FROM REIMBURSEMENT;
