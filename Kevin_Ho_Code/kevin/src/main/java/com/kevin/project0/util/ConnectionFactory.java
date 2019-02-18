@@ -11,7 +11,7 @@ import java.util.Properties;
 //import org.apache.log4j.Logger;
 
 public class ConnectionFactory {
-	//fina4l static Logger logger = Logger.getLogger(ConnectionFactory.class);
+	//final static Logger logger = Logger.getLogger(ConnectionFactory.class);
 	
 	private static ConnectionFactory cf = null;
 	

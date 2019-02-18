@@ -16,42 +16,39 @@ public class ConnectionFactory {
 	private static ConnectionFactory cf = null;
 	
 	private ConnectionFactory() {
-		logger.debug("Instantiated Connection Factory");
+		logger.info("INSTANTIATED CONNECTION FACTORY");
 	}
 	
 	public static synchronized ConnectionFactory getInstance() {
 		if(cf == null) {
 			cf = new ConnectionFactory();
-			
 		}
-		logger.debug("Returning cf instance " + cf.getClass());
+		logger.info("RETURNING CF INSTANCE " + cf.getClass());
 		return cf;
 	}
-	
+
 	public Connection getConnection() {
 		Connection conn = null;
 		Properties prop = new Properties();
-		String filepath = "../../../../resources/db.properties";
-		
+		String filepath = "src/main/resources/db.properties";
 		try {
 			prop.load(new FileReader(filepath));
 			Class.forName(prop.getProperty("driver"));
-			
-			conn = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("username"), prop.getProperty("password"));
+			conn = DriverManager.getConnection(
+					prop.getProperty("url"), 
+					prop.getProperty("username"),
+					prop.getProperty("pwd"));
+		
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.err.println("Lost connection");
 			e.printStackTrace();
 		}
-		
 		return conn;
 	}
 }
