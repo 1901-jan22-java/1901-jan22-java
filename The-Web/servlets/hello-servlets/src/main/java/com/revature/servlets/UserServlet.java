@@ -15,14 +15,9 @@ import com.revature.service.DummyUserService;
 
 @WebServlet("/users")
 public class UserServlet extends HttpServlet {
-<<<<<<< HEAD
-
-	DummyUserService service = new DummyUserService();
-=======
 	
 	DummyUserService service = new DummyUserService();
 	
->>>>>>> master
 	
 	/*
 	 * Use Jackson ObjectMapper to send response of all users 

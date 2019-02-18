@@ -8,18 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-<<<<<<< HEAD
-
-
-@WebServlet("/loadRegView")
-public class LoadRegisterViewServlet extends HttpServlet{
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.getRequestDispatcher("partials/register.html")
-				.forward(req, resp);	
-	}
-}
-=======
 @WebServlet("/loadRegView")
 public class LoadRegisterViewServlet extends HttpServlet{
 
@@ -42,4 +30,3 @@ public class LoadRegisterViewServlet extends HttpServlet{
                 .forward(req, resp); 
     }
 }
->>>>>>> master

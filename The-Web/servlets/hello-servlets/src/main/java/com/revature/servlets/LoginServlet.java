@@ -16,11 +16,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.service.DummyUserService;
 
 @WebServlet("/login")
-<<<<<<< HEAD
-public class LoginServlet extends HttpServlet{
-	
-	private static final long serialVersionUID = -4068263969926659142L;
-=======
 public class LoginServlet extends HttpServlet {
 	/*
 	 * Session Management 
@@ -63,7 +58,6 @@ public class LoginServlet extends HttpServlet {
 	 * 
 	 */
 	
->>>>>>> master
 	DummyUserService service = new DummyUserService();
 	static final Logger log = Logger.getLogger(LoginServlet.class);
 	

@@ -1,9 +1,5 @@
 window.onload = function(){
-<<<<<<< HEAD
-	loadLoginView();
-=======
    loadLoginView();
->>>>>>> master
 }
 
 function loadLoginView(){
@@ -21,19 +17,6 @@ function loadLoginView(){
 
 function logIn(){
     var user = {
-<<<<<<< HEAD
-    		username: $('#username').val(),
-            password: $('#pw').val()};
-    var json = JSON.stringify(user);
-    console.log(json);
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function() {
-    	if(xhr.readyState === 4){
-    		if(xhr.status == 200){
-    			alert("Success!");
-    		}
-    	}
-=======
         username: $('#username').val(), 
         password: $('#pw').val()};
     var json = JSON.stringify(user);
@@ -54,15 +37,10 @@ function logIn(){
                 //some other error, likely send to error page
             }
         }
->>>>>>> master
     }
     xhr.open("POST", "login");
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.send(json);
-<<<<<<< HEAD
-=======
-
->>>>>>> master
 }
 
 function loadRegisterView(){
