@@ -43,7 +43,7 @@ public class ReimbursementStatusRepository implements Repository<ReimbursementSt
 			}
 
 		} catch (SQLException e) {
-			log.error("SQLException in ReimbursementStatusRepository.readAll()", e);
+			log.error("SQLException in ReimbursementStatusRepository.create()", e);
 		}
 
 		return newItem;
