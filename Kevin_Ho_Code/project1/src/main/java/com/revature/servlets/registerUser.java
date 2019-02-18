@@ -27,12 +27,12 @@ public class registerUser extends HttpServlet{
 		PrintWriter writer = resp.getWriter();
 		resp.setContentType("text/html");
 		
-		if(user.findUserByUsername(tmp.getUsername()) != null)
+		if(user.findUserByUsername(tmp.getUsername()).equals(tmp.getUsername()))
 		{
 			resp.setStatus(409);
 			writer.write("<p><b><i>Username is taken</i></b></p>");
 		}
-		else if (user.findUserByEmail(tmp.getEmail()) != null)
+		else if (user.findUserByEmail(tmp.getEmail()).equals(tmp.getEmail()))
 		{
 			resp.setStatus(409);
 			writer.write("<p><b><i>Email is already linked to another account</i></b></p>");

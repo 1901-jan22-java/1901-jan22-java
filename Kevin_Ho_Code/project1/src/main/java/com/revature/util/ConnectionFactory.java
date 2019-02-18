@@ -30,7 +30,7 @@ public class ConnectionFactory {
 	public Connection getConnection() {
 		Connection conn = null;
 		Properties prop = new Properties();
-		String filepath = "src/main/resources/db.properties";
+		String filepath = "C:/Users/Kevin's MemeMachine/Documents/my_git_repos/1901-jan22-java/Kevin_Ho_Code/project1/src/main/resources/db.properties";
 		try {
 			prop.load(new FileReader(filepath));
 			Class.forName(prop.getProperty("driver"));

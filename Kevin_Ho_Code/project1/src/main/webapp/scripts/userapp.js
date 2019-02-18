@@ -61,26 +61,26 @@ function logIn(){
 
 function addUser(){
 	console.log("clicked");
-	if($('#role').attr('checked'))
+	if($('#roleId').attr('checked'))
 	{
 		var user = {
 	        username: $('#username').val(), 
 	        password: $('#password').val(),
-	        fn: $('#fn').val(),
-	        ln: $('#ln').val(),
+	        firstName: $('firstName').val(),
+	        lastName: $('lastName').val(),
 	        email: $('#email').val(),
-	        role: 1
+	        roleId: 1
 		};
 	}
 	else
 	{
 		var user = {
 		        username: $('#username').val(), 
-		        password: $('#pw').val(),
-		        fn: $('#fn').val(),
-		        ln: $('#ln').val(),
+		        password: $('#password').val(),
+		        firstName: $('#firstName').val(),
+		        lastName: $('#lastName').val(),
 		        email: $('#email').val(),
-		        role: 0
+		        roleId: 0
 			};
 	}
 	    var json = JSON.stringify(user);
@@ -88,7 +88,7 @@ function addUser(){
 	    var xhr = new XMLHttpRequest();
 	    xhr.onreadystatechange = function(){
 	        if(xhr.readyState == 4){
-	            if(xhr.status == 200){
+	            if(xhr.status == 201){
 	                //logged in successfully
 	            	alert("yayayayayyay");
 	            }

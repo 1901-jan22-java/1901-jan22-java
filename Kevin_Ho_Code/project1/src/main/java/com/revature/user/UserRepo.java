@@ -71,51 +71,43 @@ public class UserRepo {
 		
 	public User addUser( String username, String password, String firstName, 
 			String lastName, String email, int roleId){
-		if(findUserByUsername(username) == null)
-			return null;
-		else if(findUserByEmail(email) == null)
-			return null;
-		else
+		User tmp = new User();
+		try(Connection conn = ConnectionFactory.getInstance().getConnection())
 		{
-			User tmp = new User();
-			try(Connection conn = ConnectionFactory.getInstance().getConnection())
-			{
-				conn.setAutoCommit(false);
-				String sql = "INSERT INTO ers_users(ers_username, ers_password, user_first_name, "
-							+ "user_last_name, user_email, user_role_id) "
-							+ "values (?,?,?,?,?,?)";
-
-				String[] keys = {"ers_users_id"};
-				PreparedStatement ps = conn.prepareStatement(sql,keys);
-				
-				ps.setString(1, username);
-				ps.setString(2, password);
-				ps.setString(3, firstName);
-				ps.setString(4, lastName);
-				ps.setString(5, email);
-				ps.setInt(6, roleId);					
-						
-				int numRows = ps.executeUpdate();
-				conn.commit();
-						
-				if(numRows > 0) {
-					ResultSet pk = ps.getGeneratedKeys();
-					pk.next();
-					tmp.setUserId((pk.getInt(1)));
-					tmp.setUsername(username);
-					tmp.setPassword(password);
-					tmp.setFirstName(firstName);
-					tmp.setLastName(lastName);
-					tmp.setEmail(email);
-					tmp.setRoleId(roleId);
-				}
-				return tmp;
-						
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			conn.setAutoCommit(false);
+			String sql = "INSERT INTO ers_users(ers_username, ers_password, user_first_name, "
+						+ "user_last_name, user_email, user_role_id) "
+						+ "values (?,?,?,?,?,?)";
+			String[] keys = {"ers_users_id"};
+			PreparedStatement ps = conn.prepareStatement(sql,keys);
 			
-			return null;
+			ps.setString(1, username);
+			ps.setString(2, password);
+			ps.setString(3, firstName);
+			ps.setString(4, lastName);
+			ps.setString(5, email);
+			ps.setInt(6, roleId);					
+						
+			int numRows = ps.executeUpdate();
+			conn.commit();
+					
+			if(numRows > 0) {
+				ResultSet pk = ps.getGeneratedKeys();
+				pk.next();
+				tmp.setUserId((pk.getInt(1)));
+				tmp.setUsername(username);
+				tmp.setPassword(password);
+				tmp.setFirstName(firstName);
+				tmp.setLastName(lastName);
+				tmp.setEmail(email);
+				tmp.setRoleId(roleId);
+			}
+			return tmp;
+						
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
+		
+		return null;
 	}
 }
