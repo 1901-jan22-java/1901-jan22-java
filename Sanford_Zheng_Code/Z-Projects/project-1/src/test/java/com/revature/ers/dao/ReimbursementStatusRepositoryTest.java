@@ -13,11 +13,6 @@ import org.junit.Test;
 public class ReimbursementStatusRepositoryTest {
 
 	@Test
-	public void testGetTable() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
 	public void testCreate() {
 		fail("Not yet implemented"); // TODO
 	}

@@ -19,8 +19,12 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 
 	private static final Logger log = Logger.getLogger(ReimbursementRepository.class);
 
+	static {
+		log.trace("ReimbursementRepository Class Initialized.");
+	}
+	
 	public ReimbursementRepository() {
-		log.info("ReimbursementRepository Object Instantiated.");
+		log.trace("ReimbursementRepository Object Instantiated.");
 	}
 
 	@Override

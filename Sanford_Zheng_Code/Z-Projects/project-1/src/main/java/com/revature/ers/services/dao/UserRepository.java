@@ -18,7 +18,11 @@ public class UserRepository implements Repository<UserData> {
 	private static Logger log = Logger.getLogger(UserRepository.class);
 
 	static {
-		log.info("UserRepository Class Instantiated.");
+		log.trace("UserRepository Class Initialized.");
+	}
+	
+	public UserRepository() {
+		log.trace("UserRepository Object Instantiated.");
 	}
 
 	@Override
@@ -90,6 +94,7 @@ public class UserRepository implements Repository<UserData> {
 	@Override
 	public UserData update(Integer itemId, UserData newItem) {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

@@ -5,9 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
@@ -19,17 +17,12 @@ public class ReimbursementTypeRepository implements Repository<ReimbursementType
 
 	private static final Logger log = Logger.getLogger(ReimbursementTypeRepository.class);
 
-	private static final HashMap<Integer, String> image = new HashMap<>();
-
 	static {
-		log.info("ReimbursementTypeRepository Class Instantiated.");
+		log.trace("ReimbursementTypeRepository Class Initialized.");
 	}
 
-	public static HashMap<Integer, String> getTable() {
-		HashMap<Integer, String> clone = new HashMap<>();
-		for (Entry<Integer, String> kv : image.entrySet())
-			clone.put(kv.getKey(), kv.getValue());
-		return clone;
+	public ReimbursementTypeRepository() {
+		log.trace("ReimbursementTypeRepository Object Instantiated.");
 	}
 
 	@Override
@@ -54,7 +47,6 @@ public class ReimbursementTypeRepository implements Repository<ReimbursementType
 				Integer id = rs.getInt("type_id");
 				String type = rs.getString("reimb_type");
 
-				image.put(id, type);
 				res = new ReimbursementTypeData(id, type);
 			}
 
@@ -79,7 +71,6 @@ public class ReimbursementTypeRepository implements Repository<ReimbursementType
 				Integer id = rs.getInt("type_id");
 				String type = rs.getString("reimb_type");
 
-				image.put(id, type);
 				res.add(new ReimbursementTypeData(id, type));
 			}
 

@@ -8,6 +8,7 @@ public class User {
 	private String last_name;
 	private String email;
 	private String role;
+	
 	public User() {
 		super();
 	}
@@ -64,4 +65,7 @@ public class User {
 				+ last_name + ", email=" + email + ", role=" + role + "]";
 	}
 	
+	public User clone() {
+		return new User(this.username, this.password, this.first_name, this.last_name, this.email, this.role);
+	}
 }

@@ -8,12 +8,12 @@ import java.sql.SQLException;
 
 /**
  * I have no idea what to do here...
- * TODO: Figure it out...
+ * TODO: Figure it out... Q.Q
  * 
  * @author Sanford
  *
  */
-public class Receipt implements Serializable, Blob {
+public class Receipt implements Blob {
 	
 	private String details;
 
@@ -96,4 +96,11 @@ public class Receipt implements Serializable, Blob {
 		
 	}
 	
+	/**
+	 * When I figure out what this is I'll know what to do...
+	 * 
+	 */
+	public Receipt clone() {
+		return null;
+	}
 }

@@ -2,6 +2,7 @@ package com.revature.utils;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
@@ -36,6 +37,7 @@ public class MyUtilsTest {
 
 		assertEquals(NAME_FORMAT_EXPECTED, nameFormatActual);
 		assertArrayEquals(obfuscateExpected, obfuscateActual);
+		fail("This test case kinda sucks");
 	}
 
 }

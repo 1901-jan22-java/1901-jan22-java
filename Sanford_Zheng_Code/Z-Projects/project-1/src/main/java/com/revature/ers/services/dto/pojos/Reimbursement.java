@@ -95,4 +95,9 @@ public class Reimbursement {
 				+ resovler + ", status=" + status + ", type=" + type + "]";
 	}
 	
+	public Reimbursement clone() {
+		return new Reimbursement(this.amount, this.submitted, 
+				this.resolved, this.description, this.receipt.clone(), 
+				this.author.clone(), this.resovler.clone(), this.status, this.type);
+	}
 }

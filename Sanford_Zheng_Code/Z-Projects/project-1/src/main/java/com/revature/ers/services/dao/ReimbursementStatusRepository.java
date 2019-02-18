@@ -5,9 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
@@ -19,17 +17,12 @@ public class ReimbursementStatusRepository implements Repository<ReimbursementSt
 
 	private static final Logger log = Logger.getLogger(ReimbursementStatusRepository.class);
 
-	private static final HashMap<Integer, String> image = new HashMap<>();
-
 	static {
-		log.info("ReimbursementStatusRepository Class Instantiated.");
+		log.trace("ReimbursementStatusRepository Class Initialized.");
 	}
-
-	public static HashMap<Integer, String> getTable() {
-		HashMap<Integer, String> clone = new HashMap<>();
-		for (Entry<Integer, String> kv : image.entrySet())
-			clone.put(kv.getKey(), kv.getValue());
-		return clone;
+	
+	public ReimbursementStatusRepository() {
+		log.trace("ReimbursementStatusRepository Object Instantiated.");
 	}
 
 	@Override
@@ -53,7 +46,6 @@ public class ReimbursementStatusRepository implements Repository<ReimbursementSt
 				Integer id = rs.getInt("status_id");
 				String status = rs.getString("reimb_status");
 
-				image.put(id, status);
 				res = new ReimbursementStatusData(id, status);
 			}
 
@@ -78,7 +70,6 @@ public class ReimbursementStatusRepository implements Repository<ReimbursementSt
 				Integer id = rs.getInt("status_id");
 				String status = rs.getString("reimb_status");
 
-				image.put(id, status);
 				res.add(new ReimbursementStatusData(id, status));
 			}
 
