@@ -136,8 +136,37 @@ public class UserRoleRepository implements Repository<UserRoleData> {
 
 	@Override
 	public UserRoleData delete(UserRoleData item) {
-		// TODO Auto-generated method stub
+		UserRoleData res = null;
 
-		return null;
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			conn.setAutoCommit(false);
+
+			String sql = "select * from ers_user_roles where rold_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				Integer id = rs.getInt("role_id");
+				String role = rs.getString("user_role");
+
+				UserRoleData temp = new UserRoleData(id, role);
+
+				sql = "delete from ers_user_roles where rold_id = ?";
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, item.getRole_id());
+
+				if (ps.executeUpdate() > 0) {
+					conn.commit();
+					res = temp;
+				}
+			}
+			conn.setAutoCommit(true);
+
+		} catch (SQLException e) {
+			log.error("SQLException in ReimbursementStatusRepository.readAll()", e);
+		}
+
+		return res;
 	}
 }

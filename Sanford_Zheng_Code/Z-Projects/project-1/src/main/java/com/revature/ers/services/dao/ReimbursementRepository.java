@@ -202,7 +202,6 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-
 				Integer id = rs.getInt("reimb_id");
 				Integer amount = rs.getInt("amount");
 				Date submitted = rs.getDate("submitted");
