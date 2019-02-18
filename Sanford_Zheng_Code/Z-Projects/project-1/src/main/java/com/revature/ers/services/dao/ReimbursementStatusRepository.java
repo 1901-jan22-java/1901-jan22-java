@@ -67,6 +67,7 @@ public class ReimbursementStatusRepository implements Repository<ReimbursementSt
 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
+				log.trace("What is going on?");
 				Integer id = rs.getInt("status_id");
 				String status = rs.getString("reimb_status");
 

@@ -16,14 +16,14 @@ public class ConnectionFactory {
 	private static ConnectionFactory cf;
 	
 	private ConnectionFactory() {
-		log.info("INITIATED CONNECTIONFACTORY");
+		log.trace("INITIALIZED CONNECTIONFACTORY!");
 	}
 	
-	public static synchronized ConnectionFactory getInstance() {
+	public static ConnectionFactory getInstance() {
 		if(cf == null) {
 			cf = new ConnectionFactory();
 		}
-		log.info("RETURNING CONNECTIONFACTORY INSTANCE: " + cf.getClass());
+		log.trace("RETURNING CONNECTIONFACTORY INSTANCE: " + cf);
 		return cf;
 	}
 	
@@ -37,11 +37,10 @@ public class ConnectionFactory {
 			prop.load( new FileReader(filepath) );
 			Class.forName( prop.getProperty("driver") );
 			
-			conn = DriverManager.getConnection(
-					prop.getProperty("url"),
-					prop.getProperty("username"),
-					prop.getProperty("pwd")
-					);
+			conn = DriverManager.getConnection( prop.getProperty("url"),
+					prop.getProperty("username"), prop.getProperty("pwd") );
+			
+			log.trace("Connection Established!");
 		} catch(FileNotFoundException e) {
 			log.error("FileNotFoundException in getConnection()", e);
 		} catch(IOException e) {

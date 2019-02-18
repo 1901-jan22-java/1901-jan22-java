@@ -6,9 +6,9 @@ import java.sql.Date;
 import com.revature.ers.services.Receipt;
 
 public class ReimbursementData implements Serializable {
-	
+
 	private static final long serialVersionUID = 3307178767541629256L;
-	
+
 	private Integer reimb_id;
 	private Integer amount;
 	private Date submitted;
@@ -19,13 +19,13 @@ public class ReimbursementData implements Serializable {
 	private Integer resolver_id;
 	private Integer reimb_status_id;
 	private Integer reimb_type_id;
-	
+
 	public ReimbursementData() {
 		super();
 	}
-	public ReimbursementData(Integer reimb_id, Integer amount, Date submitted, Date resolved,
-			String reimb_description, Receipt receipt, Integer author_id, Integer resolver_id, Integer reimb_status_id,
-			Integer reimb_type_id) {
+
+	public ReimbursementData(Integer reimb_id, Integer amount, Date submitted, Date resolved, String reimb_description,
+			Receipt receipt, Integer author_id, Integer resolver_id, Integer reimb_status_id, Integer reimb_type_id) {
 		super();
 		this.reimb_id = reimb_id;
 		this.amount = amount;
@@ -118,6 +118,13 @@ public class ReimbursementData implements Serializable {
 	public void setReimb_type_id(Integer reimb_type_id) {
 		this.reimb_type_id = reimb_type_id;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "ReimbursementData [reimb_id=" + reimb_id + ", amount=" + amount + ", submitted=" + submitted
+				+ ", resolved=" + resolved + ", reimb_description=" + reimb_description + ", receipt=" + receipt
+				+ ", author_id=" + author_id + ", resolver_id=" + resolver_id + ", reimb_status_id=" + reimb_status_id
+				+ ", reimb_type_id=" + reimb_type_id + "]";
+	}
+
 }

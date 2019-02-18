@@ -6,6 +6,7 @@ import java.util.Collections;
 import com.revature.pojos.Person;
 
 public class ExploringComparisons {
+	
 	public static void main(String[] args) {
 		ArrayList<Person> people = new ArrayList<Person>();
 		people.add(new Person("Gen", "123"));

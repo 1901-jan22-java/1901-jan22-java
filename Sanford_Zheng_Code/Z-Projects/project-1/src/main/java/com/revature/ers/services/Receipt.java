@@ -2,19 +2,17 @@ package com.revature.ers.services;
 
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.Serializable;
 import java.sql.Blob;
 import java.sql.SQLException;
 
 /**
- * I have no idea what to do here...
- * TODO: Figure it out... Q.Q
+ * I have no idea what to do here... TODO: Figure it out... Q.Q
  * 
  * @author Sanford
  *
  */
 public class Receipt implements Blob {
-	
+
 	private String details;
 
 	public Receipt(String details) {
@@ -33,7 +31,7 @@ public class Receipt implements Blob {
 	@Override
 	public void free() throws SQLException {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -93,9 +91,9 @@ public class Receipt implements Blob {
 	@Override
 	public void truncate(long arg0) throws SQLException {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	/**
 	 * When I figure out what this is I'll know what to do...
 	 * 

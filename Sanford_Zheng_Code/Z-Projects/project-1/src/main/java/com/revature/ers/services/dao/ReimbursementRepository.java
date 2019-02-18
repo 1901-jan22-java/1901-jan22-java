@@ -22,7 +22,7 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 	static {
 		log.trace("ReimbursementRepository Class Initialized.");
 	}
-	
+
 	public ReimbursementRepository() {
 		log.trace("ReimbursementRepository Object Instantiated.");
 	}
@@ -126,15 +126,65 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 
 	@Override
 	public ReimbursementData update(Integer itemId, ReimbursementData newItem) {
-		// TODO Auto-generated method stub
+		ReimbursementData res = null;
 
-		return null;
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			String sql = "select * from ers_reimbursement where reimb_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, itemId);
+
+			ResultSet rs = ps.executeQuery();
+			if (!rs.next())
+				return null;
+
+			Integer id = rs.getInt("reimb_id");
+			Integer amount = rs.getInt("amount");
+			Date submitted = rs.getDate("submitted");
+			Date resolved = rs.getDate("resolved");
+			String description = rs.getString("reimb_description");
+			Receipt receipt = (Receipt) rs.getBlob("receipt");
+			Integer author_id = rs.getInt("author_id");
+			Integer resolver_id = rs.getInt("resolver_id");
+			Integer status_id = rs.getInt("reimb_status_id");
+			Integer type_id = rs.getInt("reimb_type_id");
+
+			res = new ReimbursementData(id, amount, submitted, resolved, description, receipt, author_id, resolver_id,
+					status_id, type_id);
+			sql = "update ers_reimbursement set amount = ?, submitted = ?, resolved = ?, "
+					+ "reimb_description = ?, receipt = ?, author_id = ?, resolver_id = ?, "
+					+ "reimb_status_id = ?, reimb_type_id = ?";
+			ps = conn.prepareStatement(sql);
+
+			if (ps.executeUpdate() <= 0)
+				return null;
+
+		} catch (SQLException e) {
+			log.error("SQLException in ReimbursementRepository.readAll()", e);
+			return null;
+		}
+
+		return res;
 	}
 
 	@Override
 	public boolean delete(ReimbursementData item) {
-		// TODO Auto-generated method stub
-		return false;
+
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			String sql = "delete from ers_reimbursement where reimb_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, item.getReimb_id());
+
+			if (ps.executeUpdate() <= 0)
+				return false;
+
+		} catch (SQLException e) {
+			log.error("SQLException in ReimbursementRepository.readAll()", e);
+			return false;
+		}
+
+		return true;
 	}
 
 }

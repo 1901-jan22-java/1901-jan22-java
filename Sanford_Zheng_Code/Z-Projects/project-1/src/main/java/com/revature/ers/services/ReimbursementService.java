@@ -8,7 +8,6 @@ import java.util.Map.Entry;
 import org.apache.log4j.Logger;
 
 import com.revature.ers.services.dto.pojos.Reimbursement;
-import com.revature.ers.services.dto.pojos.User;
 
 public class ReimbursementService {
 
