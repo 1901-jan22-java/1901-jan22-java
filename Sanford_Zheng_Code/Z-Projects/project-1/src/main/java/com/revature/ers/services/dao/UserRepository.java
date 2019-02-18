@@ -49,7 +49,7 @@ public class UserRepository implements Repository<UserData> {
 			}
 
 		} catch (SQLException e) {
-			log.error("SQLException in ReimbursementStatusRepository.readAll()", e);
+			log.error("SQLException in UserRepository.create()", e);
 		}
 
 		return newItem;
@@ -80,7 +80,7 @@ public class UserRepository implements Repository<UserData> {
 			}
 
 		} catch (SQLException e) {
-			log.error("SQLException in UserRepository.readAll()", e);
+			log.error("SQLException in UserRepository.read()", e);
 		}
 
 		return res;
@@ -128,7 +128,7 @@ public class UserRepository implements Repository<UserData> {
 			ps.setInt(1, itemId);
 
 			ResultSet rs = ps.executeQuery();
-			if (!rs.next()) {
+			if (rs.next()) {
 
 				Integer id = rs.getInt("user_id");
 				String username = rs.getString("username");
@@ -160,7 +160,7 @@ public class UserRepository implements Repository<UserData> {
 			conn.setAutoCommit(true);
 
 		} catch (SQLException e) {
-			log.error("SQLException in ReimbursementRepository.readAll()", e);
+			log.error("SQLException in UserRepository.update()", e);
 		}
 
 		return res;
@@ -202,7 +202,7 @@ public class UserRepository implements Repository<UserData> {
 			conn.setAutoCommit(true);
 
 		} catch (SQLException e) {
-			log.error("SQLException in ReimbursementRepository.readAll()", e);
+			log.error("SQLException in UserRepository.delete()", e);
 			return null;
 		}
 

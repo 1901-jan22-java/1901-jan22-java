@@ -69,7 +69,7 @@ public class ReimbursementStatusRepository implements Repository<ReimbursementSt
 			}
 
 		} catch (SQLException e) {
-			log.error("SQLException in ReimbursementStatusRepository.readAll()", e);
+			log.error("SQLException in ReimbursementStatusRepository.read()", e);
 		}
 
 		return res;
@@ -130,7 +130,7 @@ public class ReimbursementStatusRepository implements Repository<ReimbursementSt
 			conn.setAutoCommit(true);
 
 		} catch (SQLException e) {
-			log.error("SQLException in ReimbursementStatusRepository.readAll()", e);
+			log.error("SQLException in ReimbursementStatusRepository.update()", e);
 		}
 
 		return res;
@@ -166,8 +166,7 @@ public class ReimbursementStatusRepository implements Repository<ReimbursementSt
 			conn.setAutoCommit(true);
 
 		} catch (SQLException e) {
-			log.error("SQLException in ReimbursementStatusRepository.readAll()", e);
-			return null;
+			log.error("SQLException in ReimbursementStatusRepository.delete()", e);
 		}
 
 		return res;

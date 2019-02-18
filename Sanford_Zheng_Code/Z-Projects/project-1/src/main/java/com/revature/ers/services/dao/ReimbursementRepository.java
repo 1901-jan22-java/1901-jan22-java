@@ -55,7 +55,7 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 			}
 
 		} catch (SQLException e) {
-			log.error("SQLException in ReimbursementRepository.readAll()", e);
+			log.error("SQLException in ReimbursementRepository.create()", e);
 		}
 
 		return newItem;
@@ -90,7 +90,7 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 			}
 
 		} catch (SQLException e) {
-			log.error("SQLException in ReimbursementRepository.readAll()", e);
+			log.error("SQLException in ReimbursementRepository.read()", e);
 		}
 
 		return res;
@@ -182,7 +182,7 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 			conn.setAutoCommit(true);
 
 		} catch (SQLException e) {
-			log.error("SQLException in ReimbursementRepository.readAll()", e);
+			log.error("SQLException in ReimbursementRepository.update()", e);
 		}
 
 		return res;
@@ -229,7 +229,7 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 			conn.setAutoCommit(true);
 
 		} catch (SQLException e) {
-			log.error("SQLException in ReimbursementRepository.readAll()", e);
+			log.error("SQLException in ReimbursementRepository.delete()", e);
 		}
 
 		return res;

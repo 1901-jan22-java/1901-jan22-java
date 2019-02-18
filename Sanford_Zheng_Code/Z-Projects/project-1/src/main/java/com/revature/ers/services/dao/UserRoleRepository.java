@@ -43,7 +43,7 @@ public class UserRoleRepository implements Repository<UserRoleData> {
 			}
 
 		} catch (SQLException e) {
-			log.error("SQLException in ReimbursementStatusRepository.readAll()", e);
+			log.error("SQLException in UserRoleRepository.create()", e);
 		}
 
 		return newItem;
@@ -69,7 +69,7 @@ public class UserRoleRepository implements Repository<UserRoleData> {
 			}
 
 		} catch (SQLException e) {
-			log.error("SQLException in UserRoleRepository.readAll()", e);
+			log.error("SQLException in UserRoleRepository.read()", e);
 		}
 
 		return res;
@@ -128,7 +128,7 @@ public class UserRoleRepository implements Repository<UserRoleData> {
 			conn.setAutoCommit(true);
 
 		} catch (SQLException e) {
-			log.error("SQLException in ReimbursementStatusRepository.readAll()", e);
+			log.error("SQLException in UserRoleRepository.update()", e);
 		}
 
 		return res;
@@ -164,7 +164,7 @@ public class UserRoleRepository implements Repository<UserRoleData> {
 			conn.setAutoCommit(true);
 
 		} catch (SQLException e) {
-			log.error("SQLException in ReimbursementStatusRepository.readAll()", e);
+			log.error("SQLException in UserRoleRepository.delete()", e);
 		}
 
 		return res;
