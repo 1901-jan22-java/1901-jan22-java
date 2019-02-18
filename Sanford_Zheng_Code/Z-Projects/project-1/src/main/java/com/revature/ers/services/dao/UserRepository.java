@@ -20,16 +20,40 @@ public class UserRepository implements Repository<UserData> {
 	static {
 		log.trace("UserRepository Class Initialized.");
 	}
-	
+
 	public UserRepository() {
 		log.trace("UserRepository Object Instantiated.");
 	}
 
 	@Override
-	public boolean create(UserData newItem) {
-		// TODO Auto-generated method stub
+	public UserData create(UserData newItem) {
 
-		return false;
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			String sql = "insert into ers_users(username, password, first_name, last_name, email, rold_id) "
+					+ "values(?, ?, ?, ?, ?, ?)";
+			String[] keys = { "user_id" };
+			PreparedStatement ps = conn.prepareStatement(sql, keys);
+			ps.setString(1, newItem.getUsername());
+			ps.setString(2, newItem.getPassword());
+			ps.setString(3, newItem.getFirst_name());
+			ps.setString(4, newItem.getLast_name());
+			ps.setString(5, newItem.getEmail());
+			ps.setInt(6, newItem.getRole_id());
+
+			if (ps.executeUpdate() > 0) {
+				ResultSet rs = ps.getGeneratedKeys();
+				if (rs.next()) {
+					newItem.setUser_id(rs.getInt("user_id"));
+				}
+			}
+
+		} catch (SQLException e) {
+			log.error("SQLException in ReimbursementStatusRepository.readAll()", e);
+		}
+
+		return newItem;
+
 	}
 
 	@Override
@@ -93,15 +117,95 @@ public class UserRepository implements Repository<UserData> {
 
 	@Override
 	public UserData update(Integer itemId, UserData newItem) {
-		// TODO Auto-generated method stub
-		
-		return null;
+		UserData res = null;
+
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			conn.setAutoCommit(false);
+
+			String sql = "select * from ers_users where user_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, itemId);
+
+			ResultSet rs = ps.executeQuery();
+			if (!rs.next()) {
+
+				Integer id = rs.getInt("user_id");
+				String username = rs.getString("username");
+				String password = rs.getString("password");
+				String first_name = rs.getString("first_name");
+				String last_name = rs.getString("last_name");
+				String email = rs.getString("email");
+				Integer role_id = rs.getInt("role_id");
+				UserData temp = new UserData(id, username, password, first_name, 
+						last_name, email, role_id);
+
+				sql = "update ers_reimbursement set username = ?, password = ?, first_name = ?, "
+						+ "last_name = ?, email = ?, role_id = ? where user_id = ?";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, newItem.getUsername());
+				ps.setString(2, newItem.getPassword());
+				ps.setString(3, newItem.getFirst_name());
+				ps.setString(4, newItem.getLast_name());
+				ps.setString(5, newItem.getEmail());
+				ps.setInt(6, newItem.getRole_id());
+				ps.setInt(7, itemId);
+
+				if (ps.executeUpdate() > 0) {
+					conn.commit();
+					res = temp;
+				}
+			}
+
+			conn.setAutoCommit(true);
+
+		} catch (SQLException e) {
+			log.error("SQLException in ReimbursementRepository.readAll()", e);
+		}
+
+		return res;
 	}
 
 	@Override
-	public boolean delete(UserData item) {
-		// TODO Auto-generated method stub
+	public UserData delete(UserData item) {
+		UserData res = null;
 
-		return false;
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			conn.setAutoCommit(false);
+
+			String sql = "select * from ers_users where user_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, item.getUser_id());
+
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				Integer id = rs.getInt("user_id");
+				String username = rs.getString("username");
+				String password = rs.getString("password");
+				String first_name = rs.getString("first_name");
+				String last_name = rs.getString("last_name");
+				String email = rs.getString("email");
+				Integer role_id = rs.getInt("role_id");
+				UserData temp = new UserData(id, username, password, first_name,
+						last_name, email, role_id);
+
+				sql = "delete from ers_users where user_id = ?";
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, item.getUser_id());
+
+				if (ps.executeUpdate() > 0) {
+					conn.commit();
+					res = temp;
+				}
+			}
+			conn.setAutoCommit(true);
+
+		} catch (SQLException e) {
+			log.error("SQLException in ReimbursementRepository.readAll()", e);
+			return null;
+		}
+
+		return res;
 	}
 }

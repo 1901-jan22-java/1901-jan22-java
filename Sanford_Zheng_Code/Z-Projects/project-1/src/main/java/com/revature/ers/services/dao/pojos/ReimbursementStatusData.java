@@ -13,6 +13,11 @@ public class ReimbursementStatusData implements Serializable {
 		super();
 	}
 
+	public ReimbursementStatusData(String reimb_status) {
+		super();
+		this.reimb_status = reimb_status;
+	}
+
 	public ReimbursementStatusData(Integer status_id, String reimb_status) {
 		super();
 		this.status_id = status_id;

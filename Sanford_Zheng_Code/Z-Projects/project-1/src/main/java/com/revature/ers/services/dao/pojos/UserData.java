@@ -18,6 +18,17 @@ public class UserData implements Serializable {
 		super();
 	}
 
+	public UserData(String username, String password, String first_name, String last_name, String email,
+			Integer role_id) {
+		super();
+		this.username = username;
+		this.password = password;
+		this.first_name = first_name;
+		this.last_name = last_name;
+		this.email = email;
+		this.role_id = role_id;
+	}
+
 	public UserData(Integer user_id, String username, String password, String first_name, String last_name,
 			String email, Integer role_id) {
 		super();

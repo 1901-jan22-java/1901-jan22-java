@@ -79,7 +79,7 @@ create sequence ers_user_id_seq;
     Create Triggers
 ********************************************************************************/
 create or replace trigger ers_reimb_create_trig
-before insert on ers_reimbursement
+before insert or update on ers_reimbursement
 for each row
 begin
     select ers_reimb_id_seq.nextval into :new.reimb_id from dual;

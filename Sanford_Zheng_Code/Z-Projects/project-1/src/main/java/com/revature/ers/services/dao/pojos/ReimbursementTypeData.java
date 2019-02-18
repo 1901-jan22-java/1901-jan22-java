@@ -13,6 +13,11 @@ public class ReimbursementTypeData implements Serializable {
 		super();
 	}
 
+	public ReimbursementTypeData(String reimb_type) {
+		super();
+		this.reimb_type = reimb_type;
+	}
+
 	public ReimbursementTypeData(Integer type_id, String reimb_type) {
 		super();
 		this.type_id = type_id;

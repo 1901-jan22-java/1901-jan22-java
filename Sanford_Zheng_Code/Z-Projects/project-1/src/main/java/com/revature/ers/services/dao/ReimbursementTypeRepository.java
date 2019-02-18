@@ -26,10 +26,27 @@ public class ReimbursementTypeRepository implements Repository<ReimbursementType
 	}
 
 	@Override
-	public boolean create(ReimbursementTypeData newItem) {
-		// TODO Auto-generated method stub
+	public ReimbursementTypeData create(ReimbursementTypeData newItem) {
 
-		return false;
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			String sql = "insert into ers_reimbursement_type(reimb_type) values(?)";
+			String[] keys = { "type_id" };
+			PreparedStatement ps = conn.prepareStatement(sql, keys);
+			ps.setString(1, newItem.getReimb_type());
+
+			if (ps.executeUpdate() > 0) {
+				ResultSet rs = ps.getGeneratedKeys();
+				if (rs.next()) {
+					newItem.setType_id(rs.getInt("type_id"));
+				}
+			}
+		} catch (SQLException e) {
+			log.error("SQLException in ReimbursementTypeRepository.readAll()", e);
+		}
+
+		return newItem;
+
 	}
 
 	@Override
@@ -83,13 +100,73 @@ public class ReimbursementTypeRepository implements Repository<ReimbursementType
 
 	@Override
 	public ReimbursementTypeData update(Integer itemId, ReimbursementTypeData newItem) {
-		// TODO Auto-generated method stub
-		return null;
+		ReimbursementTypeData res = null;
+
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			conn.setAutoCommit(false);
+
+			String sql = "select * from ers_reimbursement_type where type_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, itemId);
+
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				ReimbursementTypeData temp = new ReimbursementTypeData(rs.getInt("type_id"),
+						rs.getString("reimb_type"));
+
+				sql = "update ers_reimbursement_type set reimb_type = ? where type_id = ?";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, newItem.getReimb_type());
+				ps.setInt(2, itemId);
+
+				if (ps.executeUpdate() > 0) {
+					conn.commit();
+					res = temp;
+				}
+			}
+			conn.setAutoCommit(true);
+
+		} catch (SQLException e) {
+			log.error("SQLException in ReimbursementTypeRepository.readAll()", e);
+		}
+
+		return res;
 	}
 
 	@Override
-	public boolean delete(ReimbursementTypeData item) {
-		// TODO Auto-generated method stub
-		return false;
+	public ReimbursementTypeData delete(ReimbursementTypeData item) {
+		ReimbursementTypeData res = null;
+
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			conn.setAutoCommit(false);
+
+			String sql = "select * from ers_reimbursement_type where type_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				Integer id = rs.getInt("type_id");
+				String type = rs.getString("reimb_type");
+
+				ReimbursementTypeData temp = new ReimbursementTypeData(id, type);
+
+				sql = "delete from ers_reimbursement_type where type_id = ?";
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, item.getType_id());
+
+				if (ps.executeUpdate() > 0) {
+					conn.commit();
+					res = temp;
+				}
+			}
+			conn.setAutoCommit(true);
+
+		} catch (SQLException e) {
+			log.error("SQLException in ReimbursementTypeRepository.readAll()", e);
+		}
+
+		return res;
 	}
 }

@@ -20,15 +20,34 @@ public class ReimbursementStatusRepository implements Repository<ReimbursementSt
 	static {
 		log.trace("ReimbursementStatusRepository Class Initialized.");
 	}
-	
+
 	public ReimbursementStatusRepository() {
 		log.trace("ReimbursementStatusRepository Object Instantiated.");
 	}
 
 	@Override
-	public boolean create(ReimbursementStatusData newItem) {
-		// TODO Auto-generated method stub
-		return false;
+	public ReimbursementStatusData create(ReimbursementStatusData newItem) {
+
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			String sql = "insert into ers_reimbursement_status(reimb_status) values(?)";
+			String[] keys = { "status_id" };
+			PreparedStatement ps = conn.prepareStatement(sql, keys);
+			ps.setString(1, newItem.getReimb_status());
+
+			if (ps.executeUpdate() > 0) {
+				ResultSet rs = ps.getGeneratedKeys();
+				if (rs.next()) {
+					newItem.setStatus_id(rs.getInt("status_id"));
+				}
+			}
+
+		} catch (SQLException e) {
+			log.error("SQLException in ReimbursementStatusRepository.readAll()", e);
+		}
+
+		return newItem;
+
 	}
 
 	@Override
@@ -83,13 +102,74 @@ public class ReimbursementStatusRepository implements Repository<ReimbursementSt
 
 	@Override
 	public ReimbursementStatusData update(Integer itemId, ReimbursementStatusData newItem) {
-		// TODO Auto-generated method stub
-		return null;
+		ReimbursementStatusData res = null;
+
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			conn.setAutoCommit(false);
+
+			String sql = "select * from ers_reimbursement_status where status_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, itemId);
+
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				ReimbursementStatusData temp = new ReimbursementStatusData(rs.getInt("status_id"),
+						rs.getString("reimb_status"));
+
+				sql = "update ers_reimbursement_status set reimb_status = ? where status_id = ?";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, newItem.getReimb_status());
+				ps.setInt(2, itemId);
+
+				if (ps.executeUpdate() > 0) {
+					conn.commit();
+					res = temp;
+				}
+			}
+			conn.setAutoCommit(true);
+
+		} catch (SQLException e) {
+			log.error("SQLException in ReimbursementStatusRepository.readAll()", e);
+		}
+
+		return res;
 	}
 
 	@Override
-	public boolean delete(ReimbursementStatusData item) {
-		// TODO Auto-generated method stub
-		return false;
+	public ReimbursementStatusData delete(ReimbursementStatusData item) {
+		ReimbursementStatusData res = null;
+
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			conn.setAutoCommit(false);
+
+			String sql = "select * from ers_reimbursement_status where status_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				Integer id = rs.getInt("status_id");
+				String status = rs.getString("reimb_status");
+
+				ReimbursementStatusData temp = new ReimbursementStatusData(id, status);
+
+				sql = "delete from ers_reimbursement_status where status_id = ?";
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, item.getStatus_id());
+
+				if (ps.executeUpdate() > 0) {
+					conn.commit();
+					res = temp;
+				}
+			}
+			conn.setAutoCommit(true);
+
+		} catch (SQLException e) {
+			log.error("SQLException in ReimbursementStatusRepository.readAll()", e);
+			return null;
+		}
+
+		return res;
 	}
 }

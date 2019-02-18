@@ -24,6 +24,20 @@ public class ReimbursementData implements Serializable {
 		super();
 	}
 
+	public ReimbursementData(Integer amount, Date submitted, Date resolved, String reimb_description,
+			Receipt receipt, Integer author_id, Integer resolver_id, Integer reimb_status_id, Integer reimb_type_id) {
+		super();
+		this.amount = amount;
+		this.submitted = submitted;
+		this.resolved = resolved;
+		this.reimb_description = reimb_description;
+		this.receipt = receipt;
+		this.author_id = author_id;
+		this.resolver_id = resolver_id;
+		this.reimb_status_id = reimb_status_id;
+		this.reimb_type_id = reimb_type_id;
+	}
+	
 	public ReimbursementData(Integer reimb_id, Integer amount, Date submitted, Date resolved, String reimb_description,
 			Receipt receipt, Integer author_id, Integer resolver_id, Integer reimb_status_id, Integer reimb_type_id) {
 		super();

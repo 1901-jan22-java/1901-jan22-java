@@ -28,14 +28,15 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 	}
 
 	@Override
-	public boolean create(ReimbursementData newItem) {
+	public ReimbursementData create(ReimbursementData newItem) {
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
 			String sql = "insert into ers_reimbursement(amount, submitted, resolved, "
 					+ "reimb_description, receipt, author_id, resolver_id, reimb_status_id, "
 					+ "reimb_type_id) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
-			PreparedStatement ps = conn.prepareStatement(sql);
+			String[] keys = { "reimb_id" };
+			PreparedStatement ps = conn.prepareStatement(sql, keys);
 			ps.setInt(1, newItem.getAmount());
 			ps.setDate(2, newItem.getSubmitted());
 			ps.setDate(3, newItem.getResolved());
@@ -46,15 +47,19 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 			ps.setInt(8, newItem.getReimb_status_id());
 			ps.setInt(9, newItem.getReimb_type_id());
 
-			if (ps.executeUpdate() <= 0)
-				return false;
+			if (ps.executeUpdate() > 0) {
+				ResultSet rs = ps.getGeneratedKeys();
+				if (rs.next()) {
+					newItem.setReimb_id(rs.getInt("reimb_id"));
+				}
+			}
 
 		} catch (SQLException e) {
 			log.error("SQLException in ReimbursementRepository.readAll()", e);
-			return false;
 		}
 
-		return true;
+		return newItem;
+
 	}
 
 	@Override
@@ -130,61 +135,105 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
+			conn.setAutoCommit(false);
+
 			String sql = "select * from ers_reimbursement where reimb_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, itemId);
 
 			ResultSet rs = ps.executeQuery();
-			if (!rs.next())
-				return null;
+			if (rs.next()) {
+				Integer id = rs.getInt("reimb_id");
+				Integer amount = rs.getInt("amount");
+				Date submitted = rs.getDate("submitted");
+				Date resolved = rs.getDate("resolved");
+				String description = rs.getString("reimb_description");
+				Receipt receipt = (Receipt) rs.getBlob("receipt");
+				Integer author_id = rs.getInt("author_id");
+				Integer resolver_id = rs.getInt("resolver_id");
+				Integer status_id = rs.getInt("reimb_status_id");
+				Integer type_id = rs.getInt("reimb_type_id");
 
-			Integer id = rs.getInt("reimb_id");
-			Integer amount = rs.getInt("amount");
-			Date submitted = rs.getDate("submitted");
-			Date resolved = rs.getDate("resolved");
-			String description = rs.getString("reimb_description");
-			Receipt receipt = (Receipt) rs.getBlob("receipt");
-			Integer author_id = rs.getInt("author_id");
-			Integer resolver_id = rs.getInt("resolver_id");
-			Integer status_id = rs.getInt("reimb_status_id");
-			Integer type_id = rs.getInt("reimb_type_id");
+				ReimbursementData temp = new ReimbursementData(id, amount, submitted, resolved, description, receipt,
+						author_id, resolver_id, status_id, type_id);
 
-			res = new ReimbursementData(id, amount, submitted, resolved, description, receipt, author_id, resolver_id,
-					status_id, type_id);
-			sql = "update ers_reimbursement set amount = ?, submitted = ?, resolved = ?, "
-					+ "reimb_description = ?, receipt = ?, author_id = ?, resolver_id = ?, "
-					+ "reimb_status_id = ?, reimb_type_id = ?";
-			ps = conn.prepareStatement(sql);
+				sql = "update ers_reimbursement set amount = ?, submitted = ?, resolved = ?, "
+						+ "reimb_description = ?, receipt = ?, author_id = ?, resolver_id = ?, "
+						+ "reimb_status_id = ?, reimb_type_id = ? where reimb_id = ?";
+				ps = conn.prepareStatement(sql);
 
-			if (ps.executeUpdate() <= 0)
-				return null;
+				ps.setInt(1, newItem.getAmount());
+				ps.setDate(2, newItem.getSubmitted());
+				ps.setDate(3, newItem.getResolved());
+				ps.setString(4, newItem.getReimb_description());
+				ps.setBlob(5, newItem.getReceipt());
+				ps.setInt(6, newItem.getAuthor_id());
+				ps.setInt(7, newItem.getResolver_id());
+				ps.setInt(8, newItem.getReimb_status_id());
+				ps.setInt(9, newItem.getReimb_type_id());
+				ps.setInt(10, itemId);
+
+				if (ps.executeUpdate() > 0) {
+					conn.commit();
+					res = temp;
+				}
+			}
+
+			conn.setAutoCommit(true);
 
 		} catch (SQLException e) {
 			log.error("SQLException in ReimbursementRepository.readAll()", e);
-			return null;
 		}
 
 		return res;
 	}
 
 	@Override
-	public boolean delete(ReimbursementData item) {
+	public ReimbursementData delete(ReimbursementData item) {
+		ReimbursementData res = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-			String sql = "delete from ers_reimbursement where reimb_id = ?";
+			conn.setAutoCommit(false);
+
+			String sql = "select * from ers_reimbursement where reimb_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, item.getReimb_id());
 
-			if (ps.executeUpdate() <= 0)
-				return false;
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+
+				Integer id = rs.getInt("reimb_id");
+				Integer amount = rs.getInt("amount");
+				Date submitted = rs.getDate("submitted");
+				Date resolved = rs.getDate("resolved");
+				String description = rs.getString("reimb_description");
+				Receipt receipt = (Receipt) rs.getBlob("receipt");
+				Integer author_id = rs.getInt("author_id");
+				Integer resolver_id = rs.getInt("resolver_id");
+				Integer status_id = rs.getInt("reimb_status_id");
+				Integer type_id = rs.getInt("reimb_type_id");
+				ReimbursementData temp = new ReimbursementData(id, amount, submitted, 
+						resolved, description, receipt, author_id, resolver_id, 
+						status_id, type_id);
+
+				sql = "delete from ers_reimbursement where reimb_id = ?";
+				ps = conn.prepareStatement(sql);
+				ps.setInt(1, item.getReimb_id());
+
+				if (ps.executeUpdate() > 0) {
+					conn.commit();
+					res = temp;
+				}
+			}
+
+			conn.setAutoCommit(true);
 
 		} catch (SQLException e) {
 			log.error("SQLException in ReimbursementRepository.readAll()", e);
-			return false;
 		}
 
-		return true;
+		return res;
 	}
 
 }

@@ -13,6 +13,11 @@ public class UserRoleData implements Serializable {
 		super();
 	}
 
+	public UserRoleData(String user_role) {
+		super();
+		this.user_role = user_role;
+	}
+
 	public UserRoleData(Integer role_id, String user_role) {
 		super();
 		this.role_id = role_id;

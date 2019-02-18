@@ -24,12 +24,30 @@ public class UserRoleRepository implements Repository<UserRoleData> {
 	public UserRoleRepository() {
 		log.trace("UserRoleRepository Object Instantiated.");
 	}
-	
-	@Override
-	public boolean create(UserRoleData newItem) {
-		// TODO Auto-generated method stub
 
-		return false;
+	@Override
+	public UserRoleData create(UserRoleData newItem) {
+
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			String sql = "insert into ers_user_roles(user_role) values(?)";
+			String[] keys = { "type_id" };
+			PreparedStatement ps = conn.prepareStatement(sql, keys);
+			ps.setString(1, newItem.getUser_role());
+
+			if (ps.executeUpdate() > 0) {
+				ResultSet rs = ps.getGeneratedKeys();
+				if (rs.next()) {
+					newItem.setRole_id(rs.getInt("role_id"));
+				}
+			}
+
+		} catch (SQLException e) {
+			log.error("SQLException in ReimbursementStatusRepository.readAll()", e);
+		}
+
+		return newItem;
+
 	}
 
 	@Override
@@ -37,7 +55,7 @@ public class UserRoleRepository implements Repository<UserRoleData> {
 		UserRoleData res = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			
+
 			String sql = "select * from ers_user_role where role_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, itemId);
@@ -49,7 +67,7 @@ public class UserRoleRepository implements Repository<UserRoleData> {
 
 				res = new UserRoleData(id, role);
 			}
-			
+
 		} catch (SQLException e) {
 			log.error("SQLException in UserRoleRepository.readAll()", e);
 		}
@@ -62,7 +80,7 @@ public class UserRoleRepository implements Repository<UserRoleData> {
 		List<UserRoleData> res = new ArrayList<>();
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			
+
 			String sql = "select * from ers_user_role";
 			PreparedStatement ps = conn.prepareStatement(sql);
 
@@ -73,7 +91,7 @@ public class UserRoleRepository implements Repository<UserRoleData> {
 
 				res.add(new UserRoleData(id, role));
 			}
-			
+
 		} catch (SQLException e) {
 			log.error("SQLException in UserRoleRepository.readAll()", e);
 		}
@@ -83,14 +101,43 @@ public class UserRoleRepository implements Repository<UserRoleData> {
 
 	@Override
 	public UserRoleData update(Integer itemId, UserRoleData newItem) {
-		// TODO Auto-generated method stub
-		return null;
+		UserRoleData res = null;
+
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			conn.setAutoCommit(false);
+
+			String sql = "select * from ers_user_roles where role_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, itemId);
+
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				UserRoleData temp = new UserRoleData(rs.getInt("role_id"), rs.getString("user_role"));
+
+				sql = "update ers_user_roles set user_role = ? where role_id = ?";
+				ps = conn.prepareStatement(sql);
+				ps.setString(1, newItem.getUser_role());
+				ps.setInt(2, itemId);
+
+				if (ps.executeUpdate() > 0) {
+					conn.commit();
+					res = temp;
+				}
+			}
+			conn.setAutoCommit(true);
+
+		} catch (SQLException e) {
+			log.error("SQLException in ReimbursementStatusRepository.readAll()", e);
+		}
+
+		return res;
 	}
 
 	@Override
-	public boolean delete(UserRoleData item) {
+	public UserRoleData delete(UserRoleData item) {
 		// TODO Auto-generated method stub
 
-		return false;
+		return null;
 	}
 }
