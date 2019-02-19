@@ -30,7 +30,7 @@ public class logIn extends HttpServlet{
 		PrintWriter writer = resp.getWriter();
 		resp.setContentType("text/html");
 		u = userRep.logIn(u.getUsername(), u.getPassword());
-		if(u.getUsername() == null){
+		if(u.getUsername() == null || u == null){
 			resp.setStatus(409);
 			writer.write("<p><b><i>Log In Credentials Invalid</i></b></p>");
 		}
