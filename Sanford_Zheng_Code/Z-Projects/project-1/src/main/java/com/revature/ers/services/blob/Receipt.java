@@ -1,4 +1,4 @@
-package com.revature.ers.services;
+package com.revature.ers.services.blob;
 
 import java.io.InputStream;
 import java.io.OutputStream;

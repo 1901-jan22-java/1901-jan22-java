@@ -18,4 +18,4 @@ insert into ers_user_roles(user_role) values('Finance Manager');
 commit;
 
 
-rollback;
+--rollback;

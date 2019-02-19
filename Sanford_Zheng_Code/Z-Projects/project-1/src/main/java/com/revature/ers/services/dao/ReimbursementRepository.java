@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 
 import com.jdbc.utils.ConnectionFactory;
 import com.revature.ers.interfaces.Repository;
-import com.revature.ers.services.Receipt;
+import com.revature.ers.services.blob.Receipt;
 import com.revature.ers.services.dao.dto.Reimbursement;
 import com.revature.ers.services.dao.pojos.ReimbursementData;
 

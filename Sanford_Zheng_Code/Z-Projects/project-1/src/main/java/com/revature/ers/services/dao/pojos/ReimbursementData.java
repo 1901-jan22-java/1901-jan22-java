@@ -3,7 +3,7 @@ package com.revature.ers.services.dao.pojos;
 import java.io.Serializable;
 import java.sql.Date;
 
-import com.revature.ers.services.Receipt;
+import com.revature.ers.services.blob.Receipt;
 
 public class ReimbursementData implements Serializable {
 

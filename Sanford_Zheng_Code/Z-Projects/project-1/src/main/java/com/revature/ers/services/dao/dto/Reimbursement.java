@@ -2,7 +2,7 @@ package com.revature.ers.services.dao.dto;
 
 import java.sql.Date;
 
-import com.revature.ers.services.Receipt;
+import com.revature.ers.services.blob.Receipt;
 
 public class Reimbursement {
 

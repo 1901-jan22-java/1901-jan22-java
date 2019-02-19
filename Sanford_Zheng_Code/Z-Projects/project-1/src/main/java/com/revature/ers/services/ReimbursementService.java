@@ -6,6 +6,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.revature.ers.services.dao.ReimbursementRepository;
 import com.revature.ers.services.dao.ReimbursementStatusRepository;
 import com.revature.ers.services.dao.ReimbursementTypeRepository;
@@ -22,11 +24,12 @@ public class ReimbursementService {
 	private static final ReimbursementTypeRepository reimbTypeRepo = new ReimbursementTypeRepository();
 	private static final ReimbursementStatusRepository reimbStatusRepo = new ReimbursementStatusRepository();
 
-	private static final List<Reimbursement> reimbursements = new ArrayList<>();
+	private static List<Reimbursement> reimbursements = new ArrayList<>();
 
 	private static final HashMap<Integer, ReimbursementData> rawData = new HashMap<>();
-	private static final HashMap<Integer, ReimbursementTypeData> types = new HashMap<>();
-	private static final HashMap<Integer, ReimbursementStatusData> status = new HashMap<>();
+
+	private static final BiMap<Integer, String> status = HashBiMap.create();
+	private static final BiMap<Integer, String> types = HashBiMap.create();
 
 	static {
 		loadDataImage();
@@ -47,27 +50,27 @@ public class ReimbursementService {
 	}
 
 	public static void loadDataImage() {
-		for(ReimbursementData rd : reimbRepo.readAll()) {
+		for (ReimbursementData rd : reimbRepo.readAll()) {
 			rawData.put(rd.getReimb_id(), rd);
 		}
-		for(ReimbursementTypeData rtd : reimbTypeRepo.readAll()) {
-			types.put(rtd.getType_id(), rtd);
+		for (ReimbursementStatusData rsd : reimbStatusRepo.readAll()) {
+			status.put(rsd.getStatus_id(), rsd.getReimb_status());
 		}
-		for(ReimbursementStatusData rsd : reimbStatusRepo.readAll()) {
-			status.put(rsd.getStatus_id(), rsd);
+		for (ReimbursementTypeData rtd : reimbTypeRepo.readAll()) {
+			types.put(rtd.getType_id(), rtd.getReimb_type());
 		}
 	}
-	
+
 	public static HashMap<Integer, ReimbursementData> getRawData() {
 		return rawData;
 	}
 
-	public static HashMap<Integer, ReimbursementTypeData> getTypes() {
-		return types;
+	public static BiMap<Integer, String> getStatus() {
+		return status;
 	}
 
-	public static HashMap<Integer, ReimbursementStatusData> getStatus() {
-		return status;
+	public static BiMap<Integer, String> getTypes() {
+		return types;
 	}
 
 }
