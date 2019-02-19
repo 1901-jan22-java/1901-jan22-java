@@ -1,12 +1,12 @@
 package com.revature.ers.interfaces;
 
 /**
- * I don't know what goes in here!!!! LET THE ANTI-PATTERNS COMMENCE!
+ * Should this also be CRUD access to the database? Then what's the
+ * point of the DAOs?
  * 
  * @author Sanford
  *
  */
-
 public interface DataTransferObject {
 
 }

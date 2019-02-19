@@ -3,49 +3,58 @@ package com.revature.ers.services;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
-import com.revature.ers.services.dto.pojos.User;
+import com.revature.ers.services.dao.UserRepository;
+import com.revature.ers.services.dao.UserRoleRepository;
+import com.revature.ers.services.dao.dto.User;
+import com.revature.ers.services.dao.pojos.UserData;
+import com.revature.ers.services.dao.pojos.UserRoleData;
 
 public class UserService {
 	
 	private static final Logger log = Logger.getLogger(UserService.class);
 	
-	private static final HashMap<Integer, String> roles = new HashMap<>();
+	private static final UserRepository userRepo = new UserRepository();
+	private static final UserRoleRepository roleRepo = new UserRoleRepository();
 	
-	private static final List<User> users = new ArrayList<>();
-
+	private static final List<User> usersDTOs = new ArrayList<>();
+	
+	private static final HashMap<Integer, UserData> rawData = new HashMap<>();
+	private static final HashMap<Integer, String > roles = new HashMap<>();
+	
 	static {
+		loadDataImage();
 		log.trace("UserService Class Initialized.");
 	}
 
-	/*
-	 * There is no point in making this an instance object...
-	 * unless it's multi-threaded :O
-	 */
 	public UserService() {
+		loadDataImage();
 		log.trace("UserService Object Instantiated.");
 	}
 	
+	public static void loadDataImage() {
+		for(UserData ud: userRepo.readAll())
+			rawData.put(ud.getUser_id(), ud);
+		for(UserRoleData urd: roleRepo.readAll())
+			roles.put(urd.getRole_id(), urd.getUser_role());
+	}
+	
 	public static HashMap<Integer, String> getRoles() {
-		HashMap<Integer, String> clone = new HashMap<>();
-		for (Entry<Integer, String> kv : roles.entrySet())
-			clone.put(kv.getKey(), kv.getValue());
-		return clone;
+		return roles;
 	}
 	
 	public static List<User> getAllUsers() {
-		return users;
+		return usersDTOs;
 	}
 	
 	public static void addUser(User u) {
-		users.add(u);
+		usersDTOs.add(u);
 	}
 	
 	public static User getByUsername(String un) {
-		return users.stream()
+		return usersDTOs.stream()
 				.filter(user -> user.getUsername().equalsIgnoreCase(un))
 				.findAny()
 				.orElse(null);

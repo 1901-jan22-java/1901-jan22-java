@@ -1,4 +1,4 @@
-package com.revature.ers.services.dto.pojos;
+package com.revature.ers.services.dao.dto;
 
 import java.sql.Date;
 
@@ -11,8 +11,8 @@ public class Reimbursement {
 	private Date resolved;
 	private String description;
 	private Receipt receipt;
-	private User author;
-	private User resovler;
+	private String author;
+	private String resolver;
 	private String status;
 	private String type;
 
@@ -21,7 +21,7 @@ public class Reimbursement {
 	}
 
 	public Reimbursement(Integer amount, Date submitted, Date resolved, String description, Receipt receipt,
-			User author, User resovler, String status, String type) {
+			String author, String resolver, String status, String type) {
 		super();
 		this.amount = amount;
 		this.submitted = submitted;
@@ -29,7 +29,7 @@ public class Reimbursement {
 		this.description = description;
 		this.receipt = receipt;
 		this.author = author;
-		this.resovler = resovler;
+		this.resolver = resolver;
 		this.status = status;
 		this.type = type;
 	}
@@ -74,20 +74,20 @@ public class Reimbursement {
 		this.receipt = receipt;
 	}
 
-	public User getAuthor() {
+	public String getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(User author) {
+	public void setAuthor(String author) {
 		this.author = author;
 	}
 
-	public User getResovler() {
-		return resovler;
+	public String getResolver() {
+		return resolver;
 	}
 
-	public void setResovler(User resovler) {
-		this.resovler = resovler;
+	public void setResolver(String resolver) {
+		this.resolver = resolver;
 	}
 
 	public String getStatus() {
@@ -109,12 +109,17 @@ public class Reimbursement {
 	@Override
 	public String toString() {
 		return "Reimbursement [amount=" + amount + ", submitted=" + submitted + ", resolved=" + resolved
-				+ ", description=" + description + ", receipt=" + receipt + ", author=" + author + ", resovler="
-				+ resovler + ", status=" + status + ", type=" + type + "]";
+				+ ", description=" + description + ", receipt=" + receipt + ", author=" + author + ", resolver="
+				+ resolver + ", status=" + status + ", type=" + type + "]";
 	}
 
+	/*
+	 * Actually Useless...
+	 * (non-Javadoc)
+	 * @see java.lang.Object#clone()
+	 */
 	public Reimbursement clone() {
-		return new Reimbursement(this.amount, this.submitted, this.resolved, this.description, this.receipt.clone(),
-				this.author.clone(), this.resovler.clone(), this.status, this.type);
+		return new Reimbursement(this.amount, this.submitted, this.resolved, this.description, this.receipt,
+				this.author, this.resolver, this.status, this.type);
 	}
 }

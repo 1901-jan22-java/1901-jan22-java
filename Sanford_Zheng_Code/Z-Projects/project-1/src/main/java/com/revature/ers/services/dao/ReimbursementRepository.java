@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import com.jdbc.utils.ConnectionFactory;
 import com.revature.ers.interfaces.Repository;
 import com.revature.ers.services.Receipt;
+import com.revature.ers.services.dao.dto.Reimbursement;
 import com.revature.ers.services.dao.pojos.ReimbursementData;
 
 public class ReimbursementRepository implements Repository<ReimbursementData> {
@@ -25,6 +26,37 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 
 	public ReimbursementRepository() {
 		log.trace("ReimbursementRepository Object Instantiated.");
+	}
+
+	public List<Reimbursement> getAllReimbursements() {
+		List<Reimbursement> res = new ArrayList<>();
+
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			String sql = "select * from ers_reimbursement_view";
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+			while (rs.next()) {
+				Integer amount = rs.getInt("amount");
+				Date submitted = rs.getDate("submitted");
+				Date resolved = rs.getDate("resolved");
+				String description = rs.getString("description");
+				Receipt receipt = (Receipt) rs.getBlob("receipt");
+				String author = rs.getString("author");
+				String resolver = rs.getString("resolver");
+				String status = rs.getString("status");
+				String type = rs.getString("type");
+
+				res.add(new Reimbursement(amount, submitted, resolved, description, receipt, author, resolver, status,
+						type));
+			}
+
+		} catch (SQLException e) {
+			log.error("SQLException in ReimbursementRepository.readAll()", e);
+		}
+
+		return res;
 	}
 
 	@Override
@@ -212,9 +244,8 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 				Integer resolver_id = rs.getInt("resolver_id");
 				Integer status_id = rs.getInt("reimb_status_id");
 				Integer type_id = rs.getInt("reimb_type_id");
-				ReimbursementData temp = new ReimbursementData(id, amount, submitted, 
-						resolved, description, receipt, author_id, resolver_id, 
-						status_id, type_id);
+				ReimbursementData temp = new ReimbursementData(id, amount, submitted, resolved, description, receipt,
+						author_id, resolver_id, status_id, type_id);
 
 				sql = "delete from ers_reimbursement where reimb_id = ?";
 				ps = conn.prepareStatement(sql);

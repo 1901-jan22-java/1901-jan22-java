@@ -2,6 +2,9 @@ package com.revature.ers.dao;
 
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -11,7 +14,8 @@ import com.revature.ers.services.dao.pojos.ReimbursementData;
 
 public class ReimbursementRepositoryTest {
 
-	ReimbursementRepository rr;
+	private static ReimbursementRepository rr;
+	private static List<ReimbursementData> list = new ArrayList<>();
 	
 	public static void main(String[] args) {
 		ReimbursementRepository repo = new ReimbursementRepository();
@@ -21,11 +25,11 @@ public class ReimbursementRepositoryTest {
 	}
 	
 	@BeforeClass
-	public void setUpBeforeClass() {
+	public static void setUpBeforeClass() {
 		rr = new ReimbursementRepository();
 	}
 	@AfterClass
-	public void tearDownAfterClass() {
+	public static void tearDownAfterClass() {
 		rr = null;
 	}
 	

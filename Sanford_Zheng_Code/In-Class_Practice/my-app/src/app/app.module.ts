@@ -15,7 +15,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { SquareRootPipe } from './pipes/square-root.pipe';
 import { UserService } from './services/user.service';
 
-
 // DECORATORS
 @NgModule({
   declarations: [

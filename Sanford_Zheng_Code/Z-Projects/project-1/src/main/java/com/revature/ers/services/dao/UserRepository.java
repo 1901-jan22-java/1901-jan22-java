@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 
 import com.jdbc.utils.ConnectionFactory;
 import com.revature.ers.interfaces.Repository;
+import com.revature.ers.services.dao.dto.User;
 import com.revature.ers.services.dao.pojos.UserData;
 
 public class UserRepository implements Repository<UserData> {
@@ -23,6 +24,29 @@ public class UserRepository implements Repository<UserData> {
 
 	public UserRepository() {
 		log.trace("UserRepository Object Instantiated.");
+	}
+
+	public List<User> getAllUsers() {
+		List<User> res = new ArrayList<>();
+
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			String sql = "select username, password, first_name, last_name, email, user_role as role from "
+					+ "ers_users u join ers_user_roles ur on u.role_id = ur.role_id;";
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				res.add(new User(rs.getString("username"), rs.getString("password"), rs.getString("first_name"),
+						rs.getString("last_name"), rs.getString("email"), rs.getString("role")));
+			}
+
+		} catch (SQLException e) {
+			log.error("SQLException in ReimbursementRepository.update()", e);
+		}
+
+		return res;
 	}
 
 	@Override
@@ -137,8 +161,7 @@ public class UserRepository implements Repository<UserData> {
 				String last_name = rs.getString("last_name");
 				String email = rs.getString("email");
 				Integer role_id = rs.getInt("role_id");
-				UserData temp = new UserData(id, username, password, first_name, 
-						last_name, email, role_id);
+				UserData temp = new UserData(id, username, password, first_name, last_name, email, role_id);
 
 				sql = "update ers_reimbursement set username = ?, password = ?, first_name = ?, "
 						+ "last_name = ?, email = ?, role_id = ? where user_id = ?";
@@ -187,8 +210,7 @@ public class UserRepository implements Repository<UserData> {
 				String last_name = rs.getString("last_name");
 				String email = rs.getString("email");
 				Integer role_id = rs.getInt("role_id");
-				UserData temp = new UserData(id, username, password, first_name,
-						last_name, email, role_id);
+				UserData temp = new UserData(id, username, password, first_name, last_name, email, role_id);
 
 				sql = "delete from ers_users where user_id = ?";
 				ps = conn.prepareStatement(sql);
