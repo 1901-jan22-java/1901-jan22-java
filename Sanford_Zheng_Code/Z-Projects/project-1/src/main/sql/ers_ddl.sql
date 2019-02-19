@@ -3,7 +3,7 @@
 ********************************************************************************/
 create table ers_user_roles(
     role_id number not null,
-    user_role varchar2(20) not null,
+    user_role varchar2(20) not null unique,
     constraint pk_ers_user_role primary key (role_id)
 );
 
@@ -20,13 +20,13 @@ create table ers_users(
 
 create table ers_reimbursement_status(
     status_id number not null,
-    reimb_status varchar2(20) not null,
+    reimb_status varchar2(20) not null unique,
     constraint pk_ers_reimb_status primary key (status_id)
 );
 
 create table ers_reimbursement_type(
     type_id number not null,
-    reimb_type varchar2(20) not null,
+    reimb_type varchar2(20) not null unique,
     constraint pk_ers_reimb_type primary key (type_id)
 );
 
@@ -116,7 +116,7 @@ end;
 /*******************************************************************************
     Create Views
 ********************************************************************************/
-create view ers_reimbursement_view as
+create or replace view ers_reimbursement_view as
     select r.amount, r.submitted, r.resolved, r.reimb_description as description,
         r.receipt, auth.first_name + ' ' + auth.last_name as author,
         res.first_name + ' ' + res.last_name as resolver, s.reimb_status as status,
@@ -126,7 +126,7 @@ create view ers_reimbursement_view as
     left join ers_reimbursement_status s on s.status_id = r.reimb_status_id
     left join ers_reimbursement_type t on t.type_id = r.reimb_type_id;
 /
-create view ers_users_view as
+create or replace view ers_users_view as
     select u.username, u.password, u.first_name, u.last_name, u.email, r.user_role from ers_users u
     left join ers_user_roles r on u.role_id = r.role_id;
 /
