@@ -1,12 +1,13 @@
 package com.jdbc.pojos;
 
 public class Role {
-	
+
 	private int id;
 	private String title;
-	
-	public Role() {}
-	
+
+	public Role() {
+	}
+
 	public Role(int id, String title) {
 		super();
 		this.id = id;
@@ -33,8 +34,5 @@ public class Role {
 	public String toString() {
 		return "Role [id=" + id + ", title=" + title + "]";
 	}
-	
-	
-	
 
 }
