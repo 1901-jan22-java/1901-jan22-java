@@ -110,4 +110,35 @@ public class UserRepo {
 		
 		return null;
 	}
+	public User logIn(String username, String password)
+	{
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			User tmp = new User();
+			conn.setAutoCommit(false);
+			String sql = "SELECT * FROM ers_users WHERE LOWER(ers_username) = ?"
+						+ "AND ers_password = ?";
+
+			//Create String array holding names of columns that are auto-generated
+			String[] keys = {"ers_users_id"};
+			PreparedStatement ps = conn.prepareStatement(sql,keys);
+			ps.setString(1, username.toLowerCase());
+			ps.setString(2, password);
+					
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				tmp.setUserId(rs.getInt("ers_users_id"));
+				tmp.setUsername(rs.getString("ers_username"));
+				tmp.setPassword(rs.getString("ers_password"));
+				tmp.setFirstName(rs.getString("user_first_name"));
+				tmp.setLastName(rs.getString("user_last_name"));
+				tmp.setEmail(rs.getString("user_email"));
+				tmp.setRoleId(rs.getInt("user_role_id"));
+			}
+			return tmp;	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 }

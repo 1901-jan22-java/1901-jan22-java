@@ -11,7 +11,7 @@ function loadLoginView(){
             $('#logIn').on('click', logIn);
         }   
     }
-    xhr.open("GET", "partials/login.html");
+    xhr.open("GET", "partials/logIn.html");
     xhr.send();
 }
 
@@ -34,17 +34,17 @@ function loadRegisterView(){
 function logIn(){
     var user = {
         username: $('#username').val(), 
-        password: $('#pw').val()};
+        password: $('#password').val()};
     var json = JSON.stringify(user);
-
+	
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4){
             if(xhr.status == 200){
                 //logged in successfully
-              $('#view').html(xhr.responseText);    
+            	$('#view').html(xhr.responseText);
             }
-            else if(xhr.status == 418){
+            else if(xhr.status == 409){
                 //encountered known problem (wrong password/user not in system)
                 console.log(xhr.responseText);
                 alert("Wrong login!");
@@ -54,7 +54,7 @@ function logIn(){
             }
         }
     }
-    xhr.open("POST", "login");
+    xhr.open("POST", "logIn");
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.send(json);
 }
@@ -90,12 +90,11 @@ function addUser(){
 	        if(xhr.readyState == 4){
 	            if(xhr.status == 201){
 	                //logged in successfully
-	            	alert("yayayayayyay");
+	            	$('#view').html(xhr.responseText);
 	            }
 	            else if(xhr.status == 409){
-	                //
-	                console.log(xhr.responseText);
-	                alert("nononononoo");
+	                //failed to log in
+	            	$('#view').html(xhr.responseText);
 	            }
 	            else{
 	                //some other error, likely send to error page
