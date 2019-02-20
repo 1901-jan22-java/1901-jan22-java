@@ -57,9 +57,34 @@ public class UserServlet extends HttpServlet {
 			}
 		}
 		
-		
+
 	
 	}
 	
 
+	@Override
+	protected void doPost(HttpServletRequest req, 
+			HttpServletResponse resp) throws ServletException, IOException {
+		
+		/*
+		 * Below, we get the input stream of the request
+		 * body and use Jackson's object mapper to create
+		 * an instance of a user object with the data
+		 */
+		User u = new ObjectMapper()
+				.readValue(req.getInputStream(), User.class);
+		u = uService.add(u);
+		if(u==null) {
+			//something went wrong
+			resp.setStatus(409);
+		}
+		else {
+			logger.info("Successfully added user " + u);
+			resp.setStatus(201);
+			PrintWriter writer = resp.getWriter();
+			resp.setContentType("application/json");
+			writer.write(new ObjectMapper()
+					.writeValueAsString(u));
+		}
+	}
 }
