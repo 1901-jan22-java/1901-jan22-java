@@ -2,6 +2,7 @@ package com.revature.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
+import com.revature.reimbursement.Reimbursement;
+import com.revature.reimbursement.ReimbursementRepo;
 import com.revature.user.User;
 
 @WebServlet("/home")
@@ -28,7 +31,8 @@ public class HomeServlet extends HttpServlet{
 		
 		//get user from session 
 		User user = (User) session.getAttribute("sessionUser");
-		
+		ReimbursementRepo repo = new ReimbursementRepo();
+		List lmao = repo.getReimbursements(user);
 		if(user == null) {
 			//no user stored in session. 
 			//should not be able to access the home page
@@ -39,15 +43,62 @@ public class HomeServlet extends HttpServlet{
 			//welcome page for user 
 			log.trace("user logged in session. " + session.getAttributeNames());
 			String html = "<div class=\"jumbotron\">\r\n" + 
-			"	<h1>Welcome, "+ user.getUsername() +"</h1>\r\n" + 
-			"	<i>"+user.getEmail() +"</i>\r\n";
+					"	<h1>Welcome, "+user.getFirstName()+" "+user.getLastName()+"</h1>\r\n"
+					+ "<div class='container'><table class='table'>"
+						+ "<thead>"
+							+ "<tr>"
+								+ "<th>Reimbursement ID</th>"
+								+ "<th>Amount</th>"
+								+ "<th>Time Submitted</th>"
+								+ "<th>Time Resolved</th>"
+								+ "<th>Resolver</th>"
+							+ "</tr>"
+						+ "</thead>"
+					+ "<tbody></div>";
+			for(int i = 0; i < lmao.size(); i++)
+				html+= appendTable((Reimbursement) lmao.get(i));
+			html+="</tbody></table>";
 			
 			PrintWriter writer = resp.getWriter();
 			resp.setContentType("text/html");
 			writer.write(html);
 		}
-		
+	}
+	
+	private String appendTable(Reimbursement reimb)
+	{
+		String myString = "";
+		switch(reimb.getStatusId())
+		{
+			case 1:	
+				myString += "<tr class='warning'>"
+							+ "<td>"+reimb.getReimbId()+"</td>"
+							+ "<td>$"+reimb.getAmount()+"</td>"
+							+ "<td>"+reimb.getSubmitted()+"</td>"
+							+ "<td>"+reimb.getResolved()+"</td>"
+							+ "<td>"+reimb.getResolver()+"</td>"
+							+ "</tr>";
+				break;
+			case 2:	
+				myString += "<tr class='success'>"
+							+ "<td>"+reimb.getReimbId()+"</td>"
+							+ "<td>$"+reimb.getAmount()+"</td>"
+							+ "<td>"+reimb.getSubmitted()+"</td>"
+							+ "<td>"+reimb.getResolved()+"</td>"
+							+ "<td>"+reimb.getResolver()+"</td>"
+							+ "</tr>";
+				break;
+			case 3:	
+				myString += "<tr class='danger'>"
+							+ "<td>"+reimb.getReimbId()+"</td>"
+							+ "<td>$"+reimb.getAmount()+"</td>"
+							+ "<td>"+reimb.getSubmitted()+"</td>"
+							+ "<td>"+reimb.getResolved()+"</td>"
+							+ "<td>"+reimb.getResolver()+"</td>"
+							+ "</tr>";
+				break;
+			default:break;
+		}
+		return myString;
 	}
 }
-
-

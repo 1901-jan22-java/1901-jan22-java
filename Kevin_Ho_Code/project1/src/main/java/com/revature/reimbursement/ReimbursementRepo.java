@@ -21,8 +21,9 @@ public class ReimbursementRepo {
 			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_author = ?";
 
 			String[] keys = {"reimb_id"};
-			PreparedStatement ps = conn.prepareStatement(sql,keys);
 			
+			PreparedStatement ps = conn.prepareStatement(sql,keys);
+			ps.setInt(1, user.getUserId());
 			ResultSet pk = ps.executeQuery();
 
 			while(pk.next()) {
