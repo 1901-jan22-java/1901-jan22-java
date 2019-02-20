@@ -72,11 +72,12 @@ public class UserRepository {
 		try(Connection conn = ConnectionFactory
 				.getInstance().getConnection()){
 			
-			String sql = "select * from bank_users where username = ?";
+			String sql = "select * from bank_users where "
+					+ "lower(username) = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			
 			//set values to ? params, index starts at 1
-			ps.setString(1, username); 
+			ps.setString(1, username.toLowerCase()); 
 			
 			//get results from query, only set u = NN if u exists
 			ResultSet rs = ps.executeQuery();
@@ -92,6 +93,11 @@ public class UserRepository {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		return u;
+	}
+	
+	public User addUser(User u) {
 		
 		return u;
 	}

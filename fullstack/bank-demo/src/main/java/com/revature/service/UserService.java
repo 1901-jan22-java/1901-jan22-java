@@ -12,4 +12,26 @@ public class UserService {
 	public List<User> getAllUsers(){
 		return userDao.getAll();
 	}
+	
+	public User getById(int id) {
+		return userDao.getById(id);
+	}
+	
+	public User getByUsername(String username) {
+		return userDao.getByUsername(username);
+	}
+	
+	public User login(String username, String password) {
+		User u = userDao.getByUsername(username);
+		if(u == null) {
+			//no user with this username exists
+			return null;
+		}
+		else if(u.getPassword().equals(password)) {
+			return u; //success
+		}
+		else {
+			return null;
+		}
+	}
 }

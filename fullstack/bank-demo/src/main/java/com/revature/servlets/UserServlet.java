@@ -31,15 +31,15 @@ public class UserServlet extends HttpServlet {
 		String pathInfo = req.getPathInfo();
 		logger.info("GET: /USERS" + (pathInfo==null?"":pathInfo));
 		
+		PrintWriter writer = resp.getWriter();
+		resp.setContentType("application/json");
+		
 		if(pathInfo == null || pathInfo.trim().equals("/")) {
 			//Get All Users
 			logger.info("getting all users");
 			List<User> users = uService.getAllUsers();
 			String json = new ObjectMapper()
 					.writeValueAsString(users);
-			PrintWriter writer = resp.getWriter();
-			
-			resp.setContentType("application/json");
 			writer.write(json);
 		}
 		else {
@@ -47,10 +47,13 @@ public class UserServlet extends HttpServlet {
 			try {
 				int id = Integer.parseInt(info);
 				logger.info("getting user by id");
+				writer.write(new ObjectMapper().writeValueAsString(
+						uService.getById(id)));
 			}
 			catch(NumberFormatException nfe) {
-				logger.info(nfe.getStackTrace());
 				logger.info("getting user by username");
+				writer.write(new ObjectMapper().writeValueAsString(
+						uService.getByUsername(info)));
 			}
 		}
 		
