@@ -98,7 +98,37 @@ public class UserRepository {
 	}
 	
 	public User addUser(User u) {
-		
+		try(Connection conn = ConnectionFactory
+				.getInstance().getConnection()){
+			
+			//optionally set autocommit to false until checking
+			conn.setAutoCommit(false);
+			
+			String sql = "insert into bank_users (firstname, lastname, "
+					+ "username, password) values (?,?, ?, ?)";
+			
+			String[] key = {"u_id"};
+			PreparedStatement ps = conn.prepareStatement(sql, key);
+			
+			ps.setString(1, u.getFirstname());
+			ps.setString(2, u.getLastname());
+			ps.setString(3, u.getUsername());
+			ps.setString(4, u.getPassword());
+			
+			int numRowsUpdated = ps.executeUpdate();
+			ResultSet pk = ps.getGeneratedKeys();
+			if(pk.next()) {
+				u.setId(pk.getInt(1));
+				conn.commit();
+			}
+			else {
+				//something bad happened
+				//return user without id 
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return u;
 	}
 

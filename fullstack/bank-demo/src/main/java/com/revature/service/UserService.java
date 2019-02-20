@@ -34,4 +34,11 @@ public class UserService {
 			return null;
 		}
 	}
+	
+	public User add(User u) {
+		if(getByUsername(u.getUsername())!= null) {
+			return null; //user exists by username
+		}
+		return userDao.addUser(u);
+	}
 }
