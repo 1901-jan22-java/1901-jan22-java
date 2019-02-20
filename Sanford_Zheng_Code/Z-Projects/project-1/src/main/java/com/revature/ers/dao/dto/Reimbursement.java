@@ -1,4 +1,4 @@
-package com.revature.ers.services.dao.dto;
+package com.revature.ers.dao.dto;
 
 import java.sql.Date;
 

@@ -1,4 +1,4 @@
-package com.revature.ers.services.dao;
+package com.revature.ers.dao;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -11,10 +11,10 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.jdbc.utils.ConnectionFactory;
+import com.revature.ers.dao.dto.Reimbursement;
+import com.revature.ers.dao.pojos.ReimbursementData;
 import com.revature.ers.interfaces.Repository;
 import com.revature.ers.services.blob.Receipt;
-import com.revature.ers.services.dao.dto.Reimbursement;
-import com.revature.ers.services.dao.pojos.ReimbursementData;
 
 public class ReimbursementRepository implements Repository<ReimbursementData> {
 
@@ -53,12 +53,42 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 			}
 
 		} catch (SQLException e) {
-			log.error("SQLException in ReimbursementRepository.readAll()", e);
+			log.error("SQLException in ReimbursementRepository.getAllReimbursements()", e);
 		}
 
 		return res;
 	}
+	public Reimbursement getReimbursement(Integer itemId) {
+		Reimbursement res = null;
 
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			String sql = "select * from ers_reimbursement_view where reimb_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, itemId);
+
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				Integer amount = rs.getInt("amount");
+				Date submitted = rs.getDate("submitted");
+				Date resolved = rs.getDate("resolved");
+				String description = rs.getString("description");
+				Receipt receipt = (Receipt) rs.getBlob("receipt");
+				String author = rs.getString("author");
+				String resolver = rs.getString("resolver");
+				String status = rs.getString("status");
+				String type = rs.getString("type");
+
+				res = new Reimbursement(amount, submitted, resolved, description, receipt, author, resolver, status,
+						type);
+			}
+
+		} catch (SQLException e) {
+			log.error("SQLException in ReimbursementRepository.getReimbursement()", e);
+		}
+
+		return res;
+	}
 	@Override
 	public ReimbursementData create(ReimbursementData newItem) {
 

@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.revature.ers.services.dao.ReimbursementStatusRepository;
-import com.revature.ers.services.dao.pojos.ReimbursementStatusData;
+import com.revature.ers.dao.ReimbursementStatusRepository;
+import com.revature.ers.dao.pojos.ReimbursementStatusData;
 
 /**
  * These names are ginourmous

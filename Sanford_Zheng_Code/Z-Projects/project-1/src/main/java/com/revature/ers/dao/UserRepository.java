@@ -1,4 +1,4 @@
-package com.revature.ers.services.dao;
+package com.revature.ers.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,9 +10,9 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.jdbc.utils.ConnectionFactory;
+import com.revature.ers.dao.dto.User;
+import com.revature.ers.dao.pojos.UserData;
 import com.revature.ers.interfaces.Repository;
-import com.revature.ers.services.dao.dto.User;
-import com.revature.ers.services.dao.pojos.UserData;
 
 public class UserRepository implements Repository<UserData> {
 
@@ -40,6 +40,29 @@ public class UserRepository implements Repository<UserData> {
 			while (rs.next()) {
 				res.add(new User(rs.getString("username"), rs.getString("password"), rs.getString("first_name"),
 						rs.getString("last_name"), rs.getString("email"), rs.getString("role")));
+			}
+
+		} catch (SQLException e) {
+			log.error("SQLException in ReimbursementRepository.update()", e);
+		}
+
+		return res;
+	}
+	
+	public User getUser(Integer itemId) {
+		User res = null;
+
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			String sql = "select u.username, u.password, u.first_name, u.last_name, u.email, ur.user_role as role from "
+					+ "ers_users u where user_id = ? join ers_user_roles ur on u.role_id = ur.role_id;";
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				res = new User(rs.getString("username"), rs.getString("password"), rs.getString("first_name"),
+						rs.getString("last_name"), rs.getString("email"), rs.getString("role"));
 			}
 
 		} catch (SQLException e) {

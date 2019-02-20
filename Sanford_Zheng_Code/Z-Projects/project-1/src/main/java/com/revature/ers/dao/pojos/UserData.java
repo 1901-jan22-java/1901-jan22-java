@@ -1,4 +1,4 @@
-package com.revature.ers.services.dao.pojos;
+package com.revature.ers.dao.pojos;
 
 import java.io.Serializable;
 

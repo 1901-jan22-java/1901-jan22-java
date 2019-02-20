@@ -8,13 +8,13 @@ import org.apache.log4j.Logger;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import com.revature.ers.services.dao.ReimbursementRepository;
-import com.revature.ers.services.dao.ReimbursementStatusRepository;
-import com.revature.ers.services.dao.ReimbursementTypeRepository;
-import com.revature.ers.services.dao.dto.Reimbursement;
-import com.revature.ers.services.dao.pojos.ReimbursementData;
-import com.revature.ers.services.dao.pojos.ReimbursementStatusData;
-import com.revature.ers.services.dao.pojos.ReimbursementTypeData;
+import com.revature.ers.dao.ReimbursementRepository;
+import com.revature.ers.dao.ReimbursementStatusRepository;
+import com.revature.ers.dao.ReimbursementTypeRepository;
+import com.revature.ers.dao.dto.Reimbursement;
+import com.revature.ers.dao.pojos.ReimbursementData;
+import com.revature.ers.dao.pojos.ReimbursementStatusData;
+import com.revature.ers.dao.pojos.ReimbursementTypeData;
 
 public class ReimbursementService {
 

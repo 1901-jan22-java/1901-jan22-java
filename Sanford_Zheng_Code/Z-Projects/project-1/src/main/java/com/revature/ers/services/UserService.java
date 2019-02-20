@@ -6,11 +6,11 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.revature.ers.services.dao.UserRepository;
-import com.revature.ers.services.dao.UserRoleRepository;
-import com.revature.ers.services.dao.dto.User;
-import com.revature.ers.services.dao.pojos.UserData;
-import com.revature.ers.services.dao.pojos.UserRoleData;
+import com.revature.ers.dao.UserRepository;
+import com.revature.ers.dao.UserRoleRepository;
+import com.revature.ers.dao.dto.User;
+import com.revature.ers.dao.pojos.UserData;
+import com.revature.ers.dao.pojos.UserRoleData;
 
 public class UserService {
 	

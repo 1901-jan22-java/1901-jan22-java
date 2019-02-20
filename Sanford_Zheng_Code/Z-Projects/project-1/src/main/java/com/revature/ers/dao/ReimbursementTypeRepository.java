@@ -1,4 +1,4 @@
-package com.revature.ers.services.dao;
+package com.revature.ers.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,8 +10,8 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.jdbc.utils.ConnectionFactory;
+import com.revature.ers.dao.pojos.ReimbursementTypeData;
 import com.revature.ers.interfaces.Repository;
-import com.revature.ers.services.dao.pojos.ReimbursementTypeData;
 
 public class ReimbursementTypeRepository implements Repository<ReimbursementTypeData> {
 
