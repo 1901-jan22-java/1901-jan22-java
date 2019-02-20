@@ -25,6 +25,11 @@ public class TestServlet extends HttpServlet{
 		 */
 		PrintWriter pw = resp.getWriter();
 		pw.write("in test servlet");
+		
+		/*
+		 * Retrieving info about the application 
+		 * https://www.oreilly.com/library/view/java-servlet-programming/0596000405/ch04.html
+		 */
 	}
 		
 }
