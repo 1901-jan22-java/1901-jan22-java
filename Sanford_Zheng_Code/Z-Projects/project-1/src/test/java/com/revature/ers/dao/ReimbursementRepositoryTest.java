@@ -45,6 +45,7 @@ public class ReimbursementRepositoryTest {
 
 	@Test
 	public void testReadAll() {
+		fail("Not yet implemented"); // TODO
 	}
 
 	@Test
