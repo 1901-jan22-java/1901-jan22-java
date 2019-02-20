@@ -12,8 +12,25 @@ function loadLoginView(){
 	var xhr = new XMLHttpRequest();
 	xhr.onreadystatechange = function(){
 		//only place to deal with response
+		if(xhr.readyState == 4){
+			$('#view').html(xhr.responseText);
+			$('#createUser').on('click', loadRegisterView);
+		}
 	}
 	xhr.open("GET", "login.view");
 	xhr.send();
 	
+}
+
+function loadRegisterView(){
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function(){
+		//only place to deal with response
+		if(xhr.readyState == 4){
+			$('#view').html(xhr.responseText);
+			$('#goToLogin').on('click', loadLoginView);
+		}
+	}
+	xhr.open("GET", "register.view");
+	xhr.send();
 }
