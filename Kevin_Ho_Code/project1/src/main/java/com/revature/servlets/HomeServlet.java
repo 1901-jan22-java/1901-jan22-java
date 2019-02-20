@@ -70,35 +70,26 @@ public class HomeServlet extends HttpServlet{
 		String myString = "";
 		switch(reimb.getStatusId())
 		{
-			case 1:	
-				myString += "<tr class='warning'>"
-							+ "<td>"+reimb.getReimbId()+"</td>"
-							+ "<td>$"+reimb.getAmount()+"</td>"
-							+ "<td>"+reimb.getSubmitted()+"</td>"
-							+ "<td>"+reimb.getResolved()+"</td>"
-							+ "<td>"+reimb.getResolver()+"</td>"
-							+ "</tr>";
-				break;
-			case 2:	
-				myString += "<tr class='success'>"
-							+ "<td>"+reimb.getReimbId()+"</td>"
-							+ "<td>$"+reimb.getAmount()+"</td>"
-							+ "<td>"+reimb.getSubmitted()+"</td>"
-							+ "<td>"+reimb.getResolved()+"</td>"
-							+ "<td>"+reimb.getResolver()+"</td>"
-							+ "</tr>";
-				break;
-			case 3:	
-				myString += "<tr class='danger'>"
-							+ "<td>"+reimb.getReimbId()+"</td>"
-							+ "<td>$"+reimb.getAmount()+"</td>"
-							+ "<td>"+reimb.getSubmitted()+"</td>"
-							+ "<td>"+reimb.getResolved()+"</td>"
-							+ "<td>"+reimb.getResolver()+"</td>"
-							+ "</tr>";
-				break;
+			case 1: myString += "<tr class='warning'>";break;
+			case 2:	myString += "<tr class='success'>";break;
+			case 3:	myString += "<tr class='danger'>";break;
 			default:break;
 		}
+		
+		myString +=   "<td>"+reimb.getReimbId()+"</td>"
+					+ "<td>$"+reimb.getAmount()+"</td>"
+					+ "<td>"+reimb.getSubmitted()+"</td>"
+					+ "<td>"+reimb.getResolved()+"</td>"
+					+ "<td>"+reimb.getResolver()+"</td>";
+		
+		switch(reimb.getStatusId())
+		{
+			case 1: myString += "<td>Pending</td></tr>";break;
+			case 2:	myString += "<td>Approved</td></tr>";break;
+			case 3:	myString += "<td>Denied</td></tr>";break;
+			default:break;
+		}
+		
 		return myString;
 	}
 }
