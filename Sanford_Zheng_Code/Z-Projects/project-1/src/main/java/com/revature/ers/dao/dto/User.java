@@ -1,5 +1,7 @@
 package com.revature.ers.dao.dto;
 
+import com.revature.ers.dao.pojos.UserData;
+
 public class User {
 
 	private String username;
@@ -80,4 +82,16 @@ public class User {
 	public User clone() {
 		return new User(this.username, this.password, this.first_name, this.last_name, this.email, this.role);
 	}
+
+	// Feels like dangerous behavior
+//	public User(UserData ud, String role) {
+//		super();
+//		this.username = ud.getUsername();
+//		this.password = ud.getPassword();
+//		this.first_name = ud.getFirst_name();
+//		this.last_name = ud.getLast_name();
+//		this.email = ud.getEmail();
+//		this.role = role;
+//	}
+
 }

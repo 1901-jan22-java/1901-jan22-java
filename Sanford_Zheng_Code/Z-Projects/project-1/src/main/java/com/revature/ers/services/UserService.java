@@ -6,58 +6,103 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.revature.ers.dao.UserRepository;
 import com.revature.ers.dao.UserRoleRepository;
+import com.revature.ers.dao.dto.Reimbursement;
 import com.revature.ers.dao.dto.User;
 import com.revature.ers.dao.pojos.UserData;
 import com.revature.ers.dao.pojos.UserRoleData;
 
 public class UserService {
-	
+
 	private static final Logger log = Logger.getLogger(UserService.class);
-	
-	private static final UserRepository userRepo = new UserRepository();
-	private static final UserRoleRepository roleRepo = new UserRoleRepository();
-	
-	private static final List<User> usersDTOs = new ArrayList<>();
-	
+
+	private static final ReimbursementService reimbServ = new ReimbursementService();
+
+	private static final UserRepository usersRepo = new UserRepository();
+	private static final UserRoleRepository rolesRepo = new UserRoleRepository();
+
+	private static final List<User> usersDTO = new ArrayList<>();
+
 	private static final HashMap<Integer, UserData> rawData = new HashMap<>();
-	private static final HashMap<Integer, String > roles = new HashMap<>();
-	
+	private static final BiMap<Integer, String> roles = HashBiMap.create();
+
 	static {
 		loadDataImage();
 		log.trace("UserService Class Initialized.");
 	}
 
-	public UserService() {
+	private UserService() {
 		loadDataImage();
 		log.trace("UserService Object Instantiated.");
 	}
-	
+
 	public static void loadDataImage() {
-		for(UserData ud: userRepo.readAll())
+		loadTypes();
+		loadRoles();
+	}
+
+	public static void loadTypes() {
+		for (UserData ud : usersRepo.readAll())
 			rawData.put(ud.getUser_id(), ud);
-		for(UserRoleData urd: roleRepo.readAll())
+	}
+
+	public static void loadRoles() {
+		for (UserRoleData urd : rolesRepo.readAll())
 			roles.put(urd.getRole_id(), urd.getUser_role());
 	}
-	
-	public static HashMap<Integer, String> getRoles() {
+
+	public static List<Reimbursement> getReimbursements(User u) {
+		List<Reimbursement> res = null;
+		if (u.getRole().equals("Admin")) {
+			res = reimbServ.getAllReimbursements();
+		}
+		return res;
+	}
+
+	public static BiMap<Integer, String> getRoles() {
+		loadRoles();
 		return roles;
 	}
-	
+
 	public static List<User> getAllUsers() {
-		return usersDTOs;
+		usersDTO.clear();
+		usersDTO.addAll(usersRepo.getAllUsers());
+		return usersDTO;
+	}
+
+	public static User register(User u) {
+		usersDTO.add(u);
+		return dataToUser(usersRepo.create(userToData(u)));
 	}
 	
-	public static void addUser(User u) {
-		usersDTOs.add(u);
+	public static User login(User u) {
+		return usersRepo.getUser(u.getUsername());
 	}
-	
+
+	public static UserData userToData(User u) {
+		Integer userRoleID = roles.inverse().get(u.getRole());
+		if (userRoleID == null)
+			return null;
+		UserData ud = new UserData(null, u.getUsername(), u.getPassword(), u.getFirst_name(), u.getLast_name(),
+				u.getEmail(), userRoleID);
+		return ud;
+	}
+
+	public static User dataToUser(UserData ud) {
+		
+		String userRole = roles.get(ud.getRole_id());
+		if (userRole == null)
+			return null;
+		User u = new User(ud.getUsername(), ud.getPassword(), ud.getFirst_name(), ud.getLast_name(), ud.getEmail(),
+				userRole);
+		return u;
+	}
+
 	public static User getByUsername(String un) {
-		return usersDTOs.stream()
-				.filter(user -> user.getUsername().equalsIgnoreCase(un))
-				.findAny()
-				.orElse(null);
+		return usersDTO.stream().filter(user -> user.getUsername().equalsIgnoreCase(un)).findAny().orElse(null);
 	}
-	
+
 }

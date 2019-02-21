@@ -43,7 +43,7 @@ public class UserRepository implements Repository<UserData> {
 			}
 
 		} catch (SQLException e) {
-			log.error("SQLException in ReimbursementRepository.update()", e);
+			log.error("SQLException in ReimbursementRepository.getAllUsers()", e);
 		}
 
 		return res;
@@ -67,7 +67,7 @@ public class UserRepository implements Repository<UserData> {
 			}
 
 		} catch (SQLException e) {
-			log.error("SQLException in ReimbursementRepository.update()", e);
+			log.error("SQLException in ReimbursementRepository.getUser(id)", e);
 		}
 
 		return res;
@@ -91,7 +91,7 @@ public class UserRepository implements Repository<UserData> {
 			}
 
 		} catch (SQLException e) {
-			log.error("SQLException in ReimbursementRepository.update()", e);
+			log.error("SQLException in ReimbursementRepository.getUser(username)", e);
 		}
 
 		return res;
