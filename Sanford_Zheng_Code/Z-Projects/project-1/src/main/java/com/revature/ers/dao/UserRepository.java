@@ -55,8 +55,9 @@ public class UserRepository implements Repository<UserData> {
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
 			String sql = "select u.username, u.password, u.first_name, u.last_name, u.email, ur.user_role as role from "
-					+ "ers_users u where user_id = ? join ers_user_roles ur on u.role_id = ur.role_id;";
+					+ "(select * from ers_users u where user_id = ?) join ers_user_roles ur on u.role_id = ur.role_id;";
 			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, itemId);
 
 			ResultSet rs = ps.executeQuery();
 
