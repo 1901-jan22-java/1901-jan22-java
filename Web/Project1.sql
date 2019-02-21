@@ -50,5 +50,35 @@ CONSTRAINT ers_reimbursement_type_fk FOREIGN KEY (reimb_type_id)
 REFERENCES ers_reimbursement_type(reimb_type_id)
 );
 
+INSERT INTO ers_user_roles(user_role, user_role_id) VALUES ('employee', 1);
+INSERT INTO ers_user_roles(user_role, user_role_id) VALUES ('manager', 2);
+
+INSERT ALL 
+INTO ers_users(ers_users_id, ers_username, ers_password, user_first_name,
+user_last_name, user_email, user_role_id) 
+VALUES(1, 'dsmith', 'nyknicks', 'dennis', 'smith', 'dsmith@gmail.com', 1)
+INTO ers_users(ers_users_id, ers_username, ers_password, user_first_name,
+user_last_name, user_email, user_role_id) 
+VALUES(2, 'ftili', 'nyknicks', 'frank', 'ntilikina', 'ftili@gmail.com', 1)
+INTO ers_users(ers_users_id, ers_username, ers_password, user_first_name,
+user_last_name, user_email, user_role_id) 
+VALUES(3, 'mrobinson', 'nyknicks', 'mitchell', 'robinson', 'mrobinson@gmail.com', 1)
+INTO ers_users(ers_users_id, ers_username, ers_password, user_first_name,
+user_last_name, user_email, user_role_id) 
+VALUES(4, 'kdurant', 'nyknicks', 'kevin', 'durant', 'kd@gmail.com', 1)
+SELECT 1 FROM dual;
+
+INSERT ALL 
+INTO ers_users(ers_users_id, ers_username, ers_password, user_first_name,
+user_last_name, user_email, user_role_id) 
+VALUES(5, 'jdolan', 'nyknicks', 'james', 'dolan', 'jdolan@gmail.com', 2)
+INTO ers_users(ers_users_id, ers_username, ers_password, user_first_name,
+user_last_name, user_email, user_role_id) 
+VALUES(6, 'dfizdale', 'nyknicks', 'david', 'fizdale', 'dfizdale@gmail.com', 2)
+INTO ers_users(ers_users_id, ers_username, ers_password, user_first_name,
+user_last_name, user_email, user_role_id) 
+VALUES(7, 'sperry', 'nyknicks', 'scott', 'perry', 'sperry@gmail.com', 2)
+SELECT 1 FROM dual;
+
 commit;
 

@@ -39,7 +39,7 @@ public class UserServlet extends HttpServlet {
 	/*
 	 * working with FORM data! Not going to use often at all
 	 */
-<<<<<<< HEAD
+
 //	@Override
 //	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //		String username = req.getParameter("username");
@@ -68,46 +68,6 @@ public class UserServlet extends HttpServlet {
 		}
 
 	}
-=======
-	/*
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String username = req.getParameter("username");
-		String password = req.getParameter("password");
-		String data = req.getParameter("bio");
-		User u = new User(username, password, data);
-		service.addUser(u);
-		doGet(req, resp);
-	} */
->>>>>>> master
-
-	//Responds to POST requests with request body
-	@Override
-	protected void doPost(HttpServletRequest req, 
-		HttpServletResponse resp) throws ServletException, IOException {
-		ObjectMapper mapper = new ObjectMapper();
-		User u = mapper.readValue(req.getInputStream(), User.class);
-		if(service.getByUsername(u.getUsername())==null){
-			//no conflict, can create user
-			service.addUser(u);
-			resp.setStatus(201);
-			doGet(req, resp);
-		}
-		else{
-			//username is already used. set http response status to conflict
-			resp.setStatus(409);
-		}
-
-		
-		
-	}
 }
 
-
-
-<<<<<<< HEAD
-=======
-
-
->>>>>>> master
 

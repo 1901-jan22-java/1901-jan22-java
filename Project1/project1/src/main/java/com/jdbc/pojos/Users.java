@@ -1,4 +1,4 @@
-package com.jdbc.pojos;
+  package com.jdbc.pojos;
 
 public class Users {
 	private int userId;

@@ -62,19 +62,15 @@ public class LoginServlet extends HttpServlet {
 	static final Logger log = Logger.getLogger(LoginServlet.class);
 	
 	@Override
-<<<<<<< HEAD
-=======
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.sendRedirect("index.html");
 	}
 	
 	@Override
->>>>>>> master
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		
 		User u = mapper.readValue(req.getInputStream(), User.class);
-<<<<<<< HEAD
 		
 		User storedUser = service.getByUsername(u.getUsername());
 		if(storedUser == null) {
@@ -97,39 +93,6 @@ public class LoginServlet extends HttpServlet {
 			resp.setStatus(418);
 		}
 	}
-=======
-		log.debug(u.getUsername() + " " + u.getPassword() + " " + u.getData());
-		User storedUser = service.getByUsername(u.getUsername());
-		if(storedUser == null) {
-			//no user by this username exists
-			resp.setStatus(418);
-			log.trace("no user by this username exists");
-		}
-		else if(storedUser.getPassword().equals(u.getPassword())) {
-			//user is logged in
-			resp.setStatus(200);
-			log.trace("user logged in as " + storedUser.toString());
-			//manage session
-			HttpSession session = req.getSession();
-			session.setAttribute("sessionUser", storedUser);
-			log.info("CREATED SESSION " + session.getId());
-			
-			/* if we want user info immediately, do this
-			PrintWriter writer = resp.getWriter();
-			resp.setContentType("application/json");
-			writer.write(mapper.writeValueAsString(storedUser));
-			*/
-
-			resp.sendRedirect("home");
-		}
-		else {
-			//incorrect password or some other issue. 
-			resp.setStatus(418);
-			log.trace("something else happened");
-			//forward to the error page 
-		}
-	}
+}
 
 	
->>>>>>> master
-}

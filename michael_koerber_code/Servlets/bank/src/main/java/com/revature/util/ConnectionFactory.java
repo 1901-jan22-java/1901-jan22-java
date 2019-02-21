@@ -1,4 +1,4 @@
-package com.jdbc.util;
+package com.revature.util;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -22,7 +22,6 @@ public class ConnectionFactory {
 	public static synchronized ConnectionFactory getInstance() {
 		if(cf == null) {
 			cf = new ConnectionFactory();
-			
 		}
 		logger.debug("Returning cf instance " + cf.getClass());
 		return cf;
@@ -31,7 +30,7 @@ public class ConnectionFactory {
 	public Connection getConnection() {
 		Connection conn = null;
 		Properties prop = new Properties();
-		String filepath = "src/main/resources/db.properties";
+		String filepath = "C:\\Users\\Mkoer\\Desktop\\my_git_repos\\1901-jan22-java\\michael_koerber_code\\Servlets\\bank\\src\\main\\resources\\db.properties";
 		
 		try {
 			prop.load(new FileReader(filepath));
@@ -39,19 +38,14 @@ public class ConnectionFactory {
 			
 			conn = DriverManager.getConnection(prop.getProperty("url"), prop.getProperty("username"), prop.getProperty("pwd"));
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 		return conn;
 	}
 }
