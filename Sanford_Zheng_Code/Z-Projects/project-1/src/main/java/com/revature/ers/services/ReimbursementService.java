@@ -28,8 +28,8 @@ public class ReimbursementService {
 
 	private static final HashMap<Integer, ReimbursementData> rawData = new HashMap<>();
 
-	private static final BiMap<Integer, String> status = HashBiMap.create();
-	private static final BiMap<Integer, String> types = HashBiMap.create();
+	private static final BiMap<Integer, String> statusMap = HashBiMap.create();
+	private static final BiMap<Integer, String> typesMap = HashBiMap.create();
 
 	static {
 		loadDataImage();
@@ -50,27 +50,41 @@ public class ReimbursementService {
 	}
 
 	public static void loadDataImage() {
-		for (ReimbursementData rd : reimbRepo.readAll()) {
-			rawData.put(rd.getReimb_id(), rd);
-		}
 		for (ReimbursementStatusData rsd : reimbStatusRepo.readAll()) {
-			status.put(rsd.getStatus_id(), rsd.getReimb_status());
+			statusMap.put(rsd.getStatus_id(), rsd.getReimb_status());
 		}
 		for (ReimbursementTypeData rtd : reimbTypeRepo.readAll()) {
-			types.put(rtd.getType_id(), rtd.getReimb_type());
+			typesMap.put(rtd.getType_id(), rtd.getReimb_type());
 		}
 	}
 
-	public static HashMap<Integer, ReimbursementData> getRawData() {
-		return rawData;
+	public static String getStatus(Integer id) {
+		return statusMap.get(id);
 	}
-
-	public static BiMap<Integer, String> getStatus() {
-		return status;
+	public static Integer getStatusID(String status) {
+		return statusMap.inverse().get(status);
 	}
-
-	public static BiMap<Integer, String> getTypes() {
-		return types;
+	
+	public static String getType(Integer id) {
+		return typesMap.get(id);
 	}
+	
+	public static Integer getTypeID(String type) {
+		return typesMap.inverse().get(type);
+	}
+	
+//	public static HashMap<Integer, ReimbursementData> getRawData() {
+//		return rawData;
+//	}
+//
+//	
+//	
+//	public static BiMap<Integer, String> getStatusMap(Integer id) {
+//		return status;
+//	}
+//
+//	public static BiMap<Integer, String> getTypesMap() {
+//		return types;
+//	}
 
 }

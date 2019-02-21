@@ -32,7 +32,7 @@ create table ers_reimbursement_type(
 
 create table ers_reimbursement(
     reimb_id number not null,
-    amount number not null,
+    amount number(,2) not null,
     submitted timestamp not null,
     resolved timestamp,
     reimb_description varchar2(250),
