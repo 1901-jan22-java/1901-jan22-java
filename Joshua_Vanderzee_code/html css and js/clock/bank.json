@@ -3,30 +3,16 @@
     {
       "id": 1,
       "firstname": "Joshua",
-      "last name": "Vanderzee",
+      "lastname": "Vanderzee",
       "username": "jvanderzee",
       "password": "lkjhgfdsa"
     },
     {
       "id": 2,
       "firstname": "Dan",
-      "last name": "Smith",
+      "lastname": "Smith",
       "username": "dsmith",
       "password": "gfggf"
-    },
-    {
-      "firstname": "",
-      "lastname": "",
-      "username": "",
-      "password": "",
-      "id": 3
-    },
-    {
-      "firstname": "",
-      "lastname": "",
-      "username": "test",
-      "password": "",
-      "id": 4
     },
     {
       "firstname": "test",
@@ -41,6 +27,9 @@
       "username": "eggman",
       "password": "#1",
       "id": 6
+    },
+    {
+      "id": 7
     }
   ],
   "accounts": [

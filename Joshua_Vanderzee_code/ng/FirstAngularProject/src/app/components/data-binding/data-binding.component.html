@@ -1,0 +1,23 @@
+<div>
+    <h3><i>Angular supports data binding</i></h3>
+  <br>
+  <br>
+  <h5>String interpalation</h5>
+  
+  
+  This text from {{ text }}
+
+  {{ count }}
+  <button (click)="increment()">increment</button>
+
+  <br><br><br><br><br>
+  <h5 [style.background-color]="colorProp"> Property binding</h5>
+
+current time: {{ currentTime | date:'medium' }}
+Use of custom pipe
+{{ 1000 | squareRoot }}
+
+<h4>2 way data binding</h4>
+<input type="text" [(ngModel)]="username">
+{{ username }}
+</div>

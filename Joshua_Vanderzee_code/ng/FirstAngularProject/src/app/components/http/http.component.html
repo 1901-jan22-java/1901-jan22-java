@@ -1,0 +1,21 @@
+Get all users
+<ol>
+  <li *ngFor="let u of users">{{ u.firstname }} {{ u.lastname }}</li>
+</ol>
+
+<br>
+Get User by username!
+<br>
+<input type="text" [(ngModel)]="unameInput">
+<ul>
+  <li *ngIf="user !== null">{{ user.firstname }} {{ user.lastname }}</li>
+</ul>
+<button (click)="getUserByusername()">Get</button>
+
+<br><br><br><br>
+
+<input type="text" [(ngModel)]="username" placeholder="Username">
+<input type="password" [(ngModel)]="password" placeholder="Password">
+<input type="text" [(ngModel)]="firstname" placeholder="First name">
+<input type="text" [(ngModel)]="lastname" placeholder="Last name">
+<button (click)="addUser()">Add</button>

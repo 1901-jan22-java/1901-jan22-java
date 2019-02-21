@@ -45,9 +45,8 @@ function login(){
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4){
             if (xhr.status == 200) {
-                console.log("Logged in");
-                let user = JSON.parse(xhr.responseText);
-                alert(`Welcome ${user['username']}`);
+                console.log(`Logged in ${xhr.responseText}`);
+                $('#view').html(xhr.responseText);
             }
             else if (xhr.status == 418) {
                 console.log("Invalid Login");

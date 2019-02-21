@@ -1,0 +1,16 @@
+<div>
+  Understanding directives
+
+  <button [ngClass]="buttonClass" (click)="toggleif()">Test *ngIf</button>
+  <div *ngIf="showIf">Using ngIf</div>
+</div>
+Checkout ngFor with this 
+<ul class="list-group">
+  <li *ngFor="let n of numArr">{{n}}</li>
+</ul>
+<br>
+Display every Employee in my list of employees
+<ul *ngFor="let e of employee" [ngSwitch]="e.role">
+  <li *ngSwitchCase="'Trainer'" class="text-warning">Name: {{e.name}}</li>
+  <li *ngSwitchCase="'Developer'" class="text-success">Name: {{e.name}} <br>Role: {{e.role}}</li>
+</ul>

@@ -10,12 +10,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.pojos.User;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	DummyUserService dus = new DummyUserService();
+	
+	private static Logger log = Logger.getLogger(LoginServlet.class);
+	
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.sendRedirect("index.html");
+	}
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,12 +37,13 @@ public class LoginServlet extends HttpServlet {
 		} else if (storedUser.getPassword().equals(u.getPassword())) {
 			resp.setStatus(200);
 			HttpSession session = req.getSession();
-			session.setAttribute("user", u);
-			System.out.println(session.getId());
-			PrintWriter writer = resp.getWriter();
-			resp.setContentType("application/json");
-			System.out.println(mapper.writeValueAsString(u));
-			writer.write(mapper.writeValueAsString(u));
+			session.setAttribute("sessionUser", storedUser);
+			log.info(session.getId());
+//			PrintWriter writer = resp.getWriter();
+//			resp.setContentType("application/json");
+//			log.trace(mapper.writeValueAsString(u));
+//			writer.write(mapper.writeValueAsString(u));
+			resp.sendRedirect("home");
 		} else {
 			resp.setStatus(418);
 		}
