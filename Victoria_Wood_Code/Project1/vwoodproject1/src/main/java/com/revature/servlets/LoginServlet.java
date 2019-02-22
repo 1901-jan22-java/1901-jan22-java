@@ -41,7 +41,7 @@ public class LoginServlet extends HttpServlet{
 			session.setAttribute("sessionUser", u);
 			resp.setContentType("application/json");
 			writer.write(mapper.writeValueAsString(u));
-			//resp.sendRedirect("home");
+			resp.sendRedirect("home");
 		}
 	}
 }

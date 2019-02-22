@@ -18,7 +18,7 @@ function logIn(){
     var user = {
         username: $('#username').val(), 
         password: $('#pw').val()};
-
+    var json = JSON.stringify(user);
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4){
@@ -30,7 +30,7 @@ function logIn(){
                 alert("Wrong login!");
             }
             else{
-                loadHomeView();
+                //error page
             }
         }
     }
