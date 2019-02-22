@@ -17,13 +17,6 @@
 
 	<dependencies>
 
-		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-			<version>27.0.1-jre</version>
-		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -61,12 +54,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!-- <dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc7</artifactId>
-			<version>11.2.0</version>
-		</dependency> -->
-
 		<!-- https://mvnrepository.com/artifact/com.oracle/ojdbc7 -->
 		<dependency>
 			<groupId>com.oracle</groupId>
@@ -74,6 +61,19 @@
 			<version>12.1.0.2</version>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.google.guava/guava -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>27.0.1-jre</version>
+		</dependency>
+		
+		<!-- <dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc7</artifactId>
+			<version>11.2.0</version>
+		</dependency> -->
+		
 	</dependencies>
 
 </project>
