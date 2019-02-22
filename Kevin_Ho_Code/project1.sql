@@ -109,4 +109,9 @@ insert into ers_reimbursement(reimb_amount, reimb_submitted, reimb_resolved, rei
                         values(1000, '17-FEB-2019', '18-FEB-2019', 'Hi there', 1, 2, 2, 1);
 insert into ers_reimbursement(reimb_amount, reimb_submitted, reimb_description, reimb_author, reimb_status_id, reimb_type_id) 
                         values(1000, '17-FEB-2019', 'Hi there', 1, 1, 1);
+insert into ers_reimbursement(reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id) 
+                        values(1000, '17-FEB-2019', '18-FEB-2019', 'Hi there', 2, 2, 1, 1);
+insert into ers_reimbursement(reimb_amount, reimb_submitted, reimb_description, reimb_author, reimb_status_id, reimb_type_id) 
+                        values(1000, '17-FEB-2019', 'Hi there', 2, 3, 1);
+
 commit;

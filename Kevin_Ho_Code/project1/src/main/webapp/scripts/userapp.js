@@ -63,7 +63,7 @@ function logIn(){
 }
 
 function addReimb(){
-	alert("nigaoin");
+	
 }
 
 function addUser(){

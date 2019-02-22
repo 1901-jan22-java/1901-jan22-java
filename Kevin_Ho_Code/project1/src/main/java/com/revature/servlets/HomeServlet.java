@@ -52,12 +52,15 @@ public class HomeServlet extends HttpServlet{
 			String html = "<div class=\"jumbotron\">\r\n" + 
 					"	<h1>Welcome, "+user.getFirstName()+" "+user.getLastName()+"</h1>\r\n"
 					+ "<div class='container'>"
-					+ "<button id='addReimb'>Request Reimbursement</button>"
+					+ "<button id='addReimb' class='btn btn-submit'>Request Reimbursement</button>"
 					+ "<table class='table'>"
 						+ "<thead>"
-							+ "<tr>"
-								+ "<th>Reimbursement ID</th>"
+							+ "<tr>";
+							if(user.getRoleId()==1)
+								html += "<th>Author</th>";
+							html+="<th>Reimbursement ID</th>"
 								+ "<th>Amount</th>"
+								+ "<th>Type</th>"
 								+ "<th>Time Submitted</th>"
 								+ "<th>Time Resolved</th>"
 								+ "<th>Resolver</th>"
@@ -65,7 +68,7 @@ public class HomeServlet extends HttpServlet{
 						+ "</thead>"
 					+ "<tbody></div>";
 			for(int i = 0; i < lmao.size(); i++)
-				html+= appendTable((Reimbursement) lmao.get(i));
+				html+= appendTable((Reimbursement) lmao.get(i), user);
 			html+="</tbody></table>";
 			
 			PrintWriter writer = resp.getWriter();
@@ -74,7 +77,7 @@ public class HomeServlet extends HttpServlet{
 		}
 	}
 	
-	private String appendTable(Reimbursement reimb)
+	private String appendTable(Reimbursement reimb, User x)
 	{
 		String myString = "";
 		switch(reimb.getStatusId())
@@ -85,8 +88,12 @@ public class HomeServlet extends HttpServlet{
 			default:break;
 		}
 		
+		if(x.getRoleId()==1)
+			myString += "<td>"+reimb.getAuthor()+"</td>";
+			
 		myString +=   "<td>"+reimb.getReimbId()+"</td>"
 					+ "<td>$"+reimb.getAmount()+"</td>"
+					+ "<td>"+reimb.getTypeId()+"</td>"
 					+ "<td>"+reimb.getSubmitted()+"</td>"
 					+ "<td>"+reimb.getResolved()+"</td>"
 					+ "<td>"+reimb.getResolver()+"</td>";
