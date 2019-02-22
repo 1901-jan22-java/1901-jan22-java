@@ -1,14 +1,10 @@
 package com.jdbc.util;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Properties;
-
 import org.apache.log4j.Logger;
+import oracle.jdbc.driver.OracleDriver;
 
 public class ConnectionFactory {
 	
@@ -30,22 +26,16 @@ public class ConnectionFactory {
 	
 	public Connection getConnection() {
 		Connection conn = null;
-		Properties prop = new Properties();
-		String filepath = "src/main/resources/db.properties";
 		try {
-			prop.load(new FileReader(filepath));
-			Class.forName(prop.getProperty("driver"));
+			// Interesting tidbit from Java Doc:
+			// Applications no longer need to explictly load JDBC drivers using Class.forName(). 
+			// Existing programs which currently load JDBC drivers using Class.forName() 
+			// will continue to work without modification.
 			conn = DriverManager.getConnection(
-						prop.getProperty("url"), 
-						prop.getProperty("username"),
-						prop.getProperty("pwd")
+						"jdbc:oracle:thin:@demo1901jan22rds.ctcx38zwi7iv.us-east-1.rds.amazonaws.com:1521:ORCL",
+						"demo1901jan22rds",
+						"X7B9GXr#uPn%siF*qrVR5NqJRBBvIy"
 					);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
