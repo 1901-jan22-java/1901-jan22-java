@@ -41,10 +41,7 @@ public class logIn extends HttpServlet{
 			HttpSession session = req.getSession();
 			session.setAttribute("sessionUser", u);
 			log.info("CREATED SESSION " + session.getId());
-			if(u.getRoleId() == 1)
-				resp.sendRedirect("homeManager");
-			else
-				resp.sendRedirect("home");
+			resp.sendRedirect("home");
 		}
 	}
 

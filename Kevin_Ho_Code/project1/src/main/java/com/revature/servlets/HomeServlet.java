@@ -2,6 +2,7 @@ package com.revature.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -32,7 +33,8 @@ public class HomeServlet extends HttpServlet{
 		//get user from session 
 		User user = (User) session.getAttribute("sessionUser");
 		ReimbursementRepo repo = new ReimbursementRepo();
-		List lmao = repo.getReimbursements(user);
+		List<Reimbursement> lmao = new ArrayList<Reimbursement>();
+		
 		if(user == null) {
 			//no user stored in session. 
 			//should not be able to access the home page
@@ -40,6 +42,11 @@ public class HomeServlet extends HttpServlet{
 			log.warn("no user logged in");
 		}
 		else{
+			if(user.getRoleId() == 1)
+				lmao = repo.getAllReimbursements();
+			else
+				lmao = repo.getReimbursements(user);
+
 			//welcome page for user 
 			log.trace("user logged in session. " + session.getAttributeNames());
 			String html = "<div class=\"jumbotron\">\r\n" + 
