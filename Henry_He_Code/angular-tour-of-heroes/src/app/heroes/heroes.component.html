@@ -2,7 +2,18 @@
 <ul class="heroes">
   <li *ngFor="let hero of heroes">
     <span class="badge">{{hero.id}}</span> {{hero.name}}
+    <button class="delete" title="delete hero" (click)="delete(hero)">x</button>
   </li>
 </ul>
 <!-- Child component called app-hero-details will handle the details from now on... -->
 <app-hero-detail [hero]="selectedHero"></app-hero-detail>
+
+<div>
+  <label>Hero name:
+    <input #heroName />
+  </label>
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button (click)="add(heroName.value); heroName.value=''">
+    add
+  </button>
+</div>
