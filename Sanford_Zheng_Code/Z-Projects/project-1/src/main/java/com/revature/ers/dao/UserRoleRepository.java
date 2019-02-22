@@ -56,7 +56,7 @@ public class UserRoleRepository implements Repository<UserRoleData> {
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-			String sql = "select * from ers_user_role where role_id = ?";
+			String sql = "select * from ers_user_roles where role_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, itemId);
 
@@ -81,7 +81,7 @@ public class UserRoleRepository implements Repository<UserRoleData> {
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-			String sql = "select * from ers_user_role";
+			String sql = "select * from ers_user_roles";
 			PreparedStatement ps = conn.prepareStatement(sql);
 
 			ResultSet rs = ps.executeQuery();

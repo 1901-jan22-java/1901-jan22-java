@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
@@ -32,15 +33,15 @@ public class ConnectionFactory {
 		Connection conn = null;
 		
 		Properties prop = new Properties();
-		String filepath = "src/main/resources/db.properties";
+		String filepath = "db.properties";
 		
 		String root = Thread.currentThread().getContextClassLoader().getResource("").getPath();
 
-		log.info("Root: " + root);
-		log.info("Sub: " + new File(root).list());
+		log.trace("Root: " + root);
+		log.trace("Sub: " + Arrays.toString(new File(root).list()));
 		
 		try {
-			prop.load( new FileReader(filepath) );
+			prop.load( new FileReader(root + filepath) );
 			Class.forName( prop.getProperty("driver") );
 			
 			conn = DriverManager.getConnection( prop.getProperty("url"),

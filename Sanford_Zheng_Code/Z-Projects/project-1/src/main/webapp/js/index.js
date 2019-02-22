@@ -3,7 +3,7 @@
  */
 window.onload = () => {
     fetchView('main-view', 'login.view')
-    fetchView('data-view', 'register.view')
+    fetchView('data-view', 'user')
 }
 
 function fetchView(id, url) {

@@ -32,7 +32,7 @@ public class UserRepository implements Repository<UserData> {
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
 			String sql = "select username, password, first_name, last_name, email, user_role as role from "
-					+ "ers_users u join ers_user_roles ur on u.role_id = ur.role_id;";
+					+ "ers_users u join ers_user_roles ur on u.role_id = ur.role_id";
 			PreparedStatement ps = conn.prepareStatement(sql);
 
 			ResultSet rs = ps.executeQuery();
@@ -43,7 +43,7 @@ public class UserRepository implements Repository<UserData> {
 			}
 
 		} catch (SQLException e) {
-			log.error("SQLException in ReimbursementRepository.getAllUsers()", e);
+			log.error("SQLException in UserRepository.getAllUsers()", e);
 		}
 
 		return res;
@@ -67,7 +67,7 @@ public class UserRepository implements Repository<UserData> {
 			}
 
 		} catch (SQLException e) {
-			log.error("SQLException in ReimbursementRepository.getUser(id)", e);
+			log.error("SQLException in UserRepository.getUser(id)", e);
 		}
 
 		return res;
@@ -91,7 +91,7 @@ public class UserRepository implements Repository<UserData> {
 			}
 
 		} catch (SQLException e) {
-			log.error("SQLException in ReimbursementRepository.getUser(username)", e);
+			log.error("SQLException in UserRepository.getUser(username)", e);
 		}
 
 		return res;

@@ -59,7 +59,7 @@ begin
             reimb_type_id)
         values(dbms_random.value(100, 200),
             dgRandomDate, 
-            round(dbms_random.value(1,4)), 
+            round(dbms_random.value(6,9)), 
             round(dbms_random.value(1,3)),
             round(dbms_random.value(1,4))
         );
@@ -87,7 +87,4 @@ insert into ers_user_roles(user_role) values('Admin');
 insert into ers_user_roles(user_role) values('Employee');
 insert into ers_user_roles(user_role) values('Finance Manager');
 
-
-
-commit;
 --rollback;
