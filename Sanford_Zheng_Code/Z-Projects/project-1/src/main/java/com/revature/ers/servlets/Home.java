@@ -7,6 +7,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.ers.dao.dto.User;
 
 /**
  * Servlet implementation class Home. I don't know what I'm doing...
@@ -17,31 +21,18 @@ public class Home extends HttpServlet {
 	private static final long serialVersionUID = 8550366702754639405L;
 
 	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public Home() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		HttpSession session = req.getSession(false);
+		
+		if(session != null) {
+			req.getRequestDispatcher("html/home.html").forward(req, resp);
+		} else {
+			resp.getWriter().write("Your session is not valid.");
+			req.getRequestDispatcher("html/login.html").forward(req, resp);
+		}
 	}
 
 }

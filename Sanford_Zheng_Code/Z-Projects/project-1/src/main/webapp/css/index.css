@@ -1,5 +1,13 @@
-.navbar {
+.view-container {
     display: flex;
     justify-content: center;
     flex-direction: row-reverse;
+}
+
+.view {
+    display: flexbox;
+    padding: 25px;
+    margin: 25px;
+    border: solid black 5px;
+    border-radius: 25px;
 }

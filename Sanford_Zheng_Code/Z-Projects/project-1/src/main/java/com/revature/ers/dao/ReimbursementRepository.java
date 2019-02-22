@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import com.jdbc.utils.ConnectionFactory;
 import com.revature.ers.dao.dto.Reimbursement;
 import com.revature.ers.dao.pojos.ReimbursementData;
+import com.revature.ers.dao.pojos.UserData;
 import com.revature.ers.interfaces.Repository;
 import com.revature.ers.services.blob.Receipt;
 
@@ -58,6 +59,46 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 
 		return res;
 	}
+
+	public List<Reimbursement> getReimbursements(UserData u) {
+		List<Reimbursement> res = new ArrayList<>();
+
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			String sql = "select r.amount, r.submitted, r.resolved, r.reimb_description as description, "
+					+ "r.receipt, auth.first_name + ' ' + auth.last_name as author, "
+					+ "res.first_name + ' ' + res.last_name as resolver, s.reimb_status as status, "
+					+ "t.reimb_type as type from ers_reimbursement r "
+					+ "left join ers_users auth on r.author_id = ? "
+					+ "left join ers_users res on res.user_id = r.resolver_id "
+					+ "left join ers_reimbursement_status s on s.status_id = r.reimb_status_id "
+					+ "left join ers_reimbursement_type t on t.type_id = r.reimb_type_id";
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Integer amount = rs.getInt("amount");
+				Date submitted = rs.getDate("submitted");
+				Date resolved = rs.getDate("resolved");
+				String description = rs.getString("description");
+				Receipt receipt = (Receipt) rs.getBlob("receipt");
+				String author = rs.getString("author");
+				String resolver = rs.getString("resolver");
+				String status = rs.getString("status");
+				String type = rs.getString("type");
+
+				res.add(new Reimbursement(amount, submitted, resolved, description, receipt, author, resolver, status,
+						type));
+			}
+
+		} catch (SQLException e) {
+			log.error("SQLException in ReimbursementRepository.getReimbursements()", e);
+		}
+
+		return res;
+	}
+	
 	public Reimbursement getReimbursement(Integer itemId) {
 		Reimbursement res = null;
 
@@ -89,6 +130,7 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 
 		return res;
 	}
+
 	@Override
 	public ReimbursementData create(ReimbursementData newItem) {
 

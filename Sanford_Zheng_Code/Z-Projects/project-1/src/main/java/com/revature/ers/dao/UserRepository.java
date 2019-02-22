@@ -158,6 +158,34 @@ public class UserRepository implements Repository<UserData> {
 		return res;
 	}
 
+	public UserData read(String un) {
+		UserData res = null;
+
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			String sql = "select * from ers_users where username = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setString(1, un);
+
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				Integer id = rs.getInt("user_id");
+				String username = rs.getString("username");
+				String password = rs.getString("password");
+				String first_name = rs.getString("first_name");
+				String last_name = rs.getString("last_name");
+				String email = rs.getString("email");
+				Integer role_id = rs.getInt("role_id");
+
+				res = new UserData(id, username, password, first_name, last_name, email, role_id);
+			}
+
+		} catch (SQLException e) {
+			log.error("SQLException in UserRepository.read()", e);
+		}
+
+		return res;
+	}
 	@Override
 	public List<UserData> readAll() {
 		List<UserData> res = new ArrayList<>();

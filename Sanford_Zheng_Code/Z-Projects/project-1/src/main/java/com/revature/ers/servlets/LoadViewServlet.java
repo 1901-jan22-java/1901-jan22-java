@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 
-@WebServlet("*#view")
+@WebServlet("*.view")
 public class LoadViewServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = 3014802713949514627L;
@@ -19,17 +19,20 @@ public class LoadViewServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String resourcePath = "html/" + process(req, resp) + ".html";
-		
-		log.trace(resourcePath);
-		log.trace("LOADING " + req.getRequestURI());
+
+		log.trace("REQUEST URI: " + req.getRequestURI());
+		log.trace("PROCESSED: " + resourcePath);
 		
 		req.getRequestDispatcher(resourcePath).forward(req, resp);
 	}
 	
 	private String process(HttpServletRequest req, HttpServletResponse resp) {
-		String[] uri = req.getRequestURI().split("/");
-		String resource = uri[uri.length-1];
-		return resource.substring(0, resource.length() - 5);
+		for(String r: req.getRequestURI().split("/")) {
+			if(r.contains(".view")) {
+				return r.substring(0, r.length()-5);
+			}
+		}
+		return null;
 	}
 	
 }

@@ -1,5 +1,6 @@
 package com.jdbc.utils;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -23,7 +24,7 @@ public class ConnectionFactory {
 		if(cf == null) {
 			cf = new ConnectionFactory();
 		}
-		log.trace("RETURNING CONNECTIONFACTORY INSTANCE: " + cf);
+		log.trace("RETURNING CONNECTIONFACTORY INSTANCE: " + cf.getClass());
 		return cf;
 	}
 	
@@ -32,6 +33,11 @@ public class ConnectionFactory {
 		
 		Properties prop = new Properties();
 		String filepath = "src/main/resources/db.properties";
+		
+		String root = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+
+		log.info("Root: " + root);
+		log.info("Sub: " + new File(root).list());
 		
 		try {
 			prop.load( new FileReader(filepath) );
