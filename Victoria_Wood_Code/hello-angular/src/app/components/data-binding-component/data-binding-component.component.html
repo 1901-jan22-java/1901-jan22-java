@@ -1,0 +1,48 @@
+
+  Below, we will discuss various topics about angular
+<h4>Data Binding</h4>
+<div class = "jumbotron">
+  <h5><i>Angular supports data binding which is a mechanism
+    for coordinating parts of a template(HTML) with parts of a compnont(TS)
+   </i></h5>
+    <br>
+    <h5>String Interpolation</h5>
+   String interpolation uses double cruly braces to display
+    data represented in the component or to evaluate expressions  
+    <br><br>
+    Text from component: {{text}}
+    <br>
+    Boolean value: {{bool}}
+    <br>
+    Math: {{192409/7}}
+
+    <br>
+    <br>
+    <h5>Event Binding </h5>
+    The process of linking actions to DOM events on elements
+    <pre><code>(event) = "function()"</code></pre>
+
+    
+    <h5 [style.background-color]="colorProp">Property Binding</h5>
+    <i>This allows us to apply a property to a DOM element dynamically.
+      Important note about property binding is that it is often used with attribute 
+      directives, but does not need to be
+    </i> <code>[property] = 'datafield'</code>
+
+    <br>{{count}}
+    <button (click)="increment()">Increment</button>
+    <br>
+    <b>{{currentTime | date:'medium' | uppercase}}</b>
+    <b>{{10000000 | currency}}</b>
+
+    <br>
+    Use of custom pipe... 
+    {{100 | squareroot}}
+
+     <br>
+    <h5>Two-Way Data Binding</h5>
+    <input type="text" [(ngModel)]="username">
+    {{username}}
+
+    
+  </div>

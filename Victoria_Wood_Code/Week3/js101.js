@@ -3,7 +3,7 @@ JavaScript is a scripting language used for client side operations
 
 Do note, however, that there are many frameworks that allow the server-side
 use of JS. It's known as a client-side language because it can be interpreted from
-the browse
+the browser
 
 - loosely typed - we can not declare variable types, they are dynamically allocated 
 based on the assignment of the variable. We declare variables with one of the three keywords
@@ -19,7 +19,7 @@ based on the assignment of the variable. We declare variables with one of the th
 
 - datatypes include number, string, boolean, objects, undefined,
     NaN (debatable bc typeOf(NaN) = number)
-- if..else, returns, swithc, try...cathc, do..while, for, breaks, continue, while
+- if..else, returns, swithc, try...catch, do..while, for, breaks, continue, while
 -TRUTHY AND FALSY
     - because JS is loosely typed, we have to be able to assign 
     everything a true or false identity so that they can be
