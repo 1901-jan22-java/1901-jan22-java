@@ -2,6 +2,7 @@ package com.revature.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -32,19 +33,19 @@ public class HomeServlet extends HttpServlet{
 		//get user from session 
 		User user = (User) session.getAttribute("sessionUser");
 		ReimbursementRepo repo = new ReimbursementRepo();
-		List lmao = repo.getReimbursements(user);
-		if(user == null) {
-			//no user stored in session. 
-			//should not be able to access the home page
-			resp.sendRedirect("login");
-			log.warn("no user logged in");
-		}
-		else{
-			//welcome page for user 
-			log.trace("user logged in session. " + session.getAttributeNames());
-			String html = "<div class=\"jumbotron\">\r\n" + 
-					"	<h1>Welcome, "+user.getFirstName()+" "+user.getLastName()+"</h1>\r\n"
-					+ "<div class='container'><table class='table'>"
+		List<Reimbursement> lmao = new ArrayList<Reimbursement>();
+		if(user.getRoleId()==1)
+			lmao = repo.getAllReimbursements();
+		else
+			lmao = repo.getReimbursements(user);
+		
+		//welcome page for user 
+		log.trace("user logged in session. " + session.getAttributeNames());
+		String html = "<div class=\"jumbotron\">\r\n" + 
+				"	<h1>Welcome, "+user.getFirstName()+" "+user.getLastName()+"</h1>\r\n"
+				+ "<div class='container'>"
+					+ " <button type='button' >Add Reimbursement</button> "
+					+ "<table class='table'>"
 						+ "<thead>"
 							+ "<tr>"
 								+ "<th>Reimbursement ID</th>"
@@ -54,15 +55,15 @@ public class HomeServlet extends HttpServlet{
 								+ "<th>Resolver</th>"
 							+ "</tr>"
 						+ "</thead>"
-					+ "<tbody></div>";
-			for(int i = 0; i < lmao.size(); i++)
-				html+= appendTable((Reimbursement) lmao.get(i));
-			html+="</tbody></table>";
-			
-			PrintWriter writer = resp.getWriter();
-			resp.setContentType("text/html");
-			writer.write(html);
-		}
+					+ "<tbody>"
+				+ "</div>";
+		for(int i = 0; i < lmao.size(); i++)
+			html+= appendTable((Reimbursement) lmao.get(i));
+		html+="</tbody></table>";
+		
+		PrintWriter writer = resp.getWriter();
+		resp.setContentType("text/html");
+		writer.write(html);
 	}
 	
 	private String appendTable(Reimbursement reimb)

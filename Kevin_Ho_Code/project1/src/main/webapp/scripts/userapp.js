@@ -54,7 +54,7 @@ function logIn(){
             }
         }
     }
-    xhr.open("POST", "logIn");
+    xhr.open("POST", "login");
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.send(json);
 }
