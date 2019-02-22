@@ -43,20 +43,27 @@ function logIn(){
             if(xhr.status == 200){
                 //logged in successfully
             	$('#view').html(xhr.responseText);
+            	$('#addReimb').on('click', addReimb);
             }
             else if(xhr.status == 409){
                 //encountered known problem (wrong password/user not in system)
                 console.log(xhr.responseText);
-                alert("Wrong login!");
+                $('#error').html("Wrong login!!");
+                $('#error').css('color', 'red');
             }
             else{
                 //some other error, likely send to error page
+                $('#error').html("What in gods name did you do");            	
             }
         }
     }
     xhr.open("POST", "logIn");
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.send(json);
+}
+
+function addReimb(){
+	alert("nigaoin");
 }
 
 function addUser(){

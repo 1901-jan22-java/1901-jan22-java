@@ -51,7 +51,9 @@ public class HomeServlet extends HttpServlet{
 			log.trace("user logged in session. " + session.getAttributeNames());
 			String html = "<div class=\"jumbotron\">\r\n" + 
 					"	<h1>Welcome, "+user.getFirstName()+" "+user.getLastName()+"</h1>\r\n"
-					+ "<div class='container'><table class='table'>"
+					+ "<div class='container'>"
+					+ "<button id='addReimb'>Request Reimbursement</button>"
+					+ "<table class='table'>"
 						+ "<thead>"
 							+ "<tr>"
 								+ "<th>Reimbursement ID</th>"
