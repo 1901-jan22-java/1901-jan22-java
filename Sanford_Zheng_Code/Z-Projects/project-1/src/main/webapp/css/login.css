@@ -1,8 +1,3 @@
-* {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-}
-
 /* BASIC */
 
 html {
@@ -10,8 +5,6 @@ html {
 }
 
 body {
-    padding: 0;
-    margin: 0;
     font-family: "Poppins", sans-serif;
     height: 100vh;
 }
@@ -33,51 +26,6 @@ h2 {
     color: #cccccc;
 }
 
-table {
-    color: #333;
-    font-family: Helvetica, Arial, sans-serif;
-    width: 100%;
-    border-collapse: collapse;
-    border-spacing: 5px;
-    border: solid black 1px;
-}
-
-td,
-th {
-    /* No more visible border */
-    border: 1px solid black;
-    height: fit-content;
-    /* Simple transition for hover effect */
-    transition: all 0.3s;
-    text-align: center;
-    padding: 5px;
-}
-
-th {
-    background: #DFDFDF;
-    /* Darken header a bit */
-    font-weight: bold;
-}
-
-td {
-    background: #FAFAFA;
-}
-
-/* Cells in even rows (2,4,6...) are one color */
-tr:nth-child(even) td {
-    background: #F1F1F1;
-}
-
-/* Cells in odd rows (1,3,5...) are another (excludes header cells)  */
-tr:nth-child(odd) td {
-    background: #FEFEFE;
-}
-
-/* Hover cell effect! */
-tr:hover td {
-    background: #312b2b;
-    color: #FFF;
-}
 
 
 /* STRUCTURE */
@@ -132,9 +80,6 @@ h2.active {
 
 /* FORM TYPOGRAPHY*/
 
-button,
-select,
-option,
 input[type=button],
 input[type=submit],
 input[type=reset] {
@@ -159,14 +104,12 @@ input[type=reset] {
     transition: all 0.3s ease-in-out;
 }
 
-button:hover,
 input[type=button]:hover,
 input[type=submit]:hover,
 input[type=reset]:hover {
     background-color: #39ace7;
 }
 
-button:active,
 input[type=button]:active,
 input[type=submit]:active,
 input[type=reset]:active {
@@ -177,8 +120,7 @@ input[type=reset]:active {
     transform: scale(0.95);
 }
 
-input[type=text],
-input[type=password] {
+input[type=text] {
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;
@@ -199,21 +141,15 @@ input[type=password] {
     border-radius: 5px 5px 5px 5px;
 }
 
-input[type=text]:focus,
-input[type=password]:focus {
+input[type=text]:focus {
     background-color: #fff;
     border-bottom: 2px solid #5fbae9;
 }
 
-input[type=text]:placeholder,
-input[type=password]:placeholder {
+input[type=text]:placeholder {
     color: #cccccc;
 }
 
-input[type=text]:focus::-webkit-input-placeholder,
-input[type=password]:focus::-webkit-input-placeholder {
-    color: transparent;
-}
 
 
 /* ANIMATIONS */
@@ -355,22 +291,5 @@ input[type=password]:focus::-webkit-input-placeholder {
 }
 
 #icon {
-    width: 10%;
-    margin: 25px;
-}
-
-
-.view-container {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-}
-
-.view {
-    display: flexbox;
-    padding: 25px;
-    margin: 25px;
-    border: solid black 5px;
-    border-radius: 10px;
-
+    width: 60%;
 }

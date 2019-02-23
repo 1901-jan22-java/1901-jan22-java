@@ -103,7 +103,7 @@ public class UserRepository implements Repository<UserData> {
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
 			String sql = "insert into ers_users(username, password, first_name, last_name, email, rold_id) "
-					+ "values(?, ?, ?, ?, ?, ?)";
+					+ "values(lower(?), ?, ?, ?, ?, ?)";
 			String[] keys = { "user_id" };
 			PreparedStatement ps = conn.prepareStatement(sql, keys);
 			ps.setString(1, newItem.getUsername());
@@ -186,6 +186,7 @@ public class UserRepository implements Repository<UserData> {
 
 		return res;
 	}
+	
 	@Override
 	public List<UserData> readAll() {
 		List<UserData> res = new ArrayList<>();

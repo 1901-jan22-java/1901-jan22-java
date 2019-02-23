@@ -44,7 +44,8 @@ public class ReimbursementService {
 	}
 
 	public static void addReimbursement(Reimbursement r, UserData ud) {
-		if(reimbRepo.create(reimbursementToData(r, ud)) == null) return;
+		if (reimbRepo.create(reimbursementToData(r, ud)) == null)
+			return;
 		reimbursements.add(r);
 	}
 
@@ -73,6 +74,7 @@ public class ReimbursementService {
 	public static void loadDataImage() {
 		loadStatus();
 		loadTypes();
+		reimbursements = reimbRepo.getAllReimbursements();
 	}
 
 	public static void loadStatus() {

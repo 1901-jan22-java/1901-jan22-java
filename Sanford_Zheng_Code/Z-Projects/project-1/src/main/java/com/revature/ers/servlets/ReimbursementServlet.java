@@ -18,7 +18,7 @@ public class ReimbursementServlet extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 6417817436028192843L;
-	private static ObjectMapper om = new ObjectMapper();
+	private static final ObjectMapper om = new ObjectMapper();
 //	private static ReimbursementService rs = new ReimbursementService();
 
 	/**
@@ -26,6 +26,7 @@ public class ReimbursementServlet extends HttpServlet {
 	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		String json = om.writeValueAsString(ReimbursementService.getAllReimbursements());
 		
 		resp.setContentType("application/json");
@@ -34,7 +35,7 @@ public class ReimbursementServlet extends HttpServlet {
 	
 	
 	/**
-	 * Add a new reimbursement request
+	 * Add a new reimbursement from request
 	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

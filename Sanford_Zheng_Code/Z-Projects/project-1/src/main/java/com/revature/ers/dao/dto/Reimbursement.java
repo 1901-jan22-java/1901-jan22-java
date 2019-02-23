@@ -8,8 +8,8 @@ public class Reimbursement {
 
 	private Integer id;
 	private Double amount;
-	private Date submitted;
-	private Date resolved;
+	private String submitted;
+	private String resolved;
 	private String description;
 	private Receipt receipt;
 	private String author;
@@ -21,7 +21,7 @@ public class Reimbursement {
 		super();
 	}
 
-	public Reimbursement(Integer id, Double amount, Date submitted, Date resolved, String description, Receipt receipt,
+	public Reimbursement(Integer id, Double amount, String submitted, String resolved, String description, Receipt receipt,
 			String author, String resolver, String status, String type) {
 		super();
 		this.id = id;
@@ -52,19 +52,19 @@ public class Reimbursement {
 		this.amount = amount;
 	}
 
-	public Date getSubmitted() {
+	public String getSubmitted() {
 		return submitted;
 	}
 
-	public void setSubmitted(Date submitted) {
+	public void setSubmitted(String submitted) {
 		this.submitted = submitted;
 	}
 
-	public Date getResolved() {
+	public String getResolved() {
 		return resolved;
 	}
 
-	public void setResolved(Date resolved) {
+	public void setResolved(String resolved) {
 		this.resolved = resolved;
 	}
 

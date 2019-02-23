@@ -2,26 +2,50 @@
  * LAGJLSDL:JHDKLJGHSKLDFHGK HOW DO I EVEN FINISH!@#?
  */
 $(function () {
-    getIntoElement('main-view', 'login.view', (a) => a);
-    getIntoElement('data-view', 'reimbursement', processReimb);
+    // getIntoElement('main-view', 'register.view', (a) => a);
+    // getIntoElement('data-view', 'user', processReimb);
 });
 
-function bindLogin(){
+function bindLogin() {
+    $('#loginButton').click(function () {
+        var un = $('#username').val();
+        var pwd = $('#password').val();
+        authenticate(un, pwd);
+    });
+    $('#goToRegister').click(function(){
 
+    })
 }
 
-function bindRegister(){
-
-}
-
-function bindEmployee(){
-    $('#request-reimbursement').click(function (){
+function bindRegister() {
+    $('#registerButton').click(function () {
+        var un = $('#username').val();
+        var pwd = $('#password').val();
+    });
+    $('#goToLogin').click(function(){
         
+    })
+}
+
+function bindEmployee() {
+    $('#newReimbursement').click(function () {
+
+    });
+    $('#myReimbursements').click(function () {
+
     });
 }
 
-function bindManager(){
+function bindManager() {
+    $('#viewReimbursements').click(function(){
 
+    });
+    $('#approve').click(function(){
+
+    })
+    $('#deny').click(function(){
+
+    });
 }
 
 function authenticate(username, password) {
@@ -34,16 +58,17 @@ function authenticate(username, password) {
             password: password
         },
         success: function (data) {
-            $('#main-view').html(data);
+            var obj = JSON.parse(data);
+            $('#main-view').html(obj);
         }
     })
 };
 
-function getRequest(id, url, processData, after){
+function getRequest(id, url, processData, after) {
     $.ajax({
         type: 'GET',
         url: url,
-        success: function (data){
+        success: function (data) {
             $(`${id}`).html(processData(data));
             !after && after();
         }
@@ -70,7 +95,7 @@ function processReimb(reimb) {
         '<th>Amount</th>' +
         '<th>Submitted</th>' +
         '<th>Resolved</th>' +
-        '<th>Descrption</th>' +
+        '<th>Description</th>' +
         '<th>Author</th>' +
         '<th>Resolver</th>' +
         '<th>Status</th>' +
@@ -81,10 +106,10 @@ function processReimb(reimb) {
         res += `<tr><td>${r.id}</td>` +
             `<td>${r.amount}</td>` +
             `<td>${r.submitted}</td>` +
-            `<td>${r.resolved}</td>` +
-            `<td>${r.description}</td>` +
+            `<td>${r.resolved || ""}</td>` +
+            `<td>${r.description || ""}</td>` +
             `<td>${r.author}</td>` +
-            `<td>${r.resolver}</td>` +
+            `<td>${r.resolver || ""}</td>` +
             `<td>${r.status}</td>` +
             `<td>${r.type}</td></tr>`;
 

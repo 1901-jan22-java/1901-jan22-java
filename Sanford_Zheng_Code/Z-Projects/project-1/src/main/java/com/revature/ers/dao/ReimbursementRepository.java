@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,19 +40,7 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Integer id = rs.getInt("id");
-				Double amount = rs.getDouble("amount");
-				Date submitted = rs.getDate("submitted");
-				Date resolved = rs.getDate("resolved");
-				String description = rs.getString("description");
-				Receipt receipt = (Receipt) rs.getBlob("receipt");
-				String author = rs.getString("author");
-				String resolver = rs.getString("resolver");
-				String status = rs.getString("status");
-				String type = rs.getString("type");
-
-				res.add(new Reimbursement(id, amount, submitted, resolved, description, receipt, author, resolver,
-						status, type));
+				res.add(readReimbursement(rs));
 			}
 
 		} catch (SQLException e) {
@@ -59,6 +48,23 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 		}
 
 		return res;
+	}
+	
+	private static Reimbursement readReimbursement(ResultSet rs) throws SQLException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyy.MMMMM.dd GGG hh:mm aaa");
+		Integer id = rs.getInt("id");
+		Double amount = rs.getDouble("amount");
+		String submitted = sdf.format(rs.getDate("submitted"));
+		String resolved = sdf.format(rs.getDate("resolved"));
+		String description = rs.getString("description");
+		Receipt receipt = (Receipt) rs.getBlob("receipt");
+		String author = rs.getString("author");
+		String resolver = rs.getString("resolver");
+		String status = rs.getString("status");
+		String type = rs.getString("type");
+
+		return new Reimbursement(id, amount, submitted, resolved, description, receipt, author, resolver,
+				status, type);
 	}
 
 	public List<Reimbursement> getReimbursements(UserData u) {
@@ -79,19 +85,7 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				Integer id = rs.getInt("id");
-				Double amount = rs.getDouble("amount");
-				Date submitted = rs.getDate("submitted");
-				Date resolved = rs.getDate("resolved");
-				String description = rs.getString("description");
-				Receipt receipt = (Receipt) rs.getBlob("receipt");
-				String author = rs.getString("author");
-				String resolver = rs.getString("resolver");
-				String status = rs.getString("status");
-				String type = rs.getString("type");
-
-				res.add(new Reimbursement(id, amount, submitted, resolved, description, receipt, author, resolver, status,
-						type));
+				res.add(readReimbursement(rs));
 			}
 
 		} catch (SQLException e) {
@@ -112,19 +106,7 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				Integer id = rs.getInt("id");
-				Double amount = rs.getDouble("amount");
-				Date submitted = rs.getDate("submitted");
-				Date resolved = rs.getDate("resolved");
-				String description = rs.getString("description");
-				Receipt receipt = (Receipt) rs.getBlob("receipt");
-				String author = rs.getString("author");
-				String resolver = rs.getString("resolver");
-				String status = rs.getString("status");
-				String type = rs.getString("type");
-
-				res = new Reimbursement(id, amount, submitted, resolved, description, receipt, author, resolver, status,
-						type);
+				res = readReimbursement(rs);
 			}
 
 		} catch (SQLException e) {

@@ -23,13 +23,14 @@ public class UserService {
 	private static final UserRepository usersRepo = new UserRepository();
 	private static final UserRoleRepository rolesRepo = new UserRoleRepository();
 
-	private List<User> usersDTO = new ArrayList<>();
+	private static List<User> usersDTO = new ArrayList<>();
 
 //	private static final HashMap<Integer, UserData> rawData = new HashMap<>();
 	private static final BiMap<Integer, String> roles = HashBiMap.create();
 
 	static {
 		loadRoles();
+		usersDTO = usersRepo.getAllUsers();
 		log.trace("UserService Class Initialized.");
 	}
 
@@ -39,23 +40,27 @@ public class UserService {
 		log.trace("UserService Object Instantiated.");
 	}
 
-	public List<User> getAllUsers() {
+	public static List<User> getAllUsers() {
 		return usersDTO;
 	}
 
-	public User register(User u) {
+	public static User register(User u) {
 		usersDTO.add(u);
 		return dataToUser(usersRepo.create(userToData(u)));
 	}
 
-	public User login(User u) {
-		return usersRepo.getUser(u.getUsername());
+	public static User login(User u) {
+		UserData repoUser = usersRepo.read(u.getUsername());
+		if(!repoUser.getPassword().equalsIgnoreCase(u.getPassword())) return null;
+		return dataToUser(repoUser);
 	}
 
-	public User getUser(String un) {
-		return usersDTO.stream().filter(user -> user.getUsername().equalsIgnoreCase(un)).findAny().orElse(null);
+	public static User getUser(String un) {
+		return usersDTO.stream().filter( user -> user.getUsername().equalsIgnoreCase(un) ).findAny().orElse(null);
 	}
 
+	
+	// These are too much... I shouldn't have started at the back-end...
 	public static List<Reimbursement> getReimbursements(User u) {
 		List<Reimbursement> res = null;
 		if (u.getRole().equalsIgnoreCase("Admin")) {
@@ -63,6 +68,17 @@ public class UserService {
 		} else if (u.getRole().equalsIgnoreCase("Employee")) {
 			UserData ud = usersRepo.read(u.getUsername());
 			res = ReimbursementService.getReimbursements(ud);
+		}
+		return res;
+	}
+	
+	public static List<Reimbursement> getReimbursements(UserData ud) {
+		List<Reimbursement> res = null;
+		if (ud.getRole_id().equals(getRoleID("Admin"))) {
+			res = ReimbursementService.getAllReimbursements();
+		} else if (ud.getRole_id().equals(getRoleID("Employee"))) {
+			UserData udi = usersRepo.read(ud.getUsername());
+			res = ReimbursementService.getReimbursements(udi);
 		}
 		return res;
 	}

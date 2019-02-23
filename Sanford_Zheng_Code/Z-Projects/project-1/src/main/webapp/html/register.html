@@ -1,3 +1,31 @@
-<div>
-    <h1>REGISTER!</h1>
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <!-- Tabs Titles -->
+
+        <!-- Icon -->
+        <div class="fadeIn first">
+            <img src="../images/22-128.png" id="icon" alt="Missing Icon...">
+            <h3>Expense Reimbursement System</h3>
+        </div>
+
+        <!-- Login Form -->
+        <form id="registerForm">
+            <input type="text" id="username" class="fadeIn second" name="username" placeholder="Username">
+            <input type="password" id="password" class="fadeIn second" name="password" placeholder="Password">
+            <input type="text" id="email" class="fadeIn second" name="email" placeholder="Email"><br>
+            <label for="role" class="fadeIn third">
+                <h5>Role:</h5>
+            </label>
+            <select id="role" class="fadeIn third" name="role" placeholder="Role">
+                <option value="Employee">Employee</option>
+                <option value="Finance Manager">Finance Manager</option>
+            </select>
+            <input type="button" id="registerButton" class="fadeIn fourth" value="Register">
+        </form>
+
+        <!-- Go to Register Form -->
+        <div id="formFooter">
+            <a id="goToLogin" class="underlineHover">Log In</a>
+        </div>
+    </div>
 </div>
