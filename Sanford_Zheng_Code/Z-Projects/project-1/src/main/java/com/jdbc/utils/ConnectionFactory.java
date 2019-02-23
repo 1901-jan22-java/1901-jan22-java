@@ -1,13 +1,11 @@
 package com.jdbc.utils;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Arrays;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
@@ -36,9 +34,11 @@ public class ConnectionFactory {
 		String filepath = "db.properties";
 		
 		String root = Thread.currentThread().getContextClassLoader().getResource("").getPath();
-
-		log.trace("Root: " + root);
-		log.trace("Sub: " + Arrays.toString(new File(root).list()));
+		
+//		String explore = new String(root);
+//
+//		log.trace("Root: " + explore);
+//		log.trace("Sub: " + Arrays.toString(new File(explore).list()));
 		
 		try {
 			prop.load( new FileReader(root + filepath) );

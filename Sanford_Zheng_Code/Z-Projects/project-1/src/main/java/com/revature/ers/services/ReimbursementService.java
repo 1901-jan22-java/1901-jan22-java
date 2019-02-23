@@ -38,7 +38,7 @@ public class ReimbursementService {
 		log.trace("ReimbursementService Class Initialized.");
 	}
 
-	private ReimbursementService() {
+	public ReimbursementService() {
 		loadDataImage();
 		log.trace("ReimbursementService Object Instantiated. This should not be happening...");
 	}
@@ -49,7 +49,7 @@ public class ReimbursementService {
 	}
 
 	public static List<Reimbursement> getAllReimbursements() {
-		return reimbursements;
+		return reimbRepo.getAllReimbursements();
 	}
 
 	public static List<Reimbursement> getReimbursements(UserData ud) {

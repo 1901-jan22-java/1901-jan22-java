@@ -18,7 +18,8 @@ public class LoadViewServlet extends HttpServlet {
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String resourcePath = "html/" + process(req, resp) + ".html";
+		String file = process(req, resp);
+		String resourcePath = "html/" + (file.isEmpty()? "error404" : file) + ".html";
 
 		log.trace("REQUEST URI: " + req.getRequestURI());
 		log.trace("PROCESSED: " + resourcePath);

@@ -1,7 +1,5 @@
 package com.revature.ers.dao.dto;
 
-import com.revature.ers.dao.pojos.UserData;
-
 public class User {
 
 	private String username;

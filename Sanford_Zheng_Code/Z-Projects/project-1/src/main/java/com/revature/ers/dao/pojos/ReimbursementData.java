@@ -10,7 +10,7 @@ public class ReimbursementData implements Serializable {
 	private static final long serialVersionUID = 3307178767541629256L;
 
 	private Integer reimb_id;
-	private Integer amount;
+	private Double amount;
 	private Date submitted;
 	private Date resolved;
 	private String reimb_description;
@@ -24,7 +24,7 @@ public class ReimbursementData implements Serializable {
 		super();
 	}
 
-	public ReimbursementData(Integer amount, Date submitted, Date resolved, String reimb_description,
+	public ReimbursementData(Double amount, Date submitted, Date resolved, String reimb_description,
 			Receipt receipt, Integer author_id, Integer resolver_id, Integer reimb_status_id, Integer reimb_type_id) {
 		super();
 		this.amount = amount;
@@ -38,7 +38,7 @@ public class ReimbursementData implements Serializable {
 		this.reimb_type_id = reimb_type_id;
 	}
 	
-	public ReimbursementData(Integer reimb_id, Integer amount, Date submitted, Date resolved, String reimb_description,
+	public ReimbursementData(Integer reimb_id, Double amount, Date submitted, Date resolved, String reimb_description,
 			Receipt receipt, Integer author_id, Integer resolver_id, Integer reimb_status_id, Integer reimb_type_id) {
 		super();
 		this.reimb_id = reimb_id;
@@ -61,11 +61,11 @@ public class ReimbursementData implements Serializable {
 		this.reimb_id = reimb_id;
 	}
 
-	public Integer getAmount() {
+	public Double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
 

@@ -39,7 +39,8 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				Integer amount = rs.getInt("amount");
+				Integer id = rs.getInt("id");
+				Double amount = rs.getDouble("amount");
 				Date submitted = rs.getDate("submitted");
 				Date resolved = rs.getDate("resolved");
 				String description = rs.getString("description");
@@ -49,8 +50,8 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 				String status = rs.getString("status");
 				String type = rs.getString("type");
 
-				res.add(new Reimbursement(amount, submitted, resolved, description, receipt, author, resolver, status,
-						type));
+				res.add(new Reimbursement(id, amount, submitted, resolved, description, receipt, author, resolver,
+						status, type));
 			}
 
 		} catch (SQLException e) {
@@ -67,18 +68,19 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 			String sql = "select r.amount, r.submitted, r.resolved, r.reimb_description as description, "
 					+ "r.receipt, auth.first_name + ' ' + auth.last_name as author, "
 					+ "res.first_name + ' ' + res.last_name as resolver, s.reimb_status as status, "
-					+ "t.reimb_type as type from ers_reimbursement r "
-					+ "left join ers_users auth on r.author_id = ? "
+					+ "t.reimb_type as type from ers_reimbursement r " + "left join ers_users auth on r.author_id = ? "
 					+ "left join ers_users res on res.user_id = r.resolver_id "
 					+ "left join ers_reimbursement_status s on s.status_id = r.reimb_status_id "
 					+ "left join ers_reimbursement_type t on t.type_id = r.reimb_type_id";
 
 			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, u.getUser_id());
 
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				Integer amount = rs.getInt("amount");
+				Integer id = rs.getInt("id");
+				Double amount = rs.getDouble("amount");
 				Date submitted = rs.getDate("submitted");
 				Date resolved = rs.getDate("resolved");
 				String description = rs.getString("description");
@@ -88,7 +90,7 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 				String status = rs.getString("status");
 				String type = rs.getString("type");
 
-				res.add(new Reimbursement(amount, submitted, resolved, description, receipt, author, resolver, status,
+				res.add(new Reimbursement(id, amount, submitted, resolved, description, receipt, author, resolver, status,
 						type));
 			}
 
@@ -98,7 +100,7 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 
 		return res;
 	}
-	
+
 	public Reimbursement getReimbursement(Integer itemId) {
 		Reimbursement res = null;
 
@@ -110,7 +112,8 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				Integer amount = rs.getInt("amount");
+				Integer id = rs.getInt("id");
+				Double amount = rs.getDouble("amount");
 				Date submitted = rs.getDate("submitted");
 				Date resolved = rs.getDate("resolved");
 				String description = rs.getString("description");
@@ -120,7 +123,7 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 				String status = rs.getString("status");
 				String type = rs.getString("type");
 
-				res = new Reimbursement(amount, submitted, resolved, description, receipt, author, resolver, status,
+				res = new Reimbursement(id, amount, submitted, resolved, description, receipt, author, resolver, status,
 						type);
 			}
 
@@ -141,7 +144,7 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 					+ "reimb_type_id) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			String[] keys = { "reimb_id" };
 			PreparedStatement ps = conn.prepareStatement(sql, keys);
-			ps.setInt(1, newItem.getAmount());
+			ps.setDouble(1, newItem.getAmount());
 			ps.setDate(2, newItem.getSubmitted());
 			ps.setDate(3, newItem.getResolved());
 			ps.setString(4, newItem.getReimb_description());
@@ -179,7 +182,7 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				Integer id = rs.getInt("reimb_id");
-				Integer amount = rs.getInt("amount");
+				Double amount = rs.getDouble("amount");
 				Date submitted = rs.getDate("submitted");
 				Date resolved = rs.getDate("resolved");
 				String description = rs.getString("reimb_description");
@@ -212,7 +215,7 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				Integer id = rs.getInt("reimb_id");
-				Integer amount = rs.getInt("amount");
+				Double amount = rs.getDouble("amount");
 				Date submitted = rs.getDate("submitted");
 				Date resolved = rs.getDate("resolved");
 				String description = rs.getString("reimb_description");
@@ -248,7 +251,7 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				Integer id = rs.getInt("reimb_id");
-				Integer amount = rs.getInt("amount");
+				Double amount = rs.getDouble("amount");
 				Date submitted = rs.getDate("submitted");
 				Date resolved = rs.getDate("resolved");
 				String description = rs.getString("reimb_description");
@@ -266,7 +269,7 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 						+ "reimb_status_id = ?, reimb_type_id = ? where reimb_id = ?";
 				ps = conn.prepareStatement(sql);
 
-				ps.setInt(1, newItem.getAmount());
+				ps.setDouble(1, newItem.getAmount());
 				ps.setDate(2, newItem.getSubmitted());
 				ps.setDate(3, newItem.getResolved());
 				ps.setString(4, newItem.getReimb_description());
@@ -307,7 +310,7 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				Integer id = rs.getInt("reimb_id");
-				Integer amount = rs.getInt("amount");
+				Double amount = rs.getDouble("amount");
 				Date submitted = rs.getDate("submitted");
 				Date resolved = rs.getDate("resolved");
 				String description = rs.getString("reimb_description");
@@ -316,6 +319,7 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 				Integer resolver_id = rs.getInt("resolver_id");
 				Integer status_id = rs.getInt("reimb_status_id");
 				Integer type_id = rs.getInt("reimb_type_id");
+				
 				ReimbursementData temp = new ReimbursementData(id, amount, submitted, resolved, description, receipt,
 						author_id, resolver_id, status_id, type_id);
 

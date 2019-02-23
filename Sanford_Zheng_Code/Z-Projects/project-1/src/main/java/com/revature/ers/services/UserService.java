@@ -23,7 +23,7 @@ public class UserService {
 	private static final UserRepository usersRepo = new UserRepository();
 	private static final UserRoleRepository rolesRepo = new UserRoleRepository();
 
-	private static final List<User> usersDTO = new ArrayList<>();
+	private List<User> usersDTO = new ArrayList<>();
 
 //	private static final HashMap<Integer, UserData> rawData = new HashMap<>();
 	private static final BiMap<Integer, String> roles = HashBiMap.create();
@@ -33,27 +33,26 @@ public class UserService {
 		log.trace("UserService Class Initialized.");
 	}
 
-	private UserService() {
+	public UserService() {
 		loadRoles();
-		log.trace("UserService Object Instantiated. This should not be happening...");
+		usersDTO = usersRepo.getAllUsers();
+		log.trace("UserService Object Instantiated.");
 	}
 
-	public static List<User> getAllUsers() {
-		usersDTO.clear();
-		usersDTO.addAll(usersRepo.getAllUsers());
+	public List<User> getAllUsers() {
 		return usersDTO;
 	}
 
-	public static User register(User u) {
+	public User register(User u) {
 		usersDTO.add(u);
 		return dataToUser(usersRepo.create(userToData(u)));
 	}
 
-	public static User login(User u) {
+	public User login(User u) {
 		return usersRepo.getUser(u.getUsername());
 	}
 
-	public static User getUser(String un) {
+	public User getUser(String un) {
 		return usersDTO.stream().filter(user -> user.getUsername().equalsIgnoreCase(un)).findAny().orElse(null);
 	}
 

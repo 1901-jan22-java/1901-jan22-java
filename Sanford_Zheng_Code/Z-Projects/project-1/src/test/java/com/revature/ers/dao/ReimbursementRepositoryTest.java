@@ -2,7 +2,9 @@ package com.revature.ers.dao;
 
 import static org.junit.Assert.fail;
 
+import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.junit.AfterClass;
@@ -17,18 +19,19 @@ public class ReimbursementRepositoryTest {
 	private static ReimbursementRepository rr;
 	private static List<ReimbursementData> list = new ArrayList<>();
 
-	public static void main(String[] args) {
-
-	}
-
 	@BeforeClass
 	public static void setUpBeforeClass() {
 		rr = new ReimbursementRepository();
+		list.add(new ReimbursementData(Math.random() * 1000, new Date(Calendar.getInstance().getTime().getTime()), null,
+				"description", null, 2, null, 1, 2));
+		list.add(new ReimbursementData(Math.random() * 1000, new Date(Calendar.getInstance().getTime().getTime()), null,
+				"description", null, 2, null, 1, 2));
 	}
 
 	@AfterClass
 	public static void tearDownAfterClass() {
 		rr = null;
+		list = null;
 	}
 
 	@Test

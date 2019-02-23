@@ -6,7 +6,8 @@ import com.revature.ers.services.blob.Receipt;
 
 public class Reimbursement {
 
-	private Integer amount;
+	private Integer id;
+	private Double amount;
 	private Date submitted;
 	private Date resolved;
 	private String description;
@@ -20,9 +21,10 @@ public class Reimbursement {
 		super();
 	}
 
-	public Reimbursement(Integer amount, Date submitted, Date resolved, String description, Receipt receipt,
+	public Reimbursement(Integer id, Double amount, Date submitted, Date resolved, String description, Receipt receipt,
 			String author, String resolver, String status, String type) {
 		super();
+		this.id = id;
 		this.amount = amount;
 		this.submitted = submitted;
 		this.resolved = resolved;
@@ -34,11 +36,19 @@ public class Reimbursement {
 		this.type = type;
 	}
 
-	public Integer getAmount() {
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
 
@@ -108,18 +118,9 @@ public class Reimbursement {
 
 	@Override
 	public String toString() {
-		return "Reimbursement [amount=" + amount + ", submitted=" + submitted + ", resolved=" + resolved
-				+ ", description=" + description + ", receipt=" + receipt + ", author=" + author + ", resolver="
-				+ resolver + ", status=" + status + ", type=" + type + "]";
+		return "Reimbursement [id=" + id + ", amount=" + amount + ", submitted=" + submitted + ", resolved="
+				+ resolved + ", description=" + description + ", receipt=" + receipt + ", author=" + author
+				+ ", resolver=" + resolver + ", status=" + status + ", type=" + type + "]";
 	}
 
-	/*
-	 * Actually Useless...
-	 * (non-Javadoc)
-	 * @see java.lang.Object#clone()
-	 */
-	public Reimbursement clone() {
-		return new Reimbursement(this.amount, this.submitted, this.resolved, this.description, this.receipt,
-				this.author, this.resolver, this.status, this.type);
-	}
 }

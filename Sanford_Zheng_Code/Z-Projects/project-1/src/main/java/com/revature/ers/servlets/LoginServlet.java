@@ -20,14 +20,14 @@ public class LoginServlet extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = -2530248194425658345L;
-	private static final ObjectMapper om = new ObjectMapper();
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		ObjectMapper om = new ObjectMapper();
 		User u = om.readValue(req.getInputStream(), User.class);
-		User valid = UserService.getUser(u.getUsername());
+		UserService us = new UserService();
 		
-		if(valid == null) {
+		if(us.login(u) == null) {
 			resp.getWriter().write("Username or password is incorrect.");
 		} else {
 			HttpSession session = req.getSession();

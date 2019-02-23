@@ -28,7 +28,7 @@ public class UserServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //		HttpSession session = req.getSession(false);
 
-		String json = new ObjectMapper().writeValueAsString(UserService.getAllUsers());
+		String json = new ObjectMapper().writeValueAsString(new UserService().getAllUsers());
 		
 		resp.setContentType("application/json");
 		resp.getWriter().println(json);

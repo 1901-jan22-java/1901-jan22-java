@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.ers.dao.dto.User;
+import com.revature.ers.services.UserService;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {
@@ -24,7 +25,8 @@ public class RegisterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		User u = om.readValue(req.getInputStream(), User.class);
 		
-		
+		UserService us = new UserService();
+		us.register(u);
 	}
 	
 }

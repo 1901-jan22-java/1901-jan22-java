@@ -9,9 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.ers.dao.dto.User;
-
 /**
  * Servlet implementation class Home. I don't know what I'm doing...
  */
@@ -30,7 +27,7 @@ public class Home extends HttpServlet {
 		if(session != null) {
 			req.getRequestDispatcher("html/home.html").forward(req, resp);
 		} else {
-			resp.getWriter().write("Your session is not valid.");
+			resp.getWriter().write("Invalid session. Please login first!");
 			req.getRequestDispatcher("html/login.html").forward(req, resp);
 		}
 	}
