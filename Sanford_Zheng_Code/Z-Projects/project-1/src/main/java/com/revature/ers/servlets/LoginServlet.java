@@ -30,7 +30,9 @@ public class LoginServlet extends HttpServlet {
 		User u = om.readValue(req.getInputStream(), User.class);
 		
 		if(UserService.login(u) == null) {
-			resp.getWriter().write("Username or password is incorrect.");
+			log.info("User not found or login credentials are incorrect.");
+			resp.sendError(418, "User not found or login credentials are incorrect.");
+			resp.getWriter().write("User not found or login credentials are incorrect.");
 		} else {
 			HttpSession session = req.getSession();
 			session.setAttribute("user", u);

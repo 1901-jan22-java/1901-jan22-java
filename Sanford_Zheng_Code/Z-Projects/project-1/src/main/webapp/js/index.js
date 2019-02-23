@@ -3,7 +3,7 @@
  */
 $(function () {
     getRequest('main-view', 'register.view', (a) => a);
-    // getIntoElement('data-view', 'user', processReimb);
+    getRequest('data-view', 'user', processUsers);
 });
 
 function bindLogin() {
@@ -47,48 +47,37 @@ function bindManager() {
 
     });
     $('#approve').click(function () {
+        $.post('', {
 
+        }, function(){
+            $.get('reimbursement');
+        });
     })
     $('#deny').click(function () {
+        $.post('', {
 
+        }, function(){
+
+        });
     });
 }
 
 function authenticate(username, password) {
-    $.ajax({
-        type: 'POST',
-        url: 'login',
-        dataType: 'json',
-        data: {
-            username: username,
-            password: password
-        },
-        success: function (data) {
-            var obj = JSON.parse(data);
-            $('#main-view').html(obj);
-        }
-    })
-};
-
-function getRequest(id, url, processData, after) {
-    $.get(url, function (data) {
-        var processedData = typeof processData == 'function' && processData(data) || data;
-        $(`#${id}`).html(processedData);
-        typeof after == 'function' && after();
+    $.post('login', {
+        username: username,
+        password: password
+    }, function (data) {
+        user = JSON.parse(data);
+        $('#data-view').html(obj);
     });
 };
 
-function getIntoElement(id, url, processData) {
-    var xhr = new XMLHttpRequest();
-
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4) {
-            $(`#${id}`).html(processData(xhr.responseText));
-        }
-    }
-
-    xhr.open('GET', url);
-    xhr.send();
+function getRequest(id, url, preprocess, after) {
+    $.get(url, function (data) {
+        var processed = typeof preprocess == 'function' && preprocess(data) || data;
+        $(`#${id}`).html(processed);
+        typeof after == 'function' && after();
+    });
 };
 
 function processReimb(reimb) {
@@ -142,4 +131,17 @@ function processUsers(users) {
     }
     res += '</table>';
     return res;
+};
+
+function getIntoElement(id, url, processData) {
+    var xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+            $(`#${id}`).html(processData(xhr.responseText));
+        }
+    }
+
+    xhr.open('GET', url);
+    xhr.send();
 };

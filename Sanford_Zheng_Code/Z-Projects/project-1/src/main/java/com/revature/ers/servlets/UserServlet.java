@@ -31,9 +31,13 @@ public class UserServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession(false);
+		if (session == null) {
+			resp.sendError(418, "Session not found.");
+			return;
+		}
 		Object obj = session.getAttribute("user");
 		if (obj == null || !(obj instanceof User)) {
-			resp.setStatus(404);
+			resp.sendError(404, "User not found within Session.");
 			return;
 		}
 		User u = (User) obj;
