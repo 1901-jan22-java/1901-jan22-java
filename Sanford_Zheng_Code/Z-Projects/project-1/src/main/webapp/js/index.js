@@ -2,7 +2,7 @@
  * LAGJLSDL:JHDKLJGHSKLDFHGK HOW DO I EVEN FINISH!@#?
  */
 $(function () {
-    getIntoElement('main-view', 'register.view', (a) => a);
+    getRequest('main-view', 'register.view', (a) => a);
     // getIntoElement('data-view', 'user', processReimb);
 });
 
@@ -12,18 +12,24 @@ function bindLogin() {
         var pwd = $('#password').val();
         authenticate(un, pwd);
     });
-    $('#goToRegister').click(function(){
+    $('#goToRegister').click(function () {
 
     })
 }
 
 function bindRegister() {
     $('#registerButton').click(function () {
-        var un = $('#username').val();
-        var pwd = $('#password').val();
+        $.post('register', {
+            username: $('#username').val(),
+            password: $('#password').val(),
+            email: $('#email').val(),
+            role: $('#role').val()
+        }, function (data, status) {
+
+        });
     });
-    $('#goToLogin').click(function(){
-        
+    $('#goToLogin').click(function () {
+
     })
 }
 
@@ -37,13 +43,13 @@ function bindEmployee() {
 }
 
 function bindManager() {
-    $('#viewReimbursements').click(function(){
+    $('#viewReimbursements').click(function () {
 
     });
-    $('#approve').click(function(){
+    $('#approve').click(function () {
 
     })
-    $('#deny').click(function(){
+    $('#deny').click(function () {
 
     });
 }
@@ -65,13 +71,10 @@ function authenticate(username, password) {
 };
 
 function getRequest(id, url, processData, after) {
-    $.ajax({
-        type: 'GET',
-        url: url,
-        success: function (data) {
-            $(`${id}`).html(processData(data));
-            !after && after();
-        }
+    $.get(url, function (data) {
+        var processedData = typeof processData == 'function' && processData(data) || data;
+        $(`#${id}`).html(processedData);
+        typeof after == 'function' && after();
     });
 };
 
