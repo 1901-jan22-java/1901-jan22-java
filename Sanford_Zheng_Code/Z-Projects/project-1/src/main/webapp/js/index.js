@@ -6,6 +6,50 @@ $(function () {
     getIntoElement('data-view', 'reimbursement', processReimb);
 });
 
+function bindLogin(){
+
+}
+
+function bindRegister(){
+
+}
+
+function bindEmployee(){
+    $('#request-reimbursement').click(function (){
+        
+    });
+}
+
+function bindManager(){
+
+}
+
+function authenticate(username, password) {
+    $.ajax({
+        type: 'POST',
+        url: 'login',
+        dataType: 'json',
+        data: {
+            username: username,
+            password: password
+        },
+        success: function (data) {
+            $('#main-view').html(data);
+        }
+    })
+};
+
+function getRequest(id, url, processData, after){
+    $.ajax({
+        type: 'GET',
+        url: url,
+        success: function (data){
+            $(`${id}`).html(processData(data));
+            !after && after();
+        }
+    });
+};
+
 function getIntoElement(id, url, processData) {
     var xhr = new XMLHttpRequest();
 
@@ -17,14 +61,7 @@ function getIntoElement(id, url, processData) {
 
     xhr.open('GET', url);
     xhr.send();
-}
-
-function loadLoginView(user) {
-    $('#username').html(user.username);
-    $('#name').html(user.first_name + ' ' + user.last_name);
-    $('#email').html(user.email);
-    $('#role').html(user.role);
-}
+};
 
 function processReimb(reimb) {
     var res = '<table>' +
@@ -57,7 +94,7 @@ function processReimb(reimb) {
     }
     res += '</table>';
     return res;
-}
+};
 
 function processUsers(users) {
     var res = '<table>' +
@@ -77,4 +114,4 @@ function processUsers(users) {
     }
     res += '</table>';
     return res;
-}
+};
