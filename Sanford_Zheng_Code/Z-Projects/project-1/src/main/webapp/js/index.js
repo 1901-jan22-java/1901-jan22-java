@@ -2,7 +2,7 @@
  * LAGJLSDL:JHDKLJGHSKLDFHGK HOW DO I EVEN FINISH!@#?
  */
 $(function () {
-    // getIntoElement('main-view', 'register.view', (a) => a);
+    getIntoElement('main-view', 'register.view', (a) => a);
     // getIntoElement('data-view', 'user', processReimb);
 });
 
