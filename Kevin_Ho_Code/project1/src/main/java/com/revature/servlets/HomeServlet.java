@@ -2,8 +2,6 @@ package com.revature.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,8 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 
-import com.revature.reimbursement.Reimbursement;
-import com.revature.reimbursement.ReimbursementRepo;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.user.User;
 
 @WebServlet("/home")
@@ -29,83 +26,31 @@ public class HomeServlet extends HttpServlet{
 		
 		HttpSession session = req.getSession();
 		log.trace("IN HOMESERVLET. RETRIEVED SESSION " + session.getId());
+		ObjectMapper mapper = new ObjectMapper();
+		PrintWriter writer = resp.getWriter();
+		resp.setContentType("application/json");
 		
 		//get user from session 
 		User user = (User) session.getAttribute("sessionUser");
-		ReimbursementRepo repo = new ReimbursementRepo();
-		List<Reimbursement> lmao = new ArrayList<Reimbursement>();
-		
-		if(user == null) {
+		String json = mapper.writeValueAsString(user);
+
+		if(user == null || user.getUsername() == null) {
 			//no user stored in session. 
 			//should not be able to access the home page
 			resp.sendRedirect("login");
 			log.warn("no user logged in");
-		}
-		else{
-			if(user.getRoleId() == 1)
-				lmao = repo.getAllReimbursements();
-			else
-				lmao = repo.getReimbursements(user);
-
-			//welcome page for user 
-			log.trace("user logged in session. " + session.getAttributeNames());
-			String html = "<div class=\"jumbotron\">\r\n" + 
-					"	<h1>Welcome, "+user.getFirstName()+" "+user.getLastName()+"</h1>\r\n"
-					+ "<div class='container'>"
-					+ "<button id='addReimb' class='btn btn-submit'>Request Reimbursement</button>"
-					+ "<table class='table'>"
-						+ "<thead>"
-							+ "<tr>";
-							if(user.getRoleId()==1)
-								html += "<th>Author</th>";
-							html+="<th>Reimbursement ID</th>"
-								+ "<th>Amount</th>"
-								+ "<th>Type</th>"
-								+ "<th>Time Submitted</th>"
-								+ "<th>Time Resolved</th>"
-								+ "<th>Resolver</th>"
-							+ "</tr>"
-						+ "</thead>"
-					+ "<tbody></div>";
-			for(int i = 0; i < lmao.size(); i++)
-				html+= appendTable((Reimbursement) lmao.get(i), user);
-			html+="</tbody></table>";
-			
-			PrintWriter writer = resp.getWriter();
-			resp.setContentType("text/html");
-			writer.write(html);
-		}
-	}
-	
-	private String appendTable(Reimbursement reimb, User x)
-	{
-		String myString = "";
-		switch(reimb.getStatusId())
+		} 
+		else if(user.getRoleId() == 1)
 		{
-			case 1: myString += "<tr class='warning'>";break;
-			case 2:	myString += "<tr class='success'>";break;
-			case 3:	myString += "<tr class='danger'>";break;
-			default:break;
+			resp.setStatus(201);
+			writer.write(json);
+			log.debug("manager view");
 		}
-		
-		if(x.getRoleId()==1)
-			myString += "<td>"+reimb.getAuthor()+"</td>";
-			
-		myString +=   "<td>"+reimb.getReimbId()+"</td>"
-					+ "<td>$"+reimb.getAmount()+"</td>"
-					+ "<td>"+reimb.getTypeId()+"</td>"
-					+ "<td>"+reimb.getSubmitted()+"</td>"
-					+ "<td>"+reimb.getResolved()+"</td>"
-					+ "<td>"+reimb.getResolver()+"</td>";
-		
-		switch(reimb.getStatusId())
+		else
 		{
-			case 1: myString += "<td>Pending</td></tr>";break;
-			case 2:	myString += "<td>Approved</td></tr>";break;
-			case 3:	myString += "<td>Denied</td></tr>";break;
-			default:break;
+			resp.setStatus(200);
+			writer.write(json);
+			log.debug("user view");
 		}
-		
-		return myString;
 	}
 }

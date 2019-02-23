@@ -28,7 +28,7 @@ constraint user_roles_fk foreign key (user_role_id) references ers_user_roles(er
 );
 create table ers_reimbursement(
 reimb_id number primary key,
-reimb_amount number not null,
+reimb_amount number(20,2) not null,
 reimb_submitted timestamp not null,
 reimb_resolved timestamp,
 reimb_description varchar2(250),
@@ -102,9 +102,9 @@ insert into ers_reimbursement_type(reimb_type) values('travel');
 insert into ers_user_roles values (0, 'employee');
 insert into ers_user_roles values (1, 'manager');
 insert into ers_users (ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id) 
-                values ('kevinuser', 'kevinpass', 'kevin', 'ho', 'kevho48@gmail.com', 0);
+                values ('user', 'pass', 'Kevin', 'Ho', 'kevho48@gmail.com', 0);
 insert into ers_users (ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id) 
-                values ('kevinuser2', 'kevinpass2', 'kevin', 'ho', 'kevho482@gmail.com', 1);
+                values ('will', 'smith', 'Will', 'Smith', 'agentj@gmail.com', 1);
 insert into ers_reimbursement(reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id) 
                         values(1000, '17-FEB-2019', '18-FEB-2019', 'Hi there', 1, 2, 2, 1);
 insert into ers_reimbursement(reimb_amount, reimb_submitted, reimb_description, reimb_author, reimb_status_id, reimb_type_id) 
