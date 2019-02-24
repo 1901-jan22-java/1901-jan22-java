@@ -2,35 +2,57 @@
  * LAGJLSDL:JHDKLJGHSKLDFHGK HOW DO I EVEN FINISH!@#?
  */
 $(function () {
-    getRequest('main-view', 'register.view', (a) => a);
-    getRequest('data-view', 'user', processUsers);
+    loadLogin();
 });
 
-function bindLogin() {
-    $('#loginButton').click(function () {
-        var un = $('#username').val();
-        var pwd = $('#password').val();
-        authenticate(un, pwd);
-    });
-    $('#goToRegister').click(function () {
+function loadLogin() {
+    $.get('login.view', function (pageData) {
+        $('#main-view').html(pageData);
 
-    })
+        $('#loginButton').click(function () {
+            console.log('login pushed!');
+            $.post('login', JSON.stringify({
+                username: $('#username').val(),
+                password: $('#password').val()
+            }), function (userData) {
+                user = userData;
+                $.get('home.view', function (homeData) {
+                    $('#main-view').html(homeData);
+                    $('#name').html(user.first_name + " " + user.last_name);
+                    $('#username').html(user.username);
+                    $('#email').html(user.email);
+                    $('#role').html(user.role);
+                });
+            },'json');
+        });
+
+        $('#goToRegister').click(function () {
+            console.log("go to register!");
+            loadRegister();
+        })
+    });
 }
 
-function bindRegister() {
-    $('#registerButton').click(function () {
-        $.post('register', {
-            username: $('#username').val(),
-            password: $('#password').val(),
-            email: $('#email').val(),
-            role: $('#role').val()
-        }, function (data, status) {
+function loadRegister() {
+    $.get('register.view', function(pageData){
+        $('#main-view').html(pageData);
 
-        });
+        $('#registerButton').click(function () {
+            $.post('register', JSON.stringify({
+                username: $('#username').val(),
+                password: $('#password').val(),
+                email: $('#email').val(),
+                role: $('#role').val()
+            }), function () {
+                loadLogin();
+            });
+        },'json');
+    
+        $('#goToLogin').click(function () {
+            loadLogin();
+        })
     });
-    $('#goToLogin').click(function () {
 
-    })
 }
 
 function bindEmployee() {
@@ -49,36 +71,20 @@ function bindManager() {
     $('#approve').click(function () {
         $.post('', {
 
-        }, function(){
-            $.get('reimbursement');
+        }, function () {
+            $.get('reimbursement', function (data) {
+
+            });
         });
     })
     $('#deny').click(function () {
         $.post('', {
 
-        }, function(){
+        }, function () {
 
         });
     });
 }
-
-function authenticate(username, password) {
-    $.post('login', {
-        username: username,
-        password: password
-    }, function (data) {
-        user = JSON.parse(data);
-        $('#data-view').html(obj);
-    });
-};
-
-function getRequest(id, url, preprocess, after) {
-    $.get(url, function (data) {
-        var processed = typeof preprocess == 'function' && preprocess(data) || data;
-        $(`#${id}`).html(processed);
-        typeof after == 'function' && after();
-    });
-};
 
 function processReimb(reimb) {
     var res = '<table>' +
@@ -133,15 +139,23 @@ function processUsers(users) {
     return res;
 };
 
-function getIntoElement(id, url, processData) {
-    var xhr = new XMLHttpRequest();
+// function getIntoElement(id, url, processData) {
+//     var xhr = new XMLHttpRequest();
 
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4) {
-            $(`#${id}`).html(processData(xhr.responseText));
-        }
-    }
+//     xhr.onreadystatechange = function () {
+//         if (xhr.readyState == 4) {
+//             $(`#${id}`).html(processData(xhr.responseText));
+//         }
+//     }
 
-    xhr.open('GET', url);
-    xhr.send();
-};
+//     xhr.open('GET', url);
+//     xhr.send();
+// };
+
+// function getRequest(id, url, preprocess, after) {
+//     $.get(url, function (data) {
+//         var processed = typeof preprocess == 'function' && preprocess(data) || data;
+//         $(`#${id}`).html(processed);
+//         typeof after == 'function' && after();
+//     });
+// };

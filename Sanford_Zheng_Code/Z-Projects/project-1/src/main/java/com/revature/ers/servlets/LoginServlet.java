@@ -29,16 +29,19 @@ public class LoginServlet extends HttpServlet {
 		ObjectMapper om = new ObjectMapper();
 		User u = om.readValue(req.getInputStream(), User.class);
 		
-		if(UserService.login(u) == null) {
+		User uStored = UserService.login(u);
+		
+		if(uStored == null) {
 			log.info("User not found or login credentials are incorrect.");
 			resp.sendError(418, "User not found or login credentials are incorrect.");
-			resp.getWriter().write("User not found or login credentials are incorrect.");
+			req.getRequestDispatcher("html/login.html").forward(req, resp);
 		} else {
 			HttpSession session = req.getSession();
 			session.setAttribute("user", u);
 			log.info("Object: "+(User)session.getAttribute("user"));
-			
-			req.getRequestDispatcher("/home").forward(req, resp);
+
+			resp.setContentType("application/json");
+			resp.getWriter().write(om.writeValueAsString(uStored));
 		}
 		
 	}
