@@ -87,7 +87,7 @@ public class ReimbursementService {
 	}
 
 	public static List<Reimbursement> getReimbursements(UserData ud) {
-		return reimbRepo.getReimbursements(ud);
+		return reimbRepo.getReimbursements(ud.getUser_id());
 	}
 
 	public static ReimbursementData reimbursementToData(Reimbursement r, UserData ud) {

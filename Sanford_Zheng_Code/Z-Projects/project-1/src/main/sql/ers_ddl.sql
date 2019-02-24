@@ -130,3 +130,19 @@ create or replace view ers_users_view as
     select u.username, u.password, u.first_name, u.last_name, u.email, r.user_role from ers_users u
     left join ers_user_roles r on u.role_id = r.role_id;
 /
+
+/*******************************************************************************
+    Create Stored Procedures
+********************************************************************************/
+create or replace procedure getReimbView(auth_id in number, out_cursor out sys_refcursor)
+is
+begin
+    open out_cursor for
+        select r.reimb_id as id, r.amount, r.submitted, r.resolved, r.reimb_description as description, 
+        r.receipt, auth.username as author, res.username as resolver, s.reimb_status as status, t.reimb_type as type 
+        from ers_reimbursement r 
+        join (select * from ers_users where user_id = auth_id) auth on r.author_id = auth.user_id 
+        left join ers_users res on res.user_id = r.resolver_id 
+        left join ers_reimbursement_status s on s.status_id = r.reimb_status_id 
+        left join ers_reimbursement_type t on t.type_id = r.reimb_type_id;
+end;

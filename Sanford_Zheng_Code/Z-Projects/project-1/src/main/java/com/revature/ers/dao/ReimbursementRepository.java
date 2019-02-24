@@ -1,10 +1,12 @@
 package com.revature.ers.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -15,9 +17,11 @@ import org.apache.log4j.Logger;
 import com.jdbc.utils.ConnectionFactory;
 import com.revature.ers.dao.dto.Reimbursement;
 import com.revature.ers.dao.pojos.ReimbursementData;
-import com.revature.ers.dao.pojos.UserData;
 import com.revature.ers.interfaces.Repository;
 import com.revature.ers.services.blob.Receipt;
+
+import oracle.jdbc.OracleCallableStatement;
+import oracle.jdbc.OracleTypes;
 
 public class ReimbursementRepository implements Repository<ReimbursementData> {
 
@@ -37,9 +41,9 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
 			String sql = "select * from ers_reimbursement_view";
-			PreparedStatement ps = conn.prepareStatement(sql);
+			Statement ps = conn.createStatement();
 
-			ResultSet rs = ps.executeQuery();
+			ResultSet rs = ps.executeQuery(sql);
 			while (rs.next()) {
 				res.add(readReimbursement(rs));
 			}
@@ -67,22 +71,25 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 		return new Reimbursement(id, amount, submitted, resolved, description, receipt, author, resolver, status, type);
 	}
 
-	public List<Reimbursement> getReimbursements(UserData u) {
+	public List<Reimbursement> getReimbursements(Integer user_id) {
 		List<Reimbursement> res = new ArrayList<>();
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			String sql = "select r.reimb_id as id, r.amount, r.submitted, r.resolved, r.reimb_description as description, "
-					+ "r.receipt, auth.username as author, res.username as resolver, s.reimb_status as status, t.reimb_type as type "
-					+ "from ers_reimbursement r "
-					+ "join (select * from ers_users where user_id = ?) auth on r.author_id = auth.user_id "
-					+ "left join ers_users res on res.user_id = r.resolver_id "
-					+ "left join ers_reimbursement_status s on s.status_id = r.reimb_status_id "
-					+ "left join ers_reimbursement_type t on t.type_id = r.reimb_type_id";
-
-			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, u.getUser_id());
-
-			ResultSet rs = ps.executeQuery();
+//			String sql = "select r.reimb_id as id, r.amount, r.submitted, r.resolved, r.reimb_description as description, "
+//					+ "r.receipt, auth.username as author, res.username as resolver, s.reimb_status as status, t.reimb_type as type "
+//					+ "from ers_reimbursement r "
+//					+ "join (select * from ers_users where user_id = ?) auth on r.author_id = auth.user_id "
+//					+ "left join ers_users res on res.user_id = r.resolver_id "
+//					+ "left join ers_reimbursement_status s on s.status_id = r.reimb_status_id "
+//					+ "left join ers_reimbursement_type t on t.type_id = r.reimb_type_id";
+			
+			CallableStatement cs = conn.prepareCall("BEGIN getReimbView(?, ?); END;");
+			cs.setInt(1, user_id);
+			
+			cs.registerOutParameter(2, OracleTypes.CURSOR);
+			
+			cs.execute();
+			ResultSet rs = ((OracleCallableStatement)cs).getCursor(2);
 
 			while (rs.next()) {
 				res.add(readReimbursement(rs));

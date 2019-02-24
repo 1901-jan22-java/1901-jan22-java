@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -16,6 +17,7 @@ import com.revature.ers.dao.pojos.ReimbursementData;
 
 public class ReimbursementRepositoryTest {
 
+	private static final Logger log = Logger.getLogger(ReimbursementRepositoryTest.class);
 	private static ReimbursementRepository rr;
 	private static List<ReimbursementData> list = new ArrayList<>();
 
@@ -58,7 +60,7 @@ public class ReimbursementRepositoryTest {
 			Assert.assertEquals(rd.getReimb_type_id(), "");
 		}
 	}
-
+	
 	@Test
 	public void testUpdate() {
 		fail("Not yet implemented"); // TODO
@@ -69,4 +71,10 @@ public class ReimbursementRepositoryTest {
 		fail("Not yet implemented"); // TODO
 	}
 
+	@Test
+	public void testGetReimbursements() {
+		log.info("CallableStatment returned: " + rr.getReimbursements(7));
+		log.assertLog(rr.getReimbursements(7) != null, "get reimbursement test with call");;
+	}
+	
 }
