@@ -71,7 +71,7 @@ function loadEmployeeView() {
     $('#new-reimb').click(function () {
         loadReimbursement();
     });
-    
+
     // We'll see if we need this
     // $('#myReimbursements').click(function () {
 
@@ -102,21 +102,33 @@ function loadManagerView() {
     // });
 }
 
-function loadReimbursement(){
+function bindLogout() {
+    $('#logoutButton').click(function () {
+        console.log('logout')
+        $.post('logout', JSON.stringify(user), function(){
+            delete user;
+            delete reimb;
+            loadLogin();
+        });
+    });
+}
+
+function loadReimbursement() {
     $.post('reimbursement', JSON.stringify(user), function (data) {
         reimb = data;
         $('#data-view').html(processReimb(reimb));
         applyReimb();
-    },'json');
+    }, 'json');
 }
 
 // Testing purposes
+// Delete when done
 function loadAllReimb() {
     $.get('reimbursement', function (data) {
         reimb = data;
         $('#data-view').html(processReimb(data));
         applyReimb();
-    },'json');
+    }, 'json');
 }
 
 function processReimb(data) {
@@ -134,9 +146,9 @@ function processReimb(data) {
         '</tr>';
     for (let r of data) {
 
-        if (r.status == "Pending") {
+        if (user.role == 'Finance Manager' && r.status == "Pending") {
             res += '<tr class=\"selectable\">';
-        } else{
+        } else {
             res += '<tr>'
         }
         res += `<td>${r.id}</td>` +
@@ -153,8 +165,8 @@ function processReimb(data) {
     return res;
 };
 
-function applyReimb(){
-    $("tr.selectable td").click(function(){
+function applyReimb() {
+    $("tr.selectable td").click(function () {
         $(this).parent().toggleClass('selected');
     });
 }

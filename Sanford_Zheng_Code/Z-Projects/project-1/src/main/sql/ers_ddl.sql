@@ -118,7 +118,7 @@ end;
 ********************************************************************************/
 create or replace view ers_reimbursement_view as
     select r.reimb_id as id, r.amount, r.submitted, r.resolved, r.reimb_description as description,
-        r.receipt, auth.first_name || ' ' || auth.username as author,
+        r.receipt, auth.username as author,
         res.username as resolver, s.reimb_status as status,
         t.reimb_type as type from ers_reimbursement r
     left join ers_users auth on auth.user_id = r.author_id

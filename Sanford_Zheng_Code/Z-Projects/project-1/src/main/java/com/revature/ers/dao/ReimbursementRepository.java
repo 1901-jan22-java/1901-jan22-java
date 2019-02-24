@@ -49,13 +49,13 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 
 		return res;
 	}
-	
+
 	private static Reimbursement readReimbursement(ResultSet rs) throws SQLException {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyy.MMMMM.dd GGG hh:mm aaa");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyy-MMMMM-dd hh:mm aaa");
 		Integer id = rs.getInt("id");
 		Double amount = rs.getDouble("amount");
 		String submitted = sdf.format(rs.getDate("submitted"));
-		String resolved = (rs.getDate("resolved")!=null)?sdf.format(rs.getDate("resolved")):null;
+		String resolved = (rs.getDate("resolved") != null) ? sdf.format(rs.getDate("resolved")) : null;
 		String description = rs.getString("description");
 		Receipt receipt = (Receipt) rs.getBlob("receipt");
 		String author = rs.getString("author");
@@ -63,18 +63,17 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 		String status = rs.getString("status");
 		String type = rs.getString("type");
 
-		return new Reimbursement(id, amount, submitted, resolved, description, receipt, author, resolver,
-				status, type);
+		return new Reimbursement(id, amount, submitted, resolved, description, receipt, author, resolver, status, type);
 	}
 
 	public List<Reimbursement> getReimbursements(UserData u) {
 		List<Reimbursement> res = new ArrayList<>();
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			String sql = "select r.amount, r.submitted, r.resolved, r.reimb_description as description, "
-					+ "r.receipt, auth.first_name + ' ' + auth.last_name as author, "
-					+ "res.first_name + ' ' + res.last_name as resolver, s.reimb_status as status, "
-					+ "t.reimb_type as type from ers_reimbursement r " + "left join ers_users auth on r.author_id = ? "
+			String sql = "select r.reimb_id as id, r.amount, r.submitted, r.resolved, r.reimb_description as description, "
+					+ "r.receipt, auth.username as author, res.username as resolver, s.reimb_status as status, t.reimb_type as type "
+					+ "from ers_reimbursement r "
+					+ "join (select * from ers_users where user_id = ?) auth on r.author_id = auth.user_id "
 					+ "left join ers_users res on res.user_id = r.resolver_id "
 					+ "left join ers_reimbursement_status s on s.status_id = r.reimb_status_id "
 					+ "left join ers_reimbursement_type t on t.type_id = r.reimb_type_id";
@@ -301,7 +300,7 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 				Integer resolver_id = rs.getInt("resolver_id");
 				Integer status_id = rs.getInt("reimb_status_id");
 				Integer type_id = rs.getInt("reimb_type_id");
-				
+
 				ReimbursementData temp = new ReimbursementData(id, amount, submitted, resolved, description, receipt,
 						author_id, resolver_id, status_id, type_id);
 
