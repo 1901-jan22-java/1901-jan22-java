@@ -12,14 +12,14 @@ public class Users {
 
 	public Users() {}
 
-	public Users(int userId, String firstName, String lastName, String username, String password, String email,
+	public Users(int userId, String username, String password, String firstName, String lastName, String email,
 			int roleId) {
 		super();
 		this.userId = userId;
-		this.firstName = firstName;
-		this.lastName = lastName;
 		this.username = username;
 		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.email = email;
 		this.roleId = roleId;
 	}
