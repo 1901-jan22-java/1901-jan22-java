@@ -17,6 +17,7 @@ public class ApproveServlet extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = -352446938014614027L;
+	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(LoginServlet.class);
 	
 	@Override

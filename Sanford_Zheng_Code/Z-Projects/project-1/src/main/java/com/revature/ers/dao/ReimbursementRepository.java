@@ -55,7 +55,7 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 		Integer id = rs.getInt("id");
 		Double amount = rs.getDouble("amount");
 		String submitted = sdf.format(rs.getDate("submitted"));
-		String resolved = sdf.format(rs.getDate("resolved"));
+		String resolved = (rs.getDate("resolved")!=null)?sdf.format(rs.getDate("resolved")):null;
 		String description = rs.getString("description");
 		Receipt receipt = (Receipt) rs.getBlob("receipt");
 		String author = rs.getString("author");

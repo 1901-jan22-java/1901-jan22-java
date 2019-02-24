@@ -31,6 +31,7 @@ public class ReimbursementServlet extends HttpServlet {
 		
 		resp.setContentType("application/json");
 		resp.getWriter().write(json);
+		
 	}
 	
 	
@@ -40,11 +41,11 @@ public class ReimbursementServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		
 		String json = om.writeValueAsString(ReimbursementService.getAllReimbursements());
 		
 		resp.setContentType("application/json");
 		resp.getWriter().write(json);
+		
 	}
 	
 }

@@ -10,7 +10,6 @@ function loadLogin() {
         $('#main-view').html(pageData);
 
         $('#loginButton').click(function () {
-            console.log('login pushed!');
             $.post('login', JSON.stringify({
                 username: $('#username').val(),
                 password: $('#password').val()
@@ -18,23 +17,28 @@ function loadLogin() {
                 user = userData;
                 $.get('home.view', function (homeData) {
                     $('#main-view').html(homeData);
+                    $('#firstname').html(user.first_name);
                     $('#name').html(user.first_name + " " + user.last_name);
                     $('#username').html(user.username);
                     $('#email').html(user.email);
                     $('#role').html(user.role);
+                    if (user.role == 'Employee') {
+                        loadEmployeeView();
+                    } else if (user.role == 'Finance Manager') {
+                        loadManagerView();
+                    }
                 });
-            },'json');
+            }, 'json');
         });
 
         $('#goToRegister').click(function () {
-            console.log("go to register!");
             loadRegister();
         })
     });
 }
 
 function loadRegister() {
-    $.get('register.view', function(pageData){
+    $.get('register.view', function (pageData) {
         $('#main-view').html(pageData);
 
         $('#registerButton').click(function () {
@@ -47,9 +51,9 @@ function loadRegister() {
                 role: $('#role').val()
             }), function () {
                 loadLogin();
-            },'json');
+            }, 'json');
         });
-    
+
         $('#goToLogin').click(function () {
             loadLogin();
         })
@@ -57,38 +61,66 @@ function loadRegister() {
 
 }
 
-function bindEmployee() {
-    $('#newReimbursement').click(function () {
+function loadEmployeeView() {
+    $.post('reimbursement',
+        JSON.stringify(user),
+        function (data) {
+            reimb = data;
+            $('#data-view').html(processReimb(reimb));
+            applyReimb();
+        }
+    );
+    var res = "<input type=\"button\" id=\"new-reimb\" class=\"my-button\" value=\"Request New Reimbursement\">";
+    $('#role-options').html(res);
 
+    $('#new-reimb').click(function () {
+        // GET ALL SELECTED USERS HERE
+        var selected = $('.selected').val();
+        console.log(selected);
+        $.post('approve',JSON.stringify(selected), function (data) {
+            reimb = data;
+            $('#data-view').html(processReimb(reimb));
+            applyReimb();
+        })
     });
-    $('#myReimbursements').click(function () {
+    // $('#myReimbursements').click(function () {
 
-    });
+    // });
 }
 
-function bindManager() {
-    $('#viewReimbursements').click(function () {
+function loadManagerView() {
+    loadAllReimb();
+    var res = "<input type=\"button\" id=\"approve-reimb\" class=\"my-button\" value=\"Approve\">" +
+        "<input type=\"button\" id=\"deny-reimb\" class=\"my-button\" value=\"Deny\">";
+    $('#role-options').html(res);
+    // $('#viewReimbursements').click(function () {
 
-    });
-    $('#approve').click(function () {
-        $.post('', {
-
-        }, function () {
-            $.get('reimbursement', function (data) {
-
-            });
-        });
+    // });
+    $('#approve-reimb').click(function () {
+        $.post('reimbursement', JSON.stringify(user), function (data) {
+            reimb = data;
+            $('#data-view').html(processReimb(reimb));
+            applyReimb();
+        },'json');
     })
-    $('#deny').click(function () {
-        $.post('', {
-
-        }, function () {
-
-        });
+    $('#deny-reimb').click(function () {
+        $.post('reimbursement', JSON.stringify(user), function (data) {
+            reimb = data;
+            $('#data-view').html(processReimb(reimb));
+            applyReimb();
+        },'json');
     });
 }
 
-function processReimb(reimb) {
+function loadAllReimb() {
+    $.get('reimbursement', function (data) {
+        reimb = data;
+        $('#data-view').html(processReimb(data));
+        applyReimb();
+    },'json');
+}
+
+function processReimb(data) {
     var res = '<table>' +
         '<tr>' +
         '<th>ID</th>' +
@@ -101,9 +133,14 @@ function processReimb(reimb) {
         '<th>Status</th>' +
         '<th>Type</th>' +
         '</tr>';
-    for (let r of JSON.parse(reimb)) {
+    for (let r of data) {
 
-        res += `<tr><td>${r.id}</td>` +
+        if (r.status == "Pending") {
+            res += '<tr class=\"selectable\">';
+        } else{
+            res += '<tr>'
+        }
+        res += `<td>${r.id}</td>` +
             `<td>${r.amount}</td>` +
             `<td>${r.submitted}</td>` +
             `<td>${r.resolved || ""}</td>` +
@@ -112,16 +149,20 @@ function processReimb(reimb) {
             `<td>${r.resolver || ""}</td>` +
             `<td>${r.status}</td>` +
             `<td>${r.type}</td></tr>`;
-
-        if (r.status == "Pending") {
-            res = `<a id="${r.id}">` + res + '</a>';
-        }
     }
     res += '</table>';
     return res;
 };
 
-function processUsers(users) {
+function applyReimb(){
+    $("tr.selectable td").click(function(){
+        // $(this).parent().removeClass('selectable');
+        $(this).parent().toggleClass('selected');
+    });
+}
+
+// FOR ADMIN PURPOSES
+function processUsers(data) {
     var res = '<table>' +
         '<tr>' +
         '<th>Username</th>' +
@@ -130,7 +171,7 @@ function processUsers(users) {
         '<th>Email</th>' +
         '<th>Role</th>' +
         '</tr>';
-    for (let u of JSON.parse(users)) {
+    for (let u of data) {
         res += `<tr><td>${u.username}</td>` +
             `<td>${u.password}</td>` +
             `<td>${u.first_name}  ${u.last_name}</td>` +

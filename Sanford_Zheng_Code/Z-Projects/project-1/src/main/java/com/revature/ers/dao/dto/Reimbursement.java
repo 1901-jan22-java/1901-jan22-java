@@ -1,7 +1,5 @@
 package com.revature.ers.dao.dto;
 
-import java.sql.Date;
-
 import com.revature.ers.services.blob.Receipt;
 
 public class Reimbursement {

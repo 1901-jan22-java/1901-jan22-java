@@ -17,6 +17,7 @@ public class DenyServlet extends HttpServlet{
 	 * 
 	 */
 	private static final long serialVersionUID = -5436274835900903102L;
+	@SuppressWarnings("unused")
 	private static final Logger log = Logger.getLogger(LoginServlet.class);
 
 	@Override
