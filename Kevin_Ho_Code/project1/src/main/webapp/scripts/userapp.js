@@ -99,16 +99,6 @@ function loadManagerView(user){
     xhr.send();
 }
 
-function resolve(){
-	var request = {
-			reimbId: $('#reimbId').val(),
-			reimbStatus: $('#reimbStatus').val()
-			};
-	
-	$('#resolveView').html("");
-	
-}
-
 function showReimb(){
 	$('#tableData').html("");
 	var xhr = new XMLHttpRequest();
@@ -180,7 +170,7 @@ function loadResolveView(){
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4 && xhr.status == 200){
             $('#resolveView').html(xhr.responseText);
-        	$('#resolveReimb').on('click', resolve);
+        	$('#resolvebtn').on('click', resolve);
             $('#goToHome').on('click', removeResolveView);
         }   
     }
@@ -233,6 +223,38 @@ function addReimb(){
         }
     }
     xhr.open("POST", "addReimb");
+    xhr.setRequestHeader("Content-type", "application/json");
+    xhr.send(json);
+}
+
+function resolve(){
+	console.log("hi fag");
+	var request = {
+			reimbId: $('#reimbId').val(),
+			statusId: $('#reimbStatus').val()
+			};
+	var json = JSON.stringify(request);
+	console.log(json);
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4){
+            if(xhr.status == 201){
+                //added money in
+            	$('#resolveView').html("Success!!");
+            	showReimb();
+            }
+            else if(xhr.status == 409){
+                //failed to add money in
+            	$('#resolveView').html("Invalid Input");
+            }
+            else{
+                //some other error, likely send to error page
+            	$('#resolveView').html("Something went wrong!");
+            	console.log(xhr.status);
+            }
+        }
+    }
+    xhr.open("POST", "resolve");
     xhr.setRequestHeader("Content-type", "application/json");
     xhr.send(json);
 }
