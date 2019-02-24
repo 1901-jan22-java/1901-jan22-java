@@ -1,7 +1,33 @@
-<h4>Log In!</h4>
-<form class="form" autocomplete="on">
-    <input class="form-control col-6" type="text" id="un" placeholder="Username">
-    <input class="form-control col-6" type="password" id="pw" placeholder="Password" autocomplete="on"><span id="log-error"></span>
-</form>
-    <button class="btn btn-secondary" id="login">Login</button>
-    <button class="btn btn-secondary" id="register">Request an Account!</button>
+<div class="text-center">
+    <br><br><br>
+    <h1>Welcome</h1>
+    <br>
+
+    <div class="row">
+        
+        <div class="card bg-dark mb-3 w-50 text-center">
+            <div class="card-body">
+                <div class="card-title align-content-center">
+                    <h3>Company Login</h3>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
+                        </div>
+                        <input id="un" type="text" class="form-control" placeholder="Username" aria-label="Username"
+                            aria-describedby="basic-addon1">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><i class="fas fa-key"></i></span>
+                        </div>
+                        <input id="pw" type="password" class="form-control" placeholder="Password" aria-label="Password"
+                            aria-describedby="basic-addon1">
+                    </div>
+                    <span id="log-error"></span>
+                    <button class="btn btn-secondary w-100" id="login">Login</button>
+                </div>
+                <button class="text-white nav-link small-text" id="register"><i>Don't have an account? Ensure your email is approved then click here</i></p>
+            </div>
+        </div>
+    </div>
+</div>

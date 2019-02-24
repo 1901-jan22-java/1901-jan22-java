@@ -31,14 +31,22 @@ public class AddReimbServlet extends HttpServlet{
 		Reimbursement reimb = mapper.readValue(req.getInputStream(), Reimbursement.class);
 		reimb.setAuthor(user.getUserId());
 		log.info(reimb.getAuthor() + " " + reimb.getDesc() + reimb.getType() + reimb.getReimbAmount());
-		reimb = rRepo.newReimb(reimb);
-		
-		String json = mapper.writeValueAsString(reimb);
-		
-		resp.setStatus(201);
 		
 		PrintWriter writer = resp.getWriter();
-		resp.setContentType("application/json");
-		writer.write(json);
+		if((reimb.getReimbAmount() + " ").contains("-")) {
+			resp.setStatus(400);
+			writer.write("Invalid amount.");
+		} else {
+			reimb = rRepo.newReimb(reimb);
+			
+			String json = mapper.writeValueAsString(reimb);
+			
+			resp.setStatus(201);
+			
+			
+			resp.setContentType("application/json");
+			writer.write(json);
+		}
+		
 	}
 }

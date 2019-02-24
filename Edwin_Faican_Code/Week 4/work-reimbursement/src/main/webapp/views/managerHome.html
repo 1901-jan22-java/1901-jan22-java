@@ -1,26 +1,37 @@
 <h3 id="welcome"></h3>
-<p id="info">
-    WoopWoop
-</p>
+<br>
 <div class="container-fluid">
     <div class="col-7-offset-2">
-        <button class="btn btn-secondary" id="reviewReimb">Review reimbursements</button>
+        <hr>
         <div class="my-5" id="options">
-            <h3>Review submitted Reimbursements</h3>
-            <table id="reimbs" class="table table-striped">
-                <thead>
-                    <tr>
-                        <td>Author Id</td>
-                        <td>Reimburesment Amount</td>
-                        <td>Reimbursement Type</td>
-                        <td>Reimbursement Description</td>
-                        <td>Date Submitted</td>
-                    </tr>
-                </thead>
-                <tbody id="data">
+            
+        </div>
+    </div>
+</div>
 
-                </tbody>
-            </table>
+<!-- Modal -->
+<div class="modal modal-dark" id="myModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Review Reimbursement</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h5 id="type"></h5>
+                <h6 id="authorandid"></h6>
+                <h6 id="amount"></h6>
+                <p id="description"></p>
+                <hr>
+                <i><h6 id="datetime"></h6></i>
+            </div>
+            <div class="modal-footer">
+                    
+                <button id="approve" type="button" class="btn btn-success" data-dismiss="modal">Approve</button>
+                <button id="deny" type="button" class="btn btn-danger" data-dismiss="modal">Deny</button>
+            </div>
         </div>
     </div>
 </div>

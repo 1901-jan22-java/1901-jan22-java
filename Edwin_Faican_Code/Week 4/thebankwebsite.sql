@@ -48,9 +48,18 @@ FOREIGN KEY(reimb_author) REFERENCES Users
 FOREIGN KEY(reimb_resolver) REFERENCES Users
                   ON DELETE CASCADE);
 /
+CREATE TABLE EMAILS(
+e_id number(10),
+email varchar2(50) UNIQUE NOT NULL,
+user_role_id number(20) NOT NULL,
+PRIMARY KEY(e_id),
+FOREIGN KEY (user_role_id) REFERENCES User_Roles
+              ON DELETE CASCADE);
+/
 --Create Sequences--
 CREATE SEQUENCE USER_SEQ;
 CREATE SEQUENCE REIMB_SEQ;
+CREATE SEQUENCE EMAIL_SEQ;
 /
 --Create Triggers--
 CREATE OR REPLACE TRIGGER USER_TRIG
@@ -71,6 +80,15 @@ BEGIN
   FROM dual;
 END;
 /
+CREATE OR REPLACE TRIGGER EMAIL_TRIG
+BEFORE INSERT ON EMAILS
+FOR EACH ROW
+BEGIN
+  SELECT EMAIL_SEQ.nextval
+  INTO :new.e_id
+  FROM dual;
+END;
+/
 
 --Create Procedures--
 CREATE OR REPLACE PROCEDURE resolve(
@@ -84,6 +102,26 @@ BEGIN
   SET reimb_resolver = r_resolver, reimb_resolved = r_resolved, reimb_status_id = r_status
   WHERE reimb_id = r_id;
 END;
+/
+CREATE OR REPLACE PROCEDURE update_user(
+u_id IN NUMBER,
+u_username IN VARCHAR2,
+u_password IN VARCHAR2)
+AS
+BEGIN
+  UPDATE Users
+  SET username = u_username, password = u_password
+  WHERE user_id = u_id;
+END;
+/
+--Create View--
+CREATE OR REPLACE VIEW reimbursement_data
+AS 
+SELECT reimb_id, reimb_author, u1.firstname AS author_first, u1.lastname AS author_last, reimb_amount, reimb_description, reimb_submitted, rt.reimb_type, reimb_resolver, u2.firstname, u2.lastname, rs.reimb_status, rs.reimb_status_id, reimb_resolved FROM Reimbursement r
+JOIN Users u1 ON u1.user_id = reimb_author
+LEFT JOIN Users u2 ON u2.user_id = reimb_resolver
+JOIN Reimbursement_type rt ON r.reimb_type_id = rt.reimb_type_id
+JOIN Reimbursement_status rs ON r.reimb_status_id = rs.reimb_status_id;
 /
 --Inserting values into user roles--
 INSERT INTO User_Roles VALUES(1, 'Employee');
@@ -106,6 +144,16 @@ INSERT INTO Users(firstname, lastname, username, password, email, user_role_id) 
 --Insert sample values into Reimbursement Table--
 INSERT INTO Reimbursement(reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id) VALUES (200, '01-Mar-18', '01-Mar-19', 'Woop Woop',  1, 2, 2, 1);
 INSERT INTO Reimbursement(reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id) VALUES (200, '17-Apr-11', '17-Apr-19', 'Heart you',  1, 2, 2, 1);
+
+-- Inserting List of approved email addresses -- 
+INSERT INTO Emails(email, user_role_id) VALUES('tree@ground.com', 2);
+INSERT INTO Emails(email, user_role_id) VALUES('blah@blah.com', 1);
+INSERT INTO Emails(email, user_role_id) VALUES('aeromancey@gmail.com', 2);
+INSERT INTO Emails(email, user_role_id) VALUES('edwinxfaican@gmail.com', 2);
+INSERT INTO Emails(email, user_role_id) VALUES('employeeatthecompany@gmail.com', 1);
+
+
+
 
 --DROP TABLE REIMBURSEMENT;
 SELECT * FROM REIMBURSEMENT;

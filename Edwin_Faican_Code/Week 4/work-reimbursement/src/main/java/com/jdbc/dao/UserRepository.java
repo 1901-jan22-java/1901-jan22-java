@@ -1,6 +1,8 @@
 package com.jdbc.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +12,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.jdbc.util.ConnectionFactory;
+import com.revature.reimbursment.Reimbursement;
 import com.revature.users.User;
 
 public class UserRepository {
@@ -73,7 +76,7 @@ public class UserRepository {
 				user.setUsername(rs.getString("username"));
 				user.setaPassword(rs.getInt("password"));
 				user.setEmail(rs.getString("email"));
-				user.setRole(roles.get((rs.getInt("user_role_id"))));
+				user.setRole(roles.get((rs.getInt("user_role_id") - 1)));
 			}
 			
 		} catch (SQLException e) {
@@ -139,6 +142,54 @@ public class UserRepository {
 				conn.commit();
 			}
 			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return user;
+	}
+	
+	public String findEmail(String email) {
+		email = email.toUpperCase();
+
+		List<String> roles = getRoles();
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			log.debug("Established a connection.");
+			conn.setAutoCommit(false);
+			String sql = "SELECT * FROM Emails WHERE UPPER(email) = ?";
+			//Create String array holding names of columns that are auto-generated
+			String[] keys = {"e_id"};
+			PreparedStatement ps = conn.prepareStatement(sql,keys);
+			ps.setString(1, email);
+					
+			ResultSet rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				log.debug(roles.get((rs.getInt("user_role_id") - 1)));
+				
+				return roles.get((rs.getInt("user_role_id") - 1));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
+	public User updateUser(User user){
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
+			conn.setAutoCommit(false);
+			String sql = "{call update_user(?,?,?)}";
+			
+			CallableStatement cs = conn.prepareCall(sql);
+			log.debug(user.getUsername() + " " +  user.getaPassword() + " " +  user.getUserId());
+			cs.setInt(1, user.getUserId());
+			cs.setString(2, user.getUsername());
+			cs.setInt(3, user.getaPassword());
+			
+			cs.execute();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

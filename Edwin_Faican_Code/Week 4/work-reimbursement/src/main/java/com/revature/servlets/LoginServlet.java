@@ -1,6 +1,7 @@
 package com.revature.servlets;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,12 +36,15 @@ public class LoginServlet extends HttpServlet{
 		if(storedUser == null) {
 			resp.setStatus(418);
 		} else if(User.checkPass(u.getPass(),storedUser.getaPassword())){
-			log.debug("We found the user.");
-			resp.setStatus(200);
-
+			resp.setStatus(300);
 			HttpSession session = req.getSession();
 			session.setAttribute("user", storedUser);
-			resp.sendRedirect("home");
+
+			String json = mapper.writeValueAsString(storedUser);
+			
+			PrintWriter writer = resp.getWriter();
+			resp.setContentType("application/json");
+			writer.write(json); 
 		} else {
 			resp.setStatus(404);
 		}

@@ -37,11 +37,11 @@ public class ReimbursementRepository {
 		return types;
 	}
 	
-	public List<Reimbursement> findAllReimbs() {
+	public List<Reimbursement> findAllPendingReimbs() {
 		List<Reimbursement> reimbs = new ArrayList<Reimbursement>();
 		List<String> types = reimbTypes();
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			String sql = "SELECT * FROM Reimbursement WHERE reimb_resolver IS NULL ORDER BY reimb_submitted ASC";
+			String sql = "SELECT * FROM Reimbursement_data WHERE reimb_resolver IS NULL ORDER BY reimb_submitted ASC";
 			//Create String array holding names of columns that are auto-generated
 			String[] keys = {"reimb_id"};
 			PreparedStatement ps = conn.prepareStatement(sql,keys);
@@ -49,7 +49,54 @@ public class ReimbursementRepository {
 			ResultSet pk = ps.executeQuery();
 
 			while(pk.next()) {
-				Reimbursement temp = new Reimbursement(pk.getInt("reimb_id"), pk.getBigDecimal("reimb_amount"), pk.getDate("reimb_submitted"), pk.getDate("reimb_resolved"), pk.getString("reimb_description"),pk.getInt("reimb_status_id"), pk.getInt("reimb_author"), pk.getInt("reimb_resolver"), types.get(pk.getInt("reimb_type_id") - 1));
+				Reimbursement temp = new Reimbursement();
+				temp.setReimbId(pk.getInt("reimb_id"));
+				temp.setReimbAmount(pk.getBigDecimal("reimb_amount"));
+				temp.setSubmitted(pk.getDate("reimb_submitted"));
+				temp.setDesc(pk.getString("reimb_description"));
+				temp.setStatus(pk.getString("reimb_status"));
+				temp.setStatusid(pk.getInt("reimb_status_id"));
+				temp.setAuthor(pk.getInt("reimb_author"));
+				temp.setType(pk.getString("reimb_type"));
+				temp.setAuthor_firstname(pk.getString("author_first"));
+				temp.setAuthor_lastname(pk.getString("author_last"));
+				reimbs.add(temp);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return reimbs;
+	}
+	
+	public List<Reimbursement> findAllReimbs() {
+		List<Reimbursement> reimbs = new ArrayList<Reimbursement>();
+		List<String> types = reimbTypes();
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			String sql = "SELECT * FROM Reimbursement_data ORDER BY reimb_submitted ASC";
+			//Create String array holding names of columns that are auto-generated
+			String[] keys = {"reimb_id"};
+			PreparedStatement ps = conn.prepareStatement(sql,keys);
+			
+			ResultSet pk = ps.executeQuery();
+
+			while(pk.next()) {
+				Reimbursement temp = new Reimbursement();
+				temp.setReimbId(pk.getInt("reimb_id"));
+				temp.setReimbAmount(pk.getBigDecimal("reimb_amount"));
+				temp.setSubmitted(pk.getDate("reimb_submitted"));
+				temp.setDesc(pk.getString("reimb_description"));
+				temp.setStatus(pk.getString("reimb_status"));
+				temp.setStatusid(pk.getInt("reimb_status_id"));
+				temp.setAuthor(pk.getInt("reimb_author"));
+				temp.setType(pk.getString("reimb_type"));
+				temp.setAuthor_firstname(pk.getString("author_first"));
+				temp.setAuthor_lastname(pk.getString("author_last"));
+				temp.setResolved(pk.getDate("reimb_resolved"));
+				temp.setResolver_firstname(pk.getString("firstname"));
+				temp.setResolver_lastname(pk.getString("lastname"));
 				reimbs.add(temp);
 			}
 			
@@ -66,7 +113,7 @@ public class ReimbursementRepository {
 		List<Reimbursement> reimbs = new ArrayList<Reimbursement>();
 		
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			String sql = "SELECT * FROM Reimbursement WHERE reimb_author = ?";
+			String sql = "SELECT * FROM Reimbursement_data WHERE reimb_author = ?";
 			//Create String array holding names of columns that are auto-generated
 			String[] keys = {"reimb_id"};
 			PreparedStatement ps = conn.prepareStatement(sql,keys);
@@ -75,7 +122,10 @@ public class ReimbursementRepository {
 			ResultSet pk = ps.executeQuery();
 
 			while(pk.next()) {
-				Reimbursement temp = new Reimbursement(pk.getInt("reimb_id"), pk.getBigDecimal("reimb_amount"), pk.getDate("reimb_submitted"), pk.getDate("reimb_resolved"), pk.getString("reimb_description"), pk.getInt("reimb_author"), pk.getInt("reimb_resolver"), pk.getInt("reimb_status_id"), types.get(pk.getInt("reimb_type_id") - 1));
+				Reimbursement temp = new Reimbursement(pk.getInt("reimb_id"), pk.getBigDecimal("reimb_amount"), pk.getDate("reimb_submitted"), pk.getString("reimb_description"),  pk.getString("reimb_status"), pk.getInt("reimb_status_id"), pk.getInt("reimb_author"), pk.getInt("reimb_resolver"), pk.getString("reimb_type"));
+				temp.setResolved(pk.getDate("reimb_resolved"));
+				temp.setResolver_firstname(pk.getString("firstname"));
+				temp.setResolver_lastname(pk.getString("lastname"));
 				reimbs.add(temp);
 			}
 			
@@ -124,6 +174,7 @@ public class ReimbursementRepository {
 	}
 	
 	public Reimbursement resolve(Reimbursement reimb){
+		Date date = new Date(System.currentTimeMillis());
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 			conn.setAutoCommit(false);
 			String sql = "{call resolve(?,?,?,?)}";
@@ -132,7 +183,7 @@ public class ReimbursementRepository {
 			
 			cs.setInt(1, reimb.getReimbId());
 			cs.setInt(2, reimb.getResolver());
-			cs.setDate(3, new Date(reimb.getResolved()));
+			cs.setDate(3, date);
 			cs.setInt(4,  reimb.getStatusid());
 			
 			cs.execute();

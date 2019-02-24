@@ -29,7 +29,7 @@ public class ReviewReimbServlet extends HttpServlet{
 		log.info(user.getRole());
 		if(user.getRole().equalsIgnoreCase("finance manager")) {
 			ReimbursementRepository rRepo = new ReimbursementRepository();
-			List<Reimbursement> reimbs = rRepo.findAllReimbs();
+			List<Reimbursement> reimbs = rRepo.findAllPendingReimbs();
 			ObjectMapper mapper = new ObjectMapper();
 			String json = mapper.writeValueAsString(reimbs);
 			log.info(json);

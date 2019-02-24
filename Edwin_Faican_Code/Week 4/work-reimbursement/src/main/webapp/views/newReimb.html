@@ -1,11 +1,28 @@
-<h3>Add a new Reimbursement!</h3>
-<input type="number" id="amount" min="0.00" placeholder="Amount">
-<h5>Select your reason for Reimbursement:</h5>
-<select id="type">
-    <option value="lodging">Lodging</option>
-    <option value="travel">Travel</option>
-    <option value="food">Food</option>
-    <option value="other">Other</option>
-</select>
-<input type="textarea" id="desc" placeholder="Description">
-<button class="btn btn-secondary" id="addnewreimb">Sumbit</button>
+<div class="card bg-dark mb-3 w-50 text-center">
+    <div class="card-body">
+        <div class="card-title align-content-center">
+
+            <h3>Add a new Reimbursement!</h3>
+            <div class="input-group input-group-sm">
+                <input class="form-control" type="number" id="amount" min="0.00" placeholder="Amount">
+            </div>
+
+            <div class="input-group input-group-sm">
+
+                <select class="custom-select" id="type">
+                    <option value="lodging">Lodging</option>
+                    <option value="travel">Travel</option>
+                    <option value="food">Food</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <div class="input-group input-group-sm">
+                <textarea class="form-control" id="desc" placeholder="Descripition" rows="4" cols="50"></textarea>
+            </div>
+            <br>
+            <span id="reimb-error"></span>
+            <button class="btn btn-secondary w-100" id="addnewreimb">Submit</button>
+
+        </div>
+    </div>
+</div>

@@ -22,14 +22,14 @@ public class HomeServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		//Get user from session
 		User user = (User) session.getAttribute("user");
-
+		resp.setStatus(300);
+		log.info("Response status = " + resp.getStatus());
 		if(user.getUsername() == null) {
 			//no user stored in seesion.
 			//Should not be able to access the home page.
 			//redirect to login. 
 			resp.sendRedirect("index.html");
 		} else if(user.getRole().equalsIgnoreCase("Employee")) {
-			resp.setStatus(200);
 			ObjectMapper mapper = new ObjectMapper();
 			String json = mapper.writeValueAsString(user);
 			//Welcome page for user
@@ -37,7 +37,7 @@ public class HomeServlet extends HttpServlet {
 			resp.setContentType("application/json");
 			writer.write(json); 
 		} else {
-			resp.setStatus(202);
+			
 			ObjectMapper mapper = new ObjectMapper();
 			String json = mapper.writeValueAsString(user);
 			
