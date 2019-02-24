@@ -30,7 +30,11 @@ h2 {
     text-transform: uppercase;
     display: inline-block;
     margin: 40px 8px 10px 8px;
-    color: #cccccc;
+    color: #a7a7a7;
+}
+
+label {
+    font-weight: bold;
 }
 
 table {
@@ -98,7 +102,7 @@ tr.selected td {
     padding: 20px;
 }
 
-#formContent {
+.formContent {
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
     background: #fff;
@@ -112,7 +116,7 @@ tr.selected td {
     text-align: center;
 }
 
-#formFooter {
+.formFooter {
     background-color: #f6f6f6;
     border-top: 1px solid #dce8f1;
     padding: 25px;
@@ -213,7 +217,7 @@ button:active, input[type=button]:active, input[type=submit]:active, input[type=
     transform: scale(0.95);
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=number] {
     background-color: #f6f6f6;
     border: none;
     color: #0d0d0d;
@@ -234,16 +238,45 @@ input[type=text], input[type=password] {
     border-radius: 5px 5px 5px 5px;
 }
 
-input[type=text]:focus, input[type=password]:focus {
+input[type=text]:focus, input[type=password]:focus, input[type=number]:focus {
     background-color: #fff;
     border-bottom: 2px solid #5fbae9;
 }
 
-input[type=text]:placeholder, input[type=password]:placeholder {
+input[type=text]:placeholder, input[type=password]:placeholder, input[type=number]:placeholder {
     color: #cccccc;
 }
 
-input[type=text]:focus::-webkit-input-placeholder, input[type=password]:focus::-webkit-input-placeholder {
+input[type=text]:focus::-webkit-input-placeholder, input[type=password]:focus::-webkit-input-placeholder, input[type=number]:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+
+textarea {
+    background-color: #f6f6f6;
+    border: none;
+    color: #0d0d0d;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 5px;
+    width: 85%;
+    border: 2px solid #f6f6f6;
+    -webkit-border-radius: 5px 5px 5px 5px;
+    border-radius: 5px 5px 5px 5px;
+}
+
+textarea:focus {
+    background-color: #fff;
+    border-bottom: 2px solid #5fbae9;
+}
+
+textarea:placeholder {
+    color: #cccccc;
+}
+
+textarea:focus::-webkit-input-placeholder {
     color: transparent;
 }
 

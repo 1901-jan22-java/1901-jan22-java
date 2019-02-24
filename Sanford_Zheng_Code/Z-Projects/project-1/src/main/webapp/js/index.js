@@ -105,7 +105,7 @@ function loadManagerView() {
 function bindLogout() {
     $('#logoutButton').click(function () {
         console.log('logout')
-        $.post('logout', JSON.stringify(user), function(){
+        $.post('logout', JSON.stringify(user), function () {
             delete user;
             delete reimb;
             loadLogin();

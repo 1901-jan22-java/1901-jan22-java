@@ -61,4 +61,13 @@ public class ReimbursementServlet extends HttpServlet {
 		resp.getWriter().write(json);
 	}
 	
+	@Override
+	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		User u = om.readValue(req.getInputStream(), User.class);
+		UserData ud = UserService.getUserData(u.getUsername());
+		Integer roleID = ud.getRole_id();
+
+		String json = "";
+	}
+	
 }
