@@ -81,6 +81,24 @@ function loadHomeView(user){
     xhr.send();
 }
 
+function loadManagerView(user){
+	console.log("manager view");
+	var info = JSON.parse(user);
+	var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            $('#view').html(xhr.responseText);
+            $('#name').html(`${info.firstName} ${info.lastName}`);
+            $('#reqReimb').on('click', loadAddReimbView);
+            $('#reqReimb').on('click', removeReimbView);
+            $('#resolveReimb').on('click', resolve);
+            showReimb();
+        }
+    }
+    xhr.open("GET", "partials/homeManager.html");
+    xhr.send();
+}
+
 function showReimb(){
 	$('#tableData').html("");
 	var xhr = new XMLHttpRequest();
@@ -94,7 +112,12 @@ function showReimb(){
 				case 2: reimb[i].typeId='Food';break;
 				case 3: reimb[i].typeId='Travel';break;
 				}
-				
+				switch(reimb[i].statusId)
+				{
+				case 1: reimb[i].statusId='Pending';break;
+				case 2: reimb[i].statusId='Approved';break;
+				case 3: reimb[i].statusId='Denied';break;
+				}
 				if(reimb[i].resolved != null)
 				{
 					$('#tableData').append(`
@@ -135,22 +158,6 @@ function removeReimbView(){
 	$('#reimbView').html("");
 }
 
-function loadManagerView(user){
-	console.log("manager view");
-	
-	var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState == 4 && xhr.status == 200){
-            $('#view').html(xhr.responseText);
-            $('#name').html(`${info.firstName} ${info.lastName}`);
-        	$('#reqReimb').on('click', loadAddReimbView);
-        	$('#resolve').on('click', resolve);
-        }
-    }
-    xhr.open("GET", "partials/homeManager.html");
-    xhr.send();
-}
-
 function loadAddReimbView(){
     console.log("load reimb view function");
 
@@ -179,7 +186,7 @@ function addReimb(){
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4){
-            if(xhr.status == 200){
+            if(xhr.status == 200 || xhr.status==201){
                 //added money in
             	$('#reimbView').html("Success!!");
             	showReimb();

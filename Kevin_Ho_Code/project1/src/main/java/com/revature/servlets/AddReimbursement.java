@@ -42,9 +42,7 @@ public class AddReimbursement extends HttpServlet{
 		else
 			resp.setStatus(500);
 		
-		if(u.getRoleId() == 0)
-			resp.sendRedirect("home");
-		else
-			resp.sendRedirect("managerHome");
+		resp.sendRedirect("home");
+		
 	}
 }
