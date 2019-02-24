@@ -98,7 +98,7 @@ insert into ers_reimbursement_status values(2, 'Approved');
 insert into ers_reimbursement_status values(3, 'Denied');
 insert into ers_reimbursement_type(reimb_type) values('Lodging');
 insert into ers_reimbursement_type(reimb_type) values('Food');
-insert into ers_reimbursement_type(reimb_type) values('travel');
+insert into ers_reimbursement_type(reimb_type) values('Travel');
 insert into ers_user_roles values (0, 'employee');
 insert into ers_user_roles values (1, 'manager');
 insert into ers_users (ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id) 

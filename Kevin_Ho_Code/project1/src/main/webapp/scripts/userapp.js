@@ -74,11 +74,63 @@ function loadHomeView(user){
             $('#name').html(`${info.firstName} ${info.lastName}`);
             $('#reqReimb').on('click', loadAddReimbView);
             $('#reqReimb').on('click', removeReimbView);
+            showReimb();
         }
     }
     xhr.open("GET", "partials/home.html");
     xhr.send();
 }
+
+function showReimb(){
+	$('#tableData').html("");
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status == 200){
+			var reimb = JSON.parse(xhr.responseText);
+			for(let i = 0; i < reimb.length; i++){
+				switch(reimb[i].typeId)
+				{
+				case 1: reimb[i].typeId='Lodging';break;
+				case 2: reimb[i].typeId='Food';break;
+				case 3: reimb[i].typeId='Travel';break;
+				}
+				
+				if(reimb[i].resolved != null)
+				{
+					$('#tableData').append(`
+							<tr>
+								<td>${reimb[i].author}</td>
+								<td>${reimb[i].amount}</td>
+								<td>${reimb[i].typeId}</td>
+								<td>${reimb[i].description}</td>
+								<td>${new Date(reimb[i].submitted)}</td>
+								<td>${new Date(reimb[i].resolved)}</td>
+								<td>${reimb[i].resolver}</td>
+								<td>${reimb[i].statusId}</td>
+							</tr>`);
+				}
+				else
+				{	
+					$('#tableData').append(`
+							<tr>
+								<td>${reimb[i].author}</td>
+								<td>${reimb[i].amount}</td>
+								<td>${reimb[i].typeId}</td>
+								<td>${reimb[i].description}</td>
+								<td>${new Date(reimb[i].submitted)}</td>
+								<td>N/A</td>
+								<td>${reimb[i].resolver}</td>
+								<td>${reimb[i].statusId}</td>
+							</tr>`);
+				}
+			
+			}
+		}
+	}
+	xhr.open("GET", "showReimb");
+	xhr.send();
+}
+
 function removeReimbView(){
 	$('#reimbView').html("");
 }
@@ -130,6 +182,7 @@ function addReimb(){
             if(xhr.status == 200){
                 //added money in
             	$('#reimbView').html("Success!!");
+            	showReimb();
             }
             else if(xhr.status == 409){
                 //failed to add money in
