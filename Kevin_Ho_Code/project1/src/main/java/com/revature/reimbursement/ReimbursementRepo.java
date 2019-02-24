@@ -109,6 +109,8 @@ public class ReimbursementRepo {
 	
 	public Reimbursement addReimb(Reimbursement reimb)
 	{
+		if(reimb.getAmount() == 0 || reimb.getDescription().equals("") || reimb.getTypeId() == 0)
+			return null;
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()) 
 		{
 			conn.setAutoCommit(false);

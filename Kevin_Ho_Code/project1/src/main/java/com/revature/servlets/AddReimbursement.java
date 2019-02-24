@@ -40,7 +40,7 @@ public class AddReimbursement extends HttpServlet{
 		if(reimbRep.addReimb(reimb).getReimbId() != 0)
 			resp.setStatus(200);
 		else
-			resp.setStatus(409);
+			resp.setStatus(500);
 		
 		if(u.getRoleId() == 0)
 			resp.sendRedirect("home");
