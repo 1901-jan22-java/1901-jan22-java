@@ -32,6 +32,7 @@ public class LogoutServlet extends HttpServlet {
 			return;
 		}
 		log.info("Logging out: " + (User)session.getAttribute("user"));
+		session.invalidate();
 		User uback = om.readValue(req.getInputStream(), User.class);
 		log.info("Returned user: " + uback);
 	}

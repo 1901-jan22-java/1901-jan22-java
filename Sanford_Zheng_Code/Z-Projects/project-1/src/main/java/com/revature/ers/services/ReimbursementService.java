@@ -44,8 +44,13 @@ public class ReimbursementService {
 	}
 
 	public static void addReimbursement(Reimbursement r, UserData ud) {
-		if (reimbRepo.create(reimbursementToData(r, ud)) == null)
+		r.setStatus("Pending");
+		ReimbursementData rd = reimbursementToData(r, ud);
+		rd.setSubmitted(new Date(Calendar.getInstance().getTimeInMillis()));
+		if (reimbRepo.create(rd) == null) {
+			log.error("Unable to create reimbursement: " + rd);
 			return;
+		}
 		reimbursements.add(r);
 	}
 
@@ -91,7 +96,7 @@ public class ReimbursementService {
 		if (s_id == null || t_id == null) {
 			return null;
 		}
-		return new ReimbursementData(r.getAmount(), new Date(Calendar.getInstance().getTime().getTime()), null,
+		return new ReimbursementData(r.getAmount(), new Date(Calendar.getInstance().getTimeInMillis()), null,
 				r.getDescription(), r.getReceipt(), ud.getUser_id(), null, s_id, t_id);
 	}
 

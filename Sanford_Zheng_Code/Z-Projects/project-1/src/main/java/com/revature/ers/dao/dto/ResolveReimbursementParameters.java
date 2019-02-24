@@ -2,15 +2,15 @@ package com.revature.ers.dao.dto;
 
 import java.util.Arrays;
 
-public class InputParameters {
+public class ResolveReimbursementParameters {
 	private User resolver;
 	private Integer[] reimbs;
 
-	public InputParameters() {
+	public ResolveReimbursementParameters() {
 		super();
 	}
 
-	public InputParameters(User resolver, Integer[] reimbs) {
+	public ResolveReimbursementParameters(User resolver, Integer[] reimbs) {
 		super();
 		this.resolver = resolver;
 		this.reimbs = reimbs;

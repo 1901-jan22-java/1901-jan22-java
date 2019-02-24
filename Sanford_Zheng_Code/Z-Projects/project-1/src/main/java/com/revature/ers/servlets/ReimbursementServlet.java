@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.ers.dao.dto.CreateReimbursementParameters;
 import com.revature.ers.dao.dto.Reimbursement;
 import com.revature.ers.dao.dto.User;
 import com.revature.ers.dao.pojos.UserData;
@@ -68,21 +69,18 @@ public class ReimbursementServlet extends HttpServlet {
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		PutParameter param  = om.readValue(req.getInputStream(), PutParameter.class);
-		User u = param.user;
-		UserData ud = UserService.getUserData(u.getUsername());
+		CreateReimbursementParameters param = om.readValue(req.getInputStream(), CreateReimbursementParameters.class);
+		UserData ud = UserService.getUserData(param.getAuthor().getUsername());
 		Integer roleID = ud.getRole_id();
 
-		if (roleID == 2) {
-			for (Reimbursement r : param.reimbs) {
+		if (roleID == UserService.getRoleID("Employee")) {
+			for (Reimbursement r : param.getReimbs()) {
 				ReimbursementService.addReimbursement(r, ud);
 			}
 		}
-	}
-
-	private class PutParameter {
-		public User user;
-		public Reimbursement[] reimbs;
+		
+		resp.setContentType("application/json");
+		resp.getWriter().write(om.writeValueAsString(ReimbursementService.getReimbursements(ud)));
 	}
 
 }

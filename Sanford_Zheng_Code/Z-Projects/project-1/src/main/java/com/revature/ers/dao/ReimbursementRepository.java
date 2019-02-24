@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -131,14 +132,19 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 			ps.setString(4, newItem.getReimb_description());
 			ps.setBlob(5, newItem.getReceipt());
 			ps.setInt(6, newItem.getAuthor_id());
-			ps.setInt(7, newItem.getResolver_id());
+			Integer res_id = newItem.getResolver_id();
+			if (res_id == null) {
+				ps.setNull(7, Types.INTEGER);
+			} else {
+				ps.setInt(7, res_id);
+			}
 			ps.setInt(8, newItem.getReimb_status_id());
 			ps.setInt(9, newItem.getReimb_type_id());
 
 			if (ps.executeUpdate() > 0) {
 				ResultSet rs = ps.getGeneratedKeys();
 				if (rs.next()) {
-					newItem.setReimb_id(rs.getInt("reimb_id"));
+					newItem.setReimb_id(rs.getInt(1));
 				}
 			}
 
@@ -147,7 +153,6 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 		}
 
 		return newItem;
-
 	}
 
 	@Override

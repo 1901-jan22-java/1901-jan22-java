@@ -29,13 +29,6 @@ function loadLogin() {
 
                     if (user.role == 'Employee') {
                         loadEmployeeView();
-                        $.get('reimbtypes', function (typeData) {
-                            var res = "";
-                            for (let t of typeData) {
-                                res += `<option value="${t}">${t}</option>`;
-                            }
-                            $('#reimb-type').html(res);
-                        }, 'json');
                     } else if (user.role == 'Finance Manager') {
                         loadManagerView();
                     }
@@ -86,11 +79,39 @@ function loadEmployeeView() {
     $('#role-options').html(res);
 
     $('#new-reimb').click(function () {
-        $('#new-reimb-form').addClass('hide');
+        $('#new-reimb-form').removeClass('hide');
     });
 
-    $('#reimb-close').click(function(){
-        $('new-reimb-form').removeClass('hide');
+    $('#reimb-close').click(function () {
+        $('new-reimb-form').addClass('hide');
+    });
+
+    $.get('reimbtypes', function (typeData) {
+        var res = "";
+        for (let t of typeData) {
+            res += `<option value="${t}">${t}</option>`;
+        }
+        $('#reimb-type').html(res);
+    }, 'json');
+
+    $('#reimb-create').click(function () {
+        $.ajax({
+            type: 'PUT',
+            url: 'reimbursement',
+            data: JSON.stringify({
+                author: user,
+                reimbs: [{
+                    amount: $('#reimb-amount').val(),
+                    description: $('#reimb-description').val(),
+                    type: $('#reimb-type').val()
+                }]
+            }),
+            success: function (data) {
+                reimb = data;
+                $('#data-view').html(processReimb(reimb));
+                applyReimb();
+            }
+        });
     });
     // We'll see if we need this
     // $('#myReimbursements').click(function () {
@@ -111,7 +132,7 @@ function loadManagerView() {
         $.post('approve', JSON.stringify({
             resolver: user,
             reimbs: selected
-        }), function(data){
+        }), function (data) {
             reimb = data;
             $('#data-view').html(processReimb(reimb));
             applyReimb();
@@ -125,7 +146,7 @@ function loadManagerView() {
         $.post('deny', JSON.stringify({
             resolver: user,
             reimbs: selected
-        }), function(data){
+        }), function (data) {
             reimb = data;
             $('#data-view').html(processReimb(reimb));
             applyReimb();

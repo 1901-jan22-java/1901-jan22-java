@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.BiMap;
-import com.revature.ers.dao.dto.InputParameters;
+import com.revature.ers.dao.dto.ResolveReimbursementParameters;
 import com.revature.ers.dao.pojos.UserData;
 import com.revature.ers.services.ReimbursementService;
 import com.revature.ers.services.UserService;
@@ -32,7 +32,7 @@ public class ApproveServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		InputParameters param  = om.readValue(req.getInputStream(), InputParameters.class);
+		ResolveReimbursementParameters param  = om.readValue(req.getInputStream(), ResolveReimbursementParameters.class);
 		UserData ud = UserService.getUserData(param.getResolver().getUsername());
 		Integer roleID = ud.getRole_id();
 		Integer[] reimbIDs = param.getReimbs();
