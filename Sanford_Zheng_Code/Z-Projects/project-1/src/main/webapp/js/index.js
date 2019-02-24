@@ -30,12 +30,10 @@ function loadLogin() {
                     if (user.role == 'Employee') {
                         loadEmployeeView();
                         $.get('reimbtypes', function (typeData) {
-                            var res = ""
-    
+                            var res = "";
                             for (let t of typeData) {
                                 res += `<option value="${t}">${t}</option>`;
                             }
-    
                             $('#reimb-type').html(res);
                         }, 'json');
                     } else if (user.role == 'Finance Manager') {
@@ -69,7 +67,7 @@ function loadRegister() {
                 first_name: $('#first_name').val(),
                 last_name: $('#last_name').val(),
                 email: $('#email').val(),
-                role: $('#role').val()
+                role: $('#user-role').val()
             }), function () {
                 loadLogin();
             }, 'json');
@@ -87,12 +85,13 @@ function loadEmployeeView() {
     var res = "<input type=\"button\" id=\"new-reimb\" class=\"my-button\" value=\"Request New Reimbursement\">";
     $('#role-options').html(res);
 
-
-
     $('#new-reimb').click(function () {
-        $('#new-reimb-form').toggleClass('hide');
+        $('#new-reimb-form').addClass('hide');
     });
 
+    $('#reimb-close').click(function(){
+        $('new-reimb-form').removeClass('hide');
+    });
     // We'll see if we need this
     // $('#myReimbursements').click(function () {
 
@@ -164,15 +163,6 @@ function loadReimbursement() {
     }, 'json');
 }
 
-// Testing purposes
-// Delete when done
-function loadAllReimb() {
-    $.get('reimbursement', function (data) {
-        reimb = data;
-        $('#data-view').html(processReimb(data));
-        applyReimb();
-    }, 'json');
-}
 
 function processReimb(data) {
     var res = '<table>' +
@@ -255,3 +245,13 @@ function processUsers(data) {
 //         typeof after == 'function' && after();
 //     });
 // };
+
+// Testing purposes
+// Delete when done
+// function loadAllReimb() {
+//     $.get('reimbursement', function (data) {
+//         reimb = data;
+//         $('#data-view').html(processReimb(data));
+//         applyReimb();
+//     }, 'json');
+// }

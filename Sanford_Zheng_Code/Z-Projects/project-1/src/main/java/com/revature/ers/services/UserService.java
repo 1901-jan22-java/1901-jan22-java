@@ -55,6 +55,7 @@ public class UserService {
 	}
 
 	public static User register(User u) {
+		if(usersRepo.read(u.getUsername()) != null) return null;
 		usersDTO.add(u);
 		return dataToUser(usersRepo.create(userToData(u)));
 	}
@@ -98,20 +99,27 @@ public class UserService {
 	}
 
 	public static UserData userToData(User u) {
+		log.info(u.getRole());
 		Integer userRoleID = getRoleID(u.getRole());
-		if (userRoleID == null)
+		if (userRoleID == null) {
+			log.error("Could not find corresponding role id.");
 			return null;
+		}
 		UserData ud = new UserData(null, u.getUsername(), u.getPassword(), u.getFirst_name(), u.getLast_name(),
 				u.getEmail(), userRoleID);
+		log.info("User: "+ u +"\nConverted to: " + ud);
 		return ud;
 	}
 
 	public static User dataToUser(UserData ud) {
 		String userRole = getRole(ud.getRole_id());
-		if (userRole == null)
+		if (userRole == null) {
+			log.error("Could not find corresponding role id.");
 			return null;
+		}
 		User u = new User(ud.getUsername(), ud.getPassword(), ud.getFirst_name(), ud.getLast_name(), ud.getEmail(),
 				userRole);
+		log.info("UserData: "+ ud +"\nConverted to: " + u);
 		return u;
 	}
 

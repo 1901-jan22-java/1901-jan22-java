@@ -4,7 +4,7 @@ select * from ers_reimbursement_type;
 select * from ers_reimbursement;
 
 select * from ers_user_roles;
-select * from ers_users where user_id = 7;
+select * from ers_users;
 
 -- TESTING SCRIPT FOR REIMBURSEMENT DTO --
 select * from ers_reimbursement_view;
@@ -24,11 +24,11 @@ select r.reimb_id as id, r.amount, r.submitted, r.resolved, r.reimb_description 
 r.receipt, auth.username as author,
 res.username as resolver, s.reimb_status as status,
 t.reimb_type as type from ers_reimbursement r
-join (select * from ers_users where user_id = 7) auth on r.author_id = auth.user_id
+join (select user_id, username, first_name, last_name from ers_users where user_id = 7) auth on r.author_id = auth.user_id
 left join ers_users res on res.user_id = r.resolver_id 
 left join ers_reimbursement_status s on s.status_id = r.reimb_status_id
 left join ers_reimbursement_type t on t.type_id = r.reimb_type_id;
 
-
+update ers_reimbursement set status_id = 2;
 
 
