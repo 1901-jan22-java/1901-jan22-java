@@ -48,7 +48,7 @@ public class UserService {
 		usersDTO.add(u);
 		return dataToUser(usersRepo.create(userToData(u)));
 	}
-
+	
 	public static User login(User u) {
 		UserData repoUser = usersRepo.read(u.getUsername());
 		if(!repoUser.getPassword().equalsIgnoreCase(u.getPassword())) return null;
@@ -57,6 +57,10 @@ public class UserService {
 
 	public static User getUser(String un) {
 		return usersDTO.stream().filter( user -> user.getUsername().equalsIgnoreCase(un) ).findAny().orElse(null);
+	}
+	
+	public static UserData getUserData(String un) {
+		return usersRepo.read(un);
 	}
 
 	

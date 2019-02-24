@@ -14,6 +14,7 @@ function loadLogin() {
                 username: $('#username').val(),
                 password: $('#password').val()
             }), function (userData) {
+                // LOAD USER HOME VIEW
                 user = userData;
                 $.get('home.view', function (homeData) {
                     $('#main-view').html(homeData);
@@ -22,6 +23,7 @@ function loadLogin() {
                     $('#username').html(user.username);
                     $('#email').html(user.email);
                     $('#role').html(user.role);
+                    // LOAD RELEVANT DATA VIEW
                     if (user.role == 'Employee') {
                         loadEmployeeView();
                     } else if (user.role == 'Finance Manager') {
@@ -62,56 +64,53 @@ function loadRegister() {
 }
 
 function loadEmployeeView() {
-    $.post('reimbursement',
-        JSON.stringify(user),
-        function (data) {
-            reimb = data;
-            $('#data-view').html(processReimb(reimb));
-            applyReimb();
-        }
-    );
+    loadReimbursement();
     var res = "<input type=\"button\" id=\"new-reimb\" class=\"my-button\" value=\"Request New Reimbursement\">";
     $('#role-options').html(res);
 
     $('#new-reimb').click(function () {
-        // GET ALL SELECTED USERS HERE
-        var selected = $('.selected').val();
-        console.log(selected);
-        $.post('approve',JSON.stringify(selected), function (data) {
-            reimb = data;
-            $('#data-view').html(processReimb(reimb));
-            applyReimb();
-        })
+        loadReimbursement();
     });
+    
+    // We'll see if we need this
     // $('#myReimbursements').click(function () {
 
     // });
 }
 
 function loadManagerView() {
-    loadAllReimb();
+    loadReimbursement();
     var res = "<input type=\"button\" id=\"approve-reimb\" class=\"my-button\" value=\"Approve\">" +
         "<input type=\"button\" id=\"deny-reimb\" class=\"my-button\" value=\"Deny\">";
     $('#role-options').html(res);
+    $('#approve-reimb').click(function () {
+        // GET ALL SELECTED USERS HERE
+        var selected = $('.selected').val();
+        console.log(selected);
+        loadReimbursement();
+    })
+    $('#deny-reimb').click(function () {
+        // GET ALL SELECTED USERS HERE
+        var selected = $('.selected').val();
+        console.log(selected);
+        loadReimbursement();
+    });
+
+    // We'll see if we need this
     // $('#viewReimbursements').click(function () {
 
     // });
-    $('#approve-reimb').click(function () {
-        $.post('reimbursement', JSON.stringify(user), function (data) {
-            reimb = data;
-            $('#data-view').html(processReimb(reimb));
-            applyReimb();
-        },'json');
-    })
-    $('#deny-reimb').click(function () {
-        $.post('reimbursement', JSON.stringify(user), function (data) {
-            reimb = data;
-            $('#data-view').html(processReimb(reimb));
-            applyReimb();
-        },'json');
-    });
 }
 
+function loadReimbursement(){
+    $.post('reimbursement', JSON.stringify(user), function (data) {
+        reimb = data;
+        $('#data-view').html(processReimb(reimb));
+        applyReimb();
+    },'json');
+}
+
+// Testing purposes
 function loadAllReimb() {
     $.get('reimbursement', function (data) {
         reimb = data;
@@ -156,7 +155,6 @@ function processReimb(data) {
 
 function applyReimb(){
     $("tr.selectable td").click(function(){
-        // $(this).parent().removeClass('selectable');
         $(this).parent().toggleClass('selected');
     });
 }
