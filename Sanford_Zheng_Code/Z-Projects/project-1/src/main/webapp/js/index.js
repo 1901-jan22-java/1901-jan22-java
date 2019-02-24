@@ -41,12 +41,14 @@ function loadRegister() {
             $.post('register', JSON.stringify({
                 username: $('#username').val(),
                 password: $('#password').val(),
+                first_name: $('#first_name').val(),
+                last_name: $('#last_name').val(),
                 email: $('#email').val(),
                 role: $('#role').val()
             }), function () {
                 loadLogin();
-            });
-        },'json');
+            },'json');
+        });
     
         $('#goToLogin').click(function () {
             loadLogin();

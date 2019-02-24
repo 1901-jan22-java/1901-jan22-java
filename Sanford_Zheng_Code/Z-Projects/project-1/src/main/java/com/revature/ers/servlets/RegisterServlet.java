@@ -28,7 +28,7 @@ public class RegisterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		User u = om.readValue(req.getInputStream(), User.class);
 		log.info(u);
-//		UserService.register(u);
+		log.info(UserService.register(u));
 	}
 	
 }

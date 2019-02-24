@@ -102,7 +102,7 @@ public class UserRepository implements Repository<UserData> {
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
-			String sql = "insert into ers_users(username, password, first_name, last_name, email, rold_id) "
+			String sql = "insert into ers_users(username, password, first_name, last_name, email, role_id) "
 					+ "values(lower(?), ?, ?, ?, ?, ?)";
 			String[] keys = { "user_id" };
 			PreparedStatement ps = conn.prepareStatement(sql, keys);
@@ -116,7 +116,7 @@ public class UserRepository implements Repository<UserData> {
 			if (ps.executeUpdate() > 0) {
 				ResultSet rs = ps.getGeneratedKeys();
 				if (rs.next()) {
-					newItem.setUser_id(rs.getInt("user_id"));
+					newItem.setUser_id(rs.getInt(1));
 				}
 			}
 
