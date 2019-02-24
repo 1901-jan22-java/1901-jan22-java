@@ -138,18 +138,18 @@ public class ReimbursementRepo {
 		return reimb;
 	}
 	
-	public Reimbursement resolve(Reimbursement reimb, int statusId)
+	public Reimbursement resolve(Reimbursement reimb)
 	{
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 			conn.setAutoCommit(false);
 			String sql = "{call resolve(?,?,?,?)}";
 			
 			CallableStatement cs = conn.prepareCall(sql);
-			
+
 			cs.setInt(1, reimb.getReimbId());
-			cs.setInt(2, reimb.getAuthor());
+			cs.setInt(2, reimb.getStatusId());
 			cs.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
-			cs.setInt(4, statusId);
+			cs.setInt(4, reimb.getResolver());
 			
 			cs.execute();
 		} catch (SQLException e) {

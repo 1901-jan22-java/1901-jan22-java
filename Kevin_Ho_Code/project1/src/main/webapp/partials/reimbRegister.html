@@ -1,7 +1,11 @@
 <div class="jumbotron" id="submitReimb">
 	<input type="number" id="amount" placeholder="Amount of Money" class="form-control col-3">
     <input type="text" id="description" Placeholder="Description" class="form-control col-3"><br>
-    <input type="text" id="type" placeholder="Type" class="form-control col-3">
+	<select id="type" class="form-control col-3">
+		<option value="1">Lodging</option>
+		<option value="2">Food</option>
+		<option value="3">Travel</option>
+	</select> 
 	<br>
 	
     <button class="btn btn-primary" id="addReimb">Request Reimbursement!</button>

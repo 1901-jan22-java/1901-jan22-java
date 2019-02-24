@@ -101,4 +101,11 @@ public class Reimbursement {
 	public void setTypeId(int typeId) {
 		this.typeId = typeId;
 	}
+
+	@Override
+	public String toString() {
+		return "Reimbursement [reimbId=" + reimbId + ", amount=" + amount + ", submitted=" + submitted + ", resolved="
+				+ resolved + ", description=" + description + ", author=" + author + ", resolver=" + resolver
+				+ ", statusId=" + statusId + ", typeId=" + typeId + "]";
+	}
 }

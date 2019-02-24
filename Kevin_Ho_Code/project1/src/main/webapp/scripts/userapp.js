@@ -91,12 +91,22 @@ function loadManagerView(user){
             $('#name').html(`${info.firstName} ${info.lastName}`);
             $('#reqReimb').on('click', loadAddReimbView);
             $('#reqReimb').on('click', removeReimbView);
-            $('#resolveReimb').on('click', resolve);
+            $('#resolveReimb').on('click', loadResolveView);
             showReimb();
         }
     }
     xhr.open("GET", "partials/homeManager.html");
     xhr.send();
+}
+
+function resolve(){
+	var request = {
+			reimbId: $('#reimbId').val(),
+			reimbStatus: $('#reimbStatus').val()
+			};
+	
+	$('#resolveView').html("");
+	
 }
 
 function showReimb(){
@@ -123,6 +133,7 @@ function showReimb(){
 					$('#tableData').append(`
 							<tr>
 								<td>${reimb[i].author}</td>
+								<td>${reimb[i].reimbId}</td>
 								<td>${reimb[i].amount}</td>
 								<td>${reimb[i].typeId}</td>
 								<td>${reimb[i].description}</td>
@@ -137,6 +148,7 @@ function showReimb(){
 					$('#tableData').append(`
 							<tr>
 								<td>${reimb[i].author}</td>
+								<td>${reimb[i].reimbId}</td>
 								<td>${reimb[i].amount}</td>
 								<td>${reimb[i].typeId}</td>
 								<td>${reimb[i].description}</td>
@@ -146,7 +158,7 @@ function showReimb(){
 								<td>${reimb[i].statusId}</td>
 							</tr>`);
 				}
-			
+				
 			}
 		}
 	}
@@ -156,6 +168,24 @@ function showReimb(){
 
 function removeReimbView(){
 	$('#reimbView').html("");
+}
+function removeResolveView(){
+	$('#resolveView').html("");
+}
+
+function loadResolveView(){
+    console.log("load resolve function");
+
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4 && xhr.status == 200){
+            $('#resolveView').html(xhr.responseText);
+        	$('#resolveReimb').on('click', resolve);
+            $('#goToHome').on('click', removeResolveView);
+        }   
+    }
+    xhr.open("GET", "partials/resolve.html");
+    xhr.send();
 }
 
 function loadAddReimbView(){
