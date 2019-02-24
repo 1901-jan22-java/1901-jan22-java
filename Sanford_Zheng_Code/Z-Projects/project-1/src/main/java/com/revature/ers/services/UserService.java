@@ -43,6 +43,16 @@ public class UserService {
 	public static List<User> getAllUsers() {
 		return usersDTO;
 	}
+	
+	public static List<String> getAllRoles(){
+		List<String> res = new ArrayList<>();
+		
+		for(String r: roles.values()) {
+			res.add(r);
+		}
+		
+		return res;
+	}
 
 	public static User register(User u) {
 		usersDTO.add(u);

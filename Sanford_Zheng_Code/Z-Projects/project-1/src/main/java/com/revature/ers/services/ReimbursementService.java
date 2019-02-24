@@ -49,6 +49,16 @@ public class ReimbursementService {
 		reimbursements.add(r);
 	}
 
+	public static List<String> getAllTypes(){
+		List<String> res = new ArrayList<>();
+		
+		for(String s: typesMap.values()) {
+			res.add(s);
+		}
+		
+		return res;
+	}
+	
 	public static List<Reimbursement> getAllReimbursements() {
 		return reimbRepo.getAllReimbursements();
 	}

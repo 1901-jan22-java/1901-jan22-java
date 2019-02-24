@@ -24,8 +24,20 @@ function loadLogin() {
                     $('#email').html(user.email);
                     $('#role').html(user.role);
                     // LOAD RELEVANT DATA VIEW
+
+                    $.get('reimbtypes', function(typeData){
+                        var res = ""
+
+                        for(let t of typeData){
+                            res += `<option value="${t}">${t}</option>`;
+                        }
+                        
+                        $('#reimb-type').html(res);
+                    }, 'json');
+
                     if (user.role == 'Employee') {
                         loadEmployeeView();
+                        
                     } else if (user.role == 'Finance Manager') {
                         loadManagerView();
                     }
@@ -42,6 +54,13 @@ function loadLogin() {
 function loadRegister() {
     $.get('register.view', function (pageData) {
         $('#main-view').html(pageData);
+        $.get('userroles', function(rolesData){
+            res = '';
+            for(let r of rolesData){
+                res += `<option value="${r}">${r}</option>`;
+            }
+            $('#user-role').html(res);
+        }, 'json')
 
         $('#registerButton').click(function () {
             $.post('register', JSON.stringify({
@@ -68,8 +87,10 @@ function loadEmployeeView() {
     var res = "<input type=\"button\" id=\"new-reimb\" class=\"my-button\" value=\"Request New Reimbursement\">";
     $('#role-options').html(res);
 
+    
+
     $('#new-reimb').click(function () {
-        loadReimbursement();
+        $('#new-reimb-form').toggleClass('hide');
     });
 
     // We'll see if we need this
@@ -151,7 +172,7 @@ function processReimb(data) {
         } else {
             res += '<tr>'
         }
-        res += `<td>${r.id}</td>` +
+        res += `<td id='id'>${r.id}</td>` +
             `<td>${r.amount}</td>` +
             `<td>${r.submitted}</td>` +
             `<td>${r.resolved || ""}</td>` +
