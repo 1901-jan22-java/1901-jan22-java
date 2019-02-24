@@ -58,6 +58,24 @@ public class ReimbursementService {
 		
 		return res;
 	}
+
+	public static void deny(Integer[] reimbIDs, UserData ud) {
+		updateStatus(statusMap.inverse().get("Denied"), reimbIDs, ud);
+	}
+	
+	public static void approve(Integer[] reimbIDs, UserData ud) {
+		updateStatus(statusMap.inverse().get("Approved"), reimbIDs, ud);
+	}
+	
+	public static void updateStatus(Integer newStatus, Integer[] reimbIDs, UserData ud) {
+		for(Integer id: reimbIDs) {
+			ReimbursementData rd = reimbRepo.read(id);
+			rd.setResolved(new Date(Calendar.getInstance().getTimeInMillis()));
+			rd.setResolver_id(ud.getUser_id());
+			rd.setReimb_status_id(newStatus);
+			reimbRepo.update(id, rd);
+		}
+	}
 	
 	public static List<Reimbursement> getAllReimbursements() {
 		return reimbRepo.getAllReimbursements();

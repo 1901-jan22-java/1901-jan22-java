@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.ers.dao.dto.Reimbursement;
-import com.revature.ers.dao.dto.User;
+import com.google.common.collect.BiMap;
+import com.revature.ers.dao.dto.InputParameters;
 import com.revature.ers.dao.pojos.UserData;
 import com.revature.ers.services.ReimbursementService;
 import com.revature.ers.services.UserService;
@@ -32,19 +32,18 @@ public class ApproveServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		PostParameters param  = om.readValue(req.getInputStream(), PostParameters.class);
-		User u = param.user;
-		UserData ud = UserService.getUserData(u.getUsername());
+		InputParameters param  = om.readValue(req.getInputStream(), InputParameters.class);
+		UserData ud = UserService.getUserData(param.getResolver().getUsername());
 		Integer roleID = ud.getRole_id();
+		Integer[] reimbIDs = param.getReimbs();
+		BiMap<String, Integer> rolesMap = UserService.getRoles().inverse();
 
-		if(roleID==1 || roleID == 3) {
-			
+		if(roleID==rolesMap.get("Admin") || roleID == rolesMap.get("Finance Manager")) {
+			ReimbursementService.approve(reimbIDs, ud);
 		}
-	}
-	
-	private class PostParameters {
-		public User user;
-		public Reimbursement[] reimbs;
+		
+		resp.setContentType("application/json");
+		resp.getWriter().write(om.writeValueAsString(ReimbursementService.getAllReimbursements()));
 	}
 	
 }

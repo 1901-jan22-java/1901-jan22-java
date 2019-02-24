@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
 		} else {
 			HttpSession session = req.getSession();
 			session.setAttribute("user", u);
-			log.info("Object: "+(User)session.getAttribute("user"));
+			log.info("Logging in: "+(User)session.getAttribute("user"));
 
 			resp.setContentType("application/json");
 			resp.getWriter().write(om.writeValueAsString(uStored));

@@ -3,6 +3,7 @@
  */
 $(function () {
     loadLogin();
+    bindLogout();
 });
 
 function loadLogin() {
@@ -16,6 +17,7 @@ function loadLogin() {
             }), function (userData) {
                 // LOAD USER HOME VIEW
                 user = userData;
+                console.log(user);
                 $.get('home.view', function (homeData) {
                     $('#main-view').html(homeData);
                     $('#firstname').html(user.first_name);
@@ -25,19 +27,17 @@ function loadLogin() {
                     $('#role').html(user.role);
                     // LOAD RELEVANT DATA VIEW
 
-                    $.get('reimbtypes', function(typeData){
-                        var res = ""
-
-                        for(let t of typeData){
-                            res += `<option value="${t}">${t}</option>`;
-                        }
-                        
-                        $('#reimb-type').html(res);
-                    }, 'json');
-
                     if (user.role == 'Employee') {
                         loadEmployeeView();
-                        
+                        $.get('reimbtypes', function (typeData) {
+                            var res = ""
+    
+                            for (let t of typeData) {
+                                res += `<option value="${t}">${t}</option>`;
+                            }
+    
+                            $('#reimb-type').html(res);
+                        }, 'json');
                     } else if (user.role == 'Finance Manager') {
                         loadManagerView();
                     }
@@ -54,9 +54,9 @@ function loadLogin() {
 function loadRegister() {
     $.get('register.view', function (pageData) {
         $('#main-view').html(pageData);
-        $.get('userroles', function(rolesData){
+        $.get('userroles', function (rolesData) {
             res = '';
-            for(let r of rolesData){
+            for (let r of rolesData) {
                 res += `<option value="${r}">${r}</option>`;
             }
             $('#user-role').html(res);
@@ -87,7 +87,7 @@ function loadEmployeeView() {
     var res = "<input type=\"button\" id=\"new-reimb\" class=\"my-button\" value=\"Request New Reimbursement\">";
     $('#role-options').html(res);
 
-    
+
 
     $('#new-reimb').click(function () {
         $('#new-reimb-form').toggleClass('hide');
@@ -105,16 +105,32 @@ function loadManagerView() {
         "<input type=\"button\" id=\"deny-reimb\" class=\"my-button\" value=\"Deny\">";
     $('#role-options').html(res);
     $('#approve-reimb').click(function () {
-        // GET ALL SELECTED USERS HERE
-        var selected = $('.selected').val();
+        // GET ALL SELECTED REIMBURSEMENTS HERE
+        var selected = getSelected();
+        console.log(user);
         console.log(selected);
-        loadReimbursement();
+        $.post('approve', JSON.stringify({
+            resolver: user,
+            reimbs: selected
+        }), function(data){
+            reimb = data;
+            $('#data-view').html(processReimb(reimb));
+            applyReimb();
+        });
     })
     $('#deny-reimb').click(function () {
-        // GET ALL SELECTED USERS HERE
-        var selected = $('.selected').val();
+        // GET ALL SELECTED REIMBURSEMENTS HERE
+        var selected = getSelected();
+        console.log(user);
         console.log(selected);
-        loadReimbursement();
+        $.post('deny', JSON.stringify({
+            resolver: user,
+            reimbs: selected
+        }), function(data){
+            reimb = data;
+            $('#data-view').html(processReimb(reimb));
+            applyReimb();
+        });
     });
 
     // We'll see if we need this
@@ -123,8 +139,14 @@ function loadManagerView() {
     // });
 }
 
+function getSelected() {
+    return $('.selected td:nth-child(1)').map(function () {
+        return Number.parseInt(this.innerHTML);
+    }).toArray();
+}
+
 function bindLogout() {
-    $('#logoutButton').click(function () {
+    $('#logout-button').click(function () {
         console.log('logout')
         $.post('logout', JSON.stringify(user), function () {
             delete user;
@@ -172,7 +194,7 @@ function processReimb(data) {
         } else {
             res += '<tr>'
         }
-        res += `<td id='id'>${r.id}</td>` +
+        res += `<td>${r.id}</td>` +
             `<td>${r.amount}</td>` +
             `<td>${r.submitted}</td>` +
             `<td>${r.resolved || ""}</td>` +
