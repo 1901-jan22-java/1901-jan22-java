@@ -1,6 +1,7 @@
 package com.revature.servlets;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,15 +23,28 @@ public class AddReimbursement extends HttpServlet{
 	private static Logger log =  Logger.getLogger(AddReimbursement.class);
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		log.debug("in addreimb");
+		
 		HttpSession session = req.getSession();
 		ReimbursementRepo reimbRep = new ReimbursementRepo();
 		ObjectMapper mapper = new ObjectMapper();
 		Reimbursement reimb = mapper.readValue(req.getInputStream(), Reimbursement.class);
-		reimb.setAuthor(((User)req.getAttribute("sessionUser")).getUserId());
+		
+		User u = (User)session.getAttribute("sessionUser");
+		reimb.setAuthor(u.getUserId());
+		reimb.setSubmitted(new Timestamp(System.currentTimeMillis()));
+		reimb.setStatusId(1);
 		log.debug(reimb.toString());
 		
-		resp.setStatus(200);
-		resp.sendRedirect("home");
+		if(reimbRep.addReimb(reimb).getReimbId() != 0)
+			resp.setStatus(200);
+		else
+			resp.setStatus(409);
+		
+		if(u.getRoleId() == 0)
+			resp.sendRedirect("home");
+		else
+			resp.sendRedirect("managerHome");
 	}
 }

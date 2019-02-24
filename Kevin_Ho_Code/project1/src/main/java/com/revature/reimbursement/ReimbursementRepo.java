@@ -107,10 +107,8 @@ public class ReimbursementRepo {
 		return tmp;
 	}
 	
-	public Reimbursement addReimb(int type, int user, double amount, String desc, int status, Timestamp submitted) 
+	public Reimbursement addReimb(Reimbursement reimb)
 	{
-		Reimbursement reimb = new Reimbursement();
-
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()) 
 		{
 			conn.setAutoCommit(false);
@@ -121,28 +119,16 @@ public class ReimbursementRepo {
 			String[] keys = {"reimb_id"};
 			PreparedStatement ps = conn.prepareStatement(sql,keys);
 			
-			ps.setInt(1, type);
-			ps.setInt(2, user);
-			ps.setDouble(3, amount);
-			ps.setString(4, desc);
-			ps.setInt(5, status);
-			ps.setTimestamp(6, submitted);
-						
+			ps.setInt(1, reimb.getTypeId());
+			ps.setInt(2, reimb.getAuthor());
+			ps.setDouble(3, reimb.getAmount());
+			ps.setString(4, reimb.getDescription());
+			ps.setInt(5, reimb.getStatusId());
+			ps.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
 			
-			int numRows = ps.executeUpdate();
+			ps.executeUpdate();
 			
-			if(numRows > 0) {
-				ResultSet pk = ps.getGeneratedKeys();
-				pk.next();
-				reimb.setReimbId((pk.getInt(1)));
-				reimb.setTypeId(type);
-				reimb.setAmount(amount);
-				reimb.setAuthor(user);
-				reimb.setDescription(desc);
-				reimb.setStatusId(status);
-				reimb.setSubmitted(submitted);
-				conn.commit();
-			}
+			conn.commit();
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -150,7 +136,7 @@ public class ReimbursementRepo {
 		return reimb;
 	}
 	
-	public Reimbursement resolve(Reimbursement reimb, User u, Timestamp status, int statusId)
+	public Reimbursement resolve(Reimbursement reimb, int statusId)
 	{
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()){
 			conn.setAutoCommit(false);
@@ -159,8 +145,8 @@ public class ReimbursementRepo {
 			CallableStatement cs = conn.prepareCall(sql);
 			
 			cs.setInt(1, reimb.getReimbId());
-			cs.setInt(2, u.getUserId());
-			cs.setTimestamp(3, status);
+			cs.setInt(2, reimb.getAuthor());
+			cs.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
 			cs.setInt(4, statusId);
 			
 			cs.execute();

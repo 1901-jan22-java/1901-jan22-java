@@ -43,12 +43,9 @@ function logIn(){
             if(xhr.status == 200){
                 //logged in successfully
             	loadHomeView(xhr.responseText);
-            	$('#addReimb').on('click', addReimb);
             }
             else if(xhr.status == 201){
             	loadManagerView(xhr.responseText);
-            	$('#addReimb').on('click', addReimb);
-//            	$('#resolveReimb').on('click', resolve);
             }
             else if(xhr.status == 409){
                 //encountered known problem (wrong password/user not in system)
@@ -74,12 +71,16 @@ function loadHomeView(user){
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4 && xhr.status == 200){
             $('#view').html(xhr.responseText);
-            $('#name').html($(info.firstName)+" "+$(info.lastName));
-        	$('#addReimb').on('click', loadAddReimbView);
+            $('#name').html(`${info.firstName} ${info.lastName}`);
+            $('#reqReimb').on('click', loadAddReimbView);
+            $('#reqReimb').on('click', removeReimbView);
         }
     }
     xhr.open("GET", "partials/home.html");
     xhr.send();
+}
+function removeReimbView(){
+	$('#reimbView').html("");
 }
 
 function loadManagerView(user){
@@ -89,7 +90,8 @@ function loadManagerView(user){
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4 && xhr.status == 200){
             $('#view').html(xhr.responseText);
-        	$('#addReimb').on('click', loadAddReimbView);
+            $('#name').html(`${info.firstName} ${info.lastName}`);
+        	$('#reqReimb').on('click', loadAddReimbView);
         	$('#resolve').on('click', resolve);
         }
     }
@@ -103,9 +105,9 @@ function loadAddReimbView(){
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4 && xhr.status == 200){
-            $('#view').html(xhr.responseText);
+            $('#reimbView').html(xhr.responseText);
         	$('#addReimb').on('click', addReimb);
-            $('#goToHome').on('click', loadHomeView);
+            $('#goToHome').on('click', removeReimbView);
         }   
     }
     xhr.open("GET", "partials/reimbRegister.html");
@@ -115,27 +117,28 @@ function loadAddReimbView(){
 
 function addReimb(){
 	var reimb = {
-			amount: $('amount'),
-			description: $('description'),
-			author: $('author'),
-			typeId: $('typeId')
+			amount: $('#amount').val(),
+			description: $('#description').val(),
+			typeId: $('#type').val()
 		};
 
     var json = JSON.stringify(reimb);
+    console.log(json);
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4){
-            if(xhr.status == 201){
-                //logged in successfully
-            	$('#view').html(xhr.responseText);
+            if(xhr.status == 200){
+                //added money in
+            	$('#reimbView').html("Success!!");
             }
             else if(xhr.status == 409){
-                //failed to log in
-            	$('#view').html(xhr.responseText);
+                //failed to add money in
+            	$('#reimbView').html("Invalid Input");
             }
             else{
                 //some other error, likely send to error page
-            	alert("im gay");
+            	$('#reimbView').html("Something went wrong!");
+            	console.log(xhr.status);
             }
         }
     }
