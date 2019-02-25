@@ -26,7 +26,7 @@ function loadLogin() {
                     $('#email').html(user.email);
                     $('#role').html(user.role);
 
-                    // Filter not working correctly now
+                    // Filter not working correctly now (event issue/maybe functionality)
                     // $('#search-reimb-button').bind('enterKey', function () {
                     //     var toShow = [];
                     //     var target = $('#search-reimb-table').val();
