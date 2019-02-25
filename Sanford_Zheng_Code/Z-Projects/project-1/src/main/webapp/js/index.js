@@ -25,6 +25,26 @@ function loadLogin() {
                     $('#username').html(user.username);
                     $('#email').html(user.email);
                     $('#role').html(user.role);
+
+                    // Filter not working correctly now
+                    // $('#search-reimb-button').bind('enterKey', function () {
+                    //     var toShow = [];
+                    //     var target = $('#search-reimb-table').val();
+                    //     if (target != "") {
+                    //         for (let r of reimb) {
+                    //             for (let valProp in Object.values(r)) {
+                    //                 if (valProp == target) {
+                    //                     toShow.push(r);
+                    //                 }
+                    //             }
+                    //         }
+                    //     } else {
+                    //         toShow = reimb;
+                    //     }
+                    //     $('#data-view').html(processReimb(toShow));
+                    //     applyReimb();
+                    // });
+
                     // LOAD RELEVANT DATA VIEW
 
                     if (user.role == 'Employee') {
