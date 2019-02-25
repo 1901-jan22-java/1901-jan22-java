@@ -62,7 +62,7 @@ public class UserService {
 	
 	public static User login(User u) {
 		UserData repoUser = usersRepo.read(u.getUsername());
-		if(!repoUser.getPassword().equalsIgnoreCase(u.getPassword())) return null;
+		if(repoUser == null || !repoUser.getPassword().equalsIgnoreCase(u.getPassword())) return null;
 		return dataToUser(repoUser);
 	}
 

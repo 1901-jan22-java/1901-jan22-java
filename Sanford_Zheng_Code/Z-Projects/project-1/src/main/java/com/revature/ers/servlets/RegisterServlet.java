@@ -27,8 +27,13 @@ public class RegisterServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		User u = om.readValue(req.getInputStream(), User.class);
-		log.info(u);
-		log.info("User: " + UserService.register(u));
+		log.info("User applying: " + u);
+		User processedUser = UserService.register(u);
+		log.info("User: " + processedUser);
+		
+		if(processedUser == null) {
+			resp.sendError(418, "User already exists.");
+		}
 	}
 	
 }

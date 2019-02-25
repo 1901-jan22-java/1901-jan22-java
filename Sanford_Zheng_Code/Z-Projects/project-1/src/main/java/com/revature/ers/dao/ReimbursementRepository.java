@@ -157,6 +157,8 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 
 		} catch (SQLException e) {
 			log.error("SQLException in ReimbursementRepository.create()", e);
+		} catch (NullPointerException e) {
+			log.error("NullPointerException in ReimbursementRepository.create()", e);
 		}
 
 		return newItem;
@@ -411,8 +413,6 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 					res = temp;
 				}
 			}
-
-			conn.setAutoCommit(true);
 
 		} catch (SQLException e) {
 			log.error("SQLException in ReimbursementRepository.delete()", e);

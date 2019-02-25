@@ -3,8 +3,26 @@
  */
 $(function () {
     loadLogin();
-    bindLogout();
+    bindPage();
 });
+
+function bindPage() {
+    $('#home-link').click(function () {
+        loadLogin();
+    });
+    bindLogout();
+}
+
+function bindLogout() {
+    $('#logout-button').click(function () {
+        console.log('logout')
+        $.post('logout', JSON.stringify(user), function () {
+            delete user;
+            delete reimb;
+            loadLogin();
+        });
+    });
+}
 
 function loadLogin() {
     $.get('login.view', function (pageData) {
@@ -20,30 +38,22 @@ function loadLogin() {
                 console.log(user);
                 $.get('home.view', function (homeData) {
                     $('#main-view').html(homeData);
+
                     $('#firstname').html(user.first_name);
+
                     $('#name').html(user.first_name + " " + user.last_name);
                     $('#username').html(user.username);
                     $('#email').html(user.email);
                     $('#role').html(user.role);
 
+                    $('#reimb-close').click(function () {
+                        $('new-reimb-form').addClass('hide');
+                    });
+                    // $('#search-reimb-table').unbind();
+                    // $('#search-reimb-button').unbind();
                     // Filter not working correctly now (event issue/maybe functionality)
-                    // $('#search-reimb-button').bind('enterKey', function () {
-                    //     var toShow = [];
-                    //     var target = $('#search-reimb-table').val();
-                    //     if (target != "") {
-                    //         for (let r of reimb) {
-                    //             for (let valProp in Object.values(r)) {
-                    //                 if (valProp == target) {
-                    //                     toShow.push(r);
-                    //                 }
-                    //             }
-                    //         }
-                    //     } else {
-                    //         toShow = reimb;
-                    //     }
-                    //     $('#data-view').html(processReimb(toShow));
-                    //     applyReimb();
-                    // });
+                    // $('#search-reimb-table').click(searchTable);
+                    // $('#search-reimb-button').on('keyup', searchTable);
 
                     // LOAD RELEVANT DATA VIEW
 
@@ -60,6 +70,28 @@ function loadLogin() {
             loadRegister();
         })
     });
+}
+
+function searchTable(e) {
+    console.log(e);
+    e.stopImmediatePropagation();
+    if (e.keyCode == 13) {
+        var toShow = [];
+        var target = $('#search-reimb-table').val();
+        if (target != "") {
+            for (let r of reimb) {
+                for (let valProp in Object.values(r)) {
+                    if (valProp == target) {
+                        toShow.push(r);
+                    }
+                }
+            }
+        } else {
+            toShow = reimb;
+        }
+        $('#data-view').html(processReimb(toShow));
+        applyReimb();
+    }
 }
 
 function loadRegister() {
@@ -100,10 +132,6 @@ function loadEmployeeView() {
 
     $('#new-reimb').click(function () {
         $('#new-reimb-form').removeClass('hide');
-    });
-
-    $('#reimb-close').click(function () {
-        $('new-reimb-form').addClass('hide');
     });
 
     $.get('reimbtypes', function (typeData) {
@@ -183,17 +211,6 @@ function getSelected() {
     return $('.selected td:nth-child(1)').map(function () {
         return Number.parseInt(this.innerHTML);
     }).toArray();
-}
-
-function bindLogout() {
-    $('#logout-button').click(function () {
-        console.log('logout')
-        $.post('logout', JSON.stringify(user), function () {
-            delete user;
-            delete reimb;
-            loadLogin();
-        });
-    });
 }
 
 function loadReimbursement() {

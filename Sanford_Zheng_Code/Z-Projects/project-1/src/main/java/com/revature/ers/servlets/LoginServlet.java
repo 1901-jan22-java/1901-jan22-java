@@ -34,7 +34,7 @@ public class LoginServlet extends HttpServlet {
 		if(uStored == null) {
 			log.info("User not found or login credentials are incorrect.");
 			resp.sendError(418, "User not found or login credentials are incorrect.");
-			req.getRequestDispatcher("html/login.html").forward(req, resp);
+//			req.getRequestDispatcher("html/login.html").forward(req, resp);
 		} else {
 			HttpSession session = req.getSession();
 			session.setAttribute("user", u);
