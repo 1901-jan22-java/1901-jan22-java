@@ -29,7 +29,7 @@ left join ers_users res on res.user_id = r.resolver_id
 left join ers_reimbursement_status s on s.status_id = r.reimb_status_id
 left join ers_reimbursement_type t on t.type_id = r.reimb_type_id;
 
-update ers_reimbursement set reimb_status_id = 2, resolved = null, resolver_id = null;
+update ers_reimbursement set reimb_status_id = 1, resolved = null, resolver_id = null;
 
 commit;
 
