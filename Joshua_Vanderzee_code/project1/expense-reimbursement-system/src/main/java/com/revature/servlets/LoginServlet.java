@@ -2,7 +2,6 @@ package com.revature.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.DateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,10 +13,9 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.jdbc.dao.ErsFactory;
 import com.revature.jdbc.pojos.Ers;
-import com.revature.jdbc.pojos.ErsReimbursement;
 import com.revature.jdbc.pojos.ErsUser;
+import com.revature.services.ErsService;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -60,17 +58,19 @@ public class LoginServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
-		log.info(req.getParameterNames());
+		ErsService es = new ErsService();
 		ErsUser u = mapper.readValue(req.getInputStream(), ErsUser.class);
-		Ers ers = new Ers(ErsFactory.Login(u.getErsUsername(), u.getErsPassword())) ;
-		if (ers.getUser() != null) {
+		try {
+			Ers ers = es.login(u);
 			resp.setStatus(200);
 			HttpSession session = req.getSession();
 			session.setAttribute("sessionUser", ers);
-			log.info(session.getId());
 			resp.sendRedirect("home");
-		} else {
+		} catch (Exception e) {
 			resp.setStatus(406);
+			PrintWriter writer = resp.getWriter();
+			resp.setContentType("application/html");
+			writer.write(e.getMessage());
 		}
 	}
 	

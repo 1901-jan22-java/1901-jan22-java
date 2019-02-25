@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./styles/UserApp.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
         crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -15,6 +16,8 @@
     
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
         crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <title>Revature Expense Reimbursement System</title>
 </head>
 <body>
@@ -30,11 +33,8 @@
                 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                        <button id="logout" class="btn btn-info" hidden><span class="fas fa-sign-out-alt"></span> Log out</button>
                     </li>
                 </ul>
                 <div class="form-inline my-2 my-lg-0">
@@ -62,10 +62,13 @@
             }, 500);
         </script> 
     </div>
-
+    <br>
+    <br>
     <div id="view">
         
     </div>
+    <span class="fa fa-spinner fa-pulse fa-lg"></span>
+    <span class="fa fa-file"></span>
     <script type="text/javascript" src="./scripts/UserApp.js"></script>
 </body>
 </html>

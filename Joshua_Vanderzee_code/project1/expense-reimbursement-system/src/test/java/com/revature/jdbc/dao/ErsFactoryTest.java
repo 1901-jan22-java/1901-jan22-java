@@ -22,63 +22,11 @@ class ErsFactoryTest {
 //		System.out.println(ErsFactory.hashString(c.nextLine()));
 //	}
 	
-//	@Test
-//	void testFindAllReimbursements() {
-//		Ers ers = new Ers(user);
-//		ErsFactory.findAllReimbursements(ers);
-//		for (int i = 0; i <= ers.lastReimbursement(); i++) {
-//			ErsReimbursement er = ers.getReimbursementByID(i);
-//			DateFormat df = DateFormat.getInstance();
-//			String date = df.format(er.getReimb_submitted());
-//			String dater = "Not yet Resolved";
-//			if (er.getReimbResolved() != null)
-//				dater = df.format(er.getReimbResolved());
-//			System.out.println("Amount: " + er.getReimb_amount() + " Submitted: " + date + 
-//					" Resolved: " + dater + " Desc " + er.getReimbDescription() + 
-//					" Author: " + er.getReimbAuthor().toString() + 
-//					" Resolver: " + er.getReimbResolver().toString() + 
-//					" Type: " + er.getReimb_Type() + " Status: " + er.getReimb_Status());
-//		}
-//	}
-	
 	@Test
-	void testGetAllReimbursements() {
-		Ers ers = new Ers(ErsFactory.Login("kswan", "asdf"));
-		ErsFactory.getAllReimbursements(ers);
-		for (int i = 0; i <= ers.lastReimbursement(); i++) {
-			ErsReimbursement er = ers.getReimbursementByID(i);
-			DateFormat df = DateFormat.getInstance();
-			String date = df.format(er.getReimb_submitted());
-			String dater = "Not yet Resolved";
-			if (er.getReimbResolved() != null)
-				dater = df.format(er.getReimbResolved());
-			System.out.println("Amount: " + er.getReimb_amount() + " Submitted: " + date + 
-					" Resolved: " + dater + " Desc " + er.getReimbDescription() + 
-					" Author: " + er.getReimbAuthor().toString() + 
-					" Resolver: " + er.getReimbResolver().toString() + 
-					" Type: " + er.getReimb_Type() + " Status: " + er.getReimb_Status());
-		}
-		
-		System.out.println("pending");
-		ers = new Ers(ErsFactory.Login("kswan", "asdf"));
-		ErsFactory.getAllPendingReimbursements(ers);
-		for (int i = 0; i <= ers.lastReimbursement(); i++) {
-			ErsReimbursement er = ers.getReimbursementByID(i);
-			DateFormat df = DateFormat.getInstance();
-			String date = df.format(er.getReimb_submitted());
-			String dater = "Not yet Resolved";
-			if (er.getReimbResolved() != null)
-				dater = df.format(er.getReimbResolved());
-			System.out.println("Amount: " + er.getReimb_amount() + " Submitted: " + date + 
-					" Resolved: " + dater + " Desc " + er.getReimbDescription() + 
-					" Author: " + er.getReimbAuthor().toString() + 
-					" Resolver: " + er.getReimbResolver().toString() + 
-					" Type: " + er.getReimb_Type() + " Status: " + er.getReimb_Status());
-		}
-		
-		System.out.println("resolved");
-		ers = new Ers(ErsFactory.Login("kswan", "asdf"));
-		ErsFactory.getAllResolvedReimbursements(ers);
+	void testFindAllReimbursements() {
+		Ers ers = new Ers(user);
+		ErsFactory dao = new ErsFactory();
+		dao.findUserReimbursements(ers);
 		for (int i = 0; i <= ers.lastReimbursement(); i++) {
 			ErsReimbursement er = ers.getReimbursementByID(i);
 			DateFormat df = DateFormat.getInstance();
@@ -93,6 +41,59 @@ class ErsFactoryTest {
 					" Type: " + er.getReimb_Type() + " Status: " + er.getReimb_Status());
 		}
 	}
+	
+//	@Test
+//	void testGetAllReimbursements() {
+//		Ers ers = new Ers(ErsFactory.Login("kswan", "asdf"));
+//		ErsFactory.getAllReimbursements(ers);
+//		for (int i = 0; i <= ers.lastReimbursement(); i++) {
+//			ErsReimbursement er = ers.getReimbursementByID(i);
+//			DateFormat df = DateFormat.getInstance();
+//			String date = df.format(er.getReimb_submitted());
+//			String dater = "Not yet Resolved";
+//			if (er.getReimbResolved() != null)
+//				dater = df.format(er.getReimbResolved());
+//			System.out.println("Amount: " + er.getReimb_amount() + " Submitted: " + date + 
+//					" Resolved: " + dater + " Desc " + er.getReimbDescription() + 
+//					" Author: " + er.getReimbAuthor().toString() + 
+//					" Resolver: " + er.getReimbResolver().toString() + 
+//					" Type: " + er.getReimb_Type() + " Status: " + er.getReimb_Status());
+//		}
+//		
+//		System.out.println("pending");
+//		ers = new Ers(ErsFactory.Login("kswan", "asdf"));
+//		ErsFactory.getAllPendingReimbursements(ers);
+//		for (int i = 0; i <= ers.lastReimbursement(); i++) {
+//			ErsReimbursement er = ers.getReimbursementByID(i);
+//			DateFormat df = DateFormat.getInstance();
+//			String date = df.format(er.getReimb_submitted());
+//			String dater = "Not yet Resolved";
+//			if (er.getReimbResolved() != null)
+//				dater = df.format(er.getReimbResolved());
+//			System.out.println("Amount: " + er.getReimb_amount() + " Submitted: " + date + 
+//					" Resolved: " + dater + " Desc " + er.getReimbDescription() + 
+//					" Author: " + er.getReimbAuthor().toString() + 
+//					" Resolver: " + er.getReimbResolver().toString() + 
+//					" Type: " + er.getReimb_Type() + " Status: " + er.getReimb_Status());
+//		}
+//		
+//		System.out.println("resolved");
+//		ers = new Ers(ErsFactory.Login("kswan", "asdf"));
+//		ErsFactory.getAllResolvedReimbursements(ers);
+//		for (int i = 0; i <= ers.lastReimbursement(); i++) {
+//			ErsReimbursement er = ers.getReimbursementByID(i);
+//			DateFormat df = DateFormat.getInstance();
+//			String date = df.format(er.getReimb_submitted());
+//			String dater = "Not yet Resolved";
+//			if (er.getReimbResolved() != null)
+//				dater = df.format(er.getReimbResolved());
+//			System.out.println("Amount: " + er.getReimb_amount() + " Submitted: " + date + 
+//					" Resolved: " + dater + " Desc " + er.getReimbDescription() + 
+//					" Author: " + er.getReimbAuthor().toString() + 
+//					" Resolver: " + er.getReimbResolver().toString() + 
+//					" Type: " + er.getReimb_Type() + " Status: " + er.getReimb_Status());
+//		}
+//	}
 
 //	@Test
 //	void testCreateReimbursement() {
@@ -101,13 +102,18 @@ class ErsFactoryTest {
 //		ErsFactory.CreateReimbursement(ers);
 //	}
 	
-//	@Test
-//	void testLogin() {
-//		assertTrue(ErsFactory.Login("mthompson", "password"));
-//		assertFalse(ErsFactory.Login("mthompson", "passwor"));
-//		assertFalse(ErsFactory.Login("mthompso", "password"));
-//		assertFalse(ErsFactory.Login("mthompso", "passwor"));
-//	}
+	@Test
+	void testLogin() {
+		ErsFactory dao = new ErsFactory();
+		try {
+			assertTrue(dao.Login("mthompson", "password") != null);
+			assertFalse(dao.Login("mthompson", "passwor") != null);
+			assertFalse(dao.Login("mthompso", "password") != null);
+			assertFalse(dao.Login("mthompso", "passwor") != null);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 //	@Test
 //	void testCreateUser() {

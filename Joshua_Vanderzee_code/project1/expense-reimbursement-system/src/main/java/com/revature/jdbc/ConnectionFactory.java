@@ -2,7 +2,6 @@ package com.revature.jdbc;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -11,8 +10,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
-
-import com.revature.jdbc.dao.BackgroundNotifier;
 
 import java.util.Properties;
 
@@ -29,9 +26,6 @@ public class ConnectionFactory {
 		{
 			cf = new ConnectionFactory();
 			logger.info("Returning cf " + cf.getClass());			
-			BackgroundNotifier ir = new BackgroundNotifier();
-			Thread backgroundNotifierThread = new Thread(ir);
-			backgroundNotifierThread.start();
 		}
 		return cf;
 	}
@@ -42,8 +36,6 @@ public class ConnectionFactory {
 	{
 		Connection conn = null;
 		Properties prop = new Properties();
-		String filepath = "/src/main/resources/db.properties";
-		
 		try {
 			InputStream is = ConnectionFactory.class.getResourceAsStream("/db.properties");
 			BufferedReader reader = new BufferedReader(new InputStreamReader(is));

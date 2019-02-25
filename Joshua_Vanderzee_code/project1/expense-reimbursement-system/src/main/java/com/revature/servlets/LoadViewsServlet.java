@@ -1,6 +1,5 @@
 package com.revature.servlets;
 
-import java.io.File;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -24,9 +23,10 @@ public class LoadViewsServlet extends HttpServlet {
 		log.info(req.getRequestURI());
 		
 		String resourcePath = "/partials/" + resource.substring(0, resource.length() - 5) + ".html";
-
+		//String absoluteFilePath = getServletContext().getResource(req.getRequestURI().substring(0, req.getRequestURI().length() - 5) + ".html").getFile();
+		//log.info(absoluteFilePath);
 		try {
-			if (new File(resourcePath).exists()) {
+			if (req.getRequestDispatcher(resourcePath) != null) {
 				req.getRequestDispatcher(resourcePath).forward(req, resp);	
 			}
 			else

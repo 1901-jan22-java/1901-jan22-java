@@ -1,6 +1,5 @@
 package com.revature.jdbc.pojos;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,5 +33,9 @@ public final class Ers {
 	
 	public int lastReimbursement() {
 		return reimbursement.size() - 1;
+	}
+	
+	public List<ErsReimbursement> getReimbursement() {
+		return reimbursement;
 	}
 }

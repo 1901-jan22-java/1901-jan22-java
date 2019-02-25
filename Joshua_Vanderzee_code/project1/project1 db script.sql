@@ -91,7 +91,7 @@ begin
         select u.ers_users_id into u_usernameid from ERS_USERS u where u.ers_username = temp_username;
         select count(*) into pass from ERS_USERS u where u.ers_users_id = u_usernameid and u.ers_password = temp_password;
         if pass = 1 then
-            out_result := 1;
+            out_result := u_usernameid;
         else
             out_result := 0;
             select u.user_email into email_alert from ERS_USERS u where u.ers_username = temp_username;
@@ -127,6 +127,8 @@ insert into ERS_REIMBURSEMENT(REIMB_amount, REIMB_submitted, REIMB_resolved, REI
 insert into ERS_REIMBURSEMENT(REIMB_amount, REIMB_submitted, REIMB_resolved, REIMB_Description, REIMB_author, REIMB_resolver, REIMB_status_ID, REIMB_type_ID)
     values (49, '9-Feb-19', '11-Feb-19', 'Out drinking all night', 21, 2, 3, 4);
 
+
+
 create sequence add_Ers_REIMB_ID
     start with 1
     increment by 1;
@@ -156,8 +158,35 @@ EXCEPTION
 end;
 /
 
+create or replace procedure Ers_Resolve_REIMBURSEMENT(
+    u_id in number, r_username in varchar2, r_status in number, r_result out number
+)
+as
+    r_id number;
+begin
+    select ERS_USERS_ID into r_id from ERS_USERS u where u.ERS_USERNAME = r_username;
+    update ERS_REIMBURSEMENT 
+    set REIMB_status_ID = r_status, REIMB_resolver = r_id, REIMB_resolved = current_timestamp
+    where REIMB_ID = u_id;
+    r_result := 1;
+EXCEPTION
+    when OTHERS THEN
+        r_result := 0;
+end;
+/
+
+declare
+    results number;
+begin
+    Ers_Resolve_REIMBURSEMENT(61, 'kswan', 3, results);
+    DBMS_OUTPUT.PUT_LINE('result: ' || results);
+end;
+/
+
 select * from ERS_REIMBURSEMENT;
 
+select * from ers_users u where u.user_email = 'kswadn';
+rollback;
 
 select r.reimb_amount as amount, r.reimb_submitted as submitted, r.reimb_resolved as resolved, r.reimb_description as description, 
     u.USER_FIRST_NAME as authorfirst, u.USER_LAST_NAME as authorlast, u.USER_Email as authoremail

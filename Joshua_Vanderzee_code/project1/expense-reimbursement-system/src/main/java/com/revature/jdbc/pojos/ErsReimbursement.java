@@ -1,6 +1,5 @@
 package com.revature.jdbc.pojos;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.sql.Date;
 
@@ -21,9 +20,9 @@ public class ErsReimbursement {
     ErsUser ReimbResolver;
 	String Reimb_Type;
 	String Reimb_Status;
+	public ErsReimbursement() { }
 	public ErsReimbursement(long reimb_amount,
 			ErsUser reimbAuthor, String reimb_Type) {
-		super();
 		Reimb_amount = reimb_amount;
 		ReimbAuthor = reimbAuthor;
 		Reimb_Type = reimb_Type;
@@ -82,4 +81,12 @@ public class ErsReimbursement {
 	public void setReimb_Status(String reimb_Status) {
 		Reimb_Status = reimb_Status;
 	}
+	@Override
+	public String toString() {
+		return "ErsReimbursement [Reimb_ID=" + Reimb_ID + ", Reimb_amount=" + Reimb_amount + ", Reimb_submitted="
+				+ Reimb_submitted + ", ReimbResolved=" + ReimbResolved + ", ReimbDescription=" + ReimbDescription
+				+ ", ReimbReceipt=" + ReimbReceipt + ", ReimbAuthor=" + ReimbAuthor + ", ReimbResolver=" + ReimbResolver
+				+ ", Reimb_Type=" + Reimb_Type + ", Reimb_Status=" + Reimb_Status + "]";
+	}
+	
 }

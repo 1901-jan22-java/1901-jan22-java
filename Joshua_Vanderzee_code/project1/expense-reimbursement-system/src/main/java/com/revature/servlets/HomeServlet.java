@@ -13,10 +13,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.jdbc.dao.ErsFactory;
 import com.revature.jdbc.pojos.Ers;
-import com.revature.jdbc.pojos.ErsReimbursement;
-import com.revature.jdbc.pojos.ErsUser;
+import com.revature.services.ErsService;
 
 @WebServlet("/home")
 public class HomeServlet extends HttpServlet {
@@ -48,38 +46,58 @@ public class HomeServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
+		ErsService es = new ErsService();
 		HttpSession session = req.getSession();
 		Ers user = (Ers)session.getAttribute("sessionUser");
-		dataInfo filter = mapper.readValue(req.getInputStream(), dataInfo.class);		
-		log.info(filter.homeType);
-		ErsFactory.getAllReimbursements(user);
-		String json = "[";
-		for (int i = 0; i <= user.lastReimbursement(); i++) {
-			json += mapper.writeValueAsString(user.getReimbursementByID(i));
-			if (i < user.lastReimbursement())
-				json += ",";
+		if (user != null)
+		{
+			dataInfo filter = mapper.readValue(req.getInputStream(), dataInfo.class);
+			if (filter.getFilter() != null) {
+				if (filter.filter.equals("All"))
+				{
+					if (user.isFinancialManager())
+						es.getAllReimbursements(user, com.revature.services.status.all);
+					else
+						es.findAllReimbursements(user, com.revature.services.status.all);
+				}
+				else if (filter.filter.equals("Pending"))
+				{
+					if (user.isFinancialManager())
+						es.getAllReimbursements(user, com.revature.services.status.pending);
+					else
+						es.findAllReimbursements(user, com.revature.services.status.pending);
+				}
+				else if (filter.filter.equals("Resolved"))
+				{
+					if (user.isFinancialManager())
+						es.getAllReimbursements(user, com.revature.services.status.resolved);
+					else
+						es.findAllReimbursements(user, com.revature.services.status.resolved);
+				}
+			}
+			else
+			{
+				resp.setStatus(303);
+			}
+			String json = mapper.writeValueAsString(user);
+			PrintWriter writer = resp.getWriter();
+			resp.setContentType("application/json");
+			writer.write(json);
 		}
-		json += "]";
-		PrintWriter writer = resp.getWriter();
-		resp.setContentType("application/json");
-		writer.write(json);
+		else
+		{
+			resp.setStatus(406);
+			PrintWriter writer = resp.getWriter();
+			writer.write("Not logged in");
+		}
 	}
 }
 
 class dataInfo {
-    String homeType;
     int page;
     String filter;
     
     public dataInfo() { }
-
-	public String getHomeType() {
-		return homeType;
-	}
-
-	public void setHomeType(String homeType) {
-		this.homeType = homeType;
-	}
 
 	public int getPage() {
 		return page;
@@ -96,6 +114,4 @@ class dataInfo {
 	public void setFilter(String filter) {
 		this.filter = filter;
 	}
-    
-    
 }
