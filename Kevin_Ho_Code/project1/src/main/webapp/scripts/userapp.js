@@ -92,7 +92,7 @@ function loadManagerView(user){
             $('#reqReimb').on('click', loadAddReimbView);
             $('#reqReimb').on('click', removeReimbView);
             $('#resolveReimb').on('click', loadResolveView);
-            showReimb();
+            showAllReimb();
         }
     }
     xhr.open("GET", "partials/homeManager.html");
@@ -153,6 +153,62 @@ function showReimb(){
 		}
 	}
 	xhr.open("GET", "showReimb");
+	xhr.send();
+}
+function showAllReimb(){
+	$('#tableData').html("");
+	var xhr = new XMLHttpRequest();
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState == 4 && xhr.status == 200){
+			var reimb = JSON.parse(xhr.responseText);
+			for(let i = 0; i < reimb.length; i++){
+				switch(reimb[i].typeId)
+				{
+				case 1: reimb[i].typeId='Lodging';break;
+				case 2: reimb[i].typeId='Food';break;
+				case 3: reimb[i].typeId='Travel';break;
+				}
+				switch(reimb[i].statusId)
+				{
+				case 1: reimb[i].statusId='Pending';break;
+				case 2: reimb[i].statusId='Approved';break;
+				case 3: reimb[i].statusId='Denied';break;
+				}
+				if(reimb[i].resolved != null)
+				{
+					$('#tableData').append(`
+							<tr>
+								<td>${reimb[i].author}</td>
+								<td>${reimb[i].reimbId}</td>
+								<td>${reimb[i].amount}</td>
+								<td>${reimb[i].typeId}</td>
+								<td>${reimb[i].description}</td>
+								<td>${new Date(reimb[i].submitted)}</td>
+								<td>${new Date(reimb[i].resolved)}</td>
+								<td>${reimb[i].resolver}</td>
+								<td>${reimb[i].statusId}</td>
+							</tr>`);
+				}
+				else
+				{	
+					$('#tableData').append(`
+							<tr>
+								<td>${reimb[i].author}</td>
+								<td>${reimb[i].reimbId}</td>
+								<td>${reimb[i].amount}</td>
+								<td>${reimb[i].typeId}</td>
+								<td>${reimb[i].description}</td>
+								<td>${new Date(reimb[i].submitted)}</td>
+								<td>N/A</td>
+								<td>${reimb[i].resolver}</td>
+								<td>${reimb[i].statusId}</td>
+							</tr>`);
+				}
+				
+			}
+		}
+	}
+	xhr.open("GET", "showAllReimb");
 	xhr.send();
 }
 
@@ -241,7 +297,7 @@ function resolve(){
             if(xhr.status == 201){
                 //added money in
             	$('#resolveView').html("Success!!");
-            	showReimb();
+            	showAllReimb();
             }
             else if(xhr.status == 409){
                 //failed to add money in
@@ -250,8 +306,8 @@ function resolve(){
             else{
                 //some other error, likely send to error page
             	$('#resolveView').html("Something went wrong!");
-            	console.log(xhr.status);
             }
+        	console.log(xhr.status);
         }
     }
     xhr.open("POST", "resolve");

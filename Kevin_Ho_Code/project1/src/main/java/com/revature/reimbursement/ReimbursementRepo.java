@@ -157,5 +157,35 @@ public class ReimbursementRepo {
 		}
 		
 		return reimb;
-	}	
+	}
+	
+	public Reimbursement getReimbById(int id)
+	{
+		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
+			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_id = ?";
+
+			PreparedStatement ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			
+			ResultSet pk = ps.executeQuery();
+
+			while(pk.next()) {
+				Reimbursement temp = new Reimbursement(	pk.getInt("reimb_id"),
+														pk.getDouble("reimb_amount"),
+														pk.getTimestamp("reimb_submitted"),
+														pk.getTimestamp("reimb_resolved"),
+														pk.getString("reimb_description"),
+														pk.getInt("reimb_author"),
+														pk.getInt("reimb_resolver"),
+														pk.getInt("reimb_status_id"),
+														pk.getInt("reimb_type_id"));
+			return temp;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return null;
+	}
 }

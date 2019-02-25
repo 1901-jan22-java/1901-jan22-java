@@ -1,7 +1,6 @@
 package com.revature.servlets;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,14 +30,20 @@ public class resolveServlet extends HttpServlet {
 		ObjectMapper mapper = new ObjectMapper();
 		Reimbursement reimb = mapper.readValue(req.getInputStream(), Reimbursement.class);
 		
-		User u = (User)session.getAttribute("sessionUser");
-		reimb.setResolver(u.getUserId());
-		reimbRep.resolve(reimb);
-
-		log.debug(reimb.toString());
-		
+		if(reimbRep.getReimbById(reimb.getReimbId()).getSubmitted() == null)
+		{
+			resp.setStatus(401);
+			log.debug(reimb.toString());
+		}
+		else
+		{
+			User u = (User)session.getAttribute("sessionUser");
+			reimb.setResolver(u.getUserId());
+			reimbRep.resolve(reimb);
+			resp.setStatus(201);
+			log.debug(reimbRep.resolve(reimb).toString());
+		}
 		resp.sendRedirect("home");
-		
 	}
 
 }
