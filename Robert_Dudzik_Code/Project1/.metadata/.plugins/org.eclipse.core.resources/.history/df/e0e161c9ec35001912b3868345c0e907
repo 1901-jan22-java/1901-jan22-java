@@ -1,0 +1,48 @@
+package com.revature.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
+
+import com.revature.pojos.Reimbursement;
+import com.revature.util.ConnectionFactory;
+
+public class ReimbursementRepository 
+{
+
+    public ReimbursementRepository() { }
+
+    public Reimbursement addReimbursement(Reimbursement reim)
+    {
+        Reimbursement results = new Reimbursement();
+        try(Connection conn = ConnectionFactory.getInstance().getConnections())
+        {
+            String sql = "insert into ERS_REIMBURSEMENT(reimb_amount, reimb_submitted, reimb_description, " +
+             "reimb_author, reimb_status_id, reimb_type_id) " +
+             "values(?, ?, ?, ?, ?, ?)";
+             String[] key = { "reimb_id" };
+            PreparedStatement ps = conn.prepareStatement(sql, key);
+            ps.setDouble(1, reim.getAmount());
+            Date today = new Date();
+            Timestamp time = new Timestamp(today.getTime());
+            ps.setTimestamp(2, time);
+            ps.setString(3, reim.getDescription());
+            ps.setInt(4, reim.getAuthorId());
+            ps.setInt(5, reim.getStatusId());
+            ps.setInt(6, reim.getTypeId());
+            int row = ps.executeUpdate();
+            ResultSet rs = ps.getGeneratedKeys();
+            if(rs.next())
+            {
+            	reim.setId(rs.getInt(1));
+            	conn.commit();
+            	return reim;
+            }
+        } catch(SQLException e) { e.printStackTrace(); }
+        results = null;
+        return results;
+    }
+}

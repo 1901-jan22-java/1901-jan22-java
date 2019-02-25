@@ -1,0 +1,160 @@
+window.onload = function()
+{
+    loadLogIn();
+}
+
+function logOut()
+{
+    console.log('Log Out');
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = fucntion()
+    {
+        if(xhr.readyState == 4)
+        {
+            loadLogIn();
+        }
+    }
+    xhr.open('GET', 'logOut');
+    xhr.send();
+}
+
+
+function logIn()
+{
+   console.log('Entering log in function')
+    let user = {
+        username: $('#username').val(),
+        password: $('#password').val()
+    };
+    let json = JSON.stringify(user);
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() 
+    {
+        if(xhr.readyState == 4)
+        {
+            if(xhr.status == 230)
+            {
+                console.log(xhr.responseText);
+                loadEmployee();
+            }
+            else if (xhr.status == 231)
+            {
+                
+            }
+            else if(xhr.status == 418)
+            {
+                console.log(xhr.responseText);
+                alert('Log in failed!');
+            }
+        }
+    }
+    xhr.open('POST', 'login');
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.send(json);
+}
+
+function addReimbursement()
+{
+    console.log("Entered Add Reimbursement method");
+    let reimbursement = {
+        amount: $('#amount').val(),
+        description: $('#description').val(),
+        typeId: $('input[name ="type"]:checked').val()
+    }
+    let xhr = new XMLHttpRequest();
+    let json = JSON.stringify(reimbursement);
+    xhr.onreadystatechange = function()
+    {
+        if(xhr.readyState == 4)
+        {
+            if(xhr.status == 230)
+            {
+                alert("Successfully added Reimbursement request!");
+                loadEmployee();
+            }
+            else if (xhr.status == 418)
+            {
+                alert("Failed to add Reimbursement!");
+                loadEmployee();
+            }
+        }
+    }
+    xhr.open('POST', 'addReim');
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.send(json);
+}
+
+function viewEmployeeReimbursements()
+{
+
+}
+
+function loadViewReimbursements()
+{
+    console.log("Entering View Reimbursements page");
+    let xhr = XMLHttpRequest();
+    xhr.onreadystatechange = function()
+    {
+        if(xhr.readyState == 4)
+        {
+            console.log(xhr.responseText);
+            $('#view').html(xhr.responseText);
+        }
+    }
+    xhr.open('GET', 'getReim');
+    xhr.send();
+}
+
+function loadAddReimbursement()
+{
+    console.log("Loading add employee reimbursement page");
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function()
+    {
+        if(xhr.readyState == 4)
+        {
+            console.log(xhr.responseText);
+            $('#view').html(xhr.responseText);
+            $('#submitReim').on('click', addReimbursement);
+        }
+    }
+    xhr.open('GET', 'employeeaddreimbursement.view');
+    xhr.send();
+}
+
+function loadEmployee()
+{
+    console.log("Loading employee page");
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function()
+    {
+        if(xhr.readyState == 4)
+        {
+            console.log(xhr.responseText);
+            $('#view').html(xhr.responseText);
+            $('#addReim').on('click', loadAddReimbursement);
+            $('#viewReim').on('click', viewEmployeeReimbursements);
+        }
+    }
+    xhr.open('GET', 'employee.view');
+    xhr.send();
+}
+
+function loadLogIn()
+{
+    console.log("Loading log in");
+    let xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function()
+    {
+        if(xhr.readyState == 4)
+        {
+            console.log(xhr.responseText);
+            $('#view').html(xhr.responseText);
+            console.log('Right before click');
+            $('#logIn').on('click', logIn);
+            console.log('Right after click');
+        }
+    }   
+    xhr.open('GET', 'login.view');
+    xhr.send();
+}

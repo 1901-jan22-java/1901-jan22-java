@@ -1,0 +1,13 @@
+<div style="margin: auto; width: 50%" class="jumbostron jumbotron-fluid">
+        <h2><b>Add Reimbursement</b></h2>
+        Reimbursement Amount: 
+        <input type="number" id="amount" placeholder="Amount" class="form-control col-3">
+        Reimbursement Description: 
+        <input type="text" id="description" placeholder="Description" class="form-control col-3">
+        Type of Reimbursement
+        <input type="radio" name="type" value="Lodging">Lodging <br>
+        <input type="radio" name="type" value="Travel">Travel <br>
+        <input type="radio" name="type" value="Food">Food <br>
+        <input type="radio" name="type" value="Other">Other <br>
+        <button id="submitReim" class="btn btn-success btn-large">Submit Reimbursement</button>
+    </div>

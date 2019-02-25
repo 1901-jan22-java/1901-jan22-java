@@ -1,0 +1,57 @@
+package com.revature.servlets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.dao.UserRepository;
+import com.revature.pojos.User;
+
+@WebServlet("/login")
+public class LogInServlet  extends HttpServlet
+{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3054767034092711781L;
+	//UserService service = new UserService();
+	//static final Logger log = Logger.getLogger(LogInServlet.class);
+	
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		resp.sendRedirect("index.html");
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        User u = mapper.readValue(req.getInputStream(), User.class);
+        User n = u.checkUser(u.getUsername(), u.getPassword());
+        System.out.println(u.getUsername() + ' ' + u.getPassword());
+		//User u = mapper.readValue(req.getInputStream(), User.class);
+		//User n = service.checkUser(u.getUsername());
+		if(n == null)
+		{
+            resp.setStatus(418);
+		}
+		else 
+		{
+			resp.setStatus(200);
+			HttpSession session = req.getSession();
+			session.setAttribute("sessionUser", n);
+			System.out.println(session.getId());
+			//log.info("Created Session: " + session.getId());
+		}
+	}
+}

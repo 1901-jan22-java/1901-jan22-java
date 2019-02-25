@@ -1,0 +1,26 @@
+package com.revature.dao;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import com.revature.pojos.Reimbursement;
+import com.revature.util.ConnectionFactory;
+
+public class ReimbursementRepository 
+{
+
+    public ReimbursementRepository() { }
+
+    public boolean addReimbursement(Reimbursement reim)
+    {
+        boolean results = false;
+        try(Connection conn = ConnectionFactory.getInstance().getConnections())
+        {
+            String sql = "insert into ERS_REIMBURSEMENT(reimb_id,
+             reimb_amount, reimb_submitted, reimb_description, 
+             reimb_author, reimb_status_id, reimb_type_id) 
+             values(?, ?, ?, ?, ?, ?, ?)";
+        } catch(SQLException e) { e.printStackTrace(); }
+        return results;
+    }
+}

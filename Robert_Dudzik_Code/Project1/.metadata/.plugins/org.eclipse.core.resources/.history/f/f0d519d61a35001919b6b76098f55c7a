@@ -1,0 +1,22 @@
+package com.revature.dao;
+
+import java.sql.SQLException;
+
+import com.revature.pojos.Reimbursement;
+import com.revature.util.ConnectionFactory;
+
+public class ReimbursementRepository 
+{
+
+    public ReimbursementRepository() { }
+
+    public boolean addReimbursement(Reimbursement reim)
+    {
+        boolean results = false;
+        try(Connection conn = ConnectionFactory.getInstance().getConnections())
+        {
+
+        } catch(SQLException e) { e.printStackTrace(); }
+        return results;
+    }
+}

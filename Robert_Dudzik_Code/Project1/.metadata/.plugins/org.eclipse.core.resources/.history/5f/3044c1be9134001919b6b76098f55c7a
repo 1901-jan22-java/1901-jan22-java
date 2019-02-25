@@ -1,0 +1,43 @@
+package com.revature.dao;
+import com.revature.pojos.User;
+import com.revature.util.ConnectionFactory;
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+
+
+public class UserRepository
+{
+    public UserRepository(){ }
+    public User logInUser(String username, String password)
+    {
+        User temp = new User();
+        try(Connection conn = ConnectionFactory.getInstance().getConnections())
+        {
+            String query = "select * from ERS_USERS where ers_username = ? and ers_password = ?";
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(2, username);
+            ps.setString(3, password);
+            ResultSet rs  = ps.executeQuery();
+            if(rs.next())
+            {
+                temp.setId(rs.getInt(1));
+                temp.setUsername(username);
+                temp.setPassword(password);
+                temp.setFirstName(rs.getString(4));
+                temp.setLastName(rs.getString(5));
+                temp.setEmail(rs.getString(6));
+                temp.setRoleId(rs.getInt(7));
+                return temp;
+            }
+        } catch (SQLException e) {
+			e.printStackTrace();
+        }
+        temp = null;
+        return temp;
+    }
+}
