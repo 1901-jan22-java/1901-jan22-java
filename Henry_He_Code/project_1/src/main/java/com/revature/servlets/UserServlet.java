@@ -74,7 +74,7 @@ public class UserServlet extends ProjectServlet {
 				"    </div>\r\n" + 
 				"    <div class=\"col-6\">\r\n" + 
 				"      <label>Reimbursement Type</label> <br>\r\n" + 
-				"      <select name=\"reimb_type\">\r\n" + 
+				"      <select id=\"reimb_type\" name=\"reimb_type\">\r\n" + 
 				"        <option value=\"1\">LODGING</option>\r\n" + 
 				"        <option value=\"2\">TRAVELING</option>\r\n" + 
 				"        <option value=\"3\">FOOD</option>\r\n" + 

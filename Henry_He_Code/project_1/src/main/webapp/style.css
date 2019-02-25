@@ -7,7 +7,8 @@
 	border-color: #ff9900;
 }
 
-.loginLabel, #login, #approve, #deny, #filter, #new_reimb, th, select, label {
+.loginLabel, #login, #approve, #deny, #filter, 
+#new_reimb, #reimb_type, th, select, label {
 	font-family: 'open sans';
 	font-size: 24px;
 	font-weight: bold;
@@ -15,12 +16,12 @@
 }
 
 
-.inputLabel, option {
+.inputLabel, #reimb_type option, option {
 	font-family: 'raleway';
 	font-size: 18px;
 }
 
-option {
+#reimb_type option, option {
 	font-style: italic;
 }
 
@@ -38,7 +39,7 @@ option {
 }
 
 
-th, #filter, select, label {
+#filter, #reimb_type, th, select, label {
 	color: black;
 }
 
