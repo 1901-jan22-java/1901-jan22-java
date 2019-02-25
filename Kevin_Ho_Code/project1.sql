@@ -103,8 +103,11 @@ insert into ers_user_roles values (0, 'employee');
 insert into ers_user_roles values (1, 'manager');
 insert into ers_users (ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id) 
                 values ('user', 'pass', 'Kevin', 'Ho', 'kevho48@gmail.com', 0);
-insert into ers_users (ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id) 
+insert into ers_users (ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id)
                 values ('will', 'smith', 'Will', 'Smith', 'agentj@gmail.com', 1);
+insert into ers_users (ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id) 
+                values ('kevinuser', 'kevinpass', 'Rich', 'Kid', 'kevho482@gmail.com', 0);
+
 insert into ers_reimbursement(reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id) 
                         values(1000, '17-FEB-2019', '18-FEB-2019', 'Hi there', 1, 2, 2, 1);
 insert into ers_reimbursement(reimb_amount, reimb_submitted, reimb_description, reimb_author, reimb_status_id, reimb_type_id) 

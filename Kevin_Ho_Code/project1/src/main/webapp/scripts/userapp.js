@@ -7,7 +7,7 @@ function loadLoginView(){
     xhr.onreadystatechange = function(){
         if(xhr.readyState == 4 && xhr.status == 200){
             $('#view').html(xhr.responseText);
-            $('#goToSubmit').on('click', loadRegisterView);
+            //$('#goToSubmit').on('click', loadRegisterView);
             $('#logIn').on('click', logIn);
         }   
     }
@@ -55,7 +55,8 @@ function logIn(){
             }
             else{
                 //some other error, likely send to error page
-                $('#error').html("What in gods name did you do");            	
+                $('#error').html("What in gods name did you do");
+                $('#error').css('color', 'red');
             }
         }
     }
@@ -148,7 +149,6 @@ function showReimb(){
 								<td>${reimb[i].statusId}</td>
 							</tr>`);
 				}
-				
 			}
 		}
 	}
@@ -265,16 +265,19 @@ function addReimb(){
             if(xhr.status == 200 || xhr.status==201){
                 //added money in
             	$('#reimbView').html("Success!!");
+                $('#reimbView').css('color', 'green');
             	showReimb();
             }
             else if(xhr.status == 409){
                 //failed to add money in
             	$('#reimbView').html("Invalid Input");
+                $('#reimbView').css('color', 'red');
             }
             else{
                 //some other error, likely send to error page
             	$('#reimbView').html("Something went wrong!");
-            	console.log(xhr.status);
+                $('#reimbView').css('color', 'red');
+                console.log(xhr.status);
             }
         }
     }
@@ -297,15 +300,18 @@ function resolve(){
             if(xhr.status == 201){
                 //added money in
             	$('#resolveView').html("Success!!");
+                $('#resolveView').css('color', 'green');
             	showAllReimb();
             }
             else if(xhr.status == 409){
                 //failed to add money in
             	$('#resolveView').html("Invalid Input");
+                $('#resolveView').css('color', 'red');
             }
             else{
                 //some other error, likely send to error page
             	$('#resolveView').html("Something went wrong!");
+                $('#resolveView').css('color', 'red');
             }
         	console.log(xhr.status);
         }
@@ -352,7 +358,7 @@ function addUser(){
 	            	$('#view').html(xhr.responseText);
 	            }
 	            else{
-	            	alert("lamseaoiwme");
+	            	//alert("lamseaoiwme");
 	            }
 	        }
 	    }
