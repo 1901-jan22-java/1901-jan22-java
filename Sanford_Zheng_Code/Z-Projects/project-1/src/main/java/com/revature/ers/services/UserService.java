@@ -107,7 +107,8 @@ public class UserService {
 		}
 		UserData ud = new UserData(null, u.getUsername(), u.getPassword(), u.getFirst_name(), u.getLast_name(),
 				u.getEmail(), userRoleID);
-		log.info("User: "+ u +"\nConverted to: " + ud);
+		log.info("User: "+ u);
+		log.info("Converted to: " + ud);
 		return ud;
 	}
 
@@ -119,7 +120,8 @@ public class UserService {
 		}
 		User u = new User(ud.getUsername(), ud.getPassword(), ud.getFirst_name(), ud.getLast_name(), ud.getEmail(),
 				userRole);
-		log.info("UserData: "+ ud +"\nConverted to: " + u);
+		log.info("UserData: "+ ud);
+		log.info("Converted to: " + u);
 		return u;
 	}
 

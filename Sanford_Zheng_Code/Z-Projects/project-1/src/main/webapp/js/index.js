@@ -186,17 +186,17 @@ function loadReimbursement() {
 
 
 function processReimb(data) {
-    var res = '<table>' +
+    var res = '<table id = "reimb-view">' +
         '<tr>' +
-        '<th>ID</th>' +
-        '<th>Amount</th>' +
-        '<th>Submitted</th>' +
-        '<th>Resolved</th>' +
-        '<th>Description</th>' +
-        '<th>Author</th>' +
-        '<th>Resolver</th>' +
-        '<th>Status</th>' +
-        '<th>Type</th>' +
+        '<th id="reimb-table-id">ID</th>' +
+        '<th id="reimb-table-amount">Amount</th>' +
+        '<th id="reimb-table-submitted">Submitted</th>' +
+        '<th id="reimb-table-resolved">Resolved</th>' +
+        '<th id="reimb-table-description">Description</th>' +
+        '<th id="reimb-table-author">Author</th>' +
+        '<th id="reimb-table-resolver">Resolver</th>' +
+        '<th id="reimb-table-status">Status</th>' +
+        '<th id="reimb-table-type">Type</th>' +
         '</tr>';
     for (let r of data) {
 
@@ -219,9 +219,127 @@ function processReimb(data) {
     return res;
 };
 
+function simpleCompare(a, b) {
+    if (a > b) {
+        return 1;
+    } else if (a < b) {
+        return -1;
+    }
+    return 0;
+};
+
 function applyReimb() {
     $("tr.selectable td").click(function () {
         $(this).parent().toggleClass('selected');
+    });
+
+    $('#reimb-table-id').click(function () {
+        reimb.sort((a, b) => {
+            if (a.id > b.id) {
+                return 1;
+            } else if (a.id < b.id) {
+                return -1;
+            }
+            return 0;
+        });
+        $('#data-view').html(processReimb(reimb));
+        applyReimb();
+    });
+    $('#reimb-table-amount').click(function () {
+        reimb.sort((a, b) => {
+            if (a.amount > b.amount) {
+                return 1;
+            } else if (a.amount < b.amount) {
+                return -1;
+            }
+            return 0;
+        });
+        $('#data-view').html(processReimb(reimb));
+        applyReimb();
+    });
+    $('#reimb-table-submitted').click(function () {
+        reimb.sort((a, b) => {
+            if (a.submitted > b.submitted) {
+                return 1;
+            } else if (a.submitted < b.submitted) {
+                return -1;
+            }
+            return 0;
+        });
+        $('#data-view').html(processReimb(reimb));
+        applyReimb();
+    });
+    $('#reimb-table-resolved').click(function () {
+        reimb.sort((a, b) => {
+            if (a.resolved > b.resolved) {
+                return 1;
+            } else if (a.resolved < b.resolved) {
+                return -1;
+            }
+            return 0;
+        });
+        $('#data-view').html(processReimb(reimb));
+        applyReimb();
+    });
+    $('#reimb-table-description').click(function () {
+        reimb.sort((a, b) => {
+            if (a.description > b.description) {
+                return 1;
+            } else if (a.description < b.description) {
+                return -1;
+            }
+            return 0;
+        });
+        $('#data-view').html(processReimb(reimb));
+        applyReimb();
+    });
+    $('#reimb-table-author').click(function () {
+        reimb.sort((a, b) => {
+            if (a.author > b.author) {
+                return 1;
+            } else if (a.author < b.author) {
+                return -1;
+            }
+            return 0;
+        });
+        $('#data-view').html(processReimb(reimb));
+        applyReimb();
+    });
+    $('#reimb-table-resolver').click(function () {
+        reimb.sort((a, b) => {
+            if (a.resolver > b.resolver) {
+                return 1;
+            } else if (a.resolver < b.resolver) {
+                return -1;
+            }
+            return 0;
+        });
+        $('#data-view').html(processReimb(reimb));
+        applyReimb();
+    });
+    $('#reimb-table-status').click(function () {
+        reimb.sort((a, b) => {
+            if (a.status > b.status) {
+                return 1;
+            } else if (a.status < b.status) {
+                return -1;
+            }
+            return 0;
+        });
+        $('#data-view').html(processReimb(reimb));
+        applyReimb();
+    });
+    $('#reimb-table-type').click(function () {
+        reimb.sort((a, b) => {
+            if (a.type > b.type) {
+                return 1;
+            } else if (a.type < b.type) {
+                return -1;
+            }
+            return 0;
+        });
+        $('#data-view').html(processReimb(reimb));
+        applyReimb();
     });
 }
 
