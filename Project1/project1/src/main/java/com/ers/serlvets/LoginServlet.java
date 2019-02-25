@@ -39,21 +39,21 @@ public class LoginServlet extends HttpServlet {
 		log.info(u);
 		if(storedUser == null) {
 			log.info("user is null");
-			resp.setStatus(418);
+			resp.setStatus(401);
 			
-		} else if(storedUser.getPassword().equals(u.getPassword())) {
+		} else if(storedUser.getPassword().equals(u.getPassword()) ) {
 			resp.setStatus(200);
-			
+			log.info("logged in as user" + storedUser.toString());
 			HttpSession session = req.getSession();
-			session.setAttribute("user", u);
+			session.setAttribute("user", storedUser);
 			log.info("CREATED SESSION " + session.getId());
 			
 			PrintWriter writer = resp.getWriter();
 			resp.setContentType("application/json");
-			writer.write(mapper.writeValueAsString(u));
+			writer.write(mapper.writeValueAsString(storedUser));
 		} else {
 			log.info("user isnt null, but password didnt pass");
-			resp.setStatus(418);
+			resp.setStatus(401);
 		}
 	}
 }

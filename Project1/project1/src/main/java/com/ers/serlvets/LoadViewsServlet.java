@@ -27,9 +27,7 @@ public class LoadViewsServlet extends HttpServlet{
 		log.info(resourcePath);
 		log.info("LOAD VIEW REQUEST SENT TO: " + req.getRequestURI());
 		
-		
 		req.getRequestDispatcher(resourcePath)
 			.forward(req, resp); 
 	}
-
 }

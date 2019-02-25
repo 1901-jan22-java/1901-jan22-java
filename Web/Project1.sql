@@ -80,5 +80,16 @@ user_last_name, user_email, user_role_id)
 VALUES(7, 'sperry', 'nyknicks', 'scott', 'perry', 'sperry@gmail.com', 2)
 SELECT 1 FROM dual;
 
+INSERT ALL
+INTO ers_reimbursement_type(reimb_type_id, reimb_type)
+VALUES (1, 'travel')
+INTO ers_reimbursement_type(reimb_type_id, reimb_type)
+VALUES (2, 'supplies')
+INTO ers_reimbursement_type(reimb_type_id, reimb_type)
+VALUES (3, 'other')
+SELECT 1 FROM dual;
+
+
+
 commit;
 
