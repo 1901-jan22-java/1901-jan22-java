@@ -9,8 +9,8 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.revature.dao.DaoUser;
 import com.revature.dao.DaoUserRole;
-import com.revature.dto.Reimbursement;
-import com.revature.dto.User;
+import com.revature.dpr.DprReimbursement;
+import com.revature.dpr.DprUser;
 import com.revature.pojos.UserData;
 import com.revature.pojos.UserRoleData;
 
@@ -18,7 +18,7 @@ public class UserService {
 	private static final Logger log = Logger.getLogger(UserService.class);
 	private static final DaoUser usersRepo = new DaoUser();
 	private static final DaoUserRole rolesRepo = new DaoUserRole();
-	private static List<User> usersDTO = new ArrayList<>();
+	private static List<DprUser> usersDTO = new ArrayList<>();
 	private static final BiMap<Integer, String> roles = HashBiMap.create();
 
 	static {
@@ -33,7 +33,7 @@ public class UserService {
 		log.trace("UserService Object Instantiated.");
 	}
 
-	public static List<User> getAllUsers() {
+	public static List<DprUser> getAllUsers() {
 		return usersDTO;
 	}
 
@@ -47,21 +47,21 @@ public class UserService {
 		return res;
 	}
 
-	public static User register(User u) {
+	public static DprUser register(DprUser u) {
 		if (usersRepo.read(u.getUsername()) != null)
 			return null;
 		usersDTO.add(u);
 		return dataToUser(usersRepo.create(userToData(u)));
 	}
 
-	public static User login(User u) {
+	public static DprUser login(DprUser u) {
 		UserData repoUser = usersRepo.read(u.getUsername());
 		if (!repoUser.getPassword().equalsIgnoreCase(u.getPassword()))
 			return null;
 		return dataToUser(repoUser);
 	}
 
-	public static User getUser(String un) {
+	public static DprUser getUser(String un) {
 		return usersDTO.stream().filter(user -> user.getUsername().equalsIgnoreCase(un)).findAny().orElse(null);
 	}
 
@@ -69,8 +69,8 @@ public class UserService {
 		return usersRepo.read(un);
 	}
 
-	public static List<Reimbursement> getReimbursements(User u) {
-		List<Reimbursement> res = null;
+	public static List<DprReimbursement> getReimbursements(DprUser u) {
+		List<DprReimbursement> res = null;
 		if (u.getRole().equalsIgnoreCase("Admin")) {
 			res = ReimbursementService.getAllReimbursements();
 		} else if (u.getRole().equalsIgnoreCase("Employee")) {
@@ -80,8 +80,8 @@ public class UserService {
 		return res;
 	}
 
-	public static List<Reimbursement> getReimbursements(UserData ud) {
-		List<Reimbursement> res = null;
+	public static List<DprReimbursement> getReimbursements(UserData ud) {
+		List<DprReimbursement> res = null;
 		if (ud.getRole_id().equals(getRoleID("Admin"))) {
 			res = ReimbursementService.getAllReimbursements();
 		} else if (ud.getRole_id().equals(getRoleID("Employee"))) {
@@ -91,7 +91,7 @@ public class UserService {
 		return res;
 	}
 
-	public static UserData userToData(User u) {
+	public static UserData userToData(DprUser u) {
 		log.info(u.getRole());
 		Integer userRoleID = getRoleID(u.getRole());
 		if (userRoleID == null) {
@@ -104,13 +104,13 @@ public class UserService {
 		return ud;
 	}
 
-	public static User dataToUser(UserData ud) {
+	public static DprUser dataToUser(UserData ud) {
 		String userRole = getRole(ud.getRole_id());
 		if (userRole == null) {
 			log.error("Could not find corresponding role id.");
 			return null;
 		}
-		User u = new User(ud.getUsername(), ud.getPassword(), ud.getFirst_name(), ud.getLast_name(), ud.getEmail(),
+		DprUser u = new DprUser(ud.getUsername(), ud.getPassword(), ud.getFirst_name(), ud.getLast_name(), ud.getEmail(),
 				userRole);
 		log.info("UserData: " + ud + "\nConverted to: " + u);
 		return u;

@@ -12,16 +12,12 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.dto.User;
+import com.revature.dpr.DprUser;
 
 @WebServlet("/logout")
-public class LogoutServlet extends HttpServlet {
-
-	/**
-	 * 
-	 */
+public class ServletLogout extends HttpServlet {
 	private static final long serialVersionUID = -1560355907437843017L;
-	private static final Logger log = Logger.getLogger(LogoutServlet.class);
+	private static final Logger log = Logger.getLogger(ServletLogout.class);
 	private static final ObjectMapper om = new ObjectMapper();
 	
 	@Override
@@ -31,10 +27,9 @@ public class LogoutServlet extends HttpServlet {
 			log.info("Could not find session for logout.");
 			return;
 		}
-		log.info("Logging out: " + (User)session.getAttribute("user"));
+		log.info("Logging out: " + (DprUser)session.getAttribute("user"));
 		session.invalidate();
-		User uback = om.readValue(req.getInputStream(), User.class);
+		DprUser uback = om.readValue(req.getInputStream(), DprUser.class);
 		log.info("Returned user: " + uback);
 	}
-	
 }

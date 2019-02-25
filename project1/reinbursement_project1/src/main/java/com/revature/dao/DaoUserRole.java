@@ -11,9 +11,9 @@ import org.apache.log4j.Logger;
 
 import com.jdbc.utils.ConnectionFactory;
 import com.revature.pojos.UserRoleData;
-import com.revature.interfaces.Repository;
+import com.revature.interfaces.DAOInterface;
 
-public class DaoUserRole implements Repository<UserRoleData> {
+public class DaoUserRole implements DAOInterface<UserRoleData> {
 
 	private static Logger log = Logger.getLogger(DaoUserRole.class);
 

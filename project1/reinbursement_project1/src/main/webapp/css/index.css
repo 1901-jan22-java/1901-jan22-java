@@ -3,11 +3,6 @@
 	box-sizing: border-box;
 }
 
-/* BASIC */
-html {
-	background-color: #56baed;
-}
-
 body {
 	padding: 0;
 	margin: 0;
@@ -16,6 +11,7 @@ body {
 }
 
 a {
+	text-align: center;
 	color: #92badd;
 	display: inline-block;
 	text-decoration: none;
@@ -31,10 +27,12 @@ h2 {
 	margin: 40px 8px 10px 8px;
 	color: #a7a7a7;
 }
-h3{
+
+h3 {
 	text-align: center;
 }
-h5{
+
+h5 {
 	text-align: center;
 }
 
@@ -43,8 +41,8 @@ label {
 }
 
 table {
-	color: #333;
-	font-family: Helvetica, Arial, sans-serif;
+	color: #c0c0c0;
+	font-family: Impact, Courier New, sans-serif;
 	width: 100%;
 	border-collapse: collapse;
 	border-spacing: 5px;
@@ -52,10 +50,8 @@ table {
 }
 
 td, th {
-	/* No more visible border */
 	border: 1px solid black;
 	height: fit-content;
-	/* Simple transition for hover effect */
 	transition: all 0.3s;
 	text-align: center;
 	padding: 5px;
@@ -63,7 +59,6 @@ td, th {
 
 th {
 	background: #DFDFDF;
-	/* Darken header a bit */
 	font-weight: bold;
 }
 
@@ -71,7 +66,6 @@ td {
 	background: #FAFAFA;
 }
 
-/* Cells in even rows (2,4,6...) are one color */
 tr:nth-child(even) td {
 	background: #F1F1F1;
 }
@@ -88,7 +82,7 @@ tr:hover td {
 }
 
 tr.selected td {
-	background: red !important;
+	background: green !important;
 	color: white !important;
 }
 
@@ -111,8 +105,6 @@ tr.selected td {
 	-webkit-border-radius: 0 0 10px 10px;
 	border-radius: 0 0 10px 10px;
 }
-
-
 
 *:focus {
 	outline: none;

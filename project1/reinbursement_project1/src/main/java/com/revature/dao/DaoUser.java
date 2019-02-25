@@ -10,11 +10,11 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.jdbc.utils.ConnectionFactory;
-import com.revature.dto.User;
 import com.revature.pojos.UserData;
-import com.revature.interfaces.Repository;
+import com.revature.dpr.DprUser;
+import com.revature.interfaces.DAOInterface;
 
-public class DaoUser implements Repository<UserData> {
+public class DaoUser implements DAOInterface<UserData> {
 
 	private static Logger log = Logger.getLogger(DaoUser.class);
 
@@ -26,8 +26,8 @@ public class DaoUser implements Repository<UserData> {
 		log.trace("UserRepository Object Instantiated.");
 	}
 
-	public List<User> getAllUsers() {
-		List<User> res = new ArrayList<>();
+	public List<DprUser> getAllUsers() {
+		List<DprUser> res = new ArrayList<>();
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -38,7 +38,7 @@ public class DaoUser implements Repository<UserData> {
 			ResultSet rs = ps.executeQuery();
 
 			while (rs.next()) {
-				res.add(new User(rs.getString("username"), rs.getString("password"), rs.getString("first_name"),
+				res.add(new DprUser(rs.getString("username"), rs.getString("password"), rs.getString("first_name"),
 						rs.getString("last_name"), rs.getString("email"), rs.getString("role")));
 			}
 
@@ -49,8 +49,8 @@ public class DaoUser implements Repository<UserData> {
 		return res;
 	}
 	
-	public User getUser(Integer itemId) {
-		User res = null;
+	public DprUser getUser(Integer itemId) {
+		DprUser res = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -62,7 +62,7 @@ public class DaoUser implements Repository<UserData> {
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				res = new User(rs.getString("username"), rs.getString("password"), rs.getString("first_name"),
+				res = new DprUser(rs.getString("username"), rs.getString("password"), rs.getString("first_name"),
 						rs.getString("last_name"), rs.getString("email"), rs.getString("role"));
 			}
 
@@ -73,8 +73,8 @@ public class DaoUser implements Repository<UserData> {
 		return res;
 	}
 	
-	public User getUser(String username) {
-		User res = null;
+	public DprUser getUser(String username) {
+		DprUser res = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -86,7 +86,7 @@ public class DaoUser implements Repository<UserData> {
 			ResultSet rs = ps.executeQuery();
 
 			if (rs.next()) {
-				res = new User(rs.getString("username"), rs.getString("password"), rs.getString("first_name"),
+				res = new DprUser(rs.getString("username"), rs.getString("password"), rs.getString("first_name"),
 						rs.getString("last_name"), rs.getString("email"), rs.getString("role"));
 			}
 

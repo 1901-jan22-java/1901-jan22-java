@@ -1,26 +1,26 @@
-package com.revature.dto;
+package com.revature.dpr;
 
 import java.util.Arrays;
 
-public class ResolveReimbursementParameters {
-	private User resolver;
+public class DprResolve {
+	private DprUser resolver;
 	private Integer[] reimbs;
 
-	public ResolveReimbursementParameters() {
+	public DprResolve() {
 		super();
 	}
 
-	public ResolveReimbursementParameters(User resolver, Integer[] reimbs) {
+	public DprResolve(DprUser resolver, Integer[] reimbs) {
 		super();
 		this.resolver = resolver;
 		this.reimbs = reimbs;
 	}
 
-	public User getResolver() {
+	public DprUser getResolver() {
 		return resolver;
 	}
 
-	public void setResolver(User resolver) {
+	public void setResolver(DprUser resolver) {
 		this.resolver = resolver;
 	}
 

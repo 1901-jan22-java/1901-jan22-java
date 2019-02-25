@@ -1,25 +1,30 @@
 <div>
-	<h5><label for="name">Name:</label> <span id="name"></span><br>
-	<label for="username">Username:</label> <span id="username"></span><br>
-	<label for="email">Email:</label> <span id="email"></span><br>
-	<label for="role">Role:</label> <span id="role"></span><br></h5>
-	<h3>Reimbursements</h3>
-	<div id="data-view"></div>
-	<div id="role-options" class="topnav"></div>
-	<div id="new-reimb-form" class="hide">
+	<h5>
+		<label for="name">Name:</label> <span id="name"></span><br> <label
+			for="username">Username:</label> <span id="username"></span><br>
+		<label for="email">Email:</label> <span id="email"></span><br> <label
+			for="role">Role:</label> <span id="role"></span><br>
+	</h5>
+	<h5><a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    	View Reimbursements
+  	</a></h5>
+	<div class="collapse" id="collapseExample">
+		<div class="card card-body">
+		<div id="data-view"></div>
+		<div id="role-options" class="topnav"></div>
+	</div>
+	</div>
+	<h5><div id="new-reimb-form" class="hide">
 		<div class="formContent">
 			<form id="reimb-form">
-				<label for="reimb-amount" class="fadeIn second">Amount:</label>
-				<input type="number" name="reimb-amount" id="reimb-amount" class="fadeIn second" placeholder="Enter an amount..." step="0.01"><br>
-				<label for="reimb-type" class="fadeIn second">Type:</label>
-				<select id="reimb-type" class="fadeIn second"></select><br>
-				<label for="reimb-description" class="fadeIn second">Description:</label><br>
-				<textarea name="reimb-description" id="reimb-description" class="fadeIn third" placeholder="Enter description for your reimbursement..."></textarea><br>
-				<input type="button" id="reimb-create" class="fadeIn fourth" value="Request!">
+				<label for="reimb-amount">Amount:</label> <input
+					type="number" name="reimb-amount" id="reimb-amount" placeholder="How Much?" step="0.01"><br>
+				<label for="reimb-type" class="fadeIn second">Type:</label> <select id="reimb-type" ></select><br> <label for="reimb-description" >Description:</label
+				><br>
+				<textarea name="reimb-description" id="reimb-description" placeholder="Description"></textarea>
+				<br> 
+				<input type="button" id="reimb-create" value="Request!">
 			</form>
-		<div class="formFooter">
-				<a id="reimb-close" class="underlineHover">Close</a>
 		</div>
-		</div>
-	</div>
+	</div></h5>
 </div>

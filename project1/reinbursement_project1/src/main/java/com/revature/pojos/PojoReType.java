@@ -2,23 +2,23 @@ package com.revature.pojos;
 
 import java.io.Serializable;
 
-public class ReimbursementTypeData implements Serializable {
+public class PojoReType implements Serializable {
 
 	private static final long serialVersionUID = 2282033233090845335L;
 
 	private Integer type_id;
 	private String reimb_type;
 
-	public ReimbursementTypeData() {
+	public PojoReType() {
 		super();
 	}
 
-	public ReimbursementTypeData(String reimb_type) {
+	public PojoReType(String reimb_type) {
 		super();
 		this.reimb_type = reimb_type;
 	}
 
-	public ReimbursementTypeData(Integer type_id, String reimb_type) {
+	public PojoReType(Integer type_id, String reimb_type) {
 		super();
 		this.type_id = type_id;
 		this.reimb_type = reimb_type;

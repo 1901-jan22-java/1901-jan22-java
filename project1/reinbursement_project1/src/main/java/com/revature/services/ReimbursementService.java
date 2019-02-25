@@ -10,12 +10,12 @@ import org.apache.log4j.Logger;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.revature.dao.DaoReimbursement;
+import com.revature.dpr.DprReimbursement;
 import com.revature.dao.DaoReStatus;
 import com.revature.dao.DaoReType;
-import com.revature.dto.Reimbursement;
 import com.revature.pojos.PojoReimbursement;
-import com.revature.pojos.ReimbursementStatusData;
-import com.revature.pojos.ReimbursementTypeData;
+import com.revature.pojos.PojoReStatus;
+import com.revature.pojos.PojoReType;
 import com.revature.pojos.UserData;
 
 public class ReimbursementService {
@@ -25,7 +25,7 @@ public class ReimbursementService {
 	private static final DaoReimbursement reimbRepo = new DaoReimbursement();
 	private static final DaoReType reimbTypeRepo = new DaoReType();
 	private static final DaoReStatus reimbStatusRepo = new DaoReStatus();
-	private static List<Reimbursement> reimbursements = new ArrayList<>();
+	private static List<DprReimbursement> reimbursements = new ArrayList<>();
 	private static final BiMap<Integer, String> statusMap = HashBiMap.create();
 	private static final BiMap<Integer, String> typesMap = HashBiMap.create();
 	static {
@@ -38,7 +38,7 @@ public class ReimbursementService {
 		log.trace("ReimbursementService Object Instantiated. This should not be happening...");
 	}
 
-	public static void addReimbursement(Reimbursement r, UserData ud) {
+	public static void addReimbursement(DprReimbursement r, UserData ud) {
 		r.setStatus("Pending");
 		PojoReimbursement rd = reimbursementToData(r, ud);
 		rd.setSubmitted(new Date(Calendar.getInstance().getTimeInMillis()));
@@ -77,15 +77,15 @@ public class ReimbursementService {
 		}
 	}
 
-	public static List<Reimbursement> getAllReimbursements() {
+	public static List<DprReimbursement> getAllReimbursements() {
 		return reimbRepo.getAllReimbursements();
 	}
 
-	public static List<Reimbursement> getReimbursements(UserData ud) {
+	public static List<DprReimbursement> getReimbursements(UserData ud) {
 		return reimbRepo.getReimbursements(ud.getUser_id());
 	}
 
-	public static PojoReimbursement reimbursementToData(Reimbursement r, UserData ud) {
+	public static PojoReimbursement reimbursementToData(DprReimbursement r, UserData ud) {
 		Integer s_id = getStatusID(r.getStatus());
 		Integer t_id = getTypeID(r.getType());
 		if (s_id == null || t_id == null) {
@@ -95,7 +95,7 @@ public class ReimbursementService {
 				r.getDescription(), r.getReceipt(), ud.getUser_id(), null, s_id, t_id);
 	}
 
-	public static Reimbursement dataToReimbursement(PojoReimbursement rd) {
+	public static DprReimbursement dataToReimbursement(PojoReimbursement rd) {
 		return null;
 	}
 
@@ -106,13 +106,13 @@ public class ReimbursementService {
 	}
 
 	public static void loadStatus() {
-		for (ReimbursementStatusData rsd : reimbStatusRepo.readAll()) {
+		for (PojoReStatus rsd : reimbStatusRepo.readAll()) {
 			statusMap.put(rsd.getStatus_id(), rsd.getReimb_status());
 		}
 	}
 
 	public static void loadTypes() {
-		for (ReimbursementTypeData rtd : reimbTypeRepo.readAll()) {
+		for (PojoReType rtd : reimbTypeRepo.readAll()) {
 			typesMap.put(rtd.getType_id(), rtd.getReimb_type());
 		}
 	}

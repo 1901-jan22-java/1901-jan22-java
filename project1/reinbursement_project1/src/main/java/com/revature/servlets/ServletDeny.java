@@ -12,38 +12,31 @@ import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.BiMap;
-import com.revature.dto.ResolveReimbursementParameters;
+import com.revature.dpr.DprResolve;
 import com.revature.pojos.UserData;
 import com.revature.services.ReimbursementService;
 import com.revature.services.UserService;
 
-@WebServlet("/approve")
-public class ApproveServlet extends HttpServlet {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -352446938014614027L;
+@WebServlet("/deny")
+public class ServletDeny extends HttpServlet {
+	private static final long serialVersionUID = -5436274835900903102L;
 	@SuppressWarnings("unused")
-	private static final Logger log = Logger.getLogger(LoginServlet.class);
+	private static final Logger log = Logger.getLogger(ServletLogin.class);
 	private static final ObjectMapper om = new ObjectMapper();
-	
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		ResolveReimbursementParameters param  = om.readValue(req.getInputStream(), ResolveReimbursementParameters.class);
+
+		DprResolve param = om.readValue(req.getInputStream(), DprResolve.class);
 		UserData ud = UserService.getUserData(param.getResolver().getUsername());
 		Integer roleID = ud.getRole_id();
 		Integer[] reimbIDs = param.getReimbs();
 		BiMap<String, Integer> rolesMap = UserService.getRoles().inverse();
 
-		if(roleID==rolesMap.get("Admin") || roleID == rolesMap.get("Finance Manager")) {
-			ReimbursementService.approve(reimbIDs, ud);
+		if (roleID == rolesMap.get("Admin") || roleID == rolesMap.get("Finance Manager")) {
+			ReimbursementService.deny(reimbIDs, ud);
 		}
-		
 		resp.setContentType("application/json");
 		resp.getWriter().write(om.writeValueAsString(ReimbursementService.getAllReimbursements()));
 	}
-	
 }

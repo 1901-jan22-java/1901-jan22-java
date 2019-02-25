@@ -1,6 +1,6 @@
-package com.revature.dto;
+package com.revature.dpr;
 
-public class User {
+public class DprUser {
 
 	private String username;
 	private String password;
@@ -9,11 +9,11 @@ public class User {
 	private String email;
 	private String role;
 
-	public User() {
+	public DprUser() {
 		super();
 	}
 
-	public User(String username, String password, String first_name, String last_name, String email, String role) {
+	public DprUser(String username, String password, String first_name, String last_name, String email, String role) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -77,7 +77,7 @@ public class User {
 				+ last_name + ", email=" + email + ", role=" + role + "]";
 	}
 
-	public User clone() {
-		return new User(this.username, this.password, this.first_name, this.last_name, this.email, this.role);
+	public DprUser clone() {
+		return new DprUser(this.username, this.password, this.first_name, this.last_name, this.email, this.role);
 	}
 }

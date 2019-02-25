@@ -10,10 +10,10 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.jdbc.utils.ConnectionFactory;
-import com.revature.pojos.ReimbursementTypeData;
-import com.revature.interfaces.Repository;
+import com.revature.pojos.PojoReType;
+import com.revature.interfaces.DAOInterface;
 
-public class DaoReType implements Repository<ReimbursementTypeData> {
+public class DaoReType implements DAOInterface<PojoReType> {
 
 	private static final Logger log = Logger.getLogger(DaoReType.class);
 
@@ -26,7 +26,7 @@ public class DaoReType implements Repository<ReimbursementTypeData> {
 	}
 
 	@Override
-	public ReimbursementTypeData create(ReimbursementTypeData newItem) {
+	public PojoReType create(PojoReType newItem) {
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -50,8 +50,8 @@ public class DaoReType implements Repository<ReimbursementTypeData> {
 	}
 
 	@Override
-	public ReimbursementTypeData read(Integer itemId) {
-		ReimbursementTypeData res = null;
+	public PojoReType read(Integer itemId) {
+		PojoReType res = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -64,7 +64,7 @@ public class DaoReType implements Repository<ReimbursementTypeData> {
 				Integer id = rs.getInt("type_id");
 				String type = rs.getString("reimb_type");
 
-				res = new ReimbursementTypeData(id, type);
+				res = new PojoReType(id, type);
 			}
 
 		} catch (SQLException e) {
@@ -75,8 +75,8 @@ public class DaoReType implements Repository<ReimbursementTypeData> {
 	}
 
 	@Override
-	public List<ReimbursementTypeData> readAll() {
-		List<ReimbursementTypeData> res = new ArrayList<>();
+	public List<PojoReType> readAll() {
+		List<PojoReType> res = new ArrayList<>();
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -88,7 +88,7 @@ public class DaoReType implements Repository<ReimbursementTypeData> {
 				Integer id = rs.getInt("type_id");
 				String type = rs.getString("reimb_type");
 
-				res.add(new ReimbursementTypeData(id, type));
+				res.add(new PojoReType(id, type));
 			}
 
 		} catch (SQLException e) {
@@ -99,8 +99,8 @@ public class DaoReType implements Repository<ReimbursementTypeData> {
 	}
 
 	@Override
-	public ReimbursementTypeData update(Integer itemId, ReimbursementTypeData newItem) {
-		ReimbursementTypeData res = null;
+	public PojoReType update(Integer itemId, PojoReType newItem) {
+		PojoReType res = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -112,7 +112,7 @@ public class DaoReType implements Repository<ReimbursementTypeData> {
 
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				ReimbursementTypeData temp = new ReimbursementTypeData(rs.getInt("type_id"),
+				PojoReType temp = new PojoReType(rs.getInt("type_id"),
 						rs.getString("reimb_type"));
 
 				sql = "update ers_reimbursement_type set reimb_type = ? where type_id = ?";
@@ -135,8 +135,8 @@ public class DaoReType implements Repository<ReimbursementTypeData> {
 	}
 
 	@Override
-	public ReimbursementTypeData delete(ReimbursementTypeData item) {
-		ReimbursementTypeData res = null;
+	public PojoReType delete(PojoReType item) {
+		PojoReType res = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -150,7 +150,7 @@ public class DaoReType implements Repository<ReimbursementTypeData> {
 				Integer id = rs.getInt("type_id");
 				String type = rs.getString("reimb_type");
 
-				ReimbursementTypeData temp = new ReimbursementTypeData(id, type);
+				PojoReType temp = new PojoReType(id, type);
 
 				sql = "delete from ers_reimbursement_type where type_id = ?";
 				ps = conn.prepareStatement(sql);

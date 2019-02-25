@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 @WebServlet("*.view")
-public class LoadViewServlet extends HttpServlet {
+public class ServletLoadView extends HttpServlet {
 	
 	private static final long serialVersionUID = 3014802713949514627L;
-	private static final Logger log = Logger.getLogger(LoadViewServlet.class);
+	private static final Logger log = Logger.getLogger(ServletLoadView.class);
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

@@ -10,10 +10,10 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.jdbc.utils.ConnectionFactory;
-import com.revature.pojos.ReimbursementStatusData;
-import com.revature.interfaces.Repository;
+import com.revature.pojos.PojoReStatus;
+import com.revature.interfaces.DAOInterface;
 
-public class DaoReStatus implements Repository<ReimbursementStatusData> {
+public class DaoReStatus implements DAOInterface<PojoReStatus> {
 
 	private static final Logger log = Logger.getLogger(DaoReStatus.class);
 
@@ -26,7 +26,7 @@ public class DaoReStatus implements Repository<ReimbursementStatusData> {
 	}
 
 	@Override
-	public ReimbursementStatusData create(ReimbursementStatusData newItem) {
+	public PojoReStatus create(PojoReStatus newItem) {
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -51,8 +51,8 @@ public class DaoReStatus implements Repository<ReimbursementStatusData> {
 	}
 
 	@Override
-	public ReimbursementStatusData read(Integer itemId) {
-		ReimbursementStatusData res = null;
+	public PojoReStatus read(Integer itemId) {
+		PojoReStatus res = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -65,7 +65,7 @@ public class DaoReStatus implements Repository<ReimbursementStatusData> {
 				Integer id = rs.getInt("status_id");
 				String status = rs.getString("reimb_status");
 
-				res = new ReimbursementStatusData(id, status);
+				res = new PojoReStatus(id, status);
 			}
 
 		} catch (SQLException e) {
@@ -76,8 +76,8 @@ public class DaoReStatus implements Repository<ReimbursementStatusData> {
 	}
 
 	@Override
-	public List<ReimbursementStatusData> readAll() {
-		List<ReimbursementStatusData> res = new ArrayList<>();
+	public List<PojoReStatus> readAll() {
+		List<PojoReStatus> res = new ArrayList<>();
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -89,7 +89,7 @@ public class DaoReStatus implements Repository<ReimbursementStatusData> {
 				Integer id = rs.getInt("status_id");
 				String status = rs.getString("reimb_status");
 
-				res.add(new ReimbursementStatusData(id, status));
+				res.add(new PojoReStatus(id, status));
 			}
 
 		} catch (SQLException e) {
@@ -100,8 +100,8 @@ public class DaoReStatus implements Repository<ReimbursementStatusData> {
 	}
 
 	@Override
-	public ReimbursementStatusData update(Integer itemId, ReimbursementStatusData newItem) {
-		ReimbursementStatusData res = null;
+	public PojoReStatus update(Integer itemId, PojoReStatus newItem) {
+		PojoReStatus res = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -113,7 +113,7 @@ public class DaoReStatus implements Repository<ReimbursementStatusData> {
 
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				ReimbursementStatusData temp = new ReimbursementStatusData(rs.getInt("status_id"),
+				PojoReStatus temp = new PojoReStatus(rs.getInt("status_id"),
 						rs.getString("reimb_status"));
 
 				sql = "update ers_reimbursement_status set reimb_status = ? where status_id = ?";
@@ -136,8 +136,8 @@ public class DaoReStatus implements Repository<ReimbursementStatusData> {
 	}
 
 	@Override
-	public ReimbursementStatusData delete(ReimbursementStatusData item) {
-		ReimbursementStatusData res = null;
+	public PojoReStatus delete(PojoReStatus item) {
+		PojoReStatus res = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -151,7 +151,7 @@ public class DaoReStatus implements Repository<ReimbursementStatusData> {
 				Integer id = rs.getInt("status_id");
 				String status = rs.getString("reimb_status");
 
-				ReimbursementStatusData temp = new ReimbursementStatusData(id, status);
+				PojoReStatus temp = new PojoReStatus(id, status);
 
 				sql = "delete from ers_reimbursement_status where status_id = ?";
 				ps = conn.prepareStatement(sql);

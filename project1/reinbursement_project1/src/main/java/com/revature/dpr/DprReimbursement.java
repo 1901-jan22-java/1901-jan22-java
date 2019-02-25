@@ -1,8 +1,8 @@
-package com.revature.dto;
+package com.revature.dpr;
 
 import com.revature.services.Receipt;
 
-public class Reimbursement {
+public class DprReimbursement {
 
 	private Integer id;
 	private Double amount;
@@ -15,11 +15,11 @@ public class Reimbursement {
 	private String status;
 	private String type;
 
-	public Reimbursement() {
+	public DprReimbursement() {
 		super();
 	}
 
-	public Reimbursement(Integer id, Double amount, String submitted, String resolved, String description, Receipt receipt,
+	public DprReimbursement(Integer id, Double amount, String submitted, String resolved, String description, Receipt receipt,
 			String author, String resolver, String status, String type) {
 		super();
 		this.id = id;
@@ -120,5 +120,4 @@ public class Reimbursement {
 				+ resolved + ", description=" + description + ", receipt=" + receipt + ", author=" + author
 				+ ", resolver=" + resolver + ", status=" + status + ", type=" + type + "]";
 	}
-
 }

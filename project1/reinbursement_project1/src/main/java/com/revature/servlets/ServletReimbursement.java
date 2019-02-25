@@ -11,47 +11,32 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.dto.CreateReimbursementParameters;
-import com.revature.dto.Reimbursement;
-import com.revature.dto.User;
+import com.revature.dpr.DtrReParam;
+import com.revature.dpr.DprReimbursement;
+import com.revature.dpr.DprUser;
 import com.revature.pojos.UserData;
 import com.revature.services.ReimbursementService;
 import com.revature.services.UserService;
 
 @WebServlet("/reimbursement")
-public class ReimbursementServlet extends HttpServlet {
-
-	/**
-	 * 
-	 */
+public class ServletReimbursement extends HttpServlet {
 	private static final long serialVersionUID = 6417817436028192843L;
-	private static final Logger log = Logger.getLogger(ReimbursementServlet.class);
+	private static final Logger log = Logger.getLogger(ServletReimbursement.class);
 	private static final ObjectMapper om = new ObjectMapper();
-//	private static ReimbursementService rs = new ReimbursementService();
 
-	/**
-	 * Gets all reimbursements for testing purposes. Get rid of this when done
-	 * testing.
-	 * 
-	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		String json = om.writeValueAsString(ReimbursementService.getAllReimbursements());
-
 		resp.setContentType("application/json");
 		resp.getWriter().write(json);
-
 	}
 
-	/**
-	 * Add a new reimbursement from request
-	 */
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		log.info(req.getInputStream());
 
-		User u = om.readValue(req.getInputStream(), User.class);
+		DprUser u = om.readValue(req.getInputStream(), DprUser.class);
 		UserData ud = UserService.getUserData(u.getUsername());
 		Integer roleID = ud.getRole_id();
 
@@ -68,19 +53,17 @@ public class ReimbursementServlet extends HttpServlet {
 
 	@Override
 	protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		CreateReimbursementParameters param = om.readValue(req.getInputStream(), CreateReimbursementParameters.class);
+
+		DtrReParam param = om.readValue(req.getInputStream(), DtrReParam.class);
 		UserData ud = UserService.getUserData(param.getAuthor().getUsername());
 		Integer roleID = ud.getRole_id();
 
 		if (roleID == UserService.getRoleID("Employee")) {
-			for (Reimbursement r : param.getReimbs()) {
+			for (DprReimbursement r : param.getReimbs()) {
 				ReimbursementService.addReimbursement(r, ud);
 			}
 		}
-		
 		resp.setContentType("application/json");
 		resp.getWriter().write(om.writeValueAsString(ReimbursementService.getReimbursements(ud)));
 	}
-
 }

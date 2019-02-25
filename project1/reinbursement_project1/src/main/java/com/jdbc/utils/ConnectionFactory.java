@@ -11,7 +11,6 @@ import java.util.Properties;
 import org.apache.log4j.Logger;
 
 public class ConnectionFactory {
-
 	private static Logger log = Logger.getLogger(ConnectionFactory.class);
 	private static ConnectionFactory cf;
 
@@ -29,17 +28,9 @@ public class ConnectionFactory {
 
 	public Connection getConnection() throws SQLException {
 		Connection conn = null;
-
 		Properties prop = new Properties();
 		String filepath = "db.properties";
-
 		String root = Thread.currentThread().getContextClassLoader().getResource("").getPath();
-
-//		String explore = new String(root);
-//
-//		log.trace("Root: " + explore);
-//		log.trace("Sub: " + Arrays.toString(new File(explore).list()));
-
 		try {
 			prop.load(new FileReader(root + filepath));
 			Class.forName(prop.getProperty("driver"));
@@ -55,8 +46,6 @@ public class ConnectionFactory {
 		} catch (ClassNotFoundException e) {
 			log.error("ClassNotFoundException in getConnection()", e);
 		}
-
 		return conn;
 	}
-
 }
