@@ -35,7 +35,6 @@ public class MyHttpServlet extends HttpServlet{
 		resp.setHeader("Access-Control-Allow-Origin", "*");
 		resp.setHeader("Access-Control-Allow-Methods", "GET, POST");
 		writer.write("this is text from our http servlet");
-		
 	}
 	
 }

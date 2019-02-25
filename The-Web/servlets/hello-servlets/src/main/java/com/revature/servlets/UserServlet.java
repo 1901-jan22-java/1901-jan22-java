@@ -2,7 +2,6 @@ package com.revature.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,12 +11,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.service.DummyUserService;
 
 @WebServlet("/users")
 public class UserServlet extends HttpServlet {
 	
-	UserService service = new UserService();
-	
+	DummyUserService service = new DummyUserService();
 	
 	/*
 	 * Use Jackson ObjectMapper to send response of all users 
@@ -34,12 +33,12 @@ public class UserServlet extends HttpServlet {
 		PrintWriter writer = resp.getWriter();
 		resp.setContentType("application/json");
 		writer.write(json);
-	
 	}
 	
 	/*
-	 * working with FORM data!
+	 * working with FORM data! Not going to use often at all
 	 */
+	/*
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String username = req.getParameter("username");
@@ -48,29 +47,23 @@ public class UserServlet extends HttpServlet {
 		User u = new User(username, password, data);
 		service.addUser(u);
 		doGet(req, resp);
-	}
+	} */
 
-}
-
-
-
-
-class UserService{
-	static List<User> users = new ArrayList<User>();
-	static {
-		users.add(new User("gb", "123", "this is a user"));
-		users.add(new User("test", "user", "test"));
-		users.add(new User("Beyonce", "knowles", "is awesome"));
-	}
-	
-	public List<User> getAllUser(){
-		return users;
-	}
-	
-	public void addUser(User u) {
-		users.add(u);
+	//Responds to POST requests with request body
+	@Override
+	protected void doPost(HttpServletRequest req, 
+		HttpServletResponse resp) throws ServletException, IOException {
+		ObjectMapper mapper = new ObjectMapper();
+		User u = mapper.readValue(req.getInputStream(), User.class);
+		if(service.getByUsername(u.getUsername())==null) {
+			service.addUser(u);
+			resp.setStatus(201);
+			doGet(req, resp);
+		}
+		else {
+			resp.setStatus(409);
+		}
 	}
 }
-
 
 

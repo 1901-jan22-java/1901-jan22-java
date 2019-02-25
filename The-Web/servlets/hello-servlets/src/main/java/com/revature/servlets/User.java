@@ -30,8 +30,4 @@ public class User {
 	public void setData(String data) {
 		this.data = data;
 	}
-	
-	
-	
-
 }
