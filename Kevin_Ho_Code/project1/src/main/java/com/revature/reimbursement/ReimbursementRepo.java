@@ -18,7 +18,7 @@ public class ReimbursementRepo {
 	{
 		List<Reimbursement> tmp = new ArrayList<Reimbursement>();
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_author = ?";
+			String sql = "SELECT * FROM ers_reimbursement WHERE reimb_author = ? ORDER BY reimb_status_id DESC";
 
 			String[] keys = {"reimb_id"};
 			
@@ -50,7 +50,7 @@ public class ReimbursementRepo {
 	{
 		List<Reimbursement> tmp = new ArrayList<Reimbursement>();
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			String sql = "SELECT * FROM ers_reimbursement ORDER BY reimb_submitted DESC";
+			String sql = "SELECT * FROM ers_reimbursement ORDER BY reimb_status_id DESC";
 
 			Statement statement = conn.createStatement();
 			

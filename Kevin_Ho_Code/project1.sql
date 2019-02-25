@@ -93,9 +93,9 @@ select * from ers_user_roles;
 select * from ers_users;
 select * from ers_reimbursement;
 
-insert into ers_reimbursement_status values(1, 'Pending');
+insert into ers_reimbursement_status values(3, 'Pending');
 insert into ers_reimbursement_status values(2, 'Approved');
-insert into ers_reimbursement_status values(3, 'Denied');
+insert into ers_reimbursement_status values(1, 'Denied');
 insert into ers_reimbursement_type(reimb_type) values('Lodging');
 insert into ers_reimbursement_type(reimb_type) values('Food');
 insert into ers_reimbursement_type(reimb_type) values('Travel');
@@ -109,12 +109,12 @@ insert into ers_users (ers_username, ers_password, user_first_name, user_last_na
                 values ('kevinuser', 'kevinpass', 'Rich', 'Kid', 'kevho482@gmail.com', 0);
 
 insert into ers_reimbursement(reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id) 
-                        values(1000, '17-FEB-2019', '18-FEB-2019', 'Hi there', 1, 2, 2, 1);
+                        values(1000, '17-FEB-2019', '18-FEB-2019', 'This is a test reimbursement', 1, 2, 2, 1);
 insert into ers_reimbursement(reimb_amount, reimb_submitted, reimb_description, reimb_author, reimb_status_id, reimb_type_id) 
-                        values(1000, '17-FEB-2019', 'Hi there', 1, 1, 1);
+                        values(1000, '17-FEB-2019', 'Lost my house need company to help pay', 1, 1, 1);
 insert into ers_reimbursement(reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id) 
-                        values(1000, '17-FEB-2019', '18-FEB-2019', 'Hi there', 2, 2, 1, 1);
+                        values(1000, '17-FEB-2019', '18-FEB-2019', 'Treated employees to food', 2, 2, 1, 1);
 insert into ers_reimbursement(reimb_amount, reimb_submitted, reimb_description, reimb_author, reimb_status_id, reimb_type_id) 
-                        values(1000, '17-FEB-2019', 'Hi there', 2, 3, 1);
+                        values(1000, '17-FEB-2019', 'Yes', 2, 3, 1);
 
 commit;

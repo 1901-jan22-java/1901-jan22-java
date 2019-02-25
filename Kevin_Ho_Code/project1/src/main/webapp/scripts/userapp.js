@@ -55,7 +55,7 @@ function logIn(){
             }
             else{
                 //some other error, likely send to error page
-                $('#error').html("What in gods name did you do");
+                $('#error').html("Something went wrong");
                 $('#error').css('color', 'red');
             }
         }
