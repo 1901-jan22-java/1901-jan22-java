@@ -15,10 +15,10 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.jdbc.utils.ConnectionFactory;
-import com.revature.ers.dao.dto.Reimbursement;
 import com.revature.ers.dao.pojos.ReimbursementData;
 import com.revature.ers.interfaces.Repository;
 import com.revature.ers.services.blob.Receipt;
+import com.revature.ers.services.dto.Reimbursement;
 
 import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
@@ -82,14 +82,14 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 //					+ "left join ers_users res on res.user_id = r.resolver_id "
 //					+ "left join ers_reimbursement_status s on s.status_id = r.reimb_status_id "
 //					+ "left join ers_reimbursement_type t on t.type_id = r.reimb_type_id";
-			
+
 			CallableStatement cs = conn.prepareCall("BEGIN getReimbView(?, ?); END;");
 			cs.setInt(1, user_id);
-			
+
 			cs.registerOutParameter(2, OracleTypes.CURSOR);
-			
+
 			cs.execute();
-			ResultSet rs = ((OracleCallableStatement)cs).getCursor(2);
+			ResultSet rs = ((OracleCallableStatement) cs).getCursor(2);
 
 			while (rs.next()) {
 				res.add(readReimbursement(rs));
@@ -160,6 +160,51 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 		}
 
 		return newItem;
+	}
+
+	public void createAll(ReimbursementData[] items) {
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			conn.setAutoCommit(false);
+
+			String sql = "insert into ers_reimbursement(amount, submitted, resolved, "
+					+ "reimb_description, receipt, author_id, resolver_id, reimb_status_id, "
+					+ "reimb_type_id) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String[] keys = { "reimb_id" };
+			PreparedStatement ps = conn.prepareStatement(sql, keys);
+
+			for (ReimbursementData newItem : items) {
+				ps.setDouble(1, newItem.getAmount());
+				ps.setDate(2, newItem.getSubmitted());
+				ps.setDate(3, newItem.getResolved());
+				ps.setString(4, newItem.getReimb_description());
+				ps.setBlob(5, newItem.getReceipt());
+				ps.setInt(6, newItem.getAuthor_id());
+				Integer res_id = newItem.getResolver_id();
+				if (res_id == null) {
+					ps.setNull(7, Types.INTEGER);
+				} else {
+					ps.setInt(7, res_id);
+				}
+				ps.setInt(8, newItem.getReimb_status_id());
+				ps.setInt(9, newItem.getReimb_type_id());
+
+				ps.addBatch();
+			}
+
+			int[] count = ps.executeBatch();
+
+			for (int i = 0; i < count.length; i++) {
+				if (count[i] != 1) {
+					// Should I return here? and not commit?
+					log.error("Insertion #" + i + " had " + count[i] + " updates.");
+				}
+			}
+
+			conn.commit();
+		} catch (SQLException e) {
+			log.error("SQLException in ReimbursementRepository.create()", e);
+		}
 	}
 
 	@Override
@@ -286,6 +331,47 @@ public class ReimbursementRepository implements Repository<ReimbursementData> {
 		}
 
 		return res;
+	}
+
+	public void updateAll(Integer[] ids, ReimbursementData[] rds) {
+		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
+
+			conn.setAutoCommit(false);
+			String sql = "update ers_reimbursement set amount = ?, submitted = ?, resolved = ?, "
+					+ "reimb_description = ?, receipt = ?, author_id = ?, resolver_id = ?, "
+					+ "reimb_status_id = ?, reimb_type_id = ? where reimb_id = ?";
+			PreparedStatement ps = conn.prepareStatement(sql);
+
+			for (int i = 0; i < ids.length; i++) {
+				ReimbursementData newItem = rds[i];
+				ps.setDouble(1, newItem.getAmount());
+				ps.setDate(2, newItem.getSubmitted());
+				ps.setDate(3, newItem.getResolved());
+				ps.setString(4, newItem.getReimb_description());
+				ps.setBlob(5, newItem.getReceipt());
+				ps.setInt(6, newItem.getAuthor_id());
+				ps.setInt(7, newItem.getResolver_id());
+				ps.setInt(8, newItem.getReimb_status_id());
+				ps.setInt(9, newItem.getReimb_type_id());
+				ps.setInt(10, ids[i]);
+				
+				ps.addBatch();
+			}
+			
+			int count[] = ps.executeBatch();
+			
+			for(int i = 0; i < count.length; i++) {
+				if(count[i] != 1) {
+					log.error("Execution #" + i + " had " + count[i] + "updates.");
+				}
+			}
+
+			conn.commit();
+
+		} catch (SQLException e) {
+			log.error("SQLException in ReimbursementRepository.update()", e);
+		}
+
 	}
 
 	@Override

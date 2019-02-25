@@ -1,6 +1,7 @@
 package com.revature.ers.services;
 
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -12,11 +13,12 @@ import com.google.common.collect.HashBiMap;
 import com.revature.ers.dao.ReimbursementRepository;
 import com.revature.ers.dao.ReimbursementStatusRepository;
 import com.revature.ers.dao.ReimbursementTypeRepository;
-import com.revature.ers.dao.dto.Reimbursement;
 import com.revature.ers.dao.pojos.ReimbursementData;
 import com.revature.ers.dao.pojos.ReimbursementStatusData;
 import com.revature.ers.dao.pojos.ReimbursementTypeData;
 import com.revature.ers.dao.pojos.UserData;
+import com.revature.ers.services.dto.Reimbursement;
+import com.revature.ers.services.dto.User;
 
 public class ReimbursementService {
 
@@ -54,34 +56,37 @@ public class ReimbursementService {
 		reimbursements.add(r);
 	}
 
-	public static List<String> getAllTypes(){
+	public static List<String> getAllTypes() {
 		List<String> res = new ArrayList<>();
-		
-		for(String s: typesMap.values()) {
+
+		for (String s : typesMap.values()) {
 			res.add(s);
 		}
-		
+
 		return res;
 	}
 
 	public static void deny(Integer[] reimbIDs, UserData ud) {
 		updateStatus(statusMap.inverse().get("Denied"), reimbIDs, ud);
 	}
-	
+
 	public static void approve(Integer[] reimbIDs, UserData ud) {
 		updateStatus(statusMap.inverse().get("Approved"), reimbIDs, ud);
 	}
-	
-	public static void updateStatus(Integer newStatus, Integer[] reimbIDs, UserData ud) {
-		for(Integer id: reimbIDs) {
-			ReimbursementData rd = reimbRepo.read(id);
+
+	public static void updateStatus(Integer newStatus, Integer[] reimbIDs, UserData resData) {
+		ReimbursementData[] rds = new ReimbursementData[reimbIDs.length];
+		for (int i = 0; i < reimbIDs.length; i++) {
+			ReimbursementData rd = reimbRepo.read(reimbIDs[i]);
 			rd.setResolved(new Date(Calendar.getInstance().getTimeInMillis()));
-			rd.setResolver_id(ud.getUser_id());
+			rd.setResolver_id(resData.getUser_id());
 			rd.setReimb_status_id(newStatus);
-			reimbRepo.update(id, rd);
+			
+			rds[i] = rd;
 		}
+		reimbRepo.updateAll(reimbIDs, rds);
 	}
-	
+
 	public static List<Reimbursement> getAllReimbursements() {
 		return reimbRepo.getAllReimbursements();
 	}
@@ -100,8 +105,15 @@ public class ReimbursementService {
 				r.getDescription(), r.getReceipt(), ud.getUser_id(), null, s_id, t_id);
 	}
 
-	public static Reimbursement dataToReimbursement(ReimbursementData rd) {
-		return null;
+	public static Reimbursement dataToReimbursement(ReimbursementData rd, User u) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyy-MMMMM-dd hh:mm aaa");
+		String s = getStatus(rd.getReimb_status_id());
+		String t = getType(rd.getReimb_type_id());
+		if (s == null || t == null) {
+			return null;
+		}
+		return new Reimbursement(rd.getReimb_id(), rd.getAmount(), sdf.format(rd.getSubmitted()),
+				sdf.format(rd.getResolved()), rd.getReimb_description(), rd.getReceipt(), u.getUsername(), null, s, t);
 	}
 
 	public static void loadDataImage() {

@@ -1,4 +1,4 @@
-package com.revature.ers.dao.dto;
+package com.revature.ers.services.dto;
 
 import java.util.Arrays;
 

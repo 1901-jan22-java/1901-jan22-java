@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.ers.dao.dto.User;
+import com.revature.ers.services.dto.User;
 
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {

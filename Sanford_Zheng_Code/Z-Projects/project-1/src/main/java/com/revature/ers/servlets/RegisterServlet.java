@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.ers.dao.dto.User;
 import com.revature.ers.services.UserService;
+import com.revature.ers.services.dto.User;
 
 @WebServlet("/register")
 public class RegisterServlet extends HttpServlet {

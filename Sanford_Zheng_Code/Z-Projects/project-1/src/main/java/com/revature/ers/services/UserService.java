@@ -9,10 +9,10 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.revature.ers.dao.UserRepository;
 import com.revature.ers.dao.UserRoleRepository;
-import com.revature.ers.dao.dto.Reimbursement;
-import com.revature.ers.dao.dto.User;
 import com.revature.ers.dao.pojos.UserData;
 import com.revature.ers.dao.pojos.UserRoleData;
+import com.revature.ers.services.dto.Reimbursement;
+import com.revature.ers.services.dto.User;
 
 public class UserService {
 

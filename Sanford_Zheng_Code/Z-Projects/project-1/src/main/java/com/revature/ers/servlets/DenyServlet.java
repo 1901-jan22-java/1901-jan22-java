@@ -12,10 +12,10 @@ import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.collect.BiMap;
-import com.revature.ers.dao.dto.ResolveReimbursementParameters;
 import com.revature.ers.dao.pojos.UserData;
 import com.revature.ers.services.ReimbursementService;
 import com.revature.ers.services.UserService;
+import com.revature.ers.services.dto.ResolveReimbursementParameters;
 
 @WebServlet("/deny")
 public class DenyServlet extends HttpServlet{

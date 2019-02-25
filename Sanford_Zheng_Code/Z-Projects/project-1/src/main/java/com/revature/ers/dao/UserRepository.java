@@ -10,9 +10,9 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.jdbc.utils.ConnectionFactory;
-import com.revature.ers.dao.dto.User;
 import com.revature.ers.dao.pojos.UserData;
 import com.revature.ers.interfaces.Repository;
+import com.revature.ers.services.dto.User;
 
 public class UserRepository implements Repository<UserData> {
 

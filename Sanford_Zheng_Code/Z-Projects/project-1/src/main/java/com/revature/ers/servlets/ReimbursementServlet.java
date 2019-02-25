@@ -11,12 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.log4j.Logger;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.ers.dao.dto.CreateReimbursementParameters;
-import com.revature.ers.dao.dto.Reimbursement;
-import com.revature.ers.dao.dto.User;
 import com.revature.ers.dao.pojos.UserData;
 import com.revature.ers.services.ReimbursementService;
 import com.revature.ers.services.UserService;
+import com.revature.ers.services.dto.CreateReimbursementParameters;
+import com.revature.ers.services.dto.Reimbursement;
+import com.revature.ers.services.dto.User;
 
 @WebServlet("/reimbursement")
 public class ReimbursementServlet extends HttpServlet {

@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.revature.ers.dao.dto.User;
 import com.revature.ers.services.UserService;
+import com.revature.ers.services.dto.User;
 
 @WebServlet("/user")
 public class UserServlet extends HttpServlet {

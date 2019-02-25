@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.revature.ers.dao.dto.User;
+import com.revature.ers.services.dto.User;
 
 /**
  * Servlet implementation class Home. I don't know what I'm doing...
