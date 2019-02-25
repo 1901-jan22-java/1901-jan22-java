@@ -10,22 +10,15 @@ public class User {
 	private String role;
 	
 	
-		
+	public User() {}
 	
-	public User(String username, String password) {
-		super();
-		this.username = username;
-		this.password = password;
-	}
-
-
+	
 	public User(int id, String fn, String ln) {
 		super();
 		this.id = id;
 		this.fn = fn;
 		this.ln = ln;
 	}
-
 
 	public User(int id, String fn, String ln, String role) {
 		super();
@@ -75,7 +68,7 @@ public class User {
 	public String getRole() {
 		return role;
 	}
-	public void setRole_id(String role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 

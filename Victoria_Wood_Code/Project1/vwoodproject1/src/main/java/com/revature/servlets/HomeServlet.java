@@ -34,12 +34,18 @@ public class HomeServlet extends HttpServlet {
 		}
 		else {
 			log.trace("User logged in session" + session.getAttribute("sessionUser"));
-			String html = "<div class=\"jumbotron\">\r\n"
-					+ "<h1> Welcome" + user.getFn() + "</h1>\n"
-							+ "</div>";
-			PrintWriter writer = resp.getWriter();
-			resp.setContentType("text/html");
-			writer.write(html);
+			/*
+			 * PrintWriter writer = resp.getWriter(); String html = "<h1> Welcome, " +
+			 * user.getFn() + "</h1>\n"; resp.setContentType("text/html");
+			 * writer.write(html);
+			 */
+			if (user.getRole().equals("FManager")) {
+				resp.setStatus(200);
+				//resp.sendRedirect("managermenu");
+			} else {
+				resp.setStatus(201);
+				//resp.sendRedirect("menu");
+			}
 		}
 		
 	}

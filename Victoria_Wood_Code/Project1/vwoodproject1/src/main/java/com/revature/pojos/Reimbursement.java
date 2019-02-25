@@ -9,14 +9,24 @@ public class Reimbursement {
 	private Date resolved;
 	private String author;
 	private String description;
-	private String resolver;
+	private int resolver;
 	private String status;
+	private int status_id;
 	private String type;
+	private int type_id;
 	
 	
+	public Reimbursement() {}
 	
 	
-	public Reimbursement(int id, float amount, Date submitted, Date resolved, String resolver, String description, String status,
+	public Reimbursement(float amount, String description, int type_id) {
+		super();
+		this.amount = amount;
+		this.description = description;
+		this.type_id = type_id;
+	}
+
+	public Reimbursement(int id, float amount, Date submitted, Date resolved, int resolver, String description, String status,
 			String type) {
 		super();
 		this.id = id;
@@ -66,10 +76,10 @@ public class Reimbursement {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	public String getResolver() {
+	public int getResolver() {
 		return resolver;
 	}
-	public void setResolver(String resolver) {
+	public void setResolver(int resolver) {
 		this.resolver = resolver;
 	}
 	public String getStatus() {
@@ -91,4 +101,32 @@ public class Reimbursement {
 		this.description = description;
 	}
 
+
+	public int getType_id() {
+		return type_id;
+	}
+
+
+	public void setType_id(int type_id) {
+		this.type_id = type_id;
+	}
+
+
+	@Override
+	public String toString() {
+		return "Reimbursement [amount=" + amount + ", description=" + description + ", status=" + status + ", type="
+				+ type + ", type_id=" + type_id + "]";
+	}
+
+
+	public int getStatus_id() {
+		return status_id;
+	}
+
+
+	public void setStatus_id(int status_id) {
+		this.status_id = status_id;
+	}
+
+	
 }

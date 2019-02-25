@@ -22,25 +22,27 @@ public class LoginServlet extends HttpServlet{
 	static UserService uService = new UserService();
 	static Logger log = Logger.getLogger(LoginServlet.class);
 	
+	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
 		User info = mapper.readValue(req.getInputStream(), User.class);
 		PrintWriter writer = resp.getWriter();
+		log.trace("IN LOGIN SERVLET");
 		
 		User u = uService.logIn(info.getUsername(), info.getPassword());
 		if(u == null) {
 			resp.setStatus(418);
 			log.trace("User not found");
-			resp.setContentType("application/json");
-			writer.write(mapper.writeValueAsString(u));
+			//resp.setContentType("application/json");
+			//writer.write(mapper.writeValueAsString(u));
 			
 		} else {
 			resp.setStatus(200);
 			HttpSession session = req.getSession();
 			session.setAttribute("sessionUser", u);
-			resp.setContentType("application/json");
-			writer.write(mapper.writeValueAsString(u));
+			//resp.setContentType("application/json");
+			//writer.write(mapper.writeValueAsString(u));
 			resp.sendRedirect("home");
 		}
 	}
