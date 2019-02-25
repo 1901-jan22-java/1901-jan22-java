@@ -13,14 +13,14 @@ public class ConnectionFactory {
 	private static ConnectionFactory cf = null;
 	
 	private ConnectionFactory() {
-		logger.info("INSTANTIATED CONNECTION FACTORY");
+	//	logger.info("INSTANTIATED CONNECTION FACTORY");
 	}
 	
 	public static synchronized ConnectionFactory getInstance() {
 		if(cf == null) {
 			cf = new ConnectionFactory();
 		}
-		logger.info("RETURNING CF INSTANCE " + cf.getClass());
+	//	logger.info("RETURNING CF INSTANCE " + cf.getClass());
 		return cf;
 	}
 	
@@ -31,12 +31,15 @@ public class ConnectionFactory {
 			// Applications no longer need to explictly load JDBC drivers using Class.forName(). 
 			// Existing programs which currently load JDBC drivers using Class.forName() 
 			// will continue to work without modification.
+	        Class.forName ("oracle.jdbc.OracleDriver");
 			conn = DriverManager.getConnection(
 						"jdbc:oracle:thin:@demo1901jan22rds.ctcx38zwi7iv.us-east-1.rds.amazonaws.com:1521:ORCL",
 						"demo1901jan22rds",
 						"X7B9GXr#uPn%siF*qrVR5NqJRBBvIy"
 					);
 		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		
