@@ -147,8 +147,8 @@ function make_new_reimbursement(){
 	xhr.onreadystatechange = function(){
 		if(xhr.readyState == 4 && xhr.status == 200){
 			$('tbody').append(xhr.response)
-			amountInputField = "";
-			descInputField = "";
+			amountInputField = " ";
+			descInputField = " ";
 			alert("Reimbursement Submitted");
 		} else if (xhr.status == 401){
 			alert("Something went wrong. Please try again!");

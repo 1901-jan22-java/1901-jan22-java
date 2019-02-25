@@ -37,7 +37,7 @@ public class UserServlet extends ProjectServlet {
 		}
 		
 		htmlResp.append(
-				"<table class=\"table\">\r\n" + 
+				"<table class=\"px table\">\r\n" + 
 				"	<thead>\r\n" + 
 				"		<tr>\r\n" + 
 				"			<th scope=\"col\">RID</th>\r\n" + 
@@ -62,10 +62,11 @@ public class UserServlet extends ProjectServlet {
 		}
 		htmlResp.append( 
 				"	</tbody>\r\n" + 
-				"</table>"
+				"</table><hr>"
 		);
 		if(Integer.parseInt(uid_info[1]) == 1) {
-		htmlResp.append("<div class=\"row\">\r\n" + 
+		htmlResp.append(
+				"<div class=\"mx-1 px-1 row\">\r\n" + 
 				"<input type=\"hidden\" name=\"uid\" value=" + uid_info[0] + ">" +
 				"    <div class=\"col-6\">\r\n" + 
 				"         <label>Amount</label>\r\n" + 
@@ -81,18 +82,21 @@ public class UserServlet extends ProjectServlet {
 				"      </select>\r\n" + 
 				"    </div>\r\n" + 
 				"  </div>\r\n" + 
-				"  <div class=\"row col-8 my-3\">\r\n" + 
+				"  <div class=\"row col-8 ml-3 px-1 my-3\">\r\n" + 
 				"    <label>Description</label>\r\n" + 
 				"    <input type=\"text\" class=\"form-control\" name=\"desc\" placeholder=\"Enter details pertaining to your reimbursement request\">\r\n" + 
 				"  </div>\r\n" + 
-				"  <button id=\"new_reimb\" class=\"btn btn-outline-primary\">Submit</button>");
+				"<div class=\"text-center\">\r\n" + 
+				"  <button id=\"new_reimb\" class=\"btn btn-primary btn-lg my-3\">Submit</button>" + 
+				"</div>"
+				);
 		} else {
 			htmlResp.append(
 					"<input type=\"hidden\" name=\"uid\" value=" + uid_info[0] + ">" +
-					"<div class=\"row\">\r\n" + 
+					"<div class=\"px-5 row\">\r\n" + 
 					"    <button  id=\"approve\" type=\"button\" class=\"btn btn-success \">APPROVE</button>\r\n" + 
-					"    <button id=\"deny\" type=\"button\" class=\"btn btn-danger mx-3\">DENY</button>\r\n" + 
-					"      <label>Filter:</label> <br>\r\n" + 
+					"    <button id=\"deny\" type=\"button\" class=\"btn btn-danger mx-5\">DENY</button>\r\n" + 
+					"      <label id=\"filter\" class=\"mr-3 mt-1\">Filter:</label> <br>\r\n" + 
 					"      <select name=\"filter\">\r\n" + 
 					"        <option value=\"*\">ALL</option>\r\n" + 
 					"        <option value=\"0\">PENDING</option>\r\n" + 

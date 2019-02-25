@@ -1,3 +1,47 @@
 .selected {
 	background-color:yellow;
 }
+
+#login{
+	background-color: #ff9900;
+	border-color: #ff9900;
+}
+
+.loginLabel, #login, #approve, #deny, #filter, #new_reimb, th, select, label {
+	font-family: 'open sans';
+	font-size: 24px;
+	font-weight: bold;
+	color: white;
+}
+
+
+.inputLabel, option {
+	font-family: 'raleway';
+	font-size: 18px;
+}
+
+option {
+	font-style: italic;
+}
+
+.vertical-center {
+  min-height: 100%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 100vh; /* These two lines are counted as one :-)       */
+
+  display: flex;
+  align-items: center;
+  background: url("images/login.jpg") no-repeat center center fixed;;
+    -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+th, #filter, select, label {
+	color: black;
+}
+
+td {
+	font-family: 'raleway';
+}
