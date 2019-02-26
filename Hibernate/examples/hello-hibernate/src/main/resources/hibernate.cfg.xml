@@ -32,7 +32,7 @@
         create-drop: creates the schema, destroying all 
         previously existing info if there. Also drops the 
         schema when the SessionFactory is closed -->
-        <property name="hibernate.hbm2ddl.auto">create</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
         <!-- 
         When using hibernate mapping files to configure 
         ORM mapping, we use mapping resource 

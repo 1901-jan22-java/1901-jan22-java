@@ -18,7 +18,9 @@ public class User {
 	
 	@Id //necessary for Hibernate to identify objects uniquely
 	@Column(name="USER_ID")
-	@SequenceGenerator(name="U_SEQ_GEN", sequenceName="U_SEQ")
+	//More on @SequenceGenerator at: https://docs.oracle.com/javaee/5/api/javax/persistence/SequenceGenerator.html
+	//name(required), optional: allocationSize, initialValue, sequenceName
+	@SequenceGenerator(name="U_SEQ_GEN", sequenceName="U_SEQ", allocationSize=1)
 	//more on @GeneratedValue at https://www.objectdb.com/java/jpa/entity/generated
 	@GeneratedValue(generator="U_SEQ_GEN", strategy=GenerationType.SEQUENCE)
 	private int id;
