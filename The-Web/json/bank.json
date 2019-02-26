@@ -48,6 +48,27 @@
       "username": "myuser",
       "password": "234",
       "id": 7
+    },
+    {
+      "firstName": "observable",
+      "lastName": "test",
+      "username": "test",
+      "password": "test",
+      "id": 8
+    },
+    {
+      "firstName": "tomy",
+      "lastName": "backend",
+      "username": "adding",
+      "password": "newuser",
+      "id": 9
+    },
+    {
+      "firstName": "ifthus",
+      "lastName": "works",
+      "username": "sanford",
+      "password": "wantstoknow",
+      "id": 10
     }
   ],
   "accounts": [
