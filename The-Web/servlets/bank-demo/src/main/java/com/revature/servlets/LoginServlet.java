@@ -19,29 +19,34 @@ import com.revature.service.UserService;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet{
 
-	UserService uService = new UserService();
-	Logger log = Logger.getLogger(LoginServlet.class);
+	final static Logger logger = Logger.getLogger(LoginServlet.class);
+	UserService service = new UserService();
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ObjectMapper mapper = new ObjectMapper();
-		User info = mapper.readValue(req.getInputStream(), User.class);
-		PrintWriter writer = resp.getWriter();
 		
-		User u = uService.login(info.getUsername(), info.getPassword());
+		User info = mapper
+				.readValue(req.getInputStream(),User.class);		
+		logger.info("Logging in user with credentials " + info);
+		
+		PrintWriter writer = resp.getWriter();
+		resp.setContentType("application/json");
+		
+		User u = service.login(info.getUsername(), info.getPassword());
 		if(u == null) {
-			resp.setStatus(418);
-			log.trace("User not found");
-			resp.setContentType("application/json");
-			writer.write(mapper.writeValueAsString(u));
-			
-		} else {
-			resp.setStatus(200);
-			HttpSession session = req.getSession();
-			session.setAttribute("sessionUser", u);
-			resp.setContentType("application/json");
-			writer.write(mapper.writeValueAsString(u));
-			//resp.sendRedirect("home");
+			//invalid credentials
+			writer.write(mapper.writeValueAsString(null));
 		}
+		else {
+			//valid login credentials 
+			HttpSession session = req.getSession();
+			logger.info("Adding user to session " + session.getId());
+			session.setAttribute("user", u);
+			String json = mapper.writeValueAsString(u);
+			writer.write(json);
+			
+		}
+	
 	}
 }
