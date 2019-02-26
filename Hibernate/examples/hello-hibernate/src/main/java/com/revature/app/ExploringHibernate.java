@@ -116,6 +116,7 @@ public class ExploringHibernate {
 		User u = (User) session.load(User.class, id);
 		logger.info("just called session.load()");
 		session.close();
+		return u;
 	}
 
 }
