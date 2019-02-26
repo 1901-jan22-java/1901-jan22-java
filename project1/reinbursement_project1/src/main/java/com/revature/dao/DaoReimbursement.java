@@ -85,53 +85,53 @@ public class DaoReimbursement implements DAOInterface<PojoReimbursement> {
 	}
 
 	public DprReimbursement getReimbursement(Integer itemId) {
-		DprReimbursement res = null;
+		DprReimbursement pes = null;
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			String sql = "select * from ers_reimbursement_view where reimb_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
 			ps.setInt(1, itemId);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				res = readReimbursement(rs);
+				pes = readReimbursement(rs);
 			}
 		} catch (SQLException e) {
 			log.error("SQLException in ReimbursementRepository.getReimbursement()", e);
 		}
-		return res;
+		return pes;
 	}
 
 	@Override
-	public PojoReimbursement create(PojoReimbursement newItem) {
+	public PojoReimbursement create(PojoReimbursement ni) {
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			String sql = "insert into ers_reimbursement(amount, submitted, resolved, "
 					+ "reimb_description, receipt, author_id, resolver_id, reimb_status_id, "
 					+ "reimb_type_id) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			String[] keys = { "reimb_id" };
 			PreparedStatement ps = conn.prepareStatement(sql, keys);
-			ps.setDouble(1, newItem.getAmount());
-			ps.setDate(2, newItem.getSubmitted());
-			ps.setDate(3, newItem.getResolved());
-			ps.setString(4, newItem.getReimb_description());
-			ps.setBlob(5, newItem.getReceipt());
-			ps.setInt(6, newItem.getAuthor_id());
-			Integer res_id = newItem.getResolver_id();
+			ps.setDouble(1, ni.getAmount());
+			ps.setDate(2, ni.getSubmitted());
+			ps.setDate(3, ni.getResolved());
+			ps.setString(4, ni.getReimb_description());
+			ps.setBlob(5, ni.getReceipt());
+			ps.setInt(6, ni.getAuthor_id());
+			Integer res_id = ni.getResolver_id();
 			if (res_id == null) {
 				ps.setNull(7, Types.INTEGER);
 			} else {
 				ps.setInt(7, res_id);
 			}
-			ps.setInt(8, newItem.getReimb_status_id());
-			ps.setInt(9, newItem.getReimb_type_id());
+			ps.setInt(8, ni.getReimb_status_id());
+			ps.setInt(9, ni.getReimb_type_id());
 			if (ps.executeUpdate() > 0) {
 				ResultSet rs = ps.getGeneratedKeys();
 				if (rs.next()) {
-					newItem.setReimb_id(rs.getInt(1));
+					ni.setReimb_id(rs.getInt(1));
 				}
 			}
 		} catch (SQLException e) {
 			log.error("SQLException in ReimbursementRepository.create()", e);
 		}
-		return newItem;
+		return ni;
 	}
 
 	@Override
@@ -181,11 +181,9 @@ public class DaoReimbursement implements DAOInterface<PojoReimbursement> {
 				Integer resolver_id = rs.getInt("resolver_id");
 				Integer status_id = rs.getInt("reimb_status_id");
 				Integer type_id = rs.getInt("reimb_type_id");
-
 				res.add(new PojoReimbursement(id, amount, submitted, resolved, description, receipt, author_id,
 						resolver_id, status_id, type_id));
 			}
-
 		} catch (SQLException e) {
 			log.error("SQLException in ReimbursementRepository.readAll()", e);
 		}
@@ -193,7 +191,7 @@ public class DaoReimbursement implements DAOInterface<PojoReimbursement> {
 	}
 
 	@Override
-	public PojoReimbursement update(Integer itemId, PojoReimbursement newItem) {
+	public PojoReimbursement update(Integer itemId, PojoReimbursement ni) {
 		PojoReimbursement res = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -219,15 +217,15 @@ public class DaoReimbursement implements DAOInterface<PojoReimbursement> {
 						+ "reimb_description = ?, receipt = ?, author_id = ?, resolver_id = ?, "
 						+ "reimb_status_id = ?, reimb_type_id = ? where reimb_id = ?";
 				ps = conn.prepareStatement(sql);
-				ps.setDouble(1, newItem.getAmount());
-				ps.setDate(2, newItem.getSubmitted());
-				ps.setDate(3, newItem.getResolved());
-				ps.setString(4, newItem.getReimb_description());
-				ps.setBlob(5, newItem.getReceipt());
-				ps.setInt(6, newItem.getAuthor_id());
-				ps.setInt(7, newItem.getResolver_id());
-				ps.setInt(8, newItem.getReimb_status_id());
-				ps.setInt(9, newItem.getReimb_type_id());
+				ps.setDouble(1, ni.getAmount());
+				ps.setDate(2, ni.getSubmitted());
+				ps.setDate(3, ni.getResolved());
+				ps.setString(4, ni.getReimb_description());
+				ps.setBlob(5, ni.getReceipt());
+				ps.setInt(6, ni.getAuthor_id());
+				ps.setInt(7, ni.getResolver_id());
+				ps.setInt(8, ni.getReimb_status_id());
+				ps.setInt(9, ni.getReimb_type_id());
 				ps.setInt(10, itemId);
 				if (ps.executeUpdate() > 0) {
 					conn.commit();
@@ -243,7 +241,7 @@ public class DaoReimbursement implements DAOInterface<PojoReimbursement> {
 
 	@Override
 	public PojoReimbursement delete(PojoReimbursement item) {
-		PojoReimbursement res = null;
+		PojoReimbursement pes = null;
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 			conn.setAutoCommit(false);
 			String sql = "select * from ers_reimbursement where reimb_id = ?";
@@ -268,13 +266,13 @@ public class DaoReimbursement implements DAOInterface<PojoReimbursement> {
 				ps.setInt(1, item.getReimb_id());
 				if (ps.executeUpdate() > 0) {
 					conn.commit();
-					res = temp;
+					pes = temp;
 				}
 			}
 			conn.setAutoCommit(true);
 		} catch (SQLException e) {
 			log.error("SQLException in ReimbursementRepository.delete()", e);
 		}
-		return res;
+		return pes;
 	}
 }

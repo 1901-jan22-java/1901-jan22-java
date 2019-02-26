@@ -49,7 +49,7 @@ public class DaoUser implements DAOInterface<UserData> {
 		return res;
 	}
 	
-	public DprUser getUser(Integer itemId) {
+	public DprUser getUser(Integer iId) {
 		DprUser res = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -57,7 +57,7 @@ public class DaoUser implements DAOInterface<UserData> {
 			String sql = "select u.username, u.password, u.first_name, u.last_name, u.email, ur.user_role as role from "
 					+ "(select * from ers_users where user_id = ?) u join ers_user_roles ur on u.role_id = ur.role_id;";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, itemId);
+			ps.setInt(1, iId);
 
 			ResultSet rs = ps.executeQuery();
 
@@ -98,7 +98,7 @@ public class DaoUser implements DAOInterface<UserData> {
 	}
 
 	@Override
-	public UserData create(UserData newItem) {
+	public UserData create(UserData ni) {
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -106,17 +106,17 @@ public class DaoUser implements DAOInterface<UserData> {
 					+ "values(lower(?), ?, ?, ?, ?, ?)";
 			String[] keys = { "user_id" };
 			PreparedStatement ps = conn.prepareStatement(sql, keys);
-			ps.setString(1, newItem.getUsername());
-			ps.setString(2, newItem.getPassword());
-			ps.setString(3, newItem.getFirst_name());
-			ps.setString(4, newItem.getLast_name());
-			ps.setString(5, newItem.getEmail());
-			ps.setInt(6, newItem.getRole_id());
+			ps.setString(1, ni.getUsername());
+			ps.setString(2, ni.getPassword());
+			ps.setString(3, ni.getFirst_name());
+			ps.setString(4, ni.getLast_name());
+			ps.setString(5, ni.getEmail());
+			ps.setInt(6, ni.getRole_id());
 
 			if (ps.executeUpdate() > 0) {
 				ResultSet rs = ps.getGeneratedKeys();
 				if (rs.next()) {
-					newItem.setUser_id(rs.getInt(1));
+					ni.setUser_id(rs.getInt(1));
 				}
 			}
 
@@ -124,19 +124,19 @@ public class DaoUser implements DAOInterface<UserData> {
 			log.error("SQLException in UserRepository.create()", e);
 		}
 
-		return newItem;
+		return ni;
 
 	}
 
 	@Override
-	public UserData read(Integer itemId) {
+	public UserData read(Integer iId) {
 		UserData res = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
 			String sql = "select * from ers_users where user_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, itemId);
+			ps.setInt(1, iId);
 
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
@@ -217,7 +217,7 @@ public class DaoUser implements DAOInterface<UserData> {
 	}
 
 	@Override
-	public UserData update(Integer itemId, UserData newItem) {
+	public UserData update(Integer iId, UserData ni) {
 		UserData res = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -226,7 +226,7 @@ public class DaoUser implements DAOInterface<UserData> {
 
 			String sql = "select * from ers_users where user_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, itemId);
+			ps.setInt(1, iId);
 
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
@@ -243,13 +243,13 @@ public class DaoUser implements DAOInterface<UserData> {
 				sql = "update ers_reimbursement set username = ?, password = ?, first_name = ?, "
 						+ "last_name = ?, email = ?, role_id = ? where user_id = ?";
 				ps = conn.prepareStatement(sql);
-				ps.setString(1, newItem.getUsername());
-				ps.setString(2, newItem.getPassword());
-				ps.setString(3, newItem.getFirst_name());
-				ps.setString(4, newItem.getLast_name());
-				ps.setString(5, newItem.getEmail());
-				ps.setInt(6, newItem.getRole_id());
-				ps.setInt(7, itemId);
+				ps.setString(1, ni.getUsername());
+				ps.setString(2, ni.getPassword());
+				ps.setString(3, ni.getFirst_name());
+				ps.setString(4, ni.getLast_name());
+				ps.setString(5, ni.getEmail());
+				ps.setInt(6, ni.getRole_id());
+				ps.setInt(7, iId);
 
 				if (ps.executeUpdate() > 0) {
 					conn.commit();
@@ -267,17 +267,13 @@ public class DaoUser implements DAOInterface<UserData> {
 	}
 
 	@Override
-	public UserData delete(UserData item) {
-		UserData res = null;
-
+	public UserData delete(UserData i) {
+		UserData pes = null;
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
 			conn.setAutoCommit(false);
-
 			String sql = "select * from ers_users where user_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, item.getUser_id());
-
+			ps.setInt(1, i.getUser_id());
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				Integer id = rs.getInt("user_id");
@@ -288,23 +284,20 @@ public class DaoUser implements DAOInterface<UserData> {
 				String email = rs.getString("email");
 				Integer role_id = rs.getInt("role_id");
 				UserData temp = new UserData(id, username, password, first_name, last_name, email, role_id);
-
 				sql = "delete from ers_users where user_id = ?";
 				ps = conn.prepareStatement(sql);
-				ps.setInt(1, item.getUser_id());
-
+				ps.setInt(1, i.getUser_id());
 				if (ps.executeUpdate() > 0) {
 					conn.commit();
-					res = temp;
+					pes = temp;
 				}
 			}
 			conn.setAutoCommit(true);
-
 		} catch (SQLException e) {
 			log.error("SQLException in UserRepository.delete()", e);
 			return null;
 		}
 
-		return res;
+		return pes;
 	}
 }

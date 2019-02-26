@@ -20,7 +20,6 @@ public class UserService {
 	private static final DaoUserRole rolesRepo = new DaoUserRole();
 	private static List<DprUser> usersDTO = new ArrayList<>();
 	private static final BiMap<Integer, String> roles = HashBiMap.create();
-
 	static {
 		loadRoles();
 		usersDTO = usersRepo.getAllUsers();
@@ -39,36 +38,29 @@ public class UserService {
 
 	public static List<String> getAllRoles() {
 		List<String> res = new ArrayList<>();
-
 		for (String r : roles.values()) {
 			res.add(r);
 		}
-
 		return res;
 	}
-
 	public static DprUser register(DprUser u) {
 		if (usersRepo.read(u.getUsername()) != null)
 			return null;
 		usersDTO.add(u);
 		return dataToUser(usersRepo.create(userToData(u)));
 	}
-
 	public static DprUser login(DprUser u) {
 		UserData repoUser = usersRepo.read(u.getUsername());
 		if (!repoUser.getPassword().equalsIgnoreCase(u.getPassword()))
 			return null;
 		return dataToUser(repoUser);
 	}
-
 	public static DprUser getUser(String un) {
 		return usersDTO.stream().filter(user -> user.getUsername().equalsIgnoreCase(un)).findAny().orElse(null);
 	}
-
 	public static UserData getUserData(String un) {
 		return usersRepo.read(un);
 	}
-
 	public static List<DprReimbursement> getReimbursements(DprUser u) {
 		List<DprReimbursement> res = null;
 		if (u.getRole().equalsIgnoreCase("Admin")) {
@@ -79,7 +71,6 @@ public class UserService {
 		}
 		return res;
 	}
-
 	public static List<DprReimbursement> getReimbursements(UserData ud) {
 		List<DprReimbursement> res = null;
 		if (ud.getRole_id().equals(getRoleID("Admin"))) {
@@ -90,7 +81,6 @@ public class UserService {
 		}
 		return res;
 	}
-
 	public static UserData userToData(DprUser u) {
 		log.info(u.getRole());
 		Integer userRoleID = getRoleID(u.getRole());

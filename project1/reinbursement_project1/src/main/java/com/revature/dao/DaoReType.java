@@ -26,57 +26,57 @@ public class DaoReType implements DAOInterface<PojoReType> {
 	}
 
 	@Override
-	public PojoReType create(PojoReType newItem) {
+	public PojoReType create(PojoReType ni) {
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
 			String sql = "insert into ers_reimbursement_type(reimb_type) values(?)";
 			String[] keys = { "type_id" };
 			PreparedStatement ps = conn.prepareStatement(sql, keys);
-			ps.setString(1, newItem.getReimb_type());
+			ps.setString(1, ni.getReimb_type());
 
 			if (ps.executeUpdate() > 0) {
 				ResultSet rs = ps.getGeneratedKeys();
 				if (rs.next()) {
-					newItem.setType_id(rs.getInt("type_id"));
+					ni.setType_id(rs.getInt("type_id"));
 				}
 			}
 		} catch (SQLException e) {
 			log.error("SQLException in ReimbursementTypeRepository.create()", e);
 		}
 
-		return newItem;
+		return ni;
 
 	}
 
 	@Override
-	public PojoReType read(Integer itemId) {
-		PojoReType res = null;
+	public PojoReType read(Integer iId) {
+		PojoReType pes = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
 			String sql = "select * from ers_reimbursement_type where type_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, itemId);
+			ps.setInt(1, iId);
 
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				Integer id = rs.getInt("type_id");
 				String type = rs.getString("reimb_type");
 
-				res = new PojoReType(id, type);
+				pes = new PojoReType(id, type);
 			}
 
 		} catch (SQLException e) {
 			log.error("SQLException in ReimbursementTypeRepository.read()", e);
 		}
 
-		return res;
+		return pes;
 	}
 
 	@Override
 	public List<PojoReType> readAll() {
-		List<PojoReType> res = new ArrayList<>();
+		List<PojoReType> pes = new ArrayList<>();
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -88,19 +88,19 @@ public class DaoReType implements DAOInterface<PojoReType> {
 				Integer id = rs.getInt("type_id");
 				String type = rs.getString("reimb_type");
 
-				res.add(new PojoReType(id, type));
+				pes.add(new PojoReType(id, type));
 			}
 
 		} catch (SQLException e) {
 			log.error("SQLException in ReimbursementTypeRepository.readAll()", e);
 		}
 
-		return res;
+		return pes;
 	}
 
 	@Override
-	public PojoReType update(Integer itemId, PojoReType newItem) {
-		PojoReType res = null;
+	public PojoReType update(Integer iId, PojoReType ni) {
+		PojoReType pes = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -108,7 +108,7 @@ public class DaoReType implements DAOInterface<PojoReType> {
 
 			String sql = "select * from ers_reimbursement_type where type_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, itemId);
+			ps.setInt(1, iId);
 
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
@@ -117,12 +117,12 @@ public class DaoReType implements DAOInterface<PojoReType> {
 
 				sql = "update ers_reimbursement_type set reimb_type = ? where type_id = ?";
 				ps = conn.prepareStatement(sql);
-				ps.setString(1, newItem.getReimb_type());
-				ps.setInt(2, itemId);
+				ps.setString(1, ni.getReimb_type());
+				ps.setInt(2, iId);
 
 				if (ps.executeUpdate() > 0) {
 					conn.commit();
-					res = temp;
+					pes = temp;
 				}
 			}
 			conn.setAutoCommit(true);
@@ -131,12 +131,12 @@ public class DaoReType implements DAOInterface<PojoReType> {
 			log.error("SQLException in ReimbursementTypeRepository.update()", e);
 		}
 
-		return res;
+		return pes;
 	}
 
 	@Override
-	public PojoReType delete(PojoReType item) {
-		PojoReType res = null;
+	public PojoReType delete(PojoReType i) {
+		PojoReType pes = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
 
@@ -154,11 +154,11 @@ public class DaoReType implements DAOInterface<PojoReType> {
 
 				sql = "delete from ers_reimbursement_type where type_id = ?";
 				ps = conn.prepareStatement(sql);
-				ps.setInt(1, item.getType_id());
+				ps.setInt(1, i.getType_id());
 
 				if (ps.executeUpdate() > 0) {
 					conn.commit();
-					res = temp;
+					pes = temp;
 				}
 			}
 			conn.setAutoCommit(true);
@@ -167,6 +167,6 @@ public class DaoReType implements DAOInterface<PojoReType> {
 			log.error("SQLException in ReimbursementTypeRepository.delete()", e);
 		}
 
-		return res;
+		return pes;
 	}
 }

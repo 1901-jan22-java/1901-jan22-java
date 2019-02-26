@@ -14,111 +14,88 @@ import com.revature.pojos.UserRoleData;
 import com.revature.interfaces.DAOInterface;
 
 public class DaoUserRole implements DAOInterface<UserRoleData> {
-
 	private static Logger log = Logger.getLogger(DaoUserRole.class);
-
 	static {
 		log.trace("UserRoleRepository Class Initialized.");
 	}
-
 	public DaoUserRole() {
 		log.trace("UserRoleRepository Object Instantiated.");
 	}
-
 	@Override
-	public UserRoleData create(UserRoleData newItem) {
-
+	public UserRoleData create(UserRoleData newi) {
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
 			String sql = "insert into ers_user_roles(user_role) values(?)";
 			String[] keys = { "type_id" };
 			PreparedStatement ps = conn.prepareStatement(sql, keys);
-			ps.setString(1, newItem.getUser_role());
-
+			ps.setString(1, newi.getUser_role());
 			if (ps.executeUpdate() > 0) {
 				ResultSet rs = ps.getGeneratedKeys();
 				if (rs.next()) {
-					newItem.setRole_id(rs.getInt("role_id"));
+					newi.setRole_id(rs.getInt("role_id"));
 				}
 			}
-
 		} catch (SQLException e) {
 			log.error("SQLException in UserRoleRepository.create()", e);
 		}
 
-		return newItem;
-
+		return newi;
 	}
 
 	@Override
-	public UserRoleData read(Integer itemId) {
+	public UserRoleData read(Integer iId) {
 		UserRoleData res = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
 			String sql = "select * from ers_user_roles where role_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, itemId);
-
+			ps.setInt(1, iId);
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				Integer id = rs.getInt("role_id");
 				String role = rs.getString("user_role");
-
 				res = new UserRoleData(id, role);
 			}
-
 		} catch (SQLException e) {
 			log.error("SQLException in UserRoleRepository.read()", e);
 		}
-
 		return res;
 	}
-
 	@Override
 	public List<UserRoleData> readAll() {
 		List<UserRoleData> res = new ArrayList<>();
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
 			String sql = "select * from ers_user_roles";
 			PreparedStatement ps = conn.prepareStatement(sql);
-
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
 				Integer id = rs.getInt("role_id");
 				String role = rs.getString("user_role");
-
 				res.add(new UserRoleData(id, role));
 			}
-
 		} catch (SQLException e) {
 			log.error("SQLException in UserRoleRepository.readAll()", e);
 		}
-
 		return res;
 	}
 
 	@Override
-	public UserRoleData update(Integer itemId, UserRoleData newItem) {
+	public UserRoleData update(Integer iId, UserRoleData newi) {
 		UserRoleData res = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
 			conn.setAutoCommit(false);
-
 			String sql = "select * from ers_user_roles where role_id = ?";
 			PreparedStatement ps = conn.prepareStatement(sql);
-			ps.setInt(1, itemId);
-
+			ps.setInt(1, iId);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				UserRoleData temp = new UserRoleData(rs.getInt("role_id"), rs.getString("user_role"));
 
 				sql = "update ers_user_roles set user_role = ? where role_id = ?";
 				ps = conn.prepareStatement(sql);
-				ps.setString(1, newItem.getUser_role());
-				ps.setInt(2, itemId);
+				ps.setString(1, newi.getUser_role());
+				ps.setInt(2, iId);
 
 				if (ps.executeUpdate() > 0) {
 					conn.commit();
@@ -135,7 +112,7 @@ public class DaoUserRole implements DAOInterface<UserRoleData> {
 	}
 
 	@Override
-	public UserRoleData delete(UserRoleData item) {
+	public UserRoleData delete(UserRoleData i) {
 		UserRoleData res = null;
 
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -154,7 +131,7 @@ public class DaoUserRole implements DAOInterface<UserRoleData> {
 
 				sql = "delete from ers_user_roles where rold_id = ?";
 				ps = conn.prepareStatement(sql);
-				ps.setInt(1, item.getRole_id());
+				ps.setInt(1, i.getRole_id());
 
 				if (ps.executeUpdate() > 0) {
 					conn.commit();

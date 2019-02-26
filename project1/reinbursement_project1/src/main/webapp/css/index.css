@@ -82,7 +82,7 @@ tr:hover td {
 }
 
 tr.selected td {
-	background: green !important;
+	background: #00ff40!important;
 	color: white !important;
 }
 
