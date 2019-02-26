@@ -13,7 +13,8 @@ public class ExploringHibernate {
 	final static Logger logger = Logger.getLogger(ExploringHibernate.class);
 	
 	public static void main(String[] args) {
-		System.out.println(get(2));
+		User u = new User("this is transient", "t");
+		merge(u);
 	}
 	
 	/*
@@ -85,7 +86,7 @@ public class ExploringHibernate {
 	 * or not any methods are called on the object in the persistent state
 	 * - use this method to retrieve data that we are not sure exists
 	 */
-	static User get(int id) {
+	static User getDemo(int id) {
 		Session session = util.getSession();
 		Transaction tx = session.beginTransaction();
 		logger.info("about to call get() method");
@@ -93,6 +94,13 @@ public class ExploringHibernate {
 		logger.info("called get method, going to call method on User object");
 		u.setPassword("CHANGED PASSWORD");
 		tx.commit();
+		session.close();
+		return u;
+	}
+	static User get(int id) {
+		Session session = util.getSession();
+		Transaction tx = session.beginTransaction();
+		User u = (User) session.get(User.class, id);
 		session.close();
 		return u;
 	}
@@ -106,6 +114,7 @@ public class ExploringHibernate {
 	 * - this method returns a PROXY of the object and does not 
 	 * hit the database until a method of the object is called
 	 * while the session is still open
+	 * - If a method is called on a proxy, we see a LazyInitializationException
 	 * - a proxy is a hibernate object that allows for lazy loading
 	 * of data; it is basically a shell of an object that holds the 
 	 * ID of it without any actual data from DB. Gets data when it 
@@ -114,8 +123,51 @@ public class ExploringHibernate {
 	static User load(int id) {
 		Session session = util.getSession();
 		User u = (User) session.load(User.class, id);
-		logger.info("just called session.load()");
+		logger.info("just called session.load(), about to call toString()");
+		System.out.println(u.getId());
 		session.close();
+		return u;
 	}
+	
+	/*
+	 * session.update(Object)
+	 * - acts upon method passed in (void return type)
+	 * - transitions the object passed in as param from detached to persistent 
+	 * - throws an exception if you pass it a transient entity
+	 * - org.hibernate.StaleStateException: 
+	 */
+	static void update(User u) {
+		Session session = util.getSession();
+		try {
+			Transaction tx = session.beginTransaction();
+			session.update(u);
+			tx.commit();
+		}finally {
+			session.close();
+		}
+	}
+	
+	/*
+	 * session.merge(Object)
+	 * - main purpose of this method is to update a 
+	 * persistent entity instance with new 
+	 * fields from a detached entity instance 
+	 * - if the entity is detached, it is copied upon an
+	 * existing persistent entity (in practice, it's updated
+	 * and brought into the persistent state)
+	 * - if the entity is transient, the values are 
+	 * copied to a newly persistent entity 
+	 */
+	static void merge(User u) {
+		Session session = util.getSession();
+		try {
+			Transaction tx = session.beginTransaction();
+			session.merge(u);
+			tx.commit();
+		}finally {
+			session.close();
+		}
+	}
+	
 
 }
