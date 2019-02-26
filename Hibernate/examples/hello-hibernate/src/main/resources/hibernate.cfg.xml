@@ -9,9 +9,9 @@
         	org.hibernate.dialect.Oracle10gDialect</property>
         <property name="hibernate.connection.driver_class">
         	oracle.jdbc.driver.OracleDriver</property>
-        <property name="hibernate.connection.username">demo1901jan22rds</property>
-        <property name="hibernate.connection.password">demo1901jan22rdspass</property>
-        <property name="hibernate.connection.url">jdbc:oracle:thin:@demo1901jan22rds.cjrlr2je5uec.us-east-1.rds.amazonaws.com:1521/ORCL</property>
+        <property name="hibernate.connection.username">kevho48</property>
+        <property name="hibernate.connection.password">Kroxas123</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@demo1901jan22rds.c8nizzvvwyni.us-east-1.rds.amazonaws.com:1521/TESTING</property>
       
       	<!-- show HQL commands as theyre carried out in the console -->
         <property name="show_sql">true</property>
@@ -42,5 +42,6 @@
         When using annotations to configure a class, we use
         mapping class
         <mapping class="com.websystique.hibernate.model.Student"/>-->
+        <mapping class="com.revature.models.User"/>
     </session-factory>
 </hibernate-configuration>
