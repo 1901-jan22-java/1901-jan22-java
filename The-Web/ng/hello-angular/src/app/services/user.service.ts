@@ -10,6 +10,7 @@ A service is a special class that can contain a value, function or
  a service because you use it throughout your entire application. Other
  examples, might be a data access service or a service that consumes
  some public API.
+ 
 Most services are just special classes. You export them like any other
  TypeScript class. The difference appears when you try and create a
  service for use in a class. Most often you only want one instance of
@@ -17,6 +18,7 @@ Most services are just special classes. You export them like any other
  consistency and better performance as you don’t have multiple instances
  of the same functionality being tracked in memory. Typically, you have
  to inject a service into a class for use.
+
 So what is dependency injection? Well, at a high level it is a design
  pattern. The framework that you’re using, in this case Angular, manages
  your class instantiation and provision to other classes for you. You simply
