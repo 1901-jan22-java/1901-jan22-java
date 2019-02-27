@@ -42,6 +42,7 @@
         When using annotations to configure a class, we use
         mapping class
         <mapping class="com.websystique.hibernate.model.Student"/>-->
+		 <mapping class="com.revature.models.Post"/>       
         <mapping class="com.revature.models.User"/>
         <mapping resource="TestMapping.hbm.xml"/>
     </session-factory>
