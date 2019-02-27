@@ -12,9 +12,9 @@ public class BlogApp {
 		PostRepository pDao = new PostRepository();
 		UserRepository uDao = new UserRepository();
 		
-		User me = uDao.get(23);
-		User other = uDao.get(3);
-		uDao.follow(other, me);
+		User me = uDao.get(2);
+		User other = uDao.get(25);
+		uDao.unfollow(me, other);
 	}
 
 
