@@ -9,7 +9,7 @@ import { User } from 'src/app/models/user.model';
 })
 export class HttpComponent implements OnInit {
   users: User[] = [];
-  unameInput: string;
+  unameInput: string = 'test';
   user: User = null;
   notFound = false;
   username: string;
@@ -55,6 +55,14 @@ export class HttpComponent implements OnInit {
     );
   }
 
+  TestAddUser() {
+    let temp = new User();
+    temp.firstName = this.fn;
+    temp.lastName = this.ln;
+    temp.username = this.username;
+    temp.password = this.pw;
+    this.users.push(temp);
+  }
 
   addUser() {
     let temp = new User();
@@ -66,6 +74,7 @@ export class HttpComponent implements OnInit {
     this.uService.addUser(temp).subscribe(
       u => {
         console.log('successfully added user');
+        console.log(this.users);
         this.users.push(u);
            }
     );
