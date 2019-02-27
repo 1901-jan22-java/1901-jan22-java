@@ -2,6 +2,7 @@ package com.revature.dao;
 
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -11,6 +12,7 @@ import com.revature.util.ConnectionUtil;
 public class UserRepository {
 	
 	static ConnectionUtil util = ConnectionUtil.getInstance();
+	final static Logger logger = Logger.getLogger(UserRepository.class);
 
 	public User get(int id) {
 		Session session = util.getSession();
@@ -25,7 +27,21 @@ public class UserRepository {
 		Transaction tx = session.beginTransaction();
 		Set<User> follows = user.getFollowing();
 		follows.add(following);
-		session.merge(user);
+		session.merge(user); //but what if this was update!?
+		tx.commit();
+		session.close();
+	}
+	
+	public void unfollow(User user, User unfollow) {
+		Session session = util.getSession();
+		Transaction tx = session.beginTransaction();
+//		for(User f : follows) {
+//			if(f.getId() == unfollow.getId()){
+//				follows.remove(f);
+//			}
+//		}
+		user.getFollowing().remove(unfollow);
+		session.merge(user); //but what if this was update!?
 		tx.commit();
 		session.close();
 	}
