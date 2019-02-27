@@ -13,12 +13,8 @@ public class ExploringHibernate {
 	final static Logger logger = Logger.getLogger(ExploringHibernate.class);
 	
 	public static void main(String[] args) {
-//		save();
-//		saveVSpersist();
-//		System.out.println(get(2));
-//		User u = get(3);
-//		u.setUsername("GOING TO UPDATE THIS USER");
-//		update(u);
+		User u = new User("this is transient", "t");
+		merge(u);
 	}
 	
 	/*
@@ -90,12 +86,19 @@ public class ExploringHibernate {
 	 * or not any methods are called on the object in the persistent state
 	 * - use this method to retrieve data that we are not sure exists
 	 */
-	static User get(int id) {
+	static User getDemo(int id) {
 		Session session = util.getSession();
 		Transaction tx = session.beginTransaction();
 		User u = (User) session.get(User.class, id);
 		u.setPassword("CHANGED PASSWORD");
 		tx.commit();
+		session.close();
+		return u;
+	}
+	static User get(int id) {
+		Session session = util.getSession();
+		Transaction tx = session.beginTransaction();
+		User u = (User) session.get(User.class, id);
 		session.close();
 		return u;
 	}
@@ -109,6 +112,7 @@ public class ExploringHibernate {
 	 * - this method returns a PROXY of the object and does not 
 	 * hit the database until a method of the object is called
 	 * while the session is still open
+	 * - If a method is called on a proxy, we see a LazyInitializationException
 	 * - a proxy is a hibernate object that allows for lazy loading
 	 * of data; it is basically a shell of an object that holds the 
 	 * ID of it without any actual data from DB. Gets data when it 
@@ -117,10 +121,12 @@ public class ExploringHibernate {
 	static User load(int id) {
 		Session session = util.getSession();
 		User u = (User) session.load(User.class, id);
-		logger.info("just called session.load()");
+		logger.info("just called session.load(), about to call toString()");
+		System.out.println(u.getId());
 		session.close();
 		return u;
 	}
+	
 
 	/*
 	 * session.update(Object)
