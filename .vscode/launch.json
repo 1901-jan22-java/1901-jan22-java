@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - BlogApp",
+            "request": "launch",
+            "mainClass": "com.revature.app.BlogApp",
+            "projectName": "hello-hibernate"
+        }
+    ]
+}
