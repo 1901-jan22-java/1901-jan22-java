@@ -26,7 +26,7 @@ class ErsFactoryTest {
 	void testFindAllReimbursements() {
 		Ers ers = new Ers(user);
 		ErsFactory dao = new ErsFactory();
-		dao.findUserReimbursements(ers);
+		dao.findUserReimbursements(ers, 1);
 		for (int i = 0; i <= ers.lastReimbursement(); i++) {
 			ErsReimbursement er = ers.getReimbursementByID(i);
 			DateFormat df = DateFormat.getInstance();

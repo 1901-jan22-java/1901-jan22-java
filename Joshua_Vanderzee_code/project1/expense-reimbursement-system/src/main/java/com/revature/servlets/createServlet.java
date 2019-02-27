@@ -31,17 +31,23 @@ public class createServlet extends HttpServlet {
 		if (user != null)
 		{
 			ErsReimbursement er = mapper.readValue(req.getInputStream(), ErsReimbursement.class);
-			if (es.createReimbursement(er, user))
-			{
-				//log.info(user.getReimbursementByID(user.lastReimbursement()).toString());	
+			try {
+				if (es.createReimbursement(er, user))
+				{
+					//log.info(user.getReimbursementByID(user.lastReimbursement()).toString());	
+					PrintWriter writer = resp.getWriter();
+					writer.write("Complete");
+				}
+				else
+				{
+					resp.setStatus(500);
+					PrintWriter writer = resp.getWriter();
+					writer.write("Could not create a new request.");
+				}
+			} catch (Exception e) {
+				resp.setStatus(406);
 				PrintWriter writer = resp.getWriter();
-				writer.write("Complete");
-			}
-			else
-			{
-				resp.setStatus(500);
-				PrintWriter writer = resp.getWriter();
-				writer.write("Could not create a new request.");
+				writer.write("Could not create a new request.\n" + e.getMessage());
 			}
 		}
 		else

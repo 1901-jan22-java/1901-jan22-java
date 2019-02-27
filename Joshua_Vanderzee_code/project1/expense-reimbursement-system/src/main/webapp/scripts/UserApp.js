@@ -40,6 +40,8 @@ function register(){
                 $('#email').removeClass('btn-danger');
                 $('#pw').removeClass('btn-danger');
                 $('#cfpw').removeClass('btn-danger');
+                $('#firstname').removeClass('btn-danger');
+                $('#lastname').removeClass('btn-danger');
                 $('#errormsg').html(xhr.responseText);
                 if (xhr.responseText == `Passwords don't match`) {
                     $('#pw').addClass('btn-danger');
@@ -48,6 +50,16 @@ function register(){
                     $('#username').addClass('btn-danger');
                 } else if (xhr.responseText == `Email was already used`) {
                     $('#email').addClass('btn-danger');
+                } else if (xhr.responseText == `User Required`) {
+                    $('#username').addClass('btn-danger');
+                } else if (xhr.responseText == `Email Required`) {
+                    $('#email').addClass('btn-danger');
+                } else if (xhr.responseText == `Password Required`) {
+                    $('#pw').addClass('btn-danger');
+                } else if (xhr.responseText == `First Name Required`) {
+                    $('#firstname').addClass('btn-danger');
+                } else if (xhr.responseText == `Last Name Required`) {
+                    $('#lastname').addClass('btn-danger');
                 }
             }
         }
@@ -77,7 +89,7 @@ function loadHomeView(){
                 initHome();
             }
             else if (xhr.status == 406) {
-                $('#view').html(xhr.responseText);
+                loadLogInView();
             } 
         }
     }
@@ -212,6 +224,7 @@ function loadHomeData(page, type){
                     info += `<td>$${infoItem.reimb_amount}</td>`;
                     info += `<td>${infoItem['reimbAuthor'].userFirstName}</td>`;
                     info += `<td>${infoItem['reimbAuthor'].userLastName}</td>`;
+                    info += `<td>${infoItem.reimbDescription}</td>`;
                     if (infoItem.reimb_Status == 'Pending') {
                         if (tableData.financialManager){
                             info += `<td><button type="button" class="btn btn-success" data-toggle="modal" data-target="#pendingModal">${infoItem.reimb_Status}</button></td>`;
@@ -226,13 +239,17 @@ function loadHomeData(page, type){
                         }
                     }
                     info += `<td>${infoItem.reimb_Type}</td>`;
+                    let submittedDateDisplay = new Date(infoItem.reimb_submitted);
+                    info += `<td>${submittedDateDisplay.getMonth()}/${submittedDateDisplay.getDay()}/${submittedDateDisplay.getFullYear()} ${submittedDateDisplay.getHours()}:${submittedDateDisplay.getMinutes()}:${submittedDateDisplay.getSeconds()}</td>`;
+                    let ResolvedDateDisplay = new Date(infoItem.reimb_submitted);
+                    info += `<td>${ResolvedDateDisplay.getMonth()}/${ResolvedDateDisplay.getDay()}/${ResolvedDateDisplay.getFullYear()} ${ResolvedDateDisplay.getHours()}:${ResolvedDateDisplay.getMinutes()}:${ResolvedDateDisplay.getSeconds()}</td>`;
                     info += '</tr>';
                 }
                 $('#data').html(info);
                 if (tableData.financialManager) {
                     console.log($('#pendingModal'));
                     $('#data').on('click', 'button', function(){
-                        let ID = this.parentElement.previousSibling.previousSibling.previousSibling.previousSibling.innerHTML;
+                        let ID = this.parentElement.previousSibling.previousSibling.previousSibling.previousSibling.previousSibling.innerHTML;
                         let statusElement = this.parentElement;
                         let reimblist = tableData.reimbursement;
                         let data = reimblist.find(item => item.reimb_ID == ID);

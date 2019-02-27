@@ -23,26 +23,33 @@ public final class ErsFactory {
 		return CompleteHash;
 	}
 	
-	public boolean CreateReimbursement(Ers ers) {
-		try (Connection conn = ConnectionFactory.getInstance().getConnection()){
-			conn.setAutoCommit(false);
-			String sql = "{call ERS_Create_REIMBURSEMENT(?, ?, ?, ?, ?, ?)}";
-			CallableStatement ps = conn.prepareCall(sql);
-			ErsReimbursement reimb = ers.getReimbursementByID(ers.lastReimbursement());
-			ps.setLong(1, reimb.getReimb_amount());
-			ps.setString(2, reimb.getReimbDescription());
-			ps.setNull(3, java.sql.Types.BLOB);
-			ps.setString(4, ers.getUser().getErsUsername());
-			ps.setString(5, reimb.getReimb_Type());
-			ps.registerOutParameter(6, java.sql.Types.NUMERIC);
-			ps.executeUpdate();
-			System.out.println(ps.getInt(6));
-			if (ps.getInt(6) == 1) {
-				conn.commit();
-				return true;
+	public boolean CreateReimbursement(Ers ers) throws Exception {
+		ErsReimbursement reimb = ers.getReimbursementByID(ers.lastReimbursement());
+		if (reimb.getReimb_amount() > 0) {
+			try (Connection conn = ConnectionFactory.getInstance().getConnection()){
+				conn.setAutoCommit(false);
+				String sql = "{call ERS_Create_REIMBURSEMENT(?, ?, ?, ?, ?, ?)}";
+				CallableStatement ps = conn.prepareCall(sql);
+				
+				ps.setLong(1, reimb.getReimb_amount());
+				ps.setString(2, reimb.getReimbDescription());
+				ps.setNull(3, java.sql.Types.BLOB);
+				ps.setString(4, ers.getUser().getErsUsername());
+				ps.setString(5, reimb.getReimb_Type());
+				ps.registerOutParameter(6, java.sql.Types.NUMERIC);
+				ps.executeUpdate();
+				System.out.println(ps.getInt(6));
+				if (ps.getInt(6) == 1) {
+					conn.commit();
+					return true;
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		}
+		else
+		{
+			throw new Exception("Amount cannot be less than or equal to 0");
 		}
 		return false;
 	}
@@ -79,7 +86,7 @@ public final class ErsFactory {
 		}
 	}
 	
-	public void findUserReimbursements(Ers ers)
+	public void findUserReimbursements(Ers ers, int page)
 	{
 		ers.getReimbursement().clear();
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -97,17 +104,23 @@ public final class ErsFactory {
 			statement.setString(1, ers.getUser().getErsUsername());
 			ResultSet rs = statement.executeQuery();
 			System.out.println("rs query");
+			int count = 0;
+			int begin = (page - 1) * 10;
+			int end = begin + 10;
 			while(rs.next())
 			{
-				ers.AddReimbursement(rs.getLong(2), 
-						new ErsUser(rs.getString(6), rs.getString(7), rs.getString(8)), 
-						rs.getString(13));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimb_ID(rs.getLong(1));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimb_submitted(rs.getDate(3));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolved(rs.getDate(4));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimbDescription(rs.getString(5));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolver(new ErsUser(rs.getString(9), rs.getString(10), rs.getString(11)));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimb_Status(rs.getString(12));
+				if (count >= begin && count < end)
+				{
+					ers.AddReimbursement(rs.getLong(2), 
+							new ErsUser(rs.getString(6), rs.getString(7), rs.getString(8)), 
+							rs.getString(13));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimb_ID(rs.getLong(1));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimb_submitted(rs.getDate(3));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolved(rs.getDate(4));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimbDescription(rs.getString(5));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolver(new ErsUser(rs.getString(9), rs.getString(10), rs.getString(11)));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimb_Status(rs.getString(12));
+				}
 			}
 		} catch (SQLException e) {
 			logger.error("Error with query");
@@ -116,7 +129,7 @@ public final class ErsFactory {
 		}
 	}
 	
-	public void findUserPendingReimbursements(Ers ers)
+	public void findUserPendingReimbursements(Ers ers, int page)
 	{
 		ers.getReimbursement().clear();
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -134,17 +147,23 @@ public final class ErsFactory {
 			statement.setString(1, ers.getUser().getErsUsername());
 			ResultSet rs = statement.executeQuery();
 			System.out.println("rs query");
+			int count = 0;
+			int begin = (page - 1) * 10;
+			int end = begin + 10;
 			while(rs.next())
 			{
-				ers.AddReimbursement(rs.getLong(2), 
-						new ErsUser(rs.getString(6), rs.getString(7), rs.getString(8)), 
-						rs.getString(13));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimb_ID(rs.getLong(1));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimb_submitted(rs.getDate(3));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolved(rs.getDate(4));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimbDescription(rs.getString(5));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolver(new ErsUser(rs.getString(9), rs.getString(10), rs.getString(11)));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimb_Status(rs.getString(12));
+				if (count >= begin && count < end)
+				{
+					ers.AddReimbursement(rs.getLong(2), 
+							new ErsUser(rs.getString(6), rs.getString(7), rs.getString(8)), 
+							rs.getString(13));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimb_ID(rs.getLong(1));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimb_submitted(rs.getDate(3));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolved(rs.getDate(4));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimbDescription(rs.getString(5));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolver(new ErsUser(rs.getString(9), rs.getString(10), rs.getString(11)));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimb_Status(rs.getString(12));
+				}
 			}
 		} catch (SQLException e) {
 			logger.error("Error with query");
@@ -153,7 +172,7 @@ public final class ErsFactory {
 		}
 	}
 	
-	public void findUserResolvedReimbursements(Ers ers)
+	public void findUserResolvedReimbursements(Ers ers, int page)
 	{
 		ers.getReimbursement().clear();
 		try(Connection conn = ConnectionFactory.getInstance().getConnection()) {
@@ -171,17 +190,23 @@ public final class ErsFactory {
 			statement.setString(1, ers.getUser().getErsUsername());
 			ResultSet rs = statement.executeQuery();
 			System.out.println("rs query");
+			int count = 0;
+			int begin = (page - 1) * 10;
+			int end = begin + 10;
 			while(rs.next())
 			{
-				ers.AddReimbursement(rs.getLong(2), 
-						new ErsUser(rs.getString(6), rs.getString(7), rs.getString(8)), 
-						rs.getString(13));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimb_ID(rs.getLong(1));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimb_submitted(rs.getDate(3));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolved(rs.getDate(4));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimbDescription(rs.getString(5));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolver(new ErsUser(rs.getString(9), rs.getString(10), rs.getString(11)));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimb_Status(rs.getString(12));
+				if (count >= begin && count < end)
+				{
+					ers.AddReimbursement(rs.getLong(2), 
+							new ErsUser(rs.getString(6), rs.getString(7), rs.getString(8)), 
+							rs.getString(13));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimb_ID(rs.getLong(1));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimb_submitted(rs.getDate(3));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolved(rs.getDate(4));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimbDescription(rs.getString(5));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolver(new ErsUser(rs.getString(9), rs.getString(10), rs.getString(11)));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimb_Status(rs.getString(12));
+				}
 			}
 		} catch (SQLException e) {
 			logger.error("Error with query");
@@ -190,7 +215,7 @@ public final class ErsFactory {
 		}
 	}
 	
-	public void getAllReimbursements(Ers ers) {
+	public void getAllReimbursements(Ers ers, int page) {
 		ers.getReimbursement().clear();
 		if (ers.getUser() == null) {
 			return;
@@ -212,18 +237,23 @@ public final class ErsFactory {
 //			for (ErsReimbursement er : ers.getReimbursement()) {
 //				logger.info("ID: " + er.getReimb_ID() + " count: " + ++count);
 //			}
+			int count = 0;
+			int begin = (page - 1) * 10;
+			int end = begin + 10;
 			while(rs.next())
 			{
-				//logger.info("ID: " + rs.getLong(1) + " count: " + ++count);
-				ers.AddReimbursement(rs.getLong(2), 
-					new ErsUser(rs.getString(6), rs.getString(7), rs.getString(8)), 
-					rs.getString(13));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimb_ID(rs.getLong(1));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimb_submitted(rs.getDate(3));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolved(rs.getDate(4));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimbDescription(rs.getString(5));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolver(new ErsUser(rs.getString(9), rs.getString(10), rs.getString(11)));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimb_Status(rs.getString(12));
+				if (count >= begin && count < end)
+				{
+					ers.AddReimbursement(rs.getLong(2), 
+							new ErsUser(rs.getString(6), rs.getString(7), rs.getString(8)), 
+							rs.getString(13));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimb_ID(rs.getLong(1));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimb_submitted(rs.getDate(3));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolved(rs.getDate(4));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimbDescription(rs.getString(5));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolver(new ErsUser(rs.getString(9), rs.getString(10), rs.getString(11)));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimb_Status(rs.getString(12));
+				}
 			}
 		} catch (SQLException e) {
 			logger.error("Error with query");
@@ -232,7 +262,7 @@ public final class ErsFactory {
 		}
 	}
 	
-	public void getAllPendingReimbursements(Ers ers) {
+	public void getAllPendingReimbursements(Ers ers, int page) {
 		ers.getReimbursement().clear();
 		if (ers.getUser() == null) {
 			return;
@@ -250,17 +280,23 @@ public final class ErsFactory {
 						"where r.REIMB_status_ID = 1";
 			PreparedStatement statement = conn.prepareStatement(query);
 			ResultSet rs = statement.executeQuery();
+			int count = 0;
+			int begin = (page - 1) * 10;
+			int end = begin + 10;
 			while(rs.next())
 			{
-				ers.AddReimbursement(rs.getLong(2), 
-						new ErsUser(rs.getString(6), rs.getString(7), rs.getString(8)), 
-						rs.getString(13));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimb_ID(rs.getLong(1));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimb_submitted(rs.getDate(3));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolved(rs.getDate(4));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimbDescription(rs.getString(5));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolver(new ErsUser(rs.getString(9), rs.getString(10), rs.getString(11)));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimb_Status(rs.getString(12));
+				if (count >= begin && count < end)
+				{
+					ers.AddReimbursement(rs.getLong(2), 
+							new ErsUser(rs.getString(6), rs.getString(7), rs.getString(8)), 
+							rs.getString(13));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimb_ID(rs.getLong(1));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimb_submitted(rs.getDate(3));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolved(rs.getDate(4));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimbDescription(rs.getString(5));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolver(new ErsUser(rs.getString(9), rs.getString(10), rs.getString(11)));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimb_Status(rs.getString(12));
+				}
 			}
 		} catch (SQLException e) {
 			logger.error("Error with query");
@@ -269,7 +305,7 @@ public final class ErsFactory {
 		}
 	}
 	
-	public void getAllResolvedReimbursements(Ers ers) {
+	public void getAllResolvedReimbursements(Ers ers, int page) {
 		ers.getReimbursement().clear();
 		if (ers.getUser() == null) {
 			return;
@@ -287,17 +323,23 @@ public final class ErsFactory {
 						"where r.REIMB_status_ID != 1";
 			PreparedStatement statement = conn.prepareStatement(query);
 			ResultSet rs = statement.executeQuery();
+			int count = 0;
+			int begin = (page - 1) * 10;
+			int end = begin + 10;
 			while(rs.next())
 			{
-				ers.AddReimbursement(rs.getLong(2), 
-						new ErsUser(rs.getString(6), rs.getString(7), rs.getString(8)), 
-						rs.getString(13));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimb_ID(rs.getLong(1));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimb_submitted(rs.getDate(3));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolved(rs.getDate(4));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimbDescription(rs.getString(5));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolver(new ErsUser(rs.getString(9), rs.getString(10), rs.getString(11)));
-				ers.getReimbursementByID(ers.lastReimbursement()).setReimb_Status(rs.getString(12));
+				if (count >= begin && count < end)
+				{
+					ers.AddReimbursement(rs.getLong(2), 
+							new ErsUser(rs.getString(6), rs.getString(7), rs.getString(8)), 
+							rs.getString(13));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimb_ID(rs.getLong(1));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimb_submitted(rs.getDate(3));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolved(rs.getDate(4));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimbDescription(rs.getString(5));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimbResolver(new ErsUser(rs.getString(9), rs.getString(10), rs.getString(11)));
+					ers.getReimbursementByID(ers.lastReimbursement()).setReimb_Status(rs.getString(12));
+				}
 			}
 			//return accounts;
 		} catch (SQLException e) {
@@ -361,6 +403,27 @@ public final class ErsFactory {
 
 	public boolean CreateUser(Ers user) throws Exception {
 		try (Connection conn = ConnectionFactory.getInstance().getConnection()){
+			if (user.getUser().getErsUsername().equals(""))
+			{
+				throw new Exception("User Required");
+			}
+			if (user.getUser().getUserEmail().equals(""))
+			{
+				throw new Exception("Email Required");
+			}
+			if (user.getUser().getErsPassword().equals(""))
+			{
+				throw new Exception("Password Required");
+			}
+			if (user.getUser().getUserFirstName().equals(""))
+			{
+				throw new Exception("First Name Required");
+			}
+			if (user.getUser().getUserLastName().equals(""))
+			{
+				throw new Exception("Last Name Required");
+			}
+			
 			conn.setAutoCommit(false);
 			String query = "select * from ers_users u where u.ers_username = ?";
 			PreparedStatement statement = conn.prepareStatement(query);

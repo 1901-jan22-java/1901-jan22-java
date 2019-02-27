@@ -28,10 +28,12 @@ public class HomeServlet extends HttpServlet {
 		Ers user = (Ers)session.getAttribute("sessionUser");
 		if (user == null)
 		{
-			resp.sendRedirect("login");
+			log.info("Send to login page" + resp.getStatus());
+			resp.setStatus(406);
 		}
 		else
 		{
+			log.info("Send to home page");
 			if (user.isFinancialManager())
 			{
 				resp.sendRedirect("finance-home.view");
@@ -56,23 +58,23 @@ public class HomeServlet extends HttpServlet {
 				if (filter.filter.equals("All"))
 				{
 					if (user.isFinancialManager())
-						es.getAllReimbursements(user, com.revature.services.status.all);
+						es.getAllReimbursements(user, com.revature.services.status.all, filter.page);
 					else
-						es.findAllReimbursements(user, com.revature.services.status.all);
+						es.findAllReimbursements(user, com.revature.services.status.all, filter.page);
 				}
 				else if (filter.filter.equals("Pending"))
 				{
 					if (user.isFinancialManager())
-						es.getAllReimbursements(user, com.revature.services.status.pending);
+						es.getAllReimbursements(user, com.revature.services.status.pending, filter.page);
 					else
-						es.findAllReimbursements(user, com.revature.services.status.pending);
+						es.findAllReimbursements(user, com.revature.services.status.pending, filter.page);
 				}
 				else if (filter.filter.equals("Resolved"))
 				{
 					if (user.isFinancialManager())
-						es.getAllReimbursements(user, com.revature.services.status.resolved);
+						es.getAllReimbursements(user, com.revature.services.status.resolved, filter.page);
 					else
-						es.findAllReimbursements(user, com.revature.services.status.resolved);
+						es.findAllReimbursements(user, com.revature.services.status.resolved, filter.page);
 				}
 			}
 			else

@@ -12,7 +12,7 @@ public class ErsService {
 	
 	Logger log = Logger.getLogger(ErsService.class);
 	
-	public boolean createReimbursement(ErsReimbursement er, Ers user) {
+	public boolean createReimbursement(ErsReimbursement er, Ers user) throws Exception {
 		user.AddReimbursement(er.getReimb_amount(), 
 				new ErsUser(user.getUser().getUserFirstName(), user.getUser().getUserLastName(), user.getUser().getUserEmail()), 
 				er.getReimb_Type());
@@ -25,32 +25,32 @@ public class ErsService {
 		return new Ers(ersDao.Login(eu.getErsUsername(), eu.getErsPassword()));
 	}
 
-	public void getAllReimbursements(Ers user, status stat) {
+	public void getAllReimbursements(Ers user, status stat, int page) {
 		switch(stat)
 		{
 			case pending:
-				ersDao.getAllPendingReimbursements(user);
+				ersDao.getAllPendingReimbursements(user, page);
 				break;
 			case resolved:
-				ersDao.getAllResolvedReimbursements(user);
+				ersDao.getAllResolvedReimbursements(user, page);
 				break;
 			case all:
-				ersDao.getAllReimbursements(user);
+				ersDao.getAllReimbursements(user, page);
 				break;
 		}	
 	}
 	
-	public void findAllReimbursements(Ers user, status stat) {
+	public void findAllReimbursements(Ers user, status stat, int page) {
 		switch(stat)
 		{
 			case pending:
-				ersDao.findUserPendingReimbursements(user);
+				ersDao.findUserPendingReimbursements(user, page);
 				break;
 			case resolved:
-				ersDao.findUserResolvedReimbursements(user);
+				ersDao.findUserResolvedReimbursements(user, page);
 				break;
 			case all:
-				ersDao.findUserReimbursements(user);
+				ersDao.findUserReimbursements(user, page);
 				break;
 		}	
 	}

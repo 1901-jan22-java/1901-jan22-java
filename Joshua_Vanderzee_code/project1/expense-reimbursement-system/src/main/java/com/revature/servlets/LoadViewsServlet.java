@@ -27,7 +27,7 @@ public class LoadViewsServlet extends HttpServlet {
 		//log.info(absoluteFilePath);
 		try {
 			if (req.getRequestDispatcher(resourcePath) != null) {
-				req.getRequestDispatcher(resourcePath).forward(req, resp);	
+				req.getRequestDispatcher(resourcePath).forward(req, resp);
 			}
 			else
 			{

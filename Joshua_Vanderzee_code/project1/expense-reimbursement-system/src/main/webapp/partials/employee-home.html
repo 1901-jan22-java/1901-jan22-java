@@ -10,11 +10,12 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label class="col-form-label"><h5>Amount: </h5></label>
-                    <input type="number" id="amount"></label>
+                    <input type="number" id="amount" min="1"></label>
                 </div>
                 <div class="form-group">
                     <label class="col-form-label"><h5>Description: </h5></label>
-                    <textarea id="desc"></textarea>
+                    <br>
+                    <textarea id="desc" class="col-8"></textarea>
                 </div>
                 <div class="form-group">
                     <label class="col-form-label"><h5>Request Type: </h5></label>
@@ -46,7 +47,7 @@
 <div class="jumbotron">
     <h2 id="greet">Welcome </h2>
     <br>
-    <h3>All reimbursement requests (Click pending to review item)</h3>
+    <h3>All reimbursement requests</h3>
     <table class="table table-striped">
         <thead class="thead-dark">
             <tr>
@@ -70,9 +71,10 @@
                         </div>
                     </div>
                 </th>
+                <th></th>
                 <th>
                     <div class="d-inline-flex p-2 bd-highlight">
-                        <h3>Create new Reimbursement:</h3>
+                        <h3>New Reimbursement:</h3>
                     </div>
                     <div class="d-inline-flex dropright">
                         <button type="button" class="btn btn-success" data-toggle="modal" data-target="#CreateModal">
@@ -87,8 +89,11 @@
                 <th scope="col">Amount</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Last</th>
+                <th scope="col">Description</th>
                 <th scope="col">Status</th>
                 <th scope="col">Type</th>
+                <th scope="col">Submitted</th>
+                <th scope="col">Resolved</th>
             </tr>
         </thead>
         <tbody id="data">

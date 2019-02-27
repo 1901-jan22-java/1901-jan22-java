@@ -35,7 +35,7 @@ public class NewUserServlet extends HttpServlet {
 				es.createUser(newUser);
 			} catch (Exception e) {
 				resp.setStatus(406);
-				e.printStackTrace();
+				//e.printStackTrace();
 				PrintWriter writer = resp.getWriter();
 				writer.write(e.getMessage());
 			}
@@ -44,7 +44,7 @@ public class NewUserServlet extends HttpServlet {
 		{
 			resp.setStatus(406);
 			PrintWriter writer = resp.getWriter();
-			writer.write("passwords don't match");
+			writer.write("Passwords don't match");
 		}
 	}
 }
