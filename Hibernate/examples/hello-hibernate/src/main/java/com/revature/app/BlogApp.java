@@ -12,9 +12,8 @@ public class BlogApp {
 		PostRepository pDao = new PostRepository();
 		UserRepository uDao = new UserRepository();
 		
-		User me = uDao.get(2);
-		User other = uDao.get(25);
-		uDao.unfollow(me, other);
+		User me = uDao.get(23);
+		System.out.println(uDao.getFollowers(me));
 	}
 
 

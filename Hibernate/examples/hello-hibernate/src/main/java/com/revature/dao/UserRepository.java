@@ -1,5 +1,6 @@
 package com.revature.dao;
 
+import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -44,6 +45,13 @@ public class UserRepository {
 		session.merge(user); //but what if this was update!?
 		tx.commit();
 		session.close();
+	}
+	
+	public Set<User> getFollowers(User user){
+		Session session = util.getSession();
+		user = (User) session.get(User.class, user.getId());
+		Set<User> followers = user.getFollowers();
+		return followers;
 	}
 
 }
