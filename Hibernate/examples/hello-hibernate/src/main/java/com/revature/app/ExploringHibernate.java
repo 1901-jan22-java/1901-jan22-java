@@ -1,22 +1,29 @@
 package com.revature.app;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
+import com.revature.models.TestMapping;
 import com.revature.models.User;
 import com.revature.util.ConnectionUtil;
 
 public class ExploringHibernate {
-	
+
 	static ConnectionUtil util = ConnectionUtil.getInstance();
 	final static Logger logger = Logger.getLogger(ExploringHibernate.class);
-	
+
 	public static void main(String[] args) {
-		User u = new User("this is transient", "t");
-		merge(u);
+
+		savePokemon("Pikachu");
 	}
-	
+
 	/*
 	 * SAVE
 	 * - adds instance to db
@@ -30,7 +37,7 @@ public class ExploringHibernate {
 	static User save() {
 		//currently in TRANSIENT state
 		User u = new User("Pooh Bear", "hibernates");
-		
+
 		Session session = util.getSession();
 		try {
 			logger.info("Just opened session");
@@ -56,18 +63,31 @@ public class ExploringHibernate {
 			session.close(); /*
 			SESSION CLOSED, ALL OBJECTS ASSOCIATED WITH 
 			THIS SESSION ARE NOW DETACHED
-		*/
-			}
+			 */
+		}
 		return u;
 	}
 	
+	static void savePokemon(String name) {
+		TestMapping poke = new TestMapping(name);
+		Session session = util.getSession();
+		try {
+			Transaction tx = session.beginTransaction();
+			session.save(poke);
+			tx.commit();
+		}
+		finally {
+			session.close();
+		}
+	}
+
 	/*
 	 * The persist method is intended for adding a new entity 
 	 * instance to the persistence context
 	 * Close behavior to save(), except if we attempt to call 
 	 * persist on a detached object, an exception will be thrown
 	 */
-	
+
 	//Exception in thread "main" org.hibernate.PersistentObjectException: detached entity passed to persist: com.revature.models.User
 	static void saveVSpersist() {
 		User u = new User("test123456", "user");
@@ -77,7 +97,7 @@ public class ExploringHibernate {
 		session.persist(u);
 		tx.commit();
 	}
-	
+
 	/*
 	 * Session.get(id)
 	 * - returns persisted object with specified identifier
@@ -102,8 +122,8 @@ public class ExploringHibernate {
 		session.close();
 		return u;
 	}
-	
-	
+
+
 	/*
 	 * Session.load(id)
 	 * - retrieves a persisted instance by id. 
@@ -126,7 +146,6 @@ public class ExploringHibernate {
 		session.close();
 		return u;
 	}
-	
 
 	/*
 	 * session.update(Object)
@@ -145,7 +164,7 @@ public class ExploringHibernate {
 			session.close();
 		}
 	}
-	
+
 	/*
 	 * session.merge(Object)
 	 * - main purpose of this method is to update a persistent entity
@@ -165,4 +184,46 @@ public class ExploringHibernate {
 			session.close();
 		}
 	}
+
+	/*
+	 * QUERY
+	 * Write sql queries using HQL
+	 */
+	static User findByUsername(String username) {
+		User u = null;
+		Session session = util.getSession();
+		Query query = session
+				.createQuery("from User where lower(username) = :param");
+		query.setParameter("param", username.toLowerCase());
+		u = (User) query.uniqueResult();
+		return u;
+	}
+
+	static List<User> findAll(){
+		Session session = util.getSession();
+		try {
+			Query query = session.createQuery("from User");
+			return query.list();
+		}
+		finally {
+			logger.info("in finally block");
+			session.close();
+		}
+	}
+	
+	static List<User> findAllCriteria(){
+		Session session = util.getSession();
+		try {
+			Criteria criteria = session.createCriteria(User.class)
+					.addOrder(Order.asc("username"))
+					.add(Restrictions.ge("id", 4));
+			
+			return criteria.list();
+		}
+		finally {
+			session.close();
+		}
+	}
+
+
 }
