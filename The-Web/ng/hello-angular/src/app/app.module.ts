@@ -50,7 +50,7 @@ import { UserService } from './services/user.service';
   providers: [
       /** services (@Injectable) */
       UserService
-  ],
+  ],  
   bootstrap: [AppComponent]
   /** Refers to the root component - where the bootstrapping process
    * will begin. It is the root view of the app
