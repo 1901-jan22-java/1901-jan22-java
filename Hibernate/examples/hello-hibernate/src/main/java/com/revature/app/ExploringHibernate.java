@@ -1,8 +1,14 @@
 package com.revature.app;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Restrictions;
 
 import com.revature.models.User;
 import com.revature.util.ConnectionUtil;
@@ -14,8 +20,8 @@ public class ExploringHibernate {
 	
 	public static void main(String[] args) {
 		System.out.println(get(3));
-		User u = new User("This is transsient", "t");
-		merge(u);
+		User u = new findByUsername("This is transsient");
+		System.out.println(u);
 		
 	}
 	
@@ -155,5 +161,35 @@ public class ExploringHibernate {
 		finally {
 			session.close();		}
 		}
-
+	/*
+	 * Query
+	 * Write sql queries using sql
+	 */
+	static User findByUsername(String username) {
+		User u = null;
+		Session session = util.getSession();
+		Query query = session.createQuery("from User where lower(username) = :param");
+		
+		query.setParameter("param", username.toLowerCase());
+		return u;
+	}
+	static List<User> findAll() {
+		Session session = util.getSession();
+		try {
+			Query query = session.createQuery("from Users");
+			return query.list();
+		} finally {
+			session.close();
+		}
+	}
+	static List<User> finadAllCriteria(){
+		Session session = util.getSession();
+		try {
+			Criteria criteria = session.createCriteria(User.class).addOrder(Order.asc("username")).add(Restrictions.ge("id", 4));
+			return criteria.list();
+		} finally {
+			session.close();
+		}
+		return null;
+	}
 }
