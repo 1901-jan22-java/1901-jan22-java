@@ -1,10 +1,18 @@
 package com.revature.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -32,6 +40,23 @@ public class User {
 	
 	@Column(nullable=false)
 	private String password;
+	
+	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	//@JoinTable is used to define the join/junction table
+	@JoinTable(name="Following",
+	//specify thhe column with the main entity below
+	joinColumns=@JoinColumn(name="USER_ID"),
+	//inverse side of the relationship below
+	inverseJoinColumns=@JoinColumn(name="FOLLOWING_ID"))
+	private Set<User> following = new HashSet<User>();
+	
+	/*
+	 * we CAN but do not need to bidirectionally map this relationship
+	 * mapped by refers to the collection on the inverse side of the
+	 * relationship 
+	 */
+	@ManyToMany(mappedBy="following")
+	private Set<User> followers = new HashSet<User>();
 	
 	public User() {}
 	
@@ -63,6 +88,24 @@ public class User {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+
+	public Set<User> getFollowing() {
+		return following;
+	}
+
+	public void setFollowing(Set<User> following) {
+		this.following = following;
+	}
+	
+
+	public Set<User> getFollowers() {
+		return followers;
+	}
+
+	public void setFollowers(Set<User> followers) {
+		this.followers = followers;
 	}
 
 	@Override
