@@ -26,10 +26,8 @@ Get all users:
 <br>
 Get User by Username!
 <br>
-<input type="text" [(ngModel)]="unameInput" class="form-control col-4"> 
-= {{ unameInput }}
+<input type="text" [(ngModel)]="unameInput">
 <button (click)="getUser()">Find User!</button>
-
 
 <div *ngIf="user != null">
   <li>User Id: {{user.id}}</li>
@@ -39,13 +37,3 @@ Get User by Username!
 <div class="alert alert-danger" role="alert" *ngIf="notFound">
     No User found!
   </div>
-
-  <br>
-  <hr>
-  Add user!
-  <br>
-  <input type="text" placeholder="Username" [(ngModel)]="username" class="form-control col-4">
-  <input type="password" placeholder="Password" [(ngModel)]="pw" class="form-control col-4">
-  <input type="text" placeholder="First Name" [(ngModel)]="fn" class="form-control col-4">
-  <input type="text" placeholder="Last Name" [(ngModel)]="ln" class="form-control col-4">
-  <button (click)="addUser()">Add!</button>
