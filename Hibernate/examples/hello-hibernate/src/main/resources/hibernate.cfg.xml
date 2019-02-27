@@ -9,9 +9,9 @@
         	org.hibernate.dialect.Oracle10gDialect</property>
         <property name="hibernate.connection.driver_class">
         	oracle.jdbc.driver.OracleDriver</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@demo1901jan22rds.cjrlr2je5uec.us-east-1.rds.amazonaws.com:1521/ORCL</property>
         <property name="hibernate.connection.username">demo1901jan22rds</property>
         <property name="hibernate.connection.password">demo1901jan22rdspass</property>
-        <property name="hibernate.connection.url">jdbc:oracle:thin:@demo1901jan22rds.cjrlr2je5uec.us-east-1.rds.amazonaws.com:1521/ORCL</property>
       
       	<!-- show HQL commands as theyre carried out in the console -->
         <property name="show_sql">true</property>
@@ -43,5 +43,6 @@
         mapping class
         <mapping class="com.websystique.hibernate.model.Student"/>-->
         <mapping class="com.revature.models.User"/>
+        <mapping resource="TestMapping.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>
