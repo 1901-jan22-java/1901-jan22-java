@@ -41,6 +41,7 @@ public class PostRepository {
 			session.close();
 		}
 	}
+	
 	//Calling named query
 	public List<Post> getEmptyPosts(){
 		Session session = util.getSession();
