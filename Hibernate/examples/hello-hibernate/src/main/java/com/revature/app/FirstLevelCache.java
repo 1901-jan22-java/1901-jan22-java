@@ -81,6 +81,7 @@ public class FirstLevelCache {
 	
 	static void remove() {
 		Session session = util.getSession();
+		Transaction tx = session.beginTransaction();
 		logger.info("about to retrieve user");
 		User u = (User) session.get(User.class, 2);
 		
@@ -88,6 +89,14 @@ public class FirstLevelCache {
 		session.evict(u);
 		logger.info("just evicted user from session cache. let's try retrieving it again");
 		u = (User) session.get(User.class, 2);
+		
+		u.setUsername("NOT PERSISTED"); //does not persist. but why???
+		
+		//clear all objects from cache
+		session.clear();
+		u.setUsername("our object should be detached");
+		
+		tx.commit();
 		session.close();
 	}
 
