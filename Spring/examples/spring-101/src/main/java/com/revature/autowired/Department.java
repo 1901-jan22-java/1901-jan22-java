@@ -1,11 +1,10 @@
 package com.revature.autowired;
 
 public class Department {
+
 	private String name;
 
-	public Department() {
-		
-	}
+	public Department() {}
 	
 	public Department(String name) {
 		super();
@@ -19,5 +18,4 @@ public class Department {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
 }
