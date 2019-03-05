@@ -26,8 +26,17 @@ In technical terms, spring supports setter and constructor injection -->
 <!-- constructor injection -->
 <constructor-arg name="messageString"
 	value="This is constructor injection!"/>
-	
 </bean>
 
+<!-- bean wiring
+programmatically configuring a bean to be dependent upon 
+another bean and allow the container to inject the dependency -->
+<bean id="parentBean" class="com.revature.hello.ParentBean">
+	<property name="dependency" ref="thisIsABean"></property>
+</bean>
+
+<!-- Exploring AUTOWIRING -->
+<bean id="employee" class="com.revature.autowired.Employee" autowire="byType" scope="prototype"></bean>
+<bean id="department" class="com.revature.autowired.Department"></bean>
 
 </beans>
