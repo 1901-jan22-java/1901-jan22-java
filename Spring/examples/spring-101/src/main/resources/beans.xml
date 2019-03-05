@@ -38,4 +38,9 @@ another bean and allow the container to inject the dependency -->
 
 <!-- Exploring AUTOWIRING -->
 
+<bean id="employee" class="com.revature.autowired.Employee" 
+	autowire="byType" scope="prototype"></bean>
+	
+<bean id="dept" class="com.revature.autowired.Department"></bean>
+
 </beans>
