@@ -26,9 +26,8 @@ public class UserRepository {
 	public void follow(User user, User following) {
 		Session session = util.getSession();
 		Transaction tx = session.beginTransaction();
-		Set<User> follows = user.getFollowing();
-		follows.add(following);
-		session.merge(user); //but what if this was update!?
+		user.getFollowing().add(following);
+		session.merge(user); 
 		tx.commit();
 		session.close();
 	}
