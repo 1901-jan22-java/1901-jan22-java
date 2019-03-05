@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	 http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+<!-- Spring Bean Configuration File, 
+typically named beans.xml or context.xml, but 
+can be named anything when making a simple .jar app 
+as long as we refer to the proper file in our config class -->
+
+
+<!-- Configuring our beans through XML -->
+<bean id="thisIsABean" class="com.revature.hello.HelloSpring">
+<!-- In order to inject dependecies, Spring relies on either 
+the constructor or the setter of a class to set the value
+In technical terms, spring supports setter and constructor injection -->
+
+<!-- setter injection 
+<property name="messageString" value="This is
+	setter injection! Welcome to Spring!!!" /> -->
+	
+<!-- constructor injection -->
+<constructor-arg name="messageString"
+	value="This is constructor injection!"/>
+	
+</bean>
+
+<!-- bean wiring 
+programatically configuring a bean to be dependent upon
+another bean and allow the container to inject the dependency -->
+<bean id="parentBean" class="com.revature.hello.ParentBean">
+ 	<property name="dependency" ref="thisIsABean" />
+</bean>
+
+<!-- Exploring AUTOWIRING -->
+
+<bean id="employee" class="com.revature.autowired.Employee" 
+	autowire="byType" scope="prototype"></bean>
+	
+<bean id="dept" class="com.revature.autowired.Department"></bean>
+
+</beans>
