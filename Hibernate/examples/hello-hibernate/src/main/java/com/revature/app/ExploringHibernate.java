@@ -88,7 +88,10 @@ public class ExploringHibernate {
 	 * persist on a detached object, an exception will be thrown
 	 */
 
-	//Exception in thread "main" org.hibernate.PersistentObjectException: detached entity passed to persist: com.revature.models.User
+	/* 
+	 * Exception in thread "main" org.hibernate.PersistentObjectException: 
+	 * detached entity passed to persist: com.revature.models.User
+	 */
 	static void saveVSpersist() {
 		User u = new User("test123456", "user");
 		u.setId(2); //testing this id;
