@@ -33,8 +33,8 @@ public class PostRepository {
 		Session session = util.getSession();
 		try {
 			Query query = session.createQuery
-					("from Post where Author_id = :user");
-			query.setParameter("user", u.getId());
+					("from Post where author = :user");
+			query.setParameter("user", u);
 			return query.list();
 		}
 		finally {
