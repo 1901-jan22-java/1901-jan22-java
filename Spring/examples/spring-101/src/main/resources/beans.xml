@@ -7,54 +7,49 @@
 		http://www.springframework.org/schema/context 
 		http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
-<!-- Spring Bean Configuration File, 
-typically named beans.xml or context.xml, but 
-can be named anything when making a simple .jar app 
-as long as we refer to the proper file in our config class -->
+	<!-- Spring Bean Configuration File, typically named beans.xml or context.xml, 
+		but can be named anything when making a simple .jar app as long as we refer 
+		to the proper file in our config class -->
 
 
-<!-- Configuring our beans through XML -->
-<bean id="thisIsABean" class="com.revature.hello.HelloSpring">
-<!-- In order to inject dependecies, Spring relies on either 
-the constructor or the setter of a class to set the value
-In technical terms, spring supports setter and constructor injection -->
+	<!-- Configuring our beans through XML -->
+	<bean id="thisIsABean" class="com.revature.hello.HelloSpring">
+		<!-- In order to inject dependecies, Spring relies on either the constructor 
+			or the setter of a class to set the value In technical terms, spring supports 
+			setter and constructor injection -->
 
-<!-- setter injection 
-<property name="messageString" value="This is
-	setter injection! Welcome to Spring!!!" /> -->
-	
-<!-- constructor injection -->
-<constructor-arg name="messageString"
-	value="This is constructor injection!"/>
-	
-</bean>
+		<!-- setter injection <property name="messageString" value="This is setter 
+			injection! Welcome to Spring!!!" /> -->
 
-<!-- bean wiring 
-programatically configuring a bean to be dependent upon
-another bean and allow the container to inject the dependency -->
-<bean id="parentBean" class="com.revature.hello.ParentBean">
- 	<property name="dependency" ref="thisIsABean" />
-</bean>
+		<!-- constructor injection -->
+		<constructor-arg name="messageString"
+			value="This is constructor injection!" />
 
-<!-- Exploring AUTOWIRING -->
+	</bean>
 
-<!-- AUTOWIRING WITH XML -->
-<!--  
-<bean id="employee" class="com.revature.autowired.Employee" 
-	autowire="byType" scope="prototype"></bean>
-	
-<bean id="dept" class="com.revature.autowired.Department"
-	scope="prototype"></bean>
--->
+	<!-- bean wiring programatically configuring a bean to be dependent upon 
+		another bean and allow the container to inject the dependency -->
+	<bean id="parentBean" class="com.revature.hello.ParentBean">
+		<property name="dependency" ref="thisIsABean" />
+	</bean>
 
-<!-- AUTOWIRING WITH ANNOTATIONS
-must configure spring to look for annotations of 
-each type!
-As it stands, we only need to configure things as beans
-within the context of our application, but later we will 
-see more annotation config tags -->
+	<!-- Exploring AUTOWIRING -->
 
-<context:annotation-config />
-<context:component-scan base-package="com.revature.autowired" />
+	<!-- AUTOWIRING WITH XML -->
+	<!-- <bean id="employee" class="com.revature.autowired.Employee" autowire="byType" 
+		scope="prototype"></bean> <bean id="dept" class="com.revature.autowired.Department" 
+		scope="prototype"></bean> -->
+
+	<!-- AUTOWIRING WITH ANNOTATIONS must configure spring to look for annotations 
+		of each type! As it stands, we only need to configure things as beans within 
+		the context of our application, but later we will see more annotation config 
+		tags -->
+
+	<bean id="lifecycle" class="com.revature.lifecycle.Life"
+		init-method="customInit" destroy-method="customDestroy"></bean>
+
+	<context:annotation-config />
+	<context:component-scan
+		base-package="com.revature.autowired" />
 
 </beans>
