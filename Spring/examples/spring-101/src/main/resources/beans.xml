@@ -39,6 +39,8 @@ another bean and allow the container to inject the dependency -->
 <bean id="lifecycle" class="com.revature.lifecycle.Life"
 	init-method="customInit"
 	destroy-method="customDestroy">
+	
+	<property name="lifecycle" value="setter injection, setting properties" />
 </bean>
 
 <!-- Exploring AUTOWIRING -->
