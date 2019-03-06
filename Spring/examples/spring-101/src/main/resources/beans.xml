@@ -36,6 +36,14 @@ another bean and allow the container to inject the dependency -->
  	<property name="dependency" ref="thisIsABean" />
 </bean>
 
+<!-- Exploring the spring bean lifecycle -->
+<bean id="lifecycle" class="com.revature.lifecycle.Life"
+	init-method="customInit" 
+	destroy-method="customDestroy">
+	<property name="lifecycle"
+		 value="setter injection, setting properties"/>
+</bean>
+
 <!-- Exploring AUTOWIRING -->
 
 <!-- AUTOWIRING WITH XML -->
