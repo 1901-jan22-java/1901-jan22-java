@@ -35,8 +35,31 @@ another bean and allow the container to inject the dependency -->
 	<property name="dependency" ref="thisIsABean"></property>
 </bean>
 
+<!-- Exploring the spring bean lifecycle -->
+<bean id="lifecycle" class="com.revature.lifecycle.Life"
+	init-method="customInit"
+	destroy-method="customDestroy">
+</bean>
+
 <!-- Exploring AUTOWIRING -->
-<bean id="employee" class="com.revature.autowired.Employee" autowire="byType" scope="prototype"></bean>
-<bean id="department" class="com.revature.autowired.Department"></bean>
+
+<!-- AUTOWIRING WITH XML -->
+<!--  
+<bean id="employee" class="com.revature.autowired.Employee" 
+	autowire="byType" scope="prototype"></bean>
+	
+<bean id="dept" class="com.revature.autowired.Department"
+	scope="prototype"></bean>
+-->
+
+<!-- AUTOWIRING WITH ANNOTATIONS
+must configure spring to look for annotations of 
+each type!
+As it stands, we only need to configure things as beans
+within the context of our application, but later we will 
+see more annotation config tags -->
+
+<context:annotation-config />
+<context:component-scan base-package="com.revature.autowired" />
 
 </beans>
