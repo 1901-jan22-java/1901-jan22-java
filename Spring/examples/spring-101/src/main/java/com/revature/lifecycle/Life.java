@@ -33,6 +33,9 @@ BeanPostProcessor, InitializingBean,  DisposableBean{
 	 *  destroy() -- DisposableBean
 	 *  destroy -- custom
 	 *  
+	 *  For more info, check out https://howtodoinjava.com/spring-core/spring-bean-life-cycle/
+	 *  
+	 *  
 	 */
 	
 	private String lifecycle;
@@ -92,6 +95,7 @@ BeanPostProcessor, InitializingBean,  DisposableBean{
 	public void destroy() throws Exception {
 		System.out.println("DESTROY FROM DISPOSABLE BEAN");
 	}
+	
 	
 	public void customDestroy() {
 		System.out.println("CUSTOM DESTROY");
