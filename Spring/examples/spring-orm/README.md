@@ -1,6 +1,6 @@
 # Spring ORM
 ###### Spring's Object-Relational Mapping module. Used to abstract Java Persistence functionality. 
-```
+
 * Benefits:
 	* Easier testing
 	* less boiler plate code
