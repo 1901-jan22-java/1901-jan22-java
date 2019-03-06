@@ -1,15 +1,6 @@
 package com.revature.hello;
 
 public class ParentBean {
-<<<<<<< HEAD
-
-	private HelloSpring dependency;
-
-	public ParentBean() {
-		
-	}
-
-=======
 	
 	private HelloSpring dependency;
 
@@ -18,15 +9,10 @@ public class ParentBean {
 	
 	
 	//need for constructor injection
->>>>>>> master
 	public ParentBean(HelloSpring dependency) {
 		super();
 		this.dependency = dependency;
 	}
-<<<<<<< HEAD
-	
-=======
->>>>>>> master
 
 	public HelloSpring getDependency() {
 		return dependency;
@@ -36,9 +22,4 @@ public class ParentBean {
 		this.dependency = dependency;
 	}
 	
-<<<<<<< HEAD
-=======
-	
-
->>>>>>> master
 }
