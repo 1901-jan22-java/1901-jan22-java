@@ -1,4 +1,4 @@
-package com.revature.models;
+package com.revature.beans;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -16,10 +16,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-/*
- * mapping classes with annotations 
- */
+import org.springframework.stereotype.Component;
 
+@Component //registers this class as a spring bean
 @Entity //registers a class as an entity(table) in DB
 @Table(name="BLOG_USERS")
 public class User {
@@ -138,9 +137,6 @@ public class User {
 		return true;
 	}
 
-	
-	
-	
 	
 
 }
