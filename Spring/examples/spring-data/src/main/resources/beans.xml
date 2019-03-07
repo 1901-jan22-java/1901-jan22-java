@@ -9,32 +9,40 @@
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd">
 
-<context:annotation-config/>
-<context:component-scan base-package="com.revature"></context:component-scan>
+	<context:annotation-config />
+	<context:component-scan
+		base-package="com.revature"></context:component-scan>
+	<tx:annotation-driven />
 
-<tx:annotation-driven/>
+	<!-- tell spring data where to look for repository (DAO) -->
+	<jpa:repositories
+		base-package="com.revature.repository"></jpa:repositories>
 
-<jpa:repositories base-package="com.revature.repository"></jpa:repositories>
+	<!-- so that we don't have to push up sensitive db info must name properties 
+		db.X -->
+	<context:property-placeholder
+		location="classpath:db.properties" />
 
-<context:property-placeholder location="classpath:db.properties" />
- 
-<bean id="myDataSource"
-	class="org.apache.commons.dbcp.BasicDataSource">
-	<property name="driverClassName" 
-		value="${db.driver}" />
-	<property name="url" value= "${db.url}"/>
-	<property name="username" value="${db.username}"/>
-	<property name="password" value="${db.pwd}"/>
-</bean>
+	<bean id="myDataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="${db.driver}" />
+		<property name="url" value="${db.url}" />
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.pwd}" />
+	</bean>
+	<!-- spring data is not natively compatible with hibernate it is compatible 
+		with JPA, and in turn any "vendor" of an ORM tool that is JPA compliant however 
+		we need to use a vendor adapter -->
 
-<bean 	id="hibernateJpaVendorAdapter" 
+	<bean id="hibernateJpaVendorAdapter"
 		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-</bean>
+	</bean>
 
-<bean 	id="entityManagerFactory"
+	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
 		<property name="dataSource" ref="myDataSource" />
-		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
+		<property name="jpaVendorAdapter"
+			ref="hibernateJpaVendorAdapter" />
 		<property name="packagesToScan" value="com.revature" />
 		<property name="jpaProperties">
 			<props>
@@ -46,10 +54,13 @@
 				<prop key="hibernate.format_sql">true</prop>
 			</props>
 		</property>
-</bean>
-
-<bean 	id="transactionManager"
+	</bean>
+	
+	<bean id="transactionManager"
 		class="org.springframework.orm.jpa.JpaTransactionManager">
-	<property name="entityManagerFactory" ref="entityManagerFactory" />
-</bean>
+		<property name="entityManagerFactory" ref="entityManagerFactory"/>
+			
+	</bean>
+
+
 </beans>
