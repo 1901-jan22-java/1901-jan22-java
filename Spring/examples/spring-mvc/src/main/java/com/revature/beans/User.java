@@ -4,7 +4,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class User {
-
 	private int id;
 	private String username;
 	private String password;
@@ -51,5 +50,9 @@ public class User {
 	public void setBio(String bio) {
 		this.bio = bio;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", username=" + username + ", password=" + password + ", bio=" + bio + "]";
+	}
 }
