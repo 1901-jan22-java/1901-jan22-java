@@ -1,12 +1,23 @@
 package com.revature.beans;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 import org.springframework.stereotype.Component;
 
 @Component
 public class User {
+	@Min(value=0)
 	private int id;
+	
+	@NotNull(message="username is necessary")
+	@Pattern(regexp="^[A-z][A-z]*$", message="only include letters")
 	private String username;
 	private String password;
+	
+	@Size(min=5, max=300)
 	private String bio;
 	
 	public User() {}

@@ -3,6 +3,8 @@ package com.revature.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.revature.beans.User;
@@ -47,10 +49,15 @@ public class UserService {
 	}
 	
 	public User update(User u) {
-		return null;
+		User tmp = getById(u.getId());
+		users.remove(u);
+		users.add(tmp);
+		return tmp;
 	}
 	
 	public User delete(int id) {
-		return null;
+		User tmp = getById(id);
+		users.remove(getById(id));
+		return tmp;
 	}
 }
