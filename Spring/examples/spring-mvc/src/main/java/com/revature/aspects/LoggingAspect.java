@@ -1,6 +1,7 @@
 package com.revature.aspects;
 
-import org.apache.log4j.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -19,14 +20,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoggingAspect {
 	
-	final static Logger logger =
-			Logger.getLogger(LoggingAspect.class);
+	private final Log logger = LogFactory.getLog(this.getClass());
 	
 	/*
 	 * ADVICE
 	 * Each type of advice(Before, After, AfterThrowing, 
 	 * AfterReturning, Around) is the annotation itself, 
-	 * NOT @Advice. 
+	 * NOT @Advice. S
 	 * Following the advice annotation, comes our POINTCUT
 	 * The pointcut is the set of points in execution of your 
 	 * code at which you want your advice to be applied 
@@ -54,5 +54,6 @@ public class LoggingAspect {
 		 */
 		System.out.println("Executing method: "+ 
 				jp.getSignature());
+		logger.info("TEST");
 	}
 }
