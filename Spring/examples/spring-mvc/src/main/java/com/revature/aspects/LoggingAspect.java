@@ -2,9 +2,12 @@ package com.revature.aspects;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
@@ -45,8 +48,31 @@ public class LoggingAspect {
 	 * classes, with any parameter list (..)
 	 * 
 	 */
-	@Around("everywhere()")
-	public Object testAdvice(ProceedingJoinPoint pjp) throws Throwable {
+	
+	/*
+	 * Join point - point in the application where the code
+	 * (advice) will be injected. This usually happens at 
+	 * method execution 
+	 * 
+	 * Advice - the code to be injected at the join point 
+	 * 
+	 * Point cut - element that deefines where advice will be 
+	 * applied. 
+	 * 	- execution - most common AOP pointcut, where it will 
+	 * be applied at method execution 
+	 * 	- within - limits method execution within data types
+	 * 	- this - limits matching to joinpoints where 
+	 * reference is of a given type
+	 * 	- target - limits matching to JPs where the target object
+	 * is of the given type 
+	 * - args - limitsmatching to JPs where the arguments are
+	 * instances of the given type 
+	 * 
+	 * Target object - the object being advised. 
+	 * 
+	 */
+	@Before("everywhere()")
+	public void testAdvice(JoinPoint jp) {
 		/*
 		 * Inside of your Aspect class, you have a series 
 		 * of methods which will serve as your Advice
@@ -54,16 +80,26 @@ public class LoggingAspect {
 		 * that you wish to apply to your application 
 		 * at runtime 
 		 */
-		StopWatch xd = new StopWatch();
 		
-		xd.start();
+		logger.info("EXECUTING METHOD: " + jp.getSignature()
+		+"\nTarget Object: " + jp.getTarget()
+		+ "\nKind: " + jp.getKind());
+	}
+	
+	@After("execution(* com.revature.controllers.*.*(..))")
+	public void sentResponse(JoinPoint jp) {
+		logger.info("Handled Request to method " + jp.getArgs());
+	}
+	
+	@Around("everywhere()")
+	public Object doThings(ProceedingJoinPoint pjp) throws Throwable {
+		logger.info("method started");
 		Object o = pjp.proceed();
-		xd.stop();
-		
-		logger.info(xd.getLastTaskTimeMillis());
+		logger.info("method completed");
 		return o;
 	}
 	
 	@Pointcut("execution(* com.revature.*.*.*(..))")
 	public void everywhere() {}
+	
 }
