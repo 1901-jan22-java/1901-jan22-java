@@ -2,21 +2,10 @@ package com.revature.aspects;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StopWatch;
-
-/*
- * Welcome to Spring AOP!
- * 
- * Most enterprise applications have some common 
- * cross-cutting concerns (functionality needed
- * across layers of your app). 
- * 
- */
 
 @Aspect
 @Component
@@ -45,8 +34,8 @@ public class LoggingAspect {
 	 * classes, with any parameter list (..)
 	 * 
 	 */
-	@Around("everywhere()")
-	public Object testAdvice(ProceedingJoinPoint pjp) throws Throwable {
+	@Before("execution(* com.revature.*.*.*(..))")
+	public void testAdvice(JoinPoint jp) {
 		/*
 		 * Inside of your Aspect class, you have a series 
 		 * of methods which will serve as your Advice
@@ -54,16 +43,8 @@ public class LoggingAspect {
 		 * that you wish to apply to your application 
 		 * at runtime 
 		 */
-		StopWatch xd = new StopWatch();
-		
-		xd.start();
-		Object o = pjp.proceed();
-		xd.stop();
-		
-		logger.info(xd.getLastTaskTimeMillis());
-		return o;
+		System.out.println("Executing method: "+ 
+				jp.getSignature());
+		logger.info("TEST");
 	}
-	
-	@Pointcut("execution(* com.revature.*.*.*(..))")
-	public void everywhere() {}
 }
