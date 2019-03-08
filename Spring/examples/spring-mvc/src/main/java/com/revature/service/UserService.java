@@ -49,15 +49,24 @@ public class UserService {
 	}
 	
 	public User update(User u) {
-		User tmp = getById(u.getId());
-		users.remove(u);
-		users.add(tmp);
-		return tmp;
+		User removed = getById(u.getId());
+		if(removed == null) return null;
+		users.remove(removed);
+		users.add(u);
+		return u;
 	}
 	
-	public User delete(int id) {
-		User tmp = getById(id);
-		users.remove(getById(id));
-		return tmp;
+	public User delete(User u) {
+		int id=-1;
+		for(User user : users) {
+			if(user.getId()==u.getId()) {
+				id=users.indexOf(user);
+			}
+		}
+		if(id>-1) {
+			users.remove(id);
+			return null; //this means a user was found and deleted
+		}
+		else return u;
 	}
 }

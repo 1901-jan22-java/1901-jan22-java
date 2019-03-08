@@ -6,14 +6,21 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
-
+/*
+ * Exploring JSR-303 (Bean validation)
+ * - the specification of the Java API for JavaBean validation
+ * - it provides an easy way of ensuring that the properties of 
+ * your beans have the right values in them
+ * 
+ */
 @Component
 public class User {
+
 	@Min(value=0)
 	private int id;
 	
 	@NotNull(message="username is necessary")
-	@Pattern(regexp="^[A-z][A-z]*$", message="only include letters")
+	@Pattern(regexp="[a-z-A-Z]*", message="only include letters")
 	private String username;
 	private String password;
 	

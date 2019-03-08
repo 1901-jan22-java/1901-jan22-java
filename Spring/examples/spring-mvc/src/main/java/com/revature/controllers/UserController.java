@@ -58,40 +58,44 @@ public class UserController {
 			return new ResponseEntity<User>(u, HttpStatus.OK);
 		}	
 	}
-	
-	@RequestMapping(consumes=MediaType.APPLICATION_JSON_VALUE, 
-					produces=MediaType.APPLICATION_JSON_VALUE,
-					method=RequestMethod.POST)
-	public ResponseEntity<User> add(@RequestBody @Valid User u) {
-		User user = service.save(u);
+		
+	// POST
+	@RequestMapping(method=RequestMethod.POST,
+			consumes=MediaType.APPLICATION_JSON_VALUE,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> add(@RequestBody @Valid User u){
+		User user = service.save(u); //could add server side validation
 		if(user == null) {
+			//we can pretend there's some sort of validation here 
 			return new ResponseEntity<User>(HttpStatus.CONFLICT);
-		} else {
+		}
+		else {
 			return new ResponseEntity<User>(user, HttpStatus.CREATED);
 		}
 	}
 	
-	@RequestMapping(consumes=MediaType.APPLICATION_JSON_VALUE, 
-			produces=MediaType.APPLICATION_JSON_VALUE,
-			method=RequestMethod.PUT)
-	public ResponseEntity<User> update(@RequestBody User u) {
+	//PUT
+	@RequestMapping(method=RequestMethod.PUT,
+			consumes=MediaType.APPLICATION_JSON_VALUE,
+			produces=MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> update(@RequestBody User u){
 		User user = service.update(u);
 		if(user == null) {
 			return new ResponseEntity<User>(HttpStatus.CONFLICT);
-		} else {
-			return new ResponseEntity<User>(user, HttpStatus.CREATED);
 		}
+		return new ResponseEntity<User>(u, HttpStatus.ACCEPTED);
 	}
 	
-	@RequestMapping(consumes=MediaType.APPLICATION_JSON_VALUE, 
-			method=RequestMethod.DELETE)
+	//DELETE
+	@RequestMapping(method=RequestMethod.DELETE,
+			consumes=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> delete(@RequestBody User u) {
-		User user = service.delete(u.getId());
-		if(user == null) {
-			return new ResponseEntity<User>(HttpStatus.CONFLICT);
-		} else {
-			return new ResponseEntity<User>(user, HttpStatus.I_AM_A_TEAPOT);
+		u = service.delete(u);
+		if(u==null) {
+			return new ResponseEntity<User>(HttpStatus.OK);
+		}
+		else {
+			return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
 		}
 	}
-
 }
