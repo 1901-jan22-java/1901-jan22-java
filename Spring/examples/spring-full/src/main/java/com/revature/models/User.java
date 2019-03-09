@@ -12,28 +12,29 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-@Table(name="BANK_USERS")
+@Table(name = "BANK_USERS")
 public class User {
-	
+
 	@Id
-	@Column(name="USER_ID")
-	@SequenceGenerator(name="U_ID_GEN", sequenceName="B_U_ID", allocationSize=1)
-	@GeneratedValue(generator="U_ID_GEN", strategy=GenerationType.SEQUENCE)
+	@Column(name = "USER_ID")
+	@SequenceGenerator(name = "U_ID_GEN", sequenceName = "B_U_ID", allocationSize = 1)
+	@GeneratedValue(generator = "U_ID_GEN", strategy = GenerationType.SEQUENCE)
 	private int id;
-	
-	@Column(name="FIRST_NAME", nullable=false)
+
+	@Column(name = "FIRST_NAME", nullable = false)
 	private String firstname;
-	
-	@Column(name="LAST_NAME", nullable=false)
-	private String lastname; 
-	
-	@Column(name="USERNAME", nullable=false, unique=true)
+
+	@Column(name = "LAST_NAME", nullable = false)
+	private String lastname;
+
+	@Column(name = "USERNAME", nullable = false, unique = true)
 	private String username;
-	
-	@Column(name="PASSWORD")
+
+	@Column(name = "PASSWORD")
 	private String password;
-	
-	public User() {}
+
+	public User() {
+	}
 
 	public User(int id, String firstname, String lastname, String username, String password) {
 		super();
@@ -83,8 +84,5 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	
-	
 
 }

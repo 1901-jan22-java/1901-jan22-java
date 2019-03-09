@@ -20,30 +20,29 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Entity
-@Table(name="BANK_ACCOUNTS")
+@Table(name = "BANK_ACCOUNTS")
 public class Account {
-	
+
 	@Id
-	@Column(name="ACC_ID")
-	@SequenceGenerator(name="ACC_ID_GEN", sequenceName="B_ACC_ID", allocationSize=1)
-	@GeneratedValue(generator="ACC_ID_GEN", strategy=GenerationType.SEQUENCE)
+	@Column(name = "ACC_ID")
+	@SequenceGenerator(name = "ACC_ID_GEN", sequenceName = "B_ACC_ID", allocationSize = 1)
+	@GeneratedValue(generator = "ACC_ID_GEN", strategy = GenerationType.SEQUENCE)
 	private int id;
-	
-	@Column(name="BALANCE", nullable=false)
+
+	@Column(name = "BALANCE", nullable = false)
 	private double balance;
-	
-	@ManyToOne(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinColumn(name="ACC_TYPE")
+
+	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinColumn(name = "ACC_TYPE")
 	private AccountType type;
-	
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	@JoinTable(name="BANK_ACC_OWNERS", 
-	joinColumns=@JoinColumn(name="ACC_ID"),
-	inverseJoinColumns=@JoinColumn(name="U_ID"))
+
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@JoinTable(name = "BANK_ACC_OWNERS", joinColumns = @JoinColumn(name = "ACC_ID"), inverseJoinColumns = @JoinColumn(name = "U_ID"))
 	private Set<User> owners;
 
-	public Account() {}
-	
+	public Account() {
+	}
+
 	public Account(int id, double balance, AccountType type, Set<User> owners) {
 		super();
 		this.id = id;
@@ -83,7 +82,5 @@ public class Account {
 	public void setOwners(Set<User> owners) {
 		this.owners = owners;
 	}
-	
-	
+
 }
-	

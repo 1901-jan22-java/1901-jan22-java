@@ -18,47 +18,49 @@ import javax.persistence.Table;
 
 import org.springframework.stereotype.Component;
 
-@Component //registers this class as a spring bean
-@Entity //registers a class as an entity(table) in DB
-@Table(name="BLOG_USERS")
+@Component // registers this class as a spring bean
+@Entity // registers a class as an entity(table) in DB
+@Table(name = "BLOG_USERS")
 public class User {
-	
-	@Id //necessary for Hibernate to identify objects uniquely
-	@Column(name="USER_ID")
-	//More on @SequenceGenerator at: https://docs.oracle.com/javaee/5/api/javax/persistence/SequenceGenerator.html
-	//name(required), optional: allocationSize, initialValue, sequenceName
-	@SequenceGenerator(name="U_SEQ_GEN", sequenceName="U_SEQ", allocationSize=1)
-	//more on @GeneratedValue at https://www.objectdb.com/java/jpa/entity/generated
-	@GeneratedValue(generator="U_SEQ_GEN", strategy=GenerationType.SEQUENCE)
+
+	@Id // necessary for Hibernate to identify objects uniquely
+	@Column(name = "USER_ID")
+	// More on @SequenceGenerator at:
+	// https://docs.oracle.com/javaee/5/api/javax/persistence/SequenceGenerator.html
+	// name(required), optional: allocationSize, initialValue, sequenceName
+	@SequenceGenerator(name = "U_SEQ_GEN", sequenceName = "U_SEQ", allocationSize = 1)
+	// more on @GeneratedValue at https://www.objectdb.com/java/jpa/entity/generated
+	@GeneratedValue(generator = "U_SEQ_GEN", strategy = GenerationType.SEQUENCE)
 	private int id;
-	
-	//change name of col and apply constraints
-	//@Column attributes can be found at https://docs.jboss.org/hibernate/jpa/2.1/api/javax/persistence/Column.html
-	@Column(nullable=false, unique=true)
+
+	// change name of col and apply constraints
+	// @Column attributes can be found at
+	// https://docs.jboss.org/hibernate/jpa/2.1/api/javax/persistence/Column.html
+	@Column(nullable = false, unique = true)
 	private String username;
-	
-	@Column(nullable=false)
+
+	@Column(nullable = false)
 	private String password;
-	
-	@ManyToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
-	//@JoinTable is used to define the join/junction table
-	@JoinTable(name="Following",
-	//specify thhe column with the main entity below
-	joinColumns=@JoinColumn(name="USER_ID"),
-	//inverse side of the relationship below
-	inverseJoinColumns=@JoinColumn(name="FOLLOWING_ID"))
+
+	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	// @JoinTable is used to define the join/junction table
+	@JoinTable(name = "Following",
+			// specify thhe column with the main entity below
+			joinColumns = @JoinColumn(name = "USER_ID"),
+			// inverse side of the relationship below
+			inverseJoinColumns = @JoinColumn(name = "FOLLOWING_ID"))
 	private Set<User> following = new HashSet<User>();
-	
+
 	/*
-	 * we CAN but do not need to bidirectionally map this relationship
-	 * mapped by refers to the collection on the inverse side of the
-	 * relationship 
+	 * we CAN but do not need to bidirectionally map this relationship mapped by
+	 * refers to the collection on the inverse side of the relationship
 	 */
-	@ManyToMany(mappedBy="following")
+	@ManyToMany(mappedBy = "following")
 	private Set<User> followers = new HashSet<User>();
-	
-	public User() {}
-	
+
+	public User() {
+	}
+
 	public User(String username, String password) {
 		super();
 		this.username = username;
@@ -88,7 +90,6 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
 
 	public Set<User> getFollowing() {
 		return following;
@@ -97,7 +98,6 @@ public class User {
 	public void setFollowing(Set<User> following) {
 		this.following = following;
 	}
-	
 
 	public Set<User> getFollowers() {
 		return followers;
@@ -112,7 +112,6 @@ public class User {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + "]";
 	}
 
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -130,13 +129,11 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		
+
 		if (id != other.id)
 			return false;
-		
+
 		return true;
 	}
-
-	
 
 }

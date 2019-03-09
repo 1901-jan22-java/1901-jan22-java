@@ -6,6 +6,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.springframework.stereotype.Component;
+
 /*
  * Exploring JSR-303 (Bean validation)
  * - the specification of the Java API for JavaBean validation
@@ -15,20 +16,21 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class User {
-	
-	@Min(value=0)
+
+	@Min(value = 0)
 	private int id;
-	
-	@NotNull(message="username is necessary")
-	@Pattern(regexp="[a-z-A-Z]*", message="only include letters")
+
+	@NotNull(message = "username is necessary")
+	@Pattern(regexp = "[a-z-A-Z]*", message = "only include letters")
 	private String username;
 	private String password;
-	
-	@Size(min=5, max=300)
+
+	@Size(min = 5, max = 300)
 	private String bio;
-	
-	public User() {}
-	
+
+	public User() {
+	}
+
 	public User(int id, String username, String password, String bio) {
 		super();
 		this.id = id;
@@ -73,7 +75,5 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", bio=" + bio + "]";
 	}
-	
-	
 
 }

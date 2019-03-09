@@ -53,43 +53,36 @@ public class UserController {
 			return new ResponseEntity<User>(u, HttpStatus.OK);
 		}
 	}
-	
+
 	// POST
-	@RequestMapping(method=RequestMethod.POST,
-			consumes=MediaType.APPLICATION_JSON_VALUE,
-			produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> add(@RequestBody @Valid User u){
-		User user = service.save(u); //could add server side validation
-		if(user == null) {
-			//we can pretend there's some sort of validation here 
+	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> add(@RequestBody @Valid User u) {
+		User user = service.save(u); // could add server side validation
+		if (user == null) {
+			// we can pretend there's some sort of validation here
 			return new ResponseEntity<User>(HttpStatus.CONFLICT);
-		}
-		else {
+		} else {
 			return new ResponseEntity<User>(user, HttpStatus.CREATED);
 		}
 	}
-	
-	//PUT
-	@RequestMapping(method=RequestMethod.PUT,
-			consumes=MediaType.APPLICATION_JSON_VALUE,
-			produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<User> update(@RequestBody User u){
+
+	// PUT
+	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<User> update(@RequestBody User u) {
 		User user = service.update(u);
-		if(user == null) {
+		if (user == null) {
 			return new ResponseEntity<User>(HttpStatus.CONFLICT);
 		}
 		return new ResponseEntity<User>(u, HttpStatus.ACCEPTED);
 	}
-	
-	//DELETE
-	@RequestMapping(method=RequestMethod.DELETE,
-			consumes=MediaType.APPLICATION_JSON_VALUE)
+
+	// DELETE
+	@RequestMapping(method = RequestMethod.DELETE, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<User> delete(@RequestBody User u) {
 		u = service.delete(u);
-		if(u==null) {
+		if (u == null) {
 			return new ResponseEntity<User>(HttpStatus.OK);
-		}
-		else {
+		} else {
 			return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
 		}
 	}

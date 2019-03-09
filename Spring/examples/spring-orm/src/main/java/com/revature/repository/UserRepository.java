@@ -7,7 +7,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.revature.beans.User;
 
-
 /*
  * @Transactional - we need this annotation to indicate
  * that the TX manager should be used here, and to manage
@@ -21,12 +20,12 @@ import com.revature.beans.User;
  */
 
 @Transactional
-@Repository 
+@Repository
 public class UserRepository {
-	
+
 	@Autowired
 	SessionFactory sf;
-	
+
 	public User getById(int id) {
 		return (User) sf.getCurrentSession().get(User.class, id);
 	}
