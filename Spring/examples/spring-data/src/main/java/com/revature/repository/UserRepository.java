@@ -49,6 +49,4 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 	@Query("SELECT u FROM User u WHERE length(u.username) BETWEEN ?1 AND ?2 ")
 	public List<User> lengthQuery(int l1, int l2 );
 	
-	
-
 }
