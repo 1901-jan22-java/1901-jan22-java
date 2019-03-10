@@ -1,5 +1,16 @@
 package com.revature.beans;
 
+<<<<<<< HEAD
+public class User {
+	
+	private int id;
+	private String username;
+	private String password;
+	private String bio;
+	
+	public User() {}
+
+=======
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -29,6 +40,7 @@ public class User {
 	
 	public User() {}
 	
+>>>>>>> eeb48a44af5908b66a80eec7f9cbdaa33e423885
 	public User(int id, String username, String password, String bio) {
 		super();
 		this.id = id;
@@ -69,6 +81,8 @@ public class User {
 		this.bio = bio;
 	}
 
+<<<<<<< HEAD
+=======
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", password=" + password + ", bio=" + bio + "]";
@@ -76,4 +90,5 @@ public class User {
 	
 	
 
+>>>>>>> eeb48a44af5908b66a80eec7f9cbdaa33e423885
 }

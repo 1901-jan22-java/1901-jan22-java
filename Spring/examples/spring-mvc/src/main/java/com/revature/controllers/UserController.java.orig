@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.revature.beans.User;
 import com.revature.service.UserService;
 
+<<<<<<< HEAD
+=======
 
 /*
  * Now, we take a look at @RestController
@@ -32,6 +34,7 @@ import com.revature.service.UserService;
  * with @ResponseBody, whereas, with @RestController
  * we do not
  */
+>>>>>>> eeb48a44af5908b66a80eec7f9cbdaa33e423885
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -39,6 +42,26 @@ public class UserController {
 	@Autowired
 	UserService service;
 	
+<<<<<<< HEAD
+	@RequestMapping(
+		method=RequestMethod.GET,
+		produces=MediaType.APPLICATION_JSON_VALUE
+	)
+	public List<User> getall() {
+		return service.getAll();
+	}
+	
+	@RequestMapping(
+		value="/{id}",
+		method=RequestMethod.GET,
+		produces=MediaType.APPLICATION_JSON_VALUE
+	)
+	public ResponseEntity<User> getById(@PathVariable int id) {
+		User u = service.getById(id);
+		if(u==null) {
+			return new ResponseEntity<User>(u, HttpStatus.NO_CONTENT);
+		} else {
+=======
 	//GET /users 
 	@RequestMapping(method=RequestMethod.GET,
 			produces=MediaType.APPLICATION_JSON_VALUE)
@@ -58,10 +81,28 @@ public class UserController {
 		}
 		else {
 			//all good, return user w status of ok
+>>>>>>> eeb48a44af5908b66a80eec7f9cbdaa33e423885
 			return new ResponseEntity<User>(u, HttpStatus.OK);
 		}
 	}
 	
+<<<<<<< HEAD
+	@RequestMapping(
+			consumes=MediaType.APPLICATION_JSON_VALUE,
+			method=RequestMethod.POST,
+			produces=MediaType.APPLICATION_JSON_VALUE
+	)
+	public ResponseEntity<User> add(@RequestBody User u) {
+		User u1 = service.save(u); // Could add server-side validation 
+		if(u1 == null) {
+			// pretend there's some sort of validation here
+			return new ResponseEntity<User>(HttpStatus.CONFLICT);
+		} else {
+			return new ResponseEntity<User>(u1, HttpStatus.CREATED);
+		}
+	}
+	
+=======
 	// POST
 	@RequestMapping(method=RequestMethod.POST,
 			consumes=MediaType.APPLICATION_JSON_VALUE,
@@ -101,4 +142,5 @@ public class UserController {
 			return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
 		}
 	}
+>>>>>>> eeb48a44af5908b66a80eec7f9cbdaa33e423885
 }
