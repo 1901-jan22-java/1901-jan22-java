@@ -2,11 +2,8 @@ package com.revature.controllers;
 
 import java.util.List;
 
-<<<<<<< HEAD
-=======
 import javax.validation.Valid;
 
->>>>>>> eeb48a44af5908b66a80eec7f9cbdaa33e423885
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
