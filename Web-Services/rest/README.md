@@ -1,7 +1,7 @@
 # REST
-#### _REpresentational State Transfer_
+#### _REpresentational State Transfer_ is a software architectural style that defines a set of constraints to be used for creating web services. 
 
-A RESTful web application exposes information abuot itself in the form of information about its resources. It also enables the client to take actions on those resources, such as create new resources (ie create a new user) or exchange existing resources (ie change username)
+A RESTful web application exposes information about itself in the form of information about its resources. It also enables the client to take actions on those resources, such as create new resources (ie create a new user) or exchange existing resources (ie change username)
 
 An important term to understand when it comes to REST is __resource__ which is any object the API can provide information on. Each resource has a unique identifier. The identifier can be a name or a number. 
 
@@ -20,7 +20,9 @@ In order for your API to be RESTful, you must follow a set of constraints:
 		* By application we mean web app that the server has deployed 
 		* Hypermedia - the hyperlinks, or simply links, that the server can include in the response 
 		* Together, we mean that the server can inform the client, in a response, of the ways to change the state of the web application. 
+	
 
+		...still adding notes 
 
 
 ###### Sources and Important Readings 
