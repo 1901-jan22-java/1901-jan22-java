@@ -17,6 +17,8 @@ public class App {
 
 		List<User> users = repo.lengthQuery(5, 15);
 		System.out.println(users);
+		
+	
 //		System.out.println(repo.findByUsernameLikeIgnoreCase("test12345"));
 //	
 //		User u = new User("springData!", "testing");

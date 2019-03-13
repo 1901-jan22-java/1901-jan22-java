@@ -10,6 +10,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StopWatch;
 
 /*
  * Welcome to Spring AOP!
@@ -57,7 +58,7 @@ public class LoggingAspect {
 	 * Target object - the object being advised.
 	 * 
 	 */
-	@Before("everywhere()")
+	//@Before("everywhere()")
 	public void testAdvice(JoinPoint jp) {
 		/*
 		 * Inside of your Aspect class, you have a series of methods which will serve as
@@ -68,22 +69,30 @@ public class LoggingAspect {
 		logger.info("EXECUTING METHOD: " + jp.getSignature() + "\nTarget Object: " + jp.getTarget() + "\nKind: "
 				+ jp.getKind());
 	}
-
-	@After("execution(* com.revature.controllers.*.*(..))")
+	
+	//@After("execution(* com.revature.controllers.*.*(..))")
 	public void sentResponse(JoinPoint jp) {
 		logger.info("Handled Request to method " + jp.getArgs());
 	}
 
 	@Around("everywhere()")
-	public Object doThings(ProceedingJoinPoint pjp) throws Throwable {
-		logger.info("method started");
+	public Object timer(ProceedingJoinPoint pjp) throws Throwable {
+		StopWatch timer = new StopWatch();
+		logger.info("EXECUTING " + pjp.getSignature());
+		timer.start();
 		Object o = pjp.proceed();
-		logger.info("method completed");
+		timer.stop();
+		logger.info("method completed in " + 
+		timer.getLastTaskTimeMillis() + "ms. Returned " + o);
 		return o;
 	}
 
 	@Pointcut("execution(* com.revature.*.*.*(..))")
-	public void everywhere() {
+	public void everywhere() {}
+	
+	@Before ("execution(* com.revature.beans.*.set*(..))")
+	public void settingProperties() {
+		
 	}
-
+	
 }
