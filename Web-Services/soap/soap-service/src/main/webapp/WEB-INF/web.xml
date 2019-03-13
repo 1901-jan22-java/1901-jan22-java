@@ -2,7 +2,16 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <display-name>soap-service</display-name>
 
-
+<!-- configure web app to listen to spring -->
+<context-param>
+	<param-name>contextConfigLocation</param-name>
+	<param-value>WEB-INF/beans.xml</param-value>
+</context-param>
+<listener>
+	<listener-class>
+		org.springframework.web.context.ContextLoaderListener
+	</listener-class>
+</listener>
 
 <!-- SOAP application also follow the front controller
 design pattern
