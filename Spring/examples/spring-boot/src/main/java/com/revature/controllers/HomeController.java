@@ -4,17 +4,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping()
 public class HomeController {
-
+	
 	@RequestMapping("/")
 	public String test() {
-		return "Welcome to Flavor Town. I'm Kevin";
+		return "Welcome to spring boot! And we're using devtools!";
 	}
-	
-	@RequestMapping("/test")
-	public String test2() {
-		return "nani";
-	}
-	
 }

@@ -22,6 +22,7 @@ public class User {
 	@NotNull(message="username is necessary")
 	@Pattern(regexp="[a-z-A-Z]*", message="only include letters")
 	private String username;
+	
 	private String password;
 	
 	@Size(min=5, max=300)

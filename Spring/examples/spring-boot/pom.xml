@@ -3,7 +3,9 @@
   <groupId>com.revature</groupId>
   <artifactId>spring-boot</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <properties>
+  
+  
+	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
@@ -40,16 +42,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		<!-- Implementing a data access layer of an application has been cumbersome 
+		
+			<!-- Implementing a data access layer of an application has been cumbersome 
 				for quite a while. Too much boilerplate code has to be written to execute 
 				simple queries as well as perform pagination, and auditing. Spring Data JPA 
 				aims to significantly improve the implementation of data access layers by 
 				reducing the effort to the amount that’s actually needed. As a developer 
 				you write your repository interfaces, including custom finder methods, and 
-				Spring will provide the implementation automatically.
-		 -->
-		<!-- 
+				Spring will provide the implementation automatically. 	
 		<dependency>
+	
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
@@ -57,17 +59,30 @@
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc7</artifactId>
 			<version>11.2.0</version>
-		</dependency>-->
-		<dependency>
+		</dependency>
+-->	
+<!-- Dev tools is simply a tool for development 
+that allows your spring boot application to reload
+your app onto its embedded server after saved changes
+automatically instead of you having to restart it 
+yourself. -->
+	<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<optional>true</optional>
 		</dependency>
+	<!-- Actuators are spring boot subprojects
+	that expose preconfigured endpoints (with some 
+	extra configuration) that give more information 
+	about your application 
+	ie /health
+	/info
+	/beans, and more  -->
+	
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

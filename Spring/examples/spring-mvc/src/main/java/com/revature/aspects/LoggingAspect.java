@@ -71,7 +71,7 @@ public class LoggingAspect {
 	 * Target object - the object being advised. 
 	 * 
 	 */
-	@Before("everywhere()")
+	//@Before("everywhere()")
 	public void testAdvice(JoinPoint jp) {
 		/*
 		 * Inside of your Aspect class, you have a series 
@@ -86,20 +86,29 @@ public class LoggingAspect {
 		+ "\nKind: " + jp.getKind());
 	}
 	
-	@After("execution(* com.revature.controllers.*.*(..))")
+	//@After("execution(* com.revature.controllers.*.*(..))")
 	public void sentResponse(JoinPoint jp) {
 		logger.info("Handled Request to method " + jp.getArgs());
 	}
 	
 	@Around("everywhere()")
-	public Object doThings(ProceedingJoinPoint pjp) throws Throwable {
-		logger.info("method started");
+	public Object timer(ProceedingJoinPoint pjp) throws Throwable {
+		StopWatch timer = new StopWatch();
+		logger.info("EXECUTING " + pjp.getSignature());
+		timer.start();
 		Object o = pjp.proceed();
-		logger.info("method completed");
+		timer.stop();
+		logger.info("method completed in " + 
+		timer.getLastTaskTimeMillis() + "ms. Returned " + o);
 		return o;
 	}
 	
 	@Pointcut("execution(* com.revature.*.*.*(..))")
 	public void everywhere() {}
+	
+	@Before ("execution(* com.revature.beans.*.set*(..))")
+	public void settingProperties() {
+		
+	}
 	
 }
