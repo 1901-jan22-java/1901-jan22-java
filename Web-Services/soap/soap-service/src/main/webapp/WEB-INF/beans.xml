@@ -7,6 +7,11 @@
 
 <import resource="classpath:META-INF/cxf/cxf.xml" />
 
+<!-- indicate our service endpoint interface  -->
 
+<jaxws:endpoint
+	implementor="com.revature.soap.Service"
+	address="/endpoint"
+/>
 
 </beans>
