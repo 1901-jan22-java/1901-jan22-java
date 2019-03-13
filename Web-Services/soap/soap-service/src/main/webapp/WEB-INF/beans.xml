@@ -9,4 +9,9 @@
 
 <!-- indicate our service endpoint interface  -->
 
+<jaxws:endpoint
+	implementor="com.revature.soap.Service"
+	address="/endpoint"
+/>
+
 </beans>
