@@ -21,7 +21,7 @@
 
 * **Circuit Breaker Pattern** 
 
-    CircuitBreakerRequestVolumeThreshold # of fails before tripping
+    CircuitBreakerRequestVolumeThreshold # of fails before tripping
 
 	CircuitBreakerSleepWindow 4,000ms by default – time after which the request to the remote service will be               
         resumed. Gives time for app to recover.

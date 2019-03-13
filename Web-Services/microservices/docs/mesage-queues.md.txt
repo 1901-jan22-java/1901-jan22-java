@@ -44,7 +44,7 @@ As the name implies, it is a queue of messages. They are used for IPC (inter-pro
 * **_broker_** a Kafka server. Producer and consumer rely on Kafka server as an agent to exchange messages.
 * **_kafka cluster_** - simply a group of computers, each executing one instance of Kafka broker.
 * **_topic_** - an arbitrary name given to a dataset. It is a unique name for a data stream. A consumer can subscribe to the topic.
-* **_offset_** – It is a sequence number of a message in a partition. This number is assigned as the message arrives in a partition. These numbers once assigned never change.
+* **_offset_** ï¿½ It is a sequence number of a message in a partition. This number is assigned as the message arrives in a partition. These numbers once assigned never change.
 * Global unique Identifier of a message: Topic Name -> Partition Number -> Offset
 
 ## Apache Kafka Architecture
