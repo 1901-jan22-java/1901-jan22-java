@@ -37,10 +37,10 @@ public class RoleRepository {
 		try(Connection conn = ConnectionFactory
 				.getInstance().getConnection()){
 			
-			String query = "select * from roles";
+			//String query = "select * from roles";
 			Statement statement = conn.createStatement();
-			
-			ResultSet rs = statement.executeQuery(query);
+			String var = "DROP TABLE USERS";
+			ResultSet rs = statement.executeQuery("select * from roles where name = "+ var);
 			while(rs.next()) {
 				//can access data in cells via column index OR name
 				Role temp = new 
@@ -67,8 +67,8 @@ public class RoleRepository {
 		Role r = null;
 		try(Connection conn = ConnectionFactory
 				.getInstance().getConnection()){
-			String query =
-					"select * from roles where rid = ?";
+			// String query =
+			// 		"select * from roles where rid = ?";
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.setInt(1, id);
 			ResultSet rs = ps.executeQuery();
