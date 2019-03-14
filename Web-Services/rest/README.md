@@ -3,8 +3,12 @@
 
 A RESTful web application exposes information about itself in the form of information about its resources. It also enables the client to take actions on those resources, such as create new resources (ie create a new user) or exchange existing resources (ie change username)
 
-An important term to understand when it comes to REST is __resource__ which is any object the API can provide information on. Each resource has a unique identifier. The identifier can be a name or a number. 
+###### Principles of REST
+* __resource__ - is any object the API can provide information on. Each resource has a unique identifier. The identifier can be a name or a number
+* __representation__ - JSON, XML, or some other transfered data representation of the resource (object and its attributes)
+* __messages__ - the use of explicit HTTP methods 
 
+###### Deriving REST 
 In order for your API to be RESTful, you must follow a set of constraints: 
 * __Client-Server Separation__
 	* The _client_ is the person or software using(consuming) the API
@@ -27,7 +31,13 @@ In order for your API to be RESTful, you must follow a set of constraints:
 	* The rationale for this is that as the number of clients grows, the server will not have to keep track of all the clients it is talking to which would take a lot of time and space. This ensures that our system scales well 
 * __Cacheable__
 	* _Well-managed caching partially or completely eliminates some client-server interactions, further improving scalability and performance_
-		...still adding notes 
+	* This means that the data that the server sends contains information about whether or not the it is cacheable, and if it is, it should contain a sort of version number to make caching possible
+* __Layered system__
+	* REST allows you to use a layered system architecture where you deploy the APIs on server A, and store data in server B, and authenticate requests in Server C, for example. A client cannot ordinarily tell whether it is connected directly to the end server, or to an intermediary along the way. 
+* __Code-on-demand__ 
+	* This constraint is optional (an API can be RESTful even without providing code on demand)
+	* The client can request code from the server, and then the response from the server will contain some code, usually in the form of a script, when the response is in HTML format. The client can then execute that code
+	
 
 
 ###### Sources and Important Readings 
