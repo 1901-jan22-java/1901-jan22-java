@@ -4,7 +4,7 @@
   <artifactId>soap-service</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
- <description>An introduction to SOAP web services</description>
+  <description>An introduction to SOAP web services</description>
 
 
    <dependencies>

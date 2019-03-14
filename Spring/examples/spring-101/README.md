@@ -16,7 +16,12 @@ the dependency and allow our container to manage its instantiation.
 
 ### TO MAKE STANDARD SPRING APP:
 * Build simple maven project with required jars
-* create spring bean configuration file (beans.xml)
+	* beans
+	* context
+	* core 
+	* commons logging
+* create spring bean configuration file (beans.xml) with the appropriate namespaces
+
 
 
 
