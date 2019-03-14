@@ -20,11 +20,11 @@ BeanPostProcessor, InitializingBean,  DisposableBean{
 	 *  
 	 *  Instantiate
 	 *  Populate Properties
-	 *  setBeanName() -- from BeanNameAware
-	 *  setBeanFactory() -- from BeanFactoryAware
+	 *  setBeanName() -- from BeanNameAware	-- set the name of the bean in the bean factory that created this bean 
+	 *  setBeanFactory() -- from BeanFactoryAware -- callback function that supplies the owning factory to a bean instance. 
 	 *  setApplicationContext() -- from ApplicationContextAware
 	 *  PreInitialization -- Bean PostProcessors
-	 *  afterPropertiesSet -- InitializingBean
+	 *  afterPropertiesSet -- InitializingBean -- allows the bean instance to perform initialization; only possible when all bean properties have been set. Throws an exception in the event of misconfiguration  
 	 *  init -- custom 
 	 *  Post Initialization -- BeanPostProcessors
 	 *  

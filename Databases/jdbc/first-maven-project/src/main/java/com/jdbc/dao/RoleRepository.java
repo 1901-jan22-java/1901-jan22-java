@@ -28,15 +28,17 @@ public class RoleRepository {
 	 */
 	public List<Role> findAll() {
 		List<Role> roles = new ArrayList<Role>();
-		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-
-			String query = "select * from roles";
+		try(Connection conn = ConnectionFactory
+				.getInstance().getConnection()){
+			
+			//String query = "select * from roles";
 			Statement statement = conn.createStatement();
-
-			ResultSet rs = statement.executeQuery(query);
-			while (rs.next()) {
-				// can access data in cells via column index OR name
-				Role temp = new Role(rs.getInt(1), rs.getString("Title"));
+			String var = "DROP TABLE USERS";
+			ResultSet rs = statement.executeQuery("select * from roles where name = "+ var);
+			while(rs.next()) {
+				//can access data in cells via column index OR name
+				Role temp = new 
+						Role(rs.getInt(1), rs.getString("Title"));
 				roles.add(temp);
 			}
 		} catch (SQLException e) {
@@ -54,10 +56,10 @@ public class RoleRepository {
 
 	public Role getById(int id) {
 		Role r = null;
-		try (Connection conn = ConnectionFactory.getInstance().getConnection()) {
-			
-			String query = "select * from roles where rid = ?";
-			
+		try(Connection conn = ConnectionFactory
+				.getInstance().getConnection()){
+			// String query =
+			// 		"select * from roles where rid = ?";
 			PreparedStatement ps = conn.prepareStatement(query);
 			ps.setInt(1, id);
 			
