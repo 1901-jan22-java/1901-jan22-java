@@ -55,6 +55,12 @@
       "username": "dog",
       "password": "dog",
       "id": 8
+    },
+    {
+      "firstName": "Dog",
+      "username": "Dogman",
+      "password": "doggy",
+      "id": 9
     }
   ],
   "accounts": [

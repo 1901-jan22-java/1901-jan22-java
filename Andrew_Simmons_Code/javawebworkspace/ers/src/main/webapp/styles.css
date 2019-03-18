@@ -1,0 +1,26 @@
+@CHARSET "ISO-8859-1";
+.sign-in-header {
+	padding-top: 75px;
+}
+
+.sign-in-container {
+	padding-top:10px;
+}
+
+.footer-space {
+	padding-bottom:25px;
+}
+
+.manager-table-title .employee-table-title{
+	padding-bottom: 10px;
+}
+
+.btn-approve {
+	color: green;
+	border-color: green;
+}
+
+.btn-deny {
+	color: red;
+	border-color: red;
+}

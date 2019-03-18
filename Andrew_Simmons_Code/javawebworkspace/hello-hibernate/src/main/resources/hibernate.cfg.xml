@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+ 
+ <!-- How we configure hibernate applications -->
+<hibernate-configuration>
+    <session-factory>
+    <!-- standard db configuration intro -->
+        <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+        <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+        <property name="hibernate.connection.username">Asimmons350</property>
+        <property name="hibernate.connection.password">Jackel02!</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@wafflemakeraws.clhsc4lxxx63.us-east-1.rds.amazonaws.com:1521:ORCL</property>
+  
+
+      
+        <property name="show_sql">true</property>
+      
+      <!--  formats our SQL in console nicely to show us show_sql -->
+        <property name="format_sql">true</property>
+        
+        <!--Create/Update our schema-->
+       <!--   create: create the schema, the data previously present in these tables if they exist would no longer
+        exist as the app would drop tables then recreate them
+        
+        update: updates the schema with given values
+        
+        validates: validates the schema, makes no changes in db
+        
+        create-drop:creates the schema, destroying all previously existing info if there. 
+        Also drops the schema when the session factory is closed -->
+        
+        
+       <!--  <property name ="hibernate.hbm2ddl.auto">update</property> -->
+        
+        
+        <property name ="hibernate.hbm2ddl.auto">update</property>
+        <!--  make sure to change create if table is already created -->
+        
+        <!-- When using annontations to a class-->
+     
+     
+       <!--  <mapping resource="com/websystique/hibernate/model/Student.hbm.xml"/> -->
+     
+     
+      <mapping class="com.revature.models.User"/>
+      
+        <!--<mapping class="com.websystique.hibernate.model.Student"/>-->
+        
+        
+         <!--  When using annotations to configure a class, we use
+        mapping class-->  
+       
+		 <mapping class="com.revature.models.Post"/>       
+        <mapping class="com.revature.models.User"/>
+        <mapping resource="TestMapping.hbm.xml"/>
+    </session-factory>
+</hibernate-configuration>
+
+ 
